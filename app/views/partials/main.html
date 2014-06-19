@@ -36,8 +36,8 @@
           </tr>
           <tr ng-repeat="issue in issues">
             <td>{{issue.name}}</td>
-            <td>{{selectedDistrict.issues[$index]}}</td>
-            <td>{{issue.level}}</td>
+            <td ng-class="{strong: selectedDistrict.issues[$index] >= issue.level && selectedDistrict.issues[$index] > 0}">{{selectedDistrict.issues[$index]}}</td>
+            <td ng-class="{strong: selectedDistrict.issues[$index] <= issue.level && selectedDistrict.issues[$index] > 0}">{{issue.level}}</td>
           </tr>
         </table>
       </div>
