@@ -1,24 +1,40 @@
 <div ng-include="'partials/navbar'"></div>
 
-<div class="jumbotron">
-  <h1>Design your platform:</h1>
-  <p class="lead">
-    <span>{{initialLimit}} pts. Left</span>
-    <ul class="list-group">
-      <li ng-repeat="thing in awesomeThings" class="list-group-item">
-        <div class="scaler">
-          <div class="left-btn"><a class="btn" ng-disabled="thing.level == 0" ng-click="minus(thing)"><i class="glyphicon glyphicon-chevron-left"></i></a></div>
-          <div class="center">
-            <h4>{{thing.name}} {{thing.level}}<h4>
-          </div>
-          <div class="right-btn"><a class="btn" ng-disabled="initialLimit == 0" ng-click="plus(thing)"><i class="glyphicon glyphicon-chevron-right"></i></a></div>
+<div ng-switch="page">
+  <div ng-switch-when="1" class="jumbotron">
+    <h1>Design your platform:</h1>
+    <p class="lead">
+      <span>{{initialLimit}} pts. Left</span>
+      <ul class="list-group">
+        <li ng-repeat="thing in issues" class="list-group-item">
+          <div class="scaler">
+            <div class="left-btn"><a class="btn" ng-disabled="thing.level == 0" ng-click="minus(thing)"><i class="glyphicon glyphicon-chevron-left"></i></a></div>
+            <div class="center">
+              <h4>{{thing.name}} {{thing.level}}<h4>
+            </div>
+            <div class="right-btn"><a class="btn" ng-disabled="initialLimit == 0" ng-click="plus(thing)"><i class="glyphicon glyphicon-chevron-right"></i></a></div>
 
-          <div class="clearfix"></div>
-        </div>
-      </li>
-    </ul>
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
+            <div class="clearfix"></div>
+          </div>
+        </li>
+      </ul>
+    </p>
+    <p><a class="btn btn-lg btn-success" ng-click="nextPage()" ng-href="#">Next</a></p>
+  </div>
+  <div ng-switch-when="2" class="jumbotron">
+    <h1>Select your HQ</h1>
+    <div class="lead">
+      <province-view districts="districts" selected-district="selectedDistrict"></province-view>
+      <div class="pull-right district-desc">
+        <h4>{{selectedDistrict.name}}</h4>
+        <span>{{selectedDistrict.info}}</span>
+      </div>
+    </div>
+    <p>
+      <a class="btn btn-lg btn-success" ng-click="prevPage()" ng-href="#">Back</a>
+      <a class="btn btn-lg btn-success" ng-click="submit()" ng-href="#">Submit</a>
+    </p>
+  </div>
 </div>
 
 <div class="footer">

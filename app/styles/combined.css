@@ -31,3 +31,38 @@
 .list-group-item .scaler .center {
   display: inline-block;
 }
+
+.province-view {
+  display: inline-block;
+  width: 255px;
+  height: 500px;
+}
+
+.province-view .district {
+  float: left;
+  width: 120px;
+  height: 120px;
+  background: #ccc;
+  border: 1px solid #ddd;
+}
+
+.province-view .district.selected {
+  color: white;
+  background: #0000cc;
+}
+
+.province-view .district.love {
+  background: #00cc00;
+}
+
+.province-view .district.hate {
+  background: #cc0000;
+}
+
+.province-view .district.neutral {
+  background: #ccc;
+}
+
+.district-desc {
+  width: 50%;
+}
