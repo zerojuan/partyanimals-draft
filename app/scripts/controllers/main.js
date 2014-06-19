@@ -40,4 +40,8 @@ angular.module('partyanimalsDraftApp')
 
     };
 
+    $scope.changeSelected = function(district){
+      $scope.selectedDistrict = district;
+    }
+
   });

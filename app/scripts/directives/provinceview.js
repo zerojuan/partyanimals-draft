@@ -8,15 +8,19 @@ angular.module('partyanimalsDraftApp')
       replace: true,
       scope: {
         districts : '=',
-        selectedDistrict  : '='
+        selectedDistrict  : '=',
+        changeSelected : '='
       },
       link: function postLink(scope, element, attrs) {
         scope.selected = function(district){
           if(scope.selectedDistrict){
             scope.selectedDistrict.selected = false;
+          }else{
+            console.log('There is no selected district');
           }
           scope.selectedDistrict = district;
-          district.selected = true;
+          scope.selectedDistrict.selected = true;
+          scope.changeSelected(district);
         }
       }
     };

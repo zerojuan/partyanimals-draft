@@ -24,7 +24,7 @@
   <div ng-switch-when="2" class="jumbotron">
     <h1>Select your HQ</h1>
     <div class="lead">
-      <province-view districts="districts" selected-district="selectedDistrict"></province-view>
+      <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelected"></province-view>
       <div class="pull-right district-desc">
         <h4>{{selectedDistrict.name}}</h4>
         <span>{{selectedDistrict.info}}</span>
