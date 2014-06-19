@@ -25,9 +25,21 @@
     <h1>Select your HQ</h1>
     <div class="lead">
       <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelected"></province-view>
-      <div class="pull-right district-desc">
+      <div ng-show="selectedDistrict" class="pull-right district-desc">
         <h4>{{selectedDistrict.name}}</h4>
         <span>{{selectedDistrict.info}}</span>
+        <table class="table table-striped">
+          <tr>
+            <td>Issue</td>
+            <td>This</td>
+            <td>You</td>
+          </tr>
+          <tr ng-repeat="issue in issues">
+            <td>{{issue.name}}</td>
+            <td>{{selectedDistrict.issues[$index]}}</td>
+            <td>{{issue.level}}</td>
+          </tr>
+        </table>
       </div>
     </div>
     <p>
