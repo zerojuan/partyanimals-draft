@@ -1,17 +1,17 @@
 <div ng-include="'partials/navbar'"></div>
 
 <div class="jumbotron">
-  <h1>Design your platform?</h1>
+  <h1>Design your platform:</h1>
   <p class="lead">
     <span>{{initialLimit}} pts. Left</span>
     <ul class="list-group">
       <li ng-repeat="thing in awesomeThings" class="list-group-item">
         <div class="scaler">
-          <div class="left-btn"><a class="btn" ng-click="minus(thing)"><i class="glyphicon glyphicon-chevron-left"></i></a></div>
+          <div class="left-btn"><a class="btn" ng-disabled="thing.level == 0" ng-click="minus(thing)"><i class="glyphicon glyphicon-chevron-left"></i></a></div>
           <div class="center">
             <h4>{{thing.name}} {{thing.level}}<h4>
           </div>
-          <div class="right-btn"><a class="btn" ng-click="plus(thing)"><i class="glyphicon glyphicon-chevron-right"></i></a></div>
+          <div class="right-btn"><a class="btn" ng-disabled="initialLimit == 0" ng-click="plus(thing)"><i class="glyphicon glyphicon-chevron-right"></i></a></div>
 
           <div class="clearfix"></div>
         </div>
