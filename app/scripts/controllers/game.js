@@ -14,9 +14,11 @@ angular.module('partyanimalsDraftApp')
       $scope.districts.forEach(function(val){
         if(val.id === human.hq.id){
           val.isHQ = true;
+          val.hasHuman = true;
         }
         if(val.id === ai.hq.id){
           val.isAIHQ = true;
+          val.hasAI = true;
           ai.hq = val;
         }
       });

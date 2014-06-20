@@ -3,7 +3,7 @@
 angular.module('partyanimalsDraftApp')
   .directive('provinceView', function () {
     return {
-      templateUrl: '/views/partials/province-view.html',
+      templateUrl: '/partials/province-view.html',
       restrict: 'E',
       replace: true,
       scope: {
