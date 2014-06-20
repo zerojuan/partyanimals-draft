@@ -1,5 +1,7 @@
 <div class="province-view">
   <div ng-repeat="district in districts" class="district" ng-class="{selected: district.selected}" ng-click="selected(district)">
     <h4>{{district.name}}</h4>
+    <p ng-show="district.isHQ"><i class="glyphicon glyphicon-home blue"></i></p>
+    <p ng-show="district.isAIHQ"><i class="glyphicon glyphicon-home red"></i></p>
   </div>
 </div>

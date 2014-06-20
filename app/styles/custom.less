@@ -41,8 +41,7 @@
     float: left;
     background: #ccc;
     &.selected{
-      background: #0000cc;
-      color: white;
+      border: 2px solid blue;
     }
     &.love{
       background: #00cc00;
@@ -56,10 +55,29 @@
   }
 }
 
+.red{
+  color: red;
+}
+
+.blue{
+  color: blue;
+}
+
 .district-desc{
   width: 50%;
   .strong{
     color: green;
     font-weight: bold;
+  }
+}
+
+.top-bar{
+  height: 30px;
+  div{
+    float: left;
+    &.center{
+      text-align: center;
+      width: 60%;
+    }
   }
 }

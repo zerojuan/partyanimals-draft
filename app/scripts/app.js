@@ -12,9 +12,13 @@ angular.module('partyanimalsDraftApp', [
         templateUrl: 'partials/main',
         controller: 'MainCtrl'
       })
+      .when('/game', {
+        templateUrl: 'partials/game',
+        controller: 'GameCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
-      
+
     $locationProvider.html5Mode(true);
   });

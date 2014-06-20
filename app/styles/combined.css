@@ -47,8 +47,7 @@
 }
 
 .province-view .district.selected {
-  color: white;
-  background: #0000cc;
+  border: 2px solid blue;
 }
 
 .province-view .district.love {
@@ -63,6 +62,14 @@
   background: #ccc;
 }
 
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
 .district-desc {
   width: 50%;
 }
@@ -70,4 +77,17 @@
 .district-desc .strong {
   font-weight: bold;
   color: green;
+}
+
+.top-bar {
+  height: 30px;
+}
+
+.top-bar div {
+  float: left;
+}
+
+.top-bar div.center {
+  width: 60%;
+  text-align: center;
 }
