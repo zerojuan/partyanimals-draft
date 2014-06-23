@@ -1,5 +1,11 @@
 <div ng-repeat="kapitan in kapitans">
-  <img src="images/{{kapitan.image}}"></img>
+  <img src="images/{{kapitan.image}}" ng-click="onKapSelected(kapitan)"></img>
+</div>
+<div ng-repeat="hates in selectedKapitan.hatesData">
+  <img src="images/{{hates.image}}"></img>
+</div>
+<div ng-repeat="likes in selectedKapitan.likesData">
+  <img src="images/{{likes.image}}"></img>
 </div>
 <div>
     <div>
