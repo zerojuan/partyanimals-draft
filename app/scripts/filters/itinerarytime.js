@@ -1,0 +1,14 @@
+'use strict';
+
+angular.module('partyanimalsDraftApp')
+  .filter('itinerarytime', function () {
+    return function (input) {
+      if(input < 12){
+        return input + " AM";
+      }else if(input == 12){
+        return input + " PM ";
+      }else{
+        return (input%12) + " PM ";
+      }
+    };
+  });

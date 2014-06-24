@@ -66,6 +66,7 @@ angular.module('partyanimalsDraftApp')
 
     $scope.onKapClicked = function(){
       $scope.state = 'kapitan';
+      $scope.showItinerary = false;
     }
 
     $scope.onItClicked = function(){
