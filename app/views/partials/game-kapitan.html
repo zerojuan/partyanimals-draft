@@ -3,7 +3,7 @@
     <h3>{{selectedKapitan.name}}</h3>
     <ul class="list-inline animal-list">
     <li ng-repeat="kapitan in kapitans">
-      <img src="images/{{kapitan.image}}" ng-class="{active: kapitan.active}" ng-click="onKapSelected(kapitan)"></img>
+      <img src="images/avatars/{{kapitan.image}}" ng-class="{active: kapitan.active}" ng-click="onKapSelected(kapitan)"></img>
     </li>
     </ul>
   </div>
@@ -12,7 +12,7 @@
       <h3>Friends</h3>
       <ul class="list-inline">
         <li ng-repeat="likes in selectedKapitan.likesData">
-          <img src="images/{{likes.image}}"></img>
+          <img src="images/avatars/{{likes.image}}"></img>
         </li>
       </ul>
     </div>
@@ -20,7 +20,7 @@
       <h3>Enemies</h3>
       <ul class="list-inline">
         <li ng-repeat="hates in selectedKapitan.hatesData">
-          <img src="images/{{hates.image}}"></img>
+          <img src="images/avatars/{{hates.image}}"></img>
         </li>
       </ul>
     </div>
