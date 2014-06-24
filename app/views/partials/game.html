@@ -1,13 +1,12 @@
 <div ng-include="'partials/navbar'"></div>
-
+<div ng-show="showItinerary">
+  <div ng-include="'partials/game-itinerary'"></div>
+</div>
 <div ng-switch="state">
   <div ng-switch-when="home">
     <div ng-include="'partials/game-home'"></div>
   </div>
   <div ng-switch-when="kapitan">
     <div ng-include="'partials/game-kapitan'"></div>
-  </div>
-  <div ng-switch-when="itinerary">
-    Itinerary View
   </div>
 </div>

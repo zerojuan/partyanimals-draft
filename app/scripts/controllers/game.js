@@ -8,6 +8,7 @@ angular.module('partyanimalsDraftApp')
     $scope.ai = GameState.getAI();
     $scope.turnsLeft = GameState.getTurnsLeft();
     $scope.totalCash = GameState.getInitialCash();
+    $scope.showItinerary = false;
 
     $http.get('/api/districts').success(function(districts){
       $scope.districts = districts;
@@ -30,6 +31,10 @@ angular.module('partyanimalsDraftApp')
 
     $http.get('/api/kapitans').success(function(kapitans){
       $scope.kapitans = kapitans;
+    });
+
+    $http.get('/api/activities').success(function(activities){
+      $scope.activities = activities;
     });
 
     $scope.changeSelected = function(district){
@@ -64,7 +69,7 @@ angular.module('partyanimalsDraftApp')
     }
 
     $scope.onItClicked = function(){
-      $scope.state = 'itinerary';
+      $scope.showItinerary = !$scope.showItinerary;
     }
 
     $scope.onBackHome = function(){
