@@ -41,7 +41,11 @@ angular.module('partyanimalsDraftApp')
     }
 
     $scope.onKapSelected = function(kapitan){
+      if($scope.selectedKapitan){
+        $scope.selectedKapitan.active = false;
+      }
       $scope.selectedKapitan = kapitan;
+      $scope.selectedKapitan.active = true;
       //likes
       var likesData = [];
       $scope.selectedKapitan.likes.forEach(function(val){

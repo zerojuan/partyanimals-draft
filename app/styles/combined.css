@@ -62,6 +62,14 @@
   background: #ccc;
 }
 
+.animal-list img {
+  border: 2px solid white;
+}
+
+.animal-list img.active {
+  border: 2px solid blue;
+}
+
 .red {
   color: red;
 }
