@@ -82,6 +82,16 @@
   width: 50%;
 }
 
+.district-desc h4 span {
+  float: right;
+  font-size: 12px;
+}
+
+.district-desc h4 span img {
+  width: 30px;
+  height: 30px;
+}
+
 .district-desc .strong {
   font-weight: bold;
   color: green;
@@ -104,8 +114,22 @@
   position: absolute;
   z-index: 100;
   width: 250px;
+  text-align: center;
   background: white;
   border: 1px solid black;
+}
+
+.itinerary-view .time .right {
+  height: 20px;
+  border: 1px solid gray;
+}
+
+.itinerary-view .time .left {
+  text-align: right;
+}
+
+.itinerary-view .btn-holder {
+  margin: 10px 0;
 }
 
 .reveal-animation.ng-enter {

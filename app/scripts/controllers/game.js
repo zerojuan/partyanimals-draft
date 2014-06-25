@@ -43,6 +43,7 @@ angular.module('partyanimalsDraftApp')
       }
       $scope.selectedDistrict = district;
       $scope.selectedDistrict.selected = true;
+      $scope.selectedDistrict.kapitan = findKapitan($scope.selectedDistrict.kapitanId);
     }
 
     $scope.onKapSelected = function(kapitan){
@@ -66,6 +67,7 @@ angular.module('partyanimalsDraftApp')
 
     $scope.onKapClicked = function(){
       $scope.state = 'kapitan';
+      $scope.showItinerary = false;
     }
 
     $scope.onItClicked = function(){

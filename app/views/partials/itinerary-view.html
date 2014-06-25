@@ -1,9 +1,10 @@
 <div class="itinerary-view">
   <h3>Itinerary</h3>
-  <div ng-repeat="hour in hours">
-    {{hour}}
+  <div ng-repeat="hour in hours" class="time row">
+    <div class="col-md-4 left">{{hour | itinerarytime}}</div>
+    <div class="col-md-7 right"></div>
   </div>
-  <div>
-    <a class="btn btn-default" ng-click="onItClicked()">Go</a>
+  <div class="btn-holder">
+    <a class="btn btn-success" ng-click="onItClicked()">Go</a>
   </div>
 </div>

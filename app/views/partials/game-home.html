@@ -6,7 +6,7 @@
 
 <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelected"></province-view>
 <div ng-show="selectedDistrict" class="pull-right district-desc reveal-animation">
-  <h4>{{selectedDistrict.name}}</h4>
+  <h4>{{selectedDistrict.name}} <span><img src="images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span></h4>
   <span>{{selectedDistrict.info}}</span>
   <table class="table table-striped">
     <tr>
@@ -20,6 +20,14 @@
       <td ng-class="{strong: selectedDistrict.issues[$index] <= issue.level && selectedDistrict.issues[$index] > 0}">{{issue.level}}</td>
     </tr>
   </table>
+  <h5>Activities</h5>
+  <ul class="list-unstyled">
+    <li ng-repeat="activity in activities" class="row">
+      <div class="col-md-5">{{activity.name}}</div>
+      <div class="col-md-3">{{activity.cost.gold | formatcost}}</div>
+      <div class="col-md-3">{{activity.cost.hours}} hrs</div>
+    </li>
+  </ul>
 </div>
 <div>
     <div>
