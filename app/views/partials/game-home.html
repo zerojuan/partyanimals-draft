@@ -20,6 +20,14 @@
       <td ng-class="{strong: selectedDistrict.issues[$index] <= issue.level && selectedDistrict.issues[$index] > 0}">{{issue.level}}</td>
     </tr>
   </table>
+  <h5>Activities</h5>
+  <ul class="list-unstyled">
+    <li ng-repeat="activity in activities" class="row">
+      <div class="col-md-5">{{activity.name}}</div>
+      <div class="col-md-3">{{activity.cost.gold | formatcost}}</div>
+      <div class="col-md-3">{{activity.cost.hours}} hrs</div>
+    </li>
+  </ul>
 </div>
 <div>
     <div>
