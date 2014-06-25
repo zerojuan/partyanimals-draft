@@ -21,11 +21,15 @@
     </tr>
   </table>
   <h5>Activities</h5>
-  <ul class="list-unstyled">
+  <ul class="list-unstyled activity-list">
     <li ng-repeat="activity in activities" class="row">
       <div class="col-md-5">{{activity.name}}</div>
       <div class="col-md-3">{{activity.cost.gold | formatcost}}</div>
-      <div class="col-md-3">{{activity.cost.hours}} hrs</div>
+      <div class="col-md-2">{{activity.cost.hours}} hrs</div>
+      <div class="col-md-1">
+        <a class="btn" ng-click="addToItinerary(activity)">
+        <i ng-class="{'glyphicon-plus': !activity.wasScheduled, 'glyphicon-minus': activity.wasScheduled}" class="glyphicon"></i></a>
+      </div>
     </li>
   </ul>
 </div>

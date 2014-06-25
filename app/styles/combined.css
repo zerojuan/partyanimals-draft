@@ -132,6 +132,76 @@
   margin: 10px 0;
 }
 
+.activity-list li {
+  margin: 1px 0;
+  background: #c2ece8;
+}
+
+.activity-list li .btn:focus,
+.activity-list li .btn:active:focus,
+.activity-list li .btn.active:focus,
+.activity-list li .btn.active,
+.activity-list li .btn:active {
+  color: #e9f8f7;
+  outline: none;
+  box-shadow: none;
+}
+
+.schedule {
+  position: absolute;
+  left: 78px;
+  z-index: 150;
+}
+
+.schedule .schedule-item {
+  width: 162px;
+  background: #c2ece8;
+}
+
+.schedule .schedule-item h5 {
+  margin: 0;
+}
+
+.schedule .item-10 {
+  height: 200px;
+}
+
+.schedule .item-9 {
+  height: 180px;
+}
+
+.schedule .item-8 {
+  height: 160px;
+}
+
+.schedule .item-7 {
+  height: 140px;
+}
+
+.schedule .item-6 {
+  height: 120px;
+}
+
+.schedule .item-5 {
+  height: 100px;
+}
+
+.schedule .item-4 {
+  height: 80px;
+}
+
+.schedule .item-3 {
+  height: 60px;
+}
+
+.schedule .item-2 {
+  height: 40px;
+}
+
+.schedule .item-1 {
+  height: 20px;
+}
+
 .reveal-animation.ng-enter {
   -webkit-animation: enter_sequence .5s linear;
   /* Safari/Chrome */

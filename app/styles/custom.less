@@ -1,3 +1,5 @@
+@lightblue: #C2ECE8;
+
 .list-group-item {
     margin: 0px;
     border-bottom: 0px;
@@ -119,6 +121,41 @@
   .btn-holder{
     margin: 10px 0px;
   }
+}
+
+.activity-list{
+  li{
+    background: @lightblue;
+    margin: 1px 0px;
+    .btn{
+      &:focus,&:active:focus, &.active:focus, &.active, &:active{
+        outline: none;
+        box-shadow: none;
+        color: lighten(@lightblue, 10%);
+      }
+    }
+  }
+}
+
+.schedule{
+  position: absolute;
+  left: 78px;
+  z-index: 150;
+  .schedule-item{
+      width: 162px;
+      background: @lightblue;
+      h5{
+        margin:0px;
+      }
+  }
+  .loopSchedules(@index) when (@index > 0){
+
+    .item-@{index}{
+      height: (20px *@index);
+    }
+    .loopSchedules((@index - 1));
+  }
+  .loopSchedules(10);
 }
 
 .reveal-animation.ng-enter {
