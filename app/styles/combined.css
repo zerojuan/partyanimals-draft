@@ -82,6 +82,16 @@
   width: 50%;
 }
 
+.district-desc h4 span {
+  float: right;
+  font-size: 12px;
+}
+
+.district-desc h4 span img {
+  width: 30px;
+  height: 30px;
+}
+
 .district-desc .strong {
   font-weight: bold;
   color: green;
