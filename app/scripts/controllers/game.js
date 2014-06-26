@@ -92,13 +92,16 @@ angular.module('partyanimalsDraftApp')
             gold: 100,
             hours: 3
           },
-          disabled: inFutureLocation,
+          disabled: false,
           location: angular.copy($scope.selectedDistrict)
         };
         if(isInSchedule(moveActivity)){
             moveActivity.wasScheduled = true;
         }
+
         toggleDisable(moveActivity, shouldDisable);
+
+
       // }
       var activities = $scope.activities.map(function(val){
         var newVal = angular.copy(val);
@@ -216,16 +219,29 @@ angular.module('partyanimalsDraftApp')
       }
     }
 
+    var howManyMovementScheduled = function(){
+      var count = 0;
+      $scope.scheduledActivities.forEach(function(val){
+        if(val.type === 'MOVE'){
+          count++;
+        }
+      });
+      return count;
+    }
+
     var shouldDisable = function(activity){
+        if(activity.type === 'MOVE'){
+          //disable only if there are no other
+          if(howManyMovementScheduled() === 0 &&
+            activity.location.id === $scope.futureLocation.id){
+              return true;
+          }
+
+            return $scope.timeLeft-activity.cost.hours < 0;
+          
+        }
         if(isInSchedule(activity)){
           return false;
-        }
-        if(activity.type === 'MOVE'){
-          if(activity.location.id == $scope.futureLocation.id){
-            return true;
-          }else{
-            return $scope.timeLeft-activity.cost.hours < 0;
-          }
         }
         if($scope.timeLeft - activity.cost.hours < 0){
           return true;
@@ -259,9 +275,5 @@ angular.module('partyanimalsDraftApp')
       }else{
         $scope.scheduledActivities.splice(i,1);
       }
-
-      // $scope.scheduledActivities = $scope.scheduledActivities.filter(function(val,i){
-      //   return !(val.id === activity.id && val.location.id === activity.location.id);
-      // });
     }
   });
