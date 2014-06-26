@@ -114,6 +114,7 @@
   position: absolute;
   z-index: 100;
   width: 250px;
+  margin-top: 30px;
   text-align: center;
   background: white;
   border: 1px solid black;
@@ -132,6 +133,11 @@
   margin: 10px 0;
 }
 
+.bottom {
+  position: fixed;
+  bottom: 5px;
+}
+
 .activity-list li {
   margin: 1px 0;
   background: #c2ece8;
@@ -147,6 +153,10 @@
   box-shadow: none;
 }
 
+.activity-list li.disabled {
+  background: gray;
+}
+
 .schedule {
   position: absolute;
   left: 78px;
@@ -155,7 +165,8 @@
 
 .schedule .schedule-item {
   width: 162px;
-  background: #c2ece8;
+  background: #fee8c8;
+  border: 1px dashed #f9ba77;
 }
 
 .schedule .schedule-item h5 {
