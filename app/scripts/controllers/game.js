@@ -14,6 +14,9 @@ angular.module('partyanimalsDraftApp')
     $scope.futureLocation = $scope.human.hq;
     $scope.currentLocation = $scope.human.hq;
     $scope.totalCost = 0;
+    $scope.simulate = {
+      simulateText: 'Start'
+    };
 
     $http.get('/api/districts').success(function(districts){
       $scope.districts = districts;
@@ -105,7 +108,6 @@ angular.module('partyanimalsDraftApp')
         newVal.location = angular.copy($scope.selectedDistrict);
         //check if this is already selected
         if(isInSchedule(newVal)){
-          console.log('Was already selected');
           newVal.wasScheduled = true;
         }
         //check if we are in the future location
@@ -120,6 +122,35 @@ angular.module('partyanimalsDraftApp')
 
       $scope.selectedDistrict.activities = activities;
     };
+
+    var actIndex = 0;
+    $scope.onItineraryGo = function(){
+      //execute the itinerary
+      $scope.showOverlay = true;
+      actIndex = 0;
+    };
+
+
+    $scope.simulate.onNext = function(){
+      console.log('Next');
+      // if($scope.scheduledActivities.length === 0){
+      //   //show result
+      //   //TODO: show results page
+      //   //end turn
+      //   return;
+      // }
+      if(actIndex > $scope.scheduledActivities.length-1){
+        //show result
+        //TODO: show results page
+        $scope.simulate.simulateText = 'End Day';
+        $scope.simulate.activeAct = null;
+        //end turn
+        return;
+      }
+      $scope.simulate.simulateText = 'Next';
+      $scope.simulate.activeAct = $scope.scheduledActivities[actIndex];
+      actIndex++;
+    }
 
     $scope.onKapSelected = function(kapitan){
       if($scope.selectedKapitan){

@@ -9,10 +9,11 @@ angular.module('partyanimalsDraftApp')
       transclude: true,
       scope: {
         scheduledActivities: '=',
-        hours: '='
+        hours: '=',
+        onGo: '='
       },
       link: function postLink(scope, element, attrs) {
-
+        
       }
     };
   });
