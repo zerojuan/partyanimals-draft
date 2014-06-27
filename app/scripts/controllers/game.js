@@ -52,7 +52,6 @@ angular.module('partyanimalsDraftApp')
         //remove from array
         removeFromSchedule(activity);
         if(activity.type === 'MOVE'){
-          //TODO: if movement was removed remove every act inside this location until end of list or encounter a new move type
           $scope.selectedDistrict.activities.forEach(function(val){
             if(val.type !== 'MOVE'){val.disabled = true;}
           });
@@ -81,7 +80,7 @@ angular.module('partyanimalsDraftApp')
       inFutureLocation = $scope.futureLocation.id === $scope.selectedDistrict.id;
 
 
-        //TODO: calculate cost based on location
+      //TODO: calculate cost based on location
       moveActivity = {
         id: -1,
         type: 'MOVE',
@@ -93,6 +92,7 @@ angular.module('partyanimalsDraftApp')
         disabled: false,
         location: angular.copy($scope.selectedDistrict)
       };
+      moveActivity.cost = calculateMovementCost($scope.futureLocation, $scope.selectedDistrict);
 
       if(isInSchedule(moveActivity)){
         moveActivity.wasScheduled = true;
@@ -220,6 +220,32 @@ angular.module('partyanimalsDraftApp')
         }
       });
       return count;
+    };
+
+    var calculateMovementCost = function(start, end){
+      var cost = {
+        gold: 300,
+        hours: 3
+      };
+
+      var a = {
+        x: start.id % 2,
+        y: Math.floor(start.id / 2)
+      };
+      var b = {
+        x: end.id % 2,
+        y: Math.floor(end.id / 2)
+      };
+      var distance = Math.sqrt(Math.pow(a.x-b.x, 2)+Math.pow(a.y-b.y, 2));
+      if(distance === 2){
+        cost.gold *= 2;
+        cost.hours *= 2;
+      }else if(distance !== 1){
+        cost.gold = 500;
+        cost.hours = 4;
+      }
+
+      return cost;
     };
 
     var shouldDisable = function(activity){
