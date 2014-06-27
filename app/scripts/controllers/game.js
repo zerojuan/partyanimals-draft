@@ -126,6 +126,7 @@ angular.module('partyanimalsDraftApp')
     var actIndex = 0;
     $scope.onItineraryGo = function(){
       //execute the itinerary
+      $scope.simulate.simulateText = 'Start';
       $scope.showOverlay = true;
       $scope.endTurn = false;
       actIndex = 0;
@@ -147,11 +148,14 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.simulate.onEndTurn = function(){
+
       $scope.showOverlay = false;
       $scope.endTurn = false;
       $scope.scheduledActivities = [];
       $scope.currentLocation = $scope.futureLocation;
       $scope.showItinerary = false;
+      $scope.selectedDistrict.selected = false;
+      $scope.selectedDistrict = null;
       movePlayerToLocation($scope.currentLocation, true);
     };
 
