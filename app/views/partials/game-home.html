@@ -10,12 +10,20 @@
         <h3>Simulating</h3>
       </div>
     </div>
-    <div class="row">
+    <div class="row" ng-show="!endTurn">
       <div>
         <a ng-click="simulate.onNext()">{{simulate.simulateText}}</a>
       </div>
       <div ng-show="simulate.activeAct">
         {{simulate.activeAct.name}} @ {{simulate.activeAct.location.name}}
+      </div>
+    </div>
+    <div class="row" ng-show="endTurn">
+      <div>
+        <a ng-click="simulate.onEndTurn()">{{simulate.simulateText}}</a>
+      </div>
+      <div>
+        *Summary of the things you did today*
       </div>
     </div>
   </div>

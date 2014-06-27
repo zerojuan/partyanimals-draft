@@ -127,30 +127,33 @@ angular.module('partyanimalsDraftApp')
     $scope.onItineraryGo = function(){
       //execute the itinerary
       $scope.showOverlay = true;
+      $scope.endTurn = false;
       actIndex = 0;
     };
 
 
     $scope.simulate.onNext = function(){
-      console.log('Next');
-      // if($scope.scheduledActivities.length === 0){
-      //   //show result
-      //   //TODO: show results page
-      //   //end turn
-      //   return;
-      // }
       if(actIndex > $scope.scheduledActivities.length-1){
         //show result
         //TODO: show results page
         $scope.simulate.simulateText = 'End Day';
         $scope.simulate.activeAct = null;
-        //end turn
+        $scope.endTurn = true;
         return;
       }
       $scope.simulate.simulateText = 'Next';
       $scope.simulate.activeAct = $scope.scheduledActivities[actIndex];
       actIndex++;
-    }
+    };
+
+    $scope.simulate.onEndTurn = function(){
+      $scope.showOverlay = false;
+      $scope.endTurn = false;
+      $scope.scheduledActivities = [];
+      $scope.currentLocation = $scope.futureLocation;
+      $scope.showItinerary = false;
+      movePlayerToLocation($scope.currentLocation, true);
+    };
 
     $scope.onKapSelected = function(kapitan){
       if($scope.selectedKapitan){
@@ -328,5 +331,28 @@ angular.module('partyanimalsDraftApp')
       }else{
         $scope.scheduledActivities.splice(i,1);
       }
+    };
+
+    var movePlayerToLocation = function(district, isHuman){
+      $scope.districts.forEach(function(val){
+        if(isHuman){
+          if(val.id === district.id){
+            val.hasHuman = true;
+          }else{
+            if(val.hasHuman){
+              val.hasHuman = false;
+            }
+          }
+        }else{
+          if(val.id === district.id){
+            val.hasAI = true;
+          }else{
+            if(val.hasAI){
+              val.hasAI = false;
+            }
+          }
+        }
+
+      });
     };
   });
