@@ -13,6 +13,7 @@ angular.module('partyanimalsDraftApp')
     $scope.scheduledActivities = [];
     $scope.futureLocation = $scope.human.hq;
     $scope.currentLocation = $scope.human.hq;
+    $scope.totalCost = 0;
 
     $http.get('/api/districts').success(function(districts){
       $scope.districts = districts;
@@ -80,7 +81,6 @@ angular.module('partyanimalsDraftApp')
       inFutureLocation = $scope.futureLocation.id === $scope.selectedDistrict.id;
 
 
-      //TODO: calculate cost based on location
       moveActivity = {
         id: -1,
         type: 'MOVE',
@@ -171,7 +171,11 @@ angular.module('partyanimalsDraftApp')
       var totalTime = $scope.scheduledActivities.reduce(function(a, b){
         return a + b.cost.hours;
       }, 0);
+      var totalCost = $scope.scheduledActivities.reduce(function(a, b){
+        return a + b.cost.gold;
+      }, 0);
       $scope.timeLeft = $scope.hours.length - totalTime;
+      $scope.totalCost = totalCost;
     }, true);
 
     $scope.$watch('timeLeft', function(){
