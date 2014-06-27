@@ -14,7 +14,7 @@ angular.module('partyanimalsDraftApp')
       link: function postLink(scope, element, attrs) {
         scope.selected = function(district){
           scope.changeSelected(district);
-        }
+        };
       }
     };
   });

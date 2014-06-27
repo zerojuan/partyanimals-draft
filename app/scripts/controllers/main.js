@@ -42,23 +42,23 @@ angular.module('partyanimalsDraftApp')
       //randomize aiIssues:
       $scope.issues.forEach(function(val, i){
         var newVal = angular.copy(val);
-        if(i == 0){
+        if(i === 0){
           newVal.level = 3;
-        }else if(i == 1){
+        }else if(i === 1){
           newVal.level = 1;
-        }else if(i == 2){
+        }else if(i === 2){
           newVal.level = 1;
-        }else if(i == 3){
+        }else if(i === 3){
           newVal.level = 0;
-        }else if(i == 4){
+        }else if(i === 4){
           newVal.level = 0;
         }
         aiIssues.push(newVal);
-      })
+      });
       //set ai selected district
       var aiHQ = null;
       var index = Math.floor(Math.random()*$scope.districts.length-1);
-      index = (index == $scope.selectedDistrict.id) ? index+1 : index;
+      index = (index === $scope.selectedDistrict.id) ? index+1 : index;
       aiHQ = $scope.districts[index];
       GameState.setHuman($scope.issues, $scope.selectedDistrict);
       GameState.setAI(aiIssues, aiHQ);
@@ -71,6 +71,6 @@ angular.module('partyanimalsDraftApp')
       }
       $scope.selectedDistrict = district;
       $scope.selectedDistrict.selected = true;
-    }
+    };
 
   });

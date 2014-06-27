@@ -54,8 +54,7 @@ angular.module('partyanimalsDraftApp')
         if(activity.type === 'MOVE'){
           //TODO: if movement was removed remove every act inside this location until end of list or encounter a new move type
           $scope.selectedDistrict.activities.forEach(function(val){
-            if(val.type !== 'MOVE')
-              val.disabled = true;
+            if(val.type !== 'MOVE'){val.disabled = true;}
           });
         }
       }else{ //add schedule
@@ -63,12 +62,11 @@ angular.module('partyanimalsDraftApp')
         $scope.scheduledActivities.push(activity);
         if(activity.type === 'MOVE'){
           $scope.selectedDistrict.activities.forEach(function(val){
-            if(val.type !== 'MOVE')
-              val.disabled = false;
+            if(val.type !== 'MOVE'){val.disabled = false;}
           });
         }
       }
-    }
+    };
 
     $scope.changeSelectedDistrict = function(district){
       if($scope.selectedDistrict){
@@ -79,30 +77,29 @@ angular.module('partyanimalsDraftApp')
       $scope.selectedDistrict.kapitan = findKapitan($scope.selectedDistrict.kapitanId);
       $scope.selectedDistrict.activities = [];
       //load activities for this item
-      var moveActivity = null;
-      var inFutureLocation = $scope.futureLocation.id == $scope.selectedDistrict.id;
+      var moveActivity, inFutureLocation = null;
+      inFutureLocation = $scope.futureLocation.id === $scope.selectedDistrict.id;
 
-      // if(!inFutureLocation){
+
         //TODO: calculate cost based on location
-        moveActivity = {
-          id: -1,
-          type: 'MOVE',
-          name: 'Move Here',
-          cost: {
-            gold: 100,
-            hours: 3
-          },
-          disabled: false,
-          location: angular.copy($scope.selectedDistrict)
-        };
-        if(isInSchedule(moveActivity)){
-            moveActivity.wasScheduled = true;
-        }
+      moveActivity = {
+        id: -1,
+        type: 'MOVE',
+        name: 'Move Here',
+        cost: {
+          gold: 100,
+          hours: 3
+        },
+        disabled: false,
+        location: angular.copy($scope.selectedDistrict)
+      };
 
-        toggleDisable(moveActivity, shouldDisable);
+      if(isInSchedule(moveActivity)){
+        moveActivity.wasScheduled = true;
+      }
 
+      toggleDisable(moveActivity, shouldDisable);
 
-      // }
       var activities = $scope.activities.map(function(val){
         var newVal = angular.copy(val);
         newVal.location = angular.copy($scope.selectedDistrict);
@@ -118,11 +115,11 @@ angular.module('partyanimalsDraftApp')
       });
 
       if(moveActivity){
-          activities.unshift(moveActivity);
+        activities.unshift(moveActivity);
       }
 
       $scope.selectedDistrict.activities = activities;
-    }
+    };
 
     $scope.onKapSelected = function(kapitan){
       if($scope.selectedKapitan){
@@ -141,22 +138,22 @@ angular.module('partyanimalsDraftApp')
       });
       $scope.selectedKapitan.likesData = likesData;
       $scope.selectedKapitan.hatesData = hatesData;
-    }
+    };
 
     $scope.onKapClicked = function(){
       $scope.state = 'kapitan';
       $scope.showItinerary = false;
-    }
+    };
 
     $scope.onItClicked = function(){
       $scope.showItinerary = !$scope.showItinerary;
-    }
+    };
 
     $scope.onBackHome = function(){
       $scope.state = 'home';
-    }
+    };
 
-    $scope.$watch('scheduledActivities', function(newVal, oldVal){
+    $scope.$watch('scheduledActivities', function(){
       //get the last movement location
       var futureLocationFound = false;
       for(var i = $scope.scheduledActivities.length-1; i >= 0; i--){
@@ -178,11 +175,11 @@ angular.module('partyanimalsDraftApp')
     }, true);
 
     $scope.$watch('timeLeft', function(){
-      if(!$scope.selectedDistrict) return;
+      if(!$scope.selectedDistrict) {return;}
       $scope.selectedDistrict.activities.forEach(function(val){
         toggleDisable(val, shouldDisable);
       });
-    }, true)
+    }, true);
 
     var findKapitan = function(id){
       var retVal = null;
@@ -192,16 +189,12 @@ angular.module('partyanimalsDraftApp')
         }
       });
       return retVal;
-    }
+    };
 
     var isInSchedule = function(activity){
       var retVal = false;
       if(activity.type === 'MOVE'){
-        if(activity.location.id === $scope.futureLocation.id){
-            return true;
-        }else{
-          return false;
-        }
+        return activity.location.id === $scope.futureLocation.id;
       }
       $scope.scheduledActivities.forEach(function(val){
         if(val.id === activity.id && val.location.id === activity.location.id){
@@ -209,7 +202,7 @@ angular.module('partyanimalsDraftApp')
         }
       });
       return retVal;
-    }
+    };
 
     var toggleDisable = function(activity, willDisable){
       if(willDisable(activity)){
@@ -217,7 +210,7 @@ angular.module('partyanimalsDraftApp')
       }else{
         activity.disabled = false;
       }
-    }
+    };
 
     var howManyMovementScheduled = function(){
       var count = 0;
@@ -227,18 +220,17 @@ angular.module('partyanimalsDraftApp')
         }
       });
       return count;
-    }
+    };
 
     var shouldDisable = function(activity){
         if(activity.type === 'MOVE'){
           //disable only if there are no other
           if(howManyMovementScheduled() === 0 &&
             activity.location.id === $scope.futureLocation.id){
-              return true;
+            return true;
           }
 
-            return $scope.timeLeft-activity.cost.hours < 0;
-          
+          return $scope.timeLeft-activity.cost.hours < 0;
         }
         if(isInSchedule(activity)){
           return false;
@@ -246,10 +238,10 @@ angular.module('partyanimalsDraftApp')
         if($scope.timeLeft - activity.cost.hours < 0){
           return true;
         }
-        if(activity.location.id != $scope.futureLocation.id){
+        if(activity.location.id !== $scope.futureLocation.id){
           return true;
         }
-    }
+      };
 
     var removeFromSchedule = function(activity){
       var i;
@@ -275,5 +267,5 @@ angular.module('partyanimalsDraftApp')
       }else{
         $scope.scheduledActivities.splice(i,1);
       }
-    }
+    };
   });
