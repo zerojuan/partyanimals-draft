@@ -8,6 +8,10 @@
   background: rgba(254, 232, 200, 0.7);
 }
 
+.red {
+  color: red;
+}
+
 .list-group-item {
   margin: 0;
   border-bottom: 0;

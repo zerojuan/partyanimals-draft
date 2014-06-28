@@ -1,7 +1,7 @@
 <div class="top-bar">
   <div class="pull-left">{{turnsLeft}} Days Until Election</div>
   <div class="center">Total Reputation</div>
-  <div class="pull-right">Funds: ${{totalCash}}</div>
+  <div class="pull-right" ng-class="{red: totalCash<0}">Funds: ${{totalCash}}</div>
 </div>
 <div class="overlay reveal-animation" ng-show="showOverlay">
   <div class="container">

@@ -1,5 +1,5 @@
 <itinerary-view scheduled-activities="scheduledActivities" hours="hours" on-go="onItineraryGo">
   <p>Location at EOD: {{futureLocation.name}}</p>
-  <p>Cost: $ {{totalCost}}</p>
+  <p>Cost: <span ng-class="{red: totalCost > totalCash}">$ {{totalCost}}</span></p>
   <p>Hours Free: {{timeLeft}}</p>
 </itinerary-view>

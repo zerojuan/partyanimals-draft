@@ -148,12 +148,17 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.simulate.onEndTurn = function(){
-
+      //ui reset
+      $scope.showItinerary = false;
       $scope.showOverlay = false;
       $scope.endTurn = false;
+
+      //advance game state
+      $scope.totalCash = $scope.totalCash - $scope.totalCost;
+      $scope.turnsLeft -= 1;
       $scope.scheduledActivities = [];
       $scope.currentLocation = $scope.futureLocation;
-      $scope.showItinerary = false;
+
       $scope.selectedDistrict.selected = false;
       $scope.selectedDistrict = null;
       movePlayerToLocation($scope.currentLocation, true);
