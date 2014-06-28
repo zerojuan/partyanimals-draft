@@ -1,6 +1,6 @@
 <div class="province-view reveal-animation">
   <div ng-repeat="district in districts" class="district" ng-class="{selected: district.selected}" ng-click="selected(district)">
-    <h4>{{district.name}}</h4>
+    <p><h4>{{district.name}}</h4> {{district.population}}pi</p>
     <span ng-show="district.isHQ"><i class="glyphicon glyphicon-home blue"></i></span>
     <span ng-show="district.isAIHQ"><i class="glyphicon glyphicon-home red"></i></span>
     <span ng-show="district.hasHuman"><i class="glyphicon glyphicon-user blue"></i></span>
