@@ -1,10 +1,34 @@
 <div class="top-bar">
   <div class="pull-left">{{turnsLeft}} Days Until Election</div>
   <div class="center">Total Reputation</div>
-  <div class="pull-right">Funds: ${{totalCash}}</div>
+  <div class="pull-right" ng-class="{red: totalCash<0}">Funds: ${{totalCash}}</div>
 </div>
-
-<province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelected"></province-view>
+<div class="overlay reveal-animation" ng-show="showOverlay">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Simulating</h3>
+      </div>
+    </div>
+    <div class="row" ng-show="!endTurn">
+      <div>
+        <a ng-click="simulate.onNext()">{{simulate.simulateText}}</a>
+      </div>
+      <div ng-show="simulate.activeAct">
+        {{simulate.activeAct.name}} @ {{simulate.activeAct.location.name}}
+      </div>
+    </div>
+    <div class="row" ng-show="endTurn">
+      <div>
+        <a ng-click="simulate.onEndTurn()">{{simulate.simulateText}}</a>
+      </div>
+      <div>
+        *Summary of the things you did today*
+      </div>
+    </div>
+  </div>
+</div>
+<province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelectedDistrict"></province-view>
 <div ng-show="selectedDistrict" class="pull-right district-desc reveal-animation">
   <h4>{{selectedDistrict.name}} <span><img src="images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span></h4>
   <span>{{selectedDistrict.info}}</span>
@@ -21,15 +45,19 @@
     </tr>
   </table>
   <h5>Activities</h5>
-  <ul class="list-unstyled">
-    <li ng-repeat="activity in activities" class="row">
+  <ul class="list-unstyled activity-list">
+    <li ng-repeat="activity in selectedDistrict.activities" class="row" ng-class="{disabled: activity.disabled}">
       <div class="col-md-5">{{activity.name}}</div>
       <div class="col-md-3">{{activity.cost.gold | formatcost}}</div>
-      <div class="col-md-3">{{activity.cost.hours}} hrs</div>
+      <div class="col-md-2">{{activity.cost.hours}} hrs</div>
+      <div class="col-md-1">
+        <a class="btn" ng-click="addToItinerary(activity)" ng-show="!activity.disabled">
+        <i ng-class="{'glyphicon-plus': !activity.wasScheduled, 'glyphicon-minus': activity.wasScheduled}" class="glyphicon"></i></a>
+      </div>
     </li>
   </ul>
 </div>
-<div>
+<div class="bottom">
     <div>
       <a class="btn btn-default" ng-click="onItClicked()">Itinerary</a>
       <a class="btn btn-default" ng-click="onKapClicked()">Kapitans</a>

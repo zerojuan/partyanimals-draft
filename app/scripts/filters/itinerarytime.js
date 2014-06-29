@@ -7,6 +7,8 @@ angular.module('partyanimalsDraftApp')
         return input + " AM";
       }else if(input == 12){
         return input + " PM ";
+      }else if(input == 24){
+        return  "12 AM";
       }else{
         return (input%12) + " PM ";
       }

@@ -1,10 +1,17 @@
 <div class="itinerary-view">
   <h3>Itinerary</h3>
+  <div class="schedule">
+
+    <div ng-repeat="activity in scheduledActivities" class="schedule-item item-{{activity.cost.hours}}">
+      <h5>{{activity.name}} @{{activity.location.name}}</h5>
+    </div>
+  </div>
   <div ng-repeat="hour in hours" class="time row">
     <div class="col-md-4 left">{{hour | itinerarytime}}</div>
     <div class="col-md-7 right"></div>
   </div>
+  <div ng-transclude></div>
   <div class="btn-holder">
-    <a class="btn btn-success" ng-click="onItClicked()">Go</a>
+    <a class="btn btn-success" ng-click="onGo()">Go</a>
   </div>
 </div>

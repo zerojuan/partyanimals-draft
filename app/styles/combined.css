@@ -1,3 +1,17 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 250;
+  width: 100%;
+  background: rgba(254, 232, 200, 0.7);
+}
+
+.red {
+  color: red;
+}
+
 .list-group-item {
   margin: 0;
   border-bottom: 0;
@@ -114,6 +128,7 @@
   position: absolute;
   z-index: 100;
   width: 250px;
+  margin-top: 30px;
   text-align: center;
   background: white;
   border: 1px solid black;
@@ -130,6 +145,86 @@
 
 .itinerary-view .btn-holder {
   margin: 10px 0;
+}
+
+.bottom {
+  position: fixed;
+  bottom: 5px;
+}
+
+.activity-list li {
+  margin: 1px 0;
+  background: #c2ece8;
+}
+
+.activity-list li .btn:focus,
+.activity-list li .btn:active:focus,
+.activity-list li .btn.active:focus,
+.activity-list li .btn.active,
+.activity-list li .btn:active {
+  color: #e9f8f7;
+  outline: none;
+  box-shadow: none;
+}
+
+.activity-list li.disabled {
+  background: gray;
+}
+
+.schedule {
+  position: absolute;
+  left: 78px;
+  z-index: 150;
+}
+
+.schedule .schedule-item {
+  width: 162px;
+  background: #fee8c8;
+  border: 1px dashed #f9ba77;
+}
+
+.schedule .schedule-item h5 {
+  margin: 0;
+}
+
+.schedule .item-10 {
+  height: 200px;
+}
+
+.schedule .item-9 {
+  height: 180px;
+}
+
+.schedule .item-8 {
+  height: 160px;
+}
+
+.schedule .item-7 {
+  height: 140px;
+}
+
+.schedule .item-6 {
+  height: 120px;
+}
+
+.schedule .item-5 {
+  height: 100px;
+}
+
+.schedule .item-4 {
+  height: 80px;
+}
+
+.schedule .item-3 {
+  height: 60px;
+}
+
+.schedule .item-2 {
+  height: 40px;
+}
+
+.schedule .item-1 {
+  height: 20px;
 }
 
 .reveal-animation.ng-enter {
