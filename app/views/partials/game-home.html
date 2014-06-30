@@ -10,15 +10,16 @@
         <h3>Simulating</h3>
       </div>
     </div>
-    <div class="row" ng-show="!endTurn">
+    <div class="row simulation-container" ng-show="!endTurn">
       <div>
-        <a ng-click="simulate.onNext()">{{simulate.simulateText}}</a>
+        <a ng-click="simulate.onNext()" class="btn btn-success">{{simulate.simulateText}}</a>
       </div>
       <div ng-show="simulate.activeAct">
         {{simulate.activeAct.name}} @ {{simulate.activeAct.location.name}}
+        <activity-sim activity="simulate.activeAct"></activity-sim>
       </div>
     </div>
-    <div class="row" ng-show="endTurn">
+    <div class="row simulation-container" ng-show="endTurn">
       <div>
         <a ng-click="simulate.onEndTurn()">{{simulate.simulateText}}</a>
       </div>

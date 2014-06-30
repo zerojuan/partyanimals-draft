@@ -1,0 +1,16 @@
+<div>
+  <div ng-switch="activity.type">
+    <div ng-switch-when="MOVE">
+      <img src="images/travelling.jpg"></img>
+    </div>
+    <div ng-switch-when="TALK">
+      This part should show people talking
+    </div>
+    <div ng-switch-when="SORTIE">
+      A sortie graphic should show up
+    </div>
+    <div ng-switch-default>
+      This is the default action {{activity.name}}
+    </div>
+  </div>
+</div>

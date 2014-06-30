@@ -171,6 +171,10 @@
   background: gray;
 }
 
+.simulation-container {
+  text-align: center;
+}
+
 .schedule {
   position: absolute;
   left: 78px;
