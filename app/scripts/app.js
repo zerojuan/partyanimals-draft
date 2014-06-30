@@ -5,7 +5,8 @@ angular.module('partyanimalsDraftApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngAnimate'
+  'ngAnimate',
+  'ui.bootstrap'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
