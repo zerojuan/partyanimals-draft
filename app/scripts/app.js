@@ -6,7 +6,8 @@ angular.module('partyanimalsDraftApp', [
   'ngSanitize',
   'ngRoute',
   'ngAnimate',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'firebase'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

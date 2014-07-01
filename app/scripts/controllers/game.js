@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .controller('GameCtrl', function ($scope, $http, GameState) {
+  .controller('GameCtrl', function ($scope, $http, PAFirebase, GameState) {
 
     $scope.state = 'home';
     $scope.human = GameState.getHuman();
@@ -18,8 +18,9 @@ angular.module('partyanimalsDraftApp')
       simulateText: 'Start'
     };
 
-    $http.get('/api/districts').success(function(districts){
-      $scope.districts = districts;
+
+    PAFirebase.districtsRef.on('value', function(snapshot){
+      $scope.districts = snapshot.val();
       $scope.districts.forEach(function(val){
         if(val.id === $scope.human.hq.id){
           val.isHQ = true;
@@ -31,18 +32,22 @@ angular.module('partyanimalsDraftApp')
           $scope.ai.hq = val;
         }
       });
+      $scope.$apply();
     });
 
-    $http.get('/api/issues').success(function(issues) {
-      $scope.issues = issues;
+    PAFirebase.issuesRef.on('value', function(snapshot){
+      $scope.issues = snapshot.val();
+      $scope.$apply();
     });
 
-    $http.get('/api/kapitans').success(function(kapitans){
-      $scope.kapitans = kapitans;
+    PAFirebase.kapitansRef.on('value', function(snapshot){
+      $scope.kapitans = snapshot.val();
+      $scope.$apply();
     });
 
-    $http.get('/api/activities').success(function(activities){
-      $scope.activities = activities;
+    PAFirebase.activitiesRef.on('value', function(snapshot){
+      $scope.activities = snapshot.val();
+      $scope.$apply();
     });
 
     $scope.addToItinerary = function(activity){
