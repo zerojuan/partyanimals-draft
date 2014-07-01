@@ -1,0 +1,74 @@
+[
+  {
+    "id": 0,
+    "name": "Photo Op",
+    "cost": {
+      "gold": 100,
+      "hours": 2
+    },
+    "effect": {
+      "attr": "reputation",
+      "modifier": 2
+    }
+  },
+  {
+    "id": 1,
+    "name": "Sortie",
+    "type": "SORTIE",
+    "cost": {
+      "gold": 500,
+      "hours": 5
+    },
+    "effect": {
+      "attr": "reputation",
+      "modifier": 6
+    }
+  },
+  {
+    "id": 2,
+    "name": "Put up posters",
+    "cost": {
+      "gold": 200,
+      "hours": 2
+    },
+    "effect": {
+      "attr": "reputation",
+      "modifier": 2
+    }
+  },
+  {
+    "id": 3,
+    "name": "Talk to Kapitan",
+    "type": "TALK",
+    "cost": {
+      "gold": 0,
+      "hours": 2
+    }
+  },
+  {
+    "id": 4,
+    "name": "Contest",
+    "type": "STAT",
+    "cost": {
+      "gold": 200,
+      "hours": 3
+    }
+  },
+  {
+    "id": 5,
+    "name": "Smear",
+    "type": "STAT",
+    "cost": {
+      "gold": 200,
+      "hours": 3
+    }
+  },
+  {
+    "id": 6,
+    "name": "Bribe",
+    "cost": {
+      "gold": 1000,
+      "hours": 3
+    }
+  }
+  ]

@@ -1,0 +1,56 @@
+[
+  {
+    "id": 0,
+    "name": "Kapitolyo",
+    "info": "The seat of power",
+    "issues": [2, 2, 1, 0, 0],
+    "kapitanId": 0,
+    "population": 2000,
+    "gold": 100
+  },
+  {
+    "id": 1,
+    "name": "Casino",
+    "info": "Wealthy and crimey",
+    "issues": [0, 3, 2, 0, 0],
+    "kapitanId": 1,
+    "population": 1000,
+    "gold": 50
+  },
+  {
+    "id": 2,
+    "name": "Fishing Village",
+    "info": "Rural poor",
+    "issues": [0, 1, 4, 0, 0],
+    "kapitanId": 2,
+    "population": 1000,
+    "gold": 50
+  },
+  {
+    "id": 3,
+    "name": "Port",
+    "info": "Urban poor",
+    "issues": [0, 2, 3, 1, 0],
+    "kapitanId": 3,
+    "population": 1000,
+    "gold": 25
+  },
+  {
+    "id": 4,
+    "name": "Cathedral",
+    "info": "People love God. God be the glory.",
+    "issues": [0, 1, 0, 0, 4],
+    "kapitanId": 4,
+    "population": 3000,
+    "gold": 25
+  },
+  {
+    "id": 5,
+    "name": "Resort",
+    "info": "Environmentalism and tourism",
+    "issues": [0, 0, 2, 3, 0],
+    "kapitanId": 5,
+    "population": 500,
+    "gold": 10
+  }
+]

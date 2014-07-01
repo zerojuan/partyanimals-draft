@@ -1,0 +1,28 @@
+[
+  {
+    "id": 0,
+    "name" : "Education",
+    "info" : "Education Programs Description",
+    "level": 0
+  }, {
+    "id": 1,
+    "name" : "Law & Order",
+    "info" : "Police and stuff.",
+    "level": 0
+  }, {
+    "id": 2,
+    "name" : "Employment",
+    "info" : "Jobs and small enterprise",
+    "level": 0
+  }, {
+    "id": 3,
+    "name" : "Health",
+    "info" : "Healthy people are happy people",
+    "level": 0
+  }, {
+    "id": 4,
+    "name": "Religion",
+    "info": "God above all things",
+    "level": 0
+  }
+]
