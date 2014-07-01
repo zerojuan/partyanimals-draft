@@ -231,6 +231,13 @@
   height: 20px;
 }
 
+.custom-alert {
+  position: fixed;
+  top: 10px;
+  right: 5px;
+  width: 225px;
+}
+
 .reveal-animation.ng-enter {
   -webkit-animation: enter_sequence .5s linear;
   /* Safari/Chrome */

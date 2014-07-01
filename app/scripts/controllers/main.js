@@ -2,9 +2,9 @@
 
 angular.module('partyanimalsDraftApp')
   .controller('MainCtrl', function ($scope, $http, $location, PAFirebase, GameState) {
-    PAFirebase.platformPointsRef.on('value', function(snapshot) {
-        $scope.initialLimit = snapshot.val();
-        $scope.$apply();
+    PAFirebase.platformPointsRef.on('value', function(snapshot){
+      $scope.initialLimit = snapshot.val();
+      $scope.$apply();
     });
     $scope.initialLimit = 0;
     $scope.page = 1;

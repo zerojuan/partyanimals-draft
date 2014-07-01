@@ -17,47 +17,61 @@ angular.module('partyanimalsDraftApp')
     $scope.simulate = {
       simulateText: 'Start'
     };
+    $scope.config = {
+      alerts: []
+    };
 
     PAFirebase.goldRef.on('value', function(snapshot){
-      $scope.totalCash = snapshot.val();
-      $scope.$apply();
+      if(!onDataChanged('initialGold')){
+        $scope.totalCash = snapshot.val();
+        $scope.$apply();
+      }
     });
 
     PAFirebase.turnsPerGameRef.on('value', function(snapshot){
-      $scope.turnsLeft = snapshot.val();
-      console.log('Turns left...', snapshot.val());
-      $scope.$apply();
+      if(!onDataChanged('turnsPerGame')){
+        $scope.turnsLeft = snapshot.val();
+        $scope.$apply();
+      }
     });
 
     PAFirebase.districtsRef.on('value', function(snapshot){
-      $scope.districts = snapshot.val();
-      $scope.districts.forEach(function(val){
-        if(val.id === $scope.human.hq.id){
-          val.isHQ = true;
-          val.hasHuman = true;
-        }
-        if(val.id === $scope.ai.hq.id){
-          val.isAIHQ = true;
-          val.hasAI = true;
-          $scope.ai.hq = val;
-        }
-      });
-      $scope.$apply();
+      if(!onDataChanged('districts')){
+        $scope.districts = snapshot.val();
+        $scope.districts.forEach(function(val){
+          if(val.id === $scope.human.hq.id){
+            val.isHQ = true;
+            val.hasHuman = true;
+          }
+          if(val.id === $scope.ai.hq.id){
+            val.isAIHQ = true;
+            val.hasAI = true;
+            $scope.ai.hq = val;
+          }
+        });
+        $scope.$apply();
+      }
     });
 
     PAFirebase.issuesRef.on('value', function(snapshot){
-      $scope.issues = snapshot.val();
-      $scope.$apply();
+      if(!onDataChanged('issues')){
+        $scope.issues = snapshot.val();
+        $scope.$apply();
+      }
     });
 
     PAFirebase.kapitansRef.on('value', function(snapshot){
-      $scope.kapitans = snapshot.val();
-      $scope.$apply();
+      if(!onDataChanged('kapitans')){
+        $scope.kapitans = snapshot.val();
+        $scope.$apply();
+      }
     });
 
     PAFirebase.activitiesRef.on('value', function(snapshot){
-      $scope.activities = snapshot.val();
-      $scope.$apply();
+      if(!onDataChanged('activities')){
+        $scope.activities = snapshot.val();
+        $scope.$apply();
+      }
     });
 
     $scope.addToItinerary = function(activity){
@@ -376,7 +390,18 @@ angular.module('partyanimalsDraftApp')
             }
           }
         }
-
       });
+    };
+
+    var changedList = {};
+    var onDataChanged = function(name){
+      if(changedList[name] !== undefined){
+        $scope.config.alerts.push({msg: 'Someone tweaked ' + name + '.', type: 'warning'});
+        $scope.$apply();
+        return true;
+      }else{
+        changedList[name] = true;
+        return false;
+      }
     };
   });
