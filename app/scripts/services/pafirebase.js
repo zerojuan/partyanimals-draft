@@ -8,7 +8,7 @@
  * Service in the partyanimalsDraftApp.
  */
 angular.module('partyanimalsDraftApp')
-  .service('PAFirebase', function Pafirebase($firebase) {
+  .service('PAFirebase', function Pafirebase() {
     var url = 'https://partyanimals-data.firebaseio.com';
     this.platformPointsRef = new Firebase(url+'/platformPoints');
     this.goldRef = new Firebase(url+'/gold');
@@ -16,4 +16,5 @@ angular.module('partyanimalsDraftApp')
     this.issuesRef = new Firebase(url+'/issues');
     this.kapitansRef = new Firebase(url+'/kapitan');
     this.activitiesRef = new Firebase(url+'/activities');
+    this.turnsPerGameRef = new Firebase(url+'/turnsPerGame');
   });

@@ -18,6 +18,16 @@ angular.module('partyanimalsDraftApp')
       simulateText: 'Start'
     };
 
+    PAFirebase.goldRef.on('value', function(snapshot){
+      $scope.totalCash = snapshot.val();
+      $scope.$apply();
+    });
+
+    PAFirebase.turnsPerGameRef.on('value', function(snapshot){
+      $scope.turnsLeft = snapshot.val();
+      console.log('Turns left...', snapshot.val());
+      $scope.$apply();
+    });
 
     PAFirebase.districtsRef.on('value', function(snapshot){
       $scope.districts = snapshot.val();
