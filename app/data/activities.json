@@ -1,45 +1,39 @@
 [
   {
-    "id": 0,
-    "name": "Photo Op",
-    "cost": {
-      "gold": 100,
-      "hours": 2
-    },
-    "effect": {
-      "attr": "reputation",
-      "modifier": 2
-    }
-  },
-  {
     "id": 1,
     "name": "Sortie",
     "type": "SORTIE",
+    "description": "Increase the player's reputation in the district",
     "cost": {
       "gold": 500,
       "hours": 5
     },
     "effect": {
       "attr": "reputation",
-      "modifier": 6
-    }
+      "modifier": "+10"
+    },
+    "success": "30+dmod"
   },
   {
     "id": 2,
     "name": "Put up posters",
+    "type": "STAT",
+    "description": "Increase a district's awareness of an issue",
     "cost": {
       "gold": 200,
       "hours": 2
     },
     "effect": {
-      "attr": "reputation",
-      "modifier": 2
-    }
+      "attr": "stat",
+      "modifier": "+1"
+    },
+    "success": "30+dmod"
   },
   {
     "id": 3,
     "name": "Talk to Kapitan",
     "type": "TALK",
+    "description": "Talk to the district's Kapitan",
     "cost": {
       "gold": 0,
       "hours": 2
@@ -48,27 +42,46 @@
   {
     "id": 4,
     "name": "Contest",
+    "description": "Reduce knowledge of the opponent's platform",
     "type": "STAT",
     "cost": {
       "gold": 200,
       "hours": 3
-    }
+    },
+    "effect":{
+      "attr": "vsStat",
+      "modifier": "-1"
+    },
+    "success": "30+dmod"
   },
   {
     "id": 5,
     "name": "Smear",
-    "type": "STAT",
+    "description": "Reduce the opponent's reputation on the district",
     "cost": {
       "gold": 200,
-      "hours": 3
-    }
+      "hours": 3,
+      "morality": -10
+    },
+    "effect": {
+      "attr": "vsReputation",
+      "modifier": "10+amod"
+    },
+    "success": "30+dmod"
   },
   {
     "id": 6,
     "name": "Bribe",
+    "description": "Increase your reputation greatly",
     "cost": {
       "gold": 1000,
-      "hours": 3
-    }
+      "hours": 3,
+      "morality": -10
+    },
+    "effect": {
+      "attr": "reputation",
+      "modifier": "30+amod"
+    },
+    "success": "30+dmod"
   }
-  ]
+]
