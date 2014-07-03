@@ -4,6 +4,14 @@
     "name": "Sortie",
     "type": "SORTIE",
     "description": "Increase the player's reputation in the district",
+    "text": {
+      "success": [
+        "The sortie was a $place$ was a success"
+      ],
+      "fail": [
+        "The sortie was a $place$ was a failure"
+      ]
+    },
     "cost": {
       "gold": 500,
       "hours": 5
@@ -19,6 +27,14 @@
     "name": "Put up posters",
     "type": "STAT",
     "description": "Increase a district's awareness of an issue",
+    "text": {
+      "success": [
+        "Putting up posters was extremely effective!"
+      ],
+      "fail": [
+        "Putting up posters has no effect"
+      ]
+    },
     "cost": {
       "gold": 200,
       "hours": 2
@@ -44,6 +60,14 @@
     "name": "Contest",
     "description": "Reduce knowledge of the opponent's platform",
     "type": "STAT",
+    "text": {
+      "success": [
+        "The people were convinced of the weakness of the opponents $issue$"
+      ],
+      "fail": [
+        "You have failed to contest the opponent's stance on $issue$"
+      ]
+    },
     "cost": {
       "gold": 200,
       "hours": 3
@@ -57,7 +81,16 @@
   {
     "id": 5,
     "name": "Smear",
+    "type": "REPUTATION",
     "description": "Reduce the opponent's reputation on the district",
+    "text":{
+      "success": [
+        "The smear campaign was successful"
+      ],
+      "fail": [
+        "The smear campaign was not effective"
+      ]
+    },
     "cost": {
       "gold": 200,
       "hours": 3,
@@ -72,7 +105,16 @@
   {
     "id": 6,
     "name": "Bribe",
+    "type": "REPUTATION",
     "description": "Increase your reputation greatly",
+    "text": {
+      "success": [
+        "You have bribed your way into popularity"
+      ],
+      "fail": [
+        "Your bribery attempt failed."
+      ]
+    },
     "cost": {
       "gold": 1000,
       "hours": 3,

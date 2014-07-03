@@ -41,11 +41,13 @@ angular.module('partyanimalsDraftApp')
         $scope.districts.forEach(function(val){
           if(val.id === $scope.human.hq.id){
             val.isHQ = true;
+            val.humanReputation = 50;
             val.hasHuman = true;
           }
           if(val.id === $scope.ai.hq.id){
             val.isAIHQ = true;
             val.hasAI = true;
+            val.aiReputation = 50;
             $scope.ai.hq = val;
           }
         });
@@ -117,6 +119,10 @@ angular.module('partyanimalsDraftApp')
         id: -1,
         type: 'MOVE',
         name: 'Move Here',
+        text: {
+          success: ['Moved to $place$'],
+          fail: ['Failed to move to $place$']
+        },
         cost: {
           gold: 100,
           hours: 3
@@ -187,6 +193,8 @@ angular.module('partyanimalsDraftApp')
       $scope.turnsLeft -= 1;
       $scope.scheduledActivities = [];
       $scope.currentLocation = $scope.futureLocation;
+
+      //TODO: update money when turn ends
 
       $scope.selectedDistrict.selected = false;
       $scope.selectedDistrict = null;

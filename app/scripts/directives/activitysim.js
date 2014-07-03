@@ -9,7 +9,7 @@ angular.module('partyanimalsDraftApp')
         activity: '='
       },
       link: function postLink(scope) {
-
+        //get what type of activity this is
       }
     };
   });

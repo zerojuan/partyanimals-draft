@@ -4,10 +4,20 @@
       <img src="images/travelling.jpg"></img>
     </div>
     <div ng-switch-when="TALK">
-      This part should show people talking
+      <!-- Show talk directive here -->
+      <talk-ui activity="activity"></sortie-ui>
     </div>
     <div ng-switch-when="SORTIE">
-      A sortie graphic should show up
+      <!-- Show sortie directive here -->
+      <sortie-ui activity="activity"></sortie-ui>
+    </div>
+    <div ng-switch-when="STAT">
+      <!-- Show stat directive here -->
+      <stat-ui activity="activity"></stat-ui>
+    </div>
+    <div ng-switch-when="REPUTATION">
+      <!-- Show reputation directive here -->
+      <reputation-ui activity="activity"></reputation-ui>
     </div>
     <div ng-switch-default>
       This is the default action {{activity.name}}
