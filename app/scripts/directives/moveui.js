@@ -2,26 +2,22 @@
 
 /**
  * @ngdoc directive
- * @name partyanimalsDraftApp.directive:reputationui
+ * @name partyanimalsDraftApp.directive:moveui
  * @description
- * # reputationui
+ * # moveui
  */
 angular.module('partyanimalsDraftApp')
-  .directive('reputationUi', function () {
+  .directive('moveUi', function () {
     return {
       require: '^activitySim',
-      templateUrl: 'partials/reputation-ui.html',
+      templateUrl: 'partials/move-ui.html',
       restrict: 'E',
       replace: true,
       scope: {
         activity: '='
       },
       link: function postLink(scope, element, attrs, simCtrl) {
-        scope.isSuccess = false;
-        //do checking here
-        scope.onDone = function(){
-          simCtrl.setDone();
-        }
+        simCtrl.setDone();
       }
     };
   });

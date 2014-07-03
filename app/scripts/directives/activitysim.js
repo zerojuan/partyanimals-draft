@@ -6,10 +6,14 @@ angular.module('partyanimalsDraftApp')
       templateUrl: 'partials/activity-sim.html',
       restrict: 'E',
       scope: {
-        activity: '='
+        activity: '=',
+        onNextReady: '='
       },
-      link: function postLink(scope) {
-        //get what type of activity this is
+      controller: function($scope){
+        this.setDone = function(){
+          //call the main controller that we are done here
+          $scope.onNextReady();
+        }
       }
     };
   });

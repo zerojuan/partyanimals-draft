@@ -9,14 +9,17 @@
 angular.module('partyanimalsDraftApp')
   .directive('talkUi', function () {
     return {
-      templatUrle: 'partials/talk-ui.html',
+      require: '^activitySim',
+      templateUrl: 'partials/talk-ui.html',
       restrict: 'E',
       replace: true,
       scope: {
         activity: '='
       },
-      link: function postLink(scope, element, attrs) {
-
+      link: function postLink(scope, element, attrs, simCtrl) {
+        scope.onDone = function(){
+          simCtrl.setDone();
+        }
       }
     };
   });

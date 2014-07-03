@@ -12,11 +12,11 @@
     </div>
     <div class="row simulation-container" ng-show="!endTurn">
       <div>
-        <a ng-click="simulate.onNext()" class="btn btn-success">{{simulate.simulateText}}</a>
+        <a ng-click="simulate.onNext()" class="btn btn-success" ng-class="{disabled: !simulate.isNextReady}">{{simulate.simulateText}}</a>
       </div>
       <div ng-show="simulate.activeAct">
         {{simulate.activeAct.name}} @ {{simulate.activeAct.location.name}}
-        <activity-sim activity="simulate.activeAct"></activity-sim>
+        <activity-sim activity="simulate.activeAct" on-next-ready="simulate.onNextReady"></activity-sim>
       </div>
     </div>
     <div class="row simulation-container" ng-show="endTurn">

@@ -15,7 +15,8 @@ angular.module('partyanimalsDraftApp')
     $scope.currentLocation = $scope.human.hq;
     $scope.totalCost = 0;
     $scope.simulate = {
-      simulateText: 'Start'
+      simulateText: 'Start',
+      isNextReady: false
     };
     $scope.config = {
       alerts: []
@@ -162,6 +163,7 @@ angular.module('partyanimalsDraftApp')
     $scope.onItineraryGo = function(){
       //execute the itinerary
       $scope.simulate.simulateText = 'Start';
+      $scope.simulate.isNextReady = true;
       $scope.showOverlay = true;
       $scope.endTurn = false;
       actIndex = 0;
@@ -178,9 +180,14 @@ angular.module('partyanimalsDraftApp')
         return;
       }
       $scope.simulate.simulateText = 'Next';
+      $scope.simulate.isNextReady = false;
       $scope.simulate.activeAct = $scope.scheduledActivities[actIndex];
       actIndex++;
     };
+
+    $scope.simulate.onNextReady = function(result){
+      $scope.simulate.isNextReady = true;
+    }
 
     $scope.simulate.onEndTurn = function(){
       //ui reset

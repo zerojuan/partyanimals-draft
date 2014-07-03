@@ -9,13 +9,17 @@
 angular.module('partyanimalsDraftApp')
   .directive('statUi', function () {
     return {
+      require: '^activitySim',
       templateUrl: 'partials/stat-ui.html',
       restrict: 'E',
+      replace: true,
       scope: {
         activity: '='
       },
-      link: function postLink(scope, element, attrs) {
-
+      link: function postLink(scope, element, attrs, simCtrl) {
+        scope.onDone = function(){
+          simCtrl.setDone();
+        }
       }
     };
   });
