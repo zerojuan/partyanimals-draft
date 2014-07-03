@@ -17,7 +17,6 @@ angular.module('partyanimalsDraftApp')
         activity: '='
       },
       link: function postLink(scope, element, attrs, simCtrl) {
-        //TODO: make a filter for reading formulas
         var formula = $filter('formulaparser')(scope.activity.success);
         console.log('Got this formula from parser: ', formula);
         //roll dice
