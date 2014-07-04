@@ -44,4 +44,5 @@ angular.module('partyanimalsDraftApp')
     that.getInitialCash = function(){
       return that.initialCash;
     };
+    
   });

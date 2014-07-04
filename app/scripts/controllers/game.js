@@ -9,7 +9,7 @@ angular.module('partyanimalsDraftApp')
     $scope.turnsLeft = GameState.getTurnsLeft();
     $scope.totalCash = GameState.getInitialCash();
     $scope.showItinerary = false;
-    $scope.hours = [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22, 23, 24];
+    $scope.hours = [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
     $scope.scheduledActivities = [];
     $scope.futureLocation = $scope.human.hq;
     $scope.currentLocation = $scope.human.hq;
@@ -21,6 +21,7 @@ angular.module('partyanimalsDraftApp')
     $scope.config = {
       alerts: []
     };
+    $scope.currentPlayer = $scope.human;
 
     PAFirebase.goldRef.on('value', function(snapshot){
       if(!onDataChanged('initialGold')){
@@ -51,6 +52,8 @@ angular.module('partyanimalsDraftApp')
             val.aiReputation = 50;
             $scope.ai.hq = val;
           }
+          val.humanStance = [0,0,0,0,0];
+          val.aiStance = [0,0,0,0,0];
         });
         $scope.$apply();
       }

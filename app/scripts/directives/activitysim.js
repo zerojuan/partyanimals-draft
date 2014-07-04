@@ -7,12 +7,22 @@ angular.module('partyanimalsDraftApp')
       restrict: 'E',
       scope: {
         activity: '=',
+        issues: '=',
+        player: '=',
         onNextReady: '='
       },
       controller: function($scope){
         this.setDone = function(){
           //call the main controller that we are done here
           $scope.onNextReady();
+        }
+
+        this.getIssues = function(){
+          return $scope.issues;
+        }
+
+        this.getPlayer = function(){
+          return $scope.player;
         }
       }
     };

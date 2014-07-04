@@ -16,7 +16,7 @@
       </div>
       <div ng-show="simulate.activeAct">
         {{simulate.activeAct.name}} @ {{simulate.activeAct.location.name}}
-        <activity-sim activity="simulate.activeAct" on-next-ready="simulate.onNextReady"></activity-sim>
+        <activity-sim activity="simulate.activeAct" on-next-ready="simulate.onNextReady" player="currentPlayer" issues="issues"></activity-sim>
       </div>
     </div>
     <div class="row simulation-container" ng-show="endTurn">

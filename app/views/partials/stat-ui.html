@@ -1,4 +1,19 @@
 <div>
+  <div class="container">
+    <div><h4>Select a platform to raise</h4></div>
+    <table class="table table-striped">
+      <tr>
+        <td>Issue</td>
+        <td>Human</td>
+        <td>AI</td>
+      </tr>
+      <tr ng-repeat="issue in player.issueStats">
+        <td>{{issue.name}} <strong>{{activity.location.issues[$index]}}</strong></td>
+        <td ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">{{activity.location.humanStance[$index]}}</td>
+        <td ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">{{activity.location.aiStance[$index]}}</td>
+      </tr>
+    </table>
+  </div>
   <p>
     <a class="btn btn-success" ng-click="onDone()">Done</a>
   </p>

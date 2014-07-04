@@ -17,6 +17,10 @@ angular.module('partyanimalsDraftApp')
         activity: '='
       },
       link: function postLink(scope, element, attrs, simCtrl) {
+        //select stat to change,
+        scope.issues = simCtrl.getIssues();
+        scope.player = simCtrl.getPlayer();
+        //show stats
         scope.onDone = function(){
           simCtrl.setDone();
         }
