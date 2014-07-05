@@ -1,6 +1,14 @@
 <div>
-  <img src="images/actions/sortie.jpg"></img>
+  <div ng-hide="done">
+    <img src="images/actions/sortie.jpg"></img>
+  </div>
+  <div ng-show="success">
+    <img src="images/actions/sortie-success.jpg"></img>
+  </div>
+  <div ng-show="fail">
+    <img src="images/actions/sortie-fail.jpg"></img>
+  </div>
   <p>
-    <a class="btn btn-success" ng-click="onDone()">Done</a>
+    <a class="btn btn-success" ng-click="onDone()" ng-class="{disabled: done}">Done</a>
   </p>
 </div>

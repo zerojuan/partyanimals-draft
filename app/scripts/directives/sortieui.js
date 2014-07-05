@@ -22,6 +22,8 @@ angular.module('partyanimalsDraftApp')
         //roll dice
         //check if diceroll greater than success rate
         scope.onDone = function(){
+          scope.done = true;
+          scope.success = true;
           simCtrl.setDone();
         }
       }
