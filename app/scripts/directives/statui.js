@@ -30,21 +30,25 @@ angular.module('partyanimalsDraftApp')
           scope.selectedIndex = -1;
           scope.issues = simCtrl.getIssues();
           scope.player = simCtrl.getPlayer();
+          scope.done = false;
+          scope.success = false;
           attributeFormula = $filter('attributeparser')(scope.activity.effect.attr);
-          console.log(attributeFormula, 'attri formula');
         });
-
-        //TODO: is + or - stat?
-
 
         //show stats
         scope.onDone = function(){
+          var value = 1;
+          if(attributeFormula.isVs){
+            value = -1;
+          }
           var result = {
             type: 'STAT',
             district: scope.activity.location,
-            value: 1,
+            value: value,
             issueIndex: scope.selectedIndex
           };
+          scope.done = true;
+          scope.success = true;
           simCtrl.setDone(result);
         };
 
@@ -68,7 +72,6 @@ angular.module('partyanimalsDraftApp')
         };
 
         scope.raiseStats = function(index){
-          console.log('raise stats?');
           if(scope.selectedIndex === index){
             if(attributeFormula.isVs){
               scope.activity.location.aiStance[index] += 1;

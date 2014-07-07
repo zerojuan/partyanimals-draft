@@ -200,7 +200,7 @@ angular.module('partyanimalsDraftApp')
     $scope.simulate.onNextReady = function(result){
       if(result){
         if(result.type === 'STAT'){
-          var changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, true);
+          var changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, result.value > 0);
           //update district data of the listed activities
           if($scope.scheduledActivities.length < actIndex){
             $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
