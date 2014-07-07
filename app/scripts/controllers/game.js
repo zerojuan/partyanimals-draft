@@ -52,8 +52,17 @@ angular.module('partyanimalsDraftApp')
             val.aiReputation = 50;
             $scope.ai.hq = val;
           }
-          val.humanStance = [0,0,0,0,0];
-          val.aiStance = [0,0,0,0,0];
+          // val.humanStance = [0,0,0,0,0];
+          // val.aiStance = [0,0,0,0,0];
+          val.humanStance = [];
+          val.aiStance = [];
+          for(var i = 0; i < 5; i++){
+            var rand = Math.floor(Math.random()*3);
+            val.aiStance.push(rand);
+            rand = Math.floor(Math.random()*$scope.human.issueStats[i].level);
+            val.humanStance.push(rand);
+          }
+
         });
         $scope.$apply();
       }
@@ -189,6 +198,15 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.simulate.onNextReady = function(result){
+      if(result){
+        if(result.type === 'STAT'){
+          var changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, true);
+          //update district data of the listed activities
+          if($scope.scheduledActivities.length < actIndex){
+            $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
+          }
+        }
+      }
       $scope.simulate.isNextReady = true;
     }
 
@@ -421,5 +439,21 @@ angular.module('partyanimalsDraftApp')
         changedList[name] = true;
         return false;
       }
+    };
+
+    var setStatForDistrict = function(statIndex, district, value, isHuman){
+      var changedDistrict;
+      $scope.districts.forEach(function(val){
+        if(val.id === district.id){
+          if(isHuman){
+            val.humanStance[statIndex] += value;
+          }else{
+            val.aiStance[statIndex] += value;
+          }
+          changedDistrict = val;
+        }
+      });
+      // $scope.$apply();
+      return changedDistrict;
     };
   });

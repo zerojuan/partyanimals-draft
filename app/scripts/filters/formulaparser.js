@@ -27,4 +27,21 @@ angular.module('partyanimalsDraftApp')
         formula: formula
       };
     };
+  })
+  .filter('attributeparser', function(){
+    return function(input){
+      var parsed = input.match(/(vs)|([A-z]+)/g) || [];
+      console.log(parsed);
+      if(parsed[0] === 'vs'){
+        return {
+          value: parsed[1].toLowerCase(),
+          isVs: true
+        };
+      }else{
+        return {
+          value: input.toLowerCase(),
+          isVs: false
+        };
+      }
+    };
   });

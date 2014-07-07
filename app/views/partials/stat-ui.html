@@ -1,18 +1,32 @@
-<div>
+<div class="stat-ui">
   <div class="container">
-    <div><h4>Select a platform to raise</h4></div>
+    <div><h4>{{activity.text.header[0]}}</h4></div>
     <table class="table table-striped">
       <tr>
-        <td>Issue</td>
-        <td>Human</td>
-        <td>AI</td>
-        <td></td>
+        <th>Issue</th>
+        <th class="issue-bar">Human vs AI</th>
+        <th></th>
       </tr>
       <tr ng-repeat="issue in player.issueStats">
         <td>{{issue.name}} <strong>{{activity.location.issues[$index]}}</strong></td>
-        <td ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">{{activity.location.humanStance[$index]}}</td>
-        <td ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">{{activity.location.aiStance[$index]}}</td>
-        <td ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">{{activity.location.aiStance[$index]}}</td>
+        <td class="issue-bar" ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">
+          <div class="bar">
+            <div class="base level-{{issue.level}}" tooltip="Max. Lvl: {{issue.level}}"></div>
+            <div class="points level-{{activity.location.humanStance[$index]}}" tooltip="Local Lvl: {{activity.location.humanStance[$index]}}"></div>
+          </div>
+          <div class="text">
+            {{activity.location.humanStance[$index]}} &nbsp; vs &nbsp;
+            {{activity.location.aiStance[$index]}}</div>
+          <div class="bar">
+            <div class="base left"></div>
+            <div class="points left level-{{activity.location.aiStance[$index]}}"></div>
+          </div>
+        </td>
+        <td ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">
+          <a class="btn" ng-class="{disabled: shouldDisable($index, issue) }"ng-click="raiseStats($index)" ng-mouseover="showPossible($index)" ng-mouseleave="hidePossible($index)">
+            <i ng-class="{'glyphicon-check': selectedIndex == $index, 'glyphicon-unchecked': selectedIndex != $index}" class="glyphicon"></i>
+          </a>
+        </td>
       </tr>
     </table>
   </div>

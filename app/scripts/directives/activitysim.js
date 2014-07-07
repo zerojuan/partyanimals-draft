@@ -5,6 +5,7 @@ angular.module('partyanimalsDraftApp')
     return{
       templateUrl: 'partials/activity-sim.html',
       restrict: 'E',
+      replace: true,
       scope: {
         activity: '=',
         issues: '=',
@@ -12,9 +13,9 @@ angular.module('partyanimalsDraftApp')
         onNextReady: '='
       },
       controller: function($scope){
-        this.setDone = function(){
+        this.setDone = function(action){
           //call the main controller that we are done here
-          $scope.onNextReady();
+          $scope.onNextReady(action);
         }
 
         this.getIssues = function(){

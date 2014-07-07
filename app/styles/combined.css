@@ -231,6 +231,75 @@
   height: 20px;
 }
 
+.activity-sim {
+  padding: 10px 0;
+  margin: 10px 0;
+  background: white;
+}
+
+.activity-sim .stat-ui table .issue-bar {
+  position: relative;
+  width: 40%;
+  text-align: center;
+}
+
+.activity-sim .stat-ui table .issue-bar .text {
+  float: left;
+  margin: 0 5px;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar {
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 5px;
+  padding-top: 7px;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar .base {
+  position: absolute;
+  right: 0;
+  width: 0;
+  height: 5px;
+  border: 1px solid gray;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar .base.left {
+  left: 0;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar .points {
+  position: absolute;
+  right: 0;
+  width: 0;
+  height: 5px;
+  background: blue;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar .points.left {
+  left: 0;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar .level-5 {
+  width: 100px;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar .level-4 {
+  width: 80px;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar .level-3 {
+  width: 60px;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar .level-2 {
+  width: 40px;
+}
+
+.activity-sim .stat-ui table .issue-bar .bar .level-1 {
+  width: 20px;
+}
+
 .custom-alert {
   position: fixed;
   top: 10px;
