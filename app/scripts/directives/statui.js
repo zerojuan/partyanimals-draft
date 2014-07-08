@@ -36,12 +36,13 @@ angular.module('partyanimalsDraftApp')
           attributeFormula = $filter('attributeparser')(scope.activity.effect.attr);
           var effectFormula = $filter('formulaparser')(scope.activity.effect.modifier);
           console.log('Effect formula:',effectFormula);
-          modifier = effectFormula.formula(effectFormula.value);
+          modifier = effectFormula;
           console.log('Modifier: ', modifier);
         });
 
         //show stats
         scope.onDone = function(){
+
           var value = 1;
           if(attributeFormula.isVs){
             value = -1;
@@ -50,10 +51,42 @@ angular.module('partyanimalsDraftApp')
             type: 'STAT',
             district: scope.activity.location,
             value: value,
-            issueIndex: scope.selectedIndex
+            name: scope.activity.name,
+            issueIndex: scope.selectedIndex,
           };
           scope.done = true;
           scope.success = true;
+          if(scope.selectedIndex === -1){
+            scope.doneMessage = 'Lacking direction, your activity failed.';
+            scope.success = false;
+            simCtrl.setDone(result);
+            return;
+          }
+
+          //success or fail?
+          var dataForCheck = {
+            random: Math.random() * 100,
+            PKRm: 1,
+            em: 10
+          };
+          var dataForActionDifficulty = {
+            BD: scope.activity.difficulty,
+            em: 10,
+            ITL: scope.activity.location.humanStance[scope.selectedIndex],
+            IDM: scope.activity.location.issues[scope.selectedIndex],
+            OKRm: 1
+          };
+
+          var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);
+          var actionDifficulty = $filter('formulaparser')(scope.activity.actionDifficulty, dataForActionDifficulty);
+
+          console.log('Check Action '+ scope.activity.name + ': Difficulty('+actionDifficulty+') vs Dice('+actionCheck+')');
+
+          if(actionCheck > actionDifficulty){
+            scope.success = true;
+          }else{
+            scope.success = false;
+          }
           var parseVal = {
             issue: scope.player.issueStats[scope.selectedIndex].name,
             district: scope.activity.location.name
@@ -65,6 +98,7 @@ angular.module('partyanimalsDraftApp')
             message = $filter('messageparser')(scope.activity.text.fail[0], parseVal);
           }
           scope.doneMessage = message;
+          result.success = scope.success;
           simCtrl.setDone(result);
         };
 

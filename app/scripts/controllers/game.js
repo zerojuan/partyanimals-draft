@@ -175,6 +175,7 @@ angular.module('partyanimalsDraftApp')
     $scope.onItineraryGo = function(){
       //execute the itinerary
       $scope.simulate.simulateText = 'Start';
+      $scope.simulate.summaries = [];
       $scope.simulate.isNextReady = true;
       $scope.showOverlay = true;
       $scope.endTurn = false;
@@ -200,15 +201,29 @@ angular.module('partyanimalsDraftApp')
     $scope.simulate.onNextReady = function(result){
       if(result){
         if(result.type === 'STAT'){
-          var changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, result.value > 0);
-          //update district data of the listed activities
-          if($scope.scheduledActivities.length < actIndex){
-            $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
+          if(result.success){
+            var changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, result.value > 0);
+            //update district data of the listed activities
+            if($scope.scheduledActivities.length < actIndex){
+              $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
+            }
           }
+
+          $scope.simulate.summaries.push({
+            text: result.name + ' ' + $scope.issues[result.issueIndex].name + ' at ' + result.district.name,
+            success: result.success
+          });
+        }else if(result.type === 'REPUTATION'){
+
+        }else if(result.type === 'MOVE'){
+          $scope.simulate.summaries.push({
+            text: 'Travelled to ' + result.district.name,
+            success: result.success
+          });
         }
       }
       $scope.simulate.isNextReady = true;
-    }
+    };
 
     $scope.simulate.onEndTurn = function(){
       //ui reset

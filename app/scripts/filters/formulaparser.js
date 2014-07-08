@@ -10,43 +10,31 @@
  */
 angular.module('partyanimalsDraftApp')
   .filter('formulaparser', function () {
-    return function (input) {
-      var input = input.match(/([A-z,0-9]+)|([+-/])/g) || [];
-      var formula = null;
-      var value = parseInt(input[0]);
-      if(input[2] === 'amod'){
-        formula = function(value, actionResult, successChance){
-          return value + ((actionResult-successChance)*5);
-        }
-      }else if(input[2] === 'dmod'){
-        formula = function(value, districtMod){
-          return value + (districtMod*10);
-        }
-      }else{
-        value = eval(input.join(''));
-        console.log('Value: ', value);
-        formula = function(value){
-          return value;
-        }
+    return function (input, values) {
+      if(!values){
+        return parseInt(input);
       }
-      return {
-        value: value,
-        formula: formula
-      };
+      var parsed = input.replace('random',values.random)
+                        .replace('PKRm', values.PKRm)
+                        .replace('OKRm', values.OKRm)
+                        .replace('BD', values.BD)
+                        .replace('ITL', values.ITL)
+                        .replace('IDM', values.IDM)
+                        .replace('em', values.em);
+      var val = eval(parsed);
+      return val;
     };
   })
   .filter('attributeparser', function(){
     return function(input){
-      var parsed = input.match(/(vs)|([A-z]+)/g) || [];
-      console.log(parsed);
-      if(parsed[0] === 'vs'){
+      if(input.charAt(0) === 'O'){
         return {
-          value: parsed[1].toLowerCase(),
+          value: input,
           isVs: true
         };
       }else{
         return {
-          value: input.toLowerCase(),
+          value: input,
           isVs: false
         };
       }

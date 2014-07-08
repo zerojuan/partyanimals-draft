@@ -1,5 +1,16 @@
 [
   {
+    "id": 3,
+    "name": "Talk to Kapitan",
+    "type": "TALK",
+    "description": "Talk to the district's Kapitan",
+    "cost": {
+      "gold": 0,
+      "hours": 2
+    },
+    "difficulty": 0
+  },
+  {
     "id": 1,
     "name": "Sortie",
     "type": "SORTIE",
@@ -13,19 +24,21 @@
       ]
     },
     "cost": {
-      "gold": 500,
-      "hours": 5
+      "gold": 300,
+      "hours": 4
     },
+    "difficulty": 50,
+    "actionDifficulty": "BD+IDM+em",
+    "actionCheck": "random+(PKRm*10)+em",
     "effect": {
-      "attr": "reputation",
-      "modifier": "+10"
-    },
-    "success": "30+dmod"
+      "attr": "DR",
+      "modifier": "10+AR-AD"
+    }
   },
   {
     "id": 2,
-    "name": "Put up posters",
-    "type": "STAT",
+    "name": "Photo Op",
+    "type": "REPUTATION",
     "description": "Increase a district's awareness of an issue",
     "text": {
       "success": [
@@ -36,23 +49,15 @@
       ]
     },
     "cost": {
-      "gold": 200,
+      "gold": 100,
       "hours": 2
     },
+    "difficulty": 20,
+    "actionDifficulty": "BD+em",
+    "actionCheck": "random+(PKRm*10)+em",
     "effect": {
-      "attr": "stat",
-      "modifier": "+1"
-    },
-    "success": "30+dmod"
-  },
-  {
-    "id": 3,
-    "name": "Talk to Kapitan",
-    "type": "TALK",
-    "description": "Talk to the district's Kapitan",
-    "cost": {
-      "gold": 0,
-      "hours": 2
+      "attr": "DR",
+      "modifier": "10"
     }
   },
   {
@@ -61,6 +66,9 @@
     "description": "Reduce knowledge of the opponent's platform",
     "type": "STAT",
     "text": {
+      "header": [
+        "Select an opponent's issue to contest"
+      ],
       "success": [
         "The people were convinced of the weakness of the opponents $issue$"
       ],
@@ -70,40 +78,18 @@
     },
     "cost": {
       "gold": 200,
-      "hours": 3
+      "hours": 2
     },
+    "difficulty": 50,
+    "actionDifficulty": "(BD+em)+(OKRm*10)",
+    "actionCheck": "random+(PKRm*10)+em",
     "effect":{
-      "attr": "vsStat",
+      "attr": "OIS",
       "modifier": "-1"
-    },
-    "success": "30+dmod"
+    }
   },
   {
     "id": 5,
-    "name": "Smear",
-    "type": "REPUTATION",
-    "description": "Reduce the opponent's reputation on the district",
-    "text":{
-      "success": [
-        "The smear campaign was successful"
-      ],
-      "fail": [
-        "The smear campaign was not effective"
-      ]
-    },
-    "cost": {
-      "gold": 200,
-      "hours": 3,
-      "morality": -10
-    },
-    "effect": {
-      "attr": "vsReputation",
-      "modifier": "10+amod"
-    },
-    "success": "30+dmod"
-  },
-  {
-    "id": 6,
     "name": "Bribe",
     "type": "REPUTATION",
     "description": "Increase your reputation greatly",
@@ -116,14 +102,70 @@
       ]
     },
     "cost": {
-      "gold": 1000,
-      "hours": 3,
+      "gold": 1500,
+      "hours": 2,
       "morality": -10
     },
+    "difficulty": 60,
+    "actionDifficulty": "(BD+em)+(OKRm*10)",
+    "actionCheck": "random+(PKRm*10)+em",
     "effect": {
-      "attr": "reputation",
-      "modifier": "30+amod"
+      "attr": "DR",
+      "modifier": "50+AR-AD"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Educate",
+    "type": "STAT",
+    "description": "Educate the district",
+    "text": {
+      "header": [
+        "Select an issue to educate this district in"
+      ],
+      "success": [
+        "You successfully educated the people on $issue$"
+      ],
+      "fail": [
+        "Your voter education campaign failed"
+      ]
     },
-    "success": "30+dmod"
+    "cost": {
+      "gold": 100,
+      "hours": 2
+    },
+    "difficulty": 20,
+    "actionDifficulty": "(BD+ITL*10)+IDM",
+    "actionCheck": "random+(PKRm*10)+em",
+    "effect": {
+      "attr": "IS",
+      "modifier": "1"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Smear",
+    "type": "REPUTATION",
+    "description": "Reduce the opponent's reputation on the district",
+    "text":{
+      "success": [
+        "The smear campaign was successful"
+      ],
+      "fail": [
+        "The smear campaign was not effective"
+      ]
+    },
+    "cost": {
+      "gold": 500,
+      "hours": 2,
+      "morality": -10
+    },
+    "difficulty": 50,
+    "actionDifficulty": "(BD+em)+(OKRm*10)",
+    "actionCheck": "random+(PKRm*10)+em",
+    "effect": {
+      "attr": "OR",
+      "modifier": "10+AR-AD"
+    }
   }
 ]

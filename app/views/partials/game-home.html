@@ -24,7 +24,9 @@
         <a ng-click="simulate.onEndTurn()">{{simulate.simulateText}}</a>
       </div>
       <div>
-        *Summary of the things you did today*
+        <ul ng-repeat="summary in simulate.summaries">
+          <li><span>{{summary.text}}</span><span>{{summary.success}}</span></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -44,7 +46,7 @@
     </tr>
     <tr ng-repeat="issue in human.issueStats">
       <td>{{issue.name}}</td>
-      <td ng-class="{strong: selectedDistrict.issues[$index] >= issue.level && selectedDistrict.issues[$index] > 0}">{{selectedDistrict.issues[$index]}}</td>
+      <td ng-class="{strong: selectedDistrict.issues[$index] >= issue.level && selectedDistrict.issues[$index] > 0}">{{selectedDistrict.issues[$index] | difficultyparser}}</td>
       <td ng-class="{strong: selectedDistrict.issues[$index] <= issue.level && selectedDistrict.issues[$index] > 0}">{{issue.level}}</td>
     </tr>
   </table>

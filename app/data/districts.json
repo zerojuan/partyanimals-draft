@@ -3,54 +3,78 @@
     "id": 0,
     "name": "Kapitolyo",
     "info": "The seat of power",
-    "issues": [2, 2, 1, 0, 0],
+    "issues": [25, 25, 40, 40, 40],
     "kapitanId": 0,
+    "kapitanModifier": -20,
     "population": 2000,
-    "gold": 100
+    "gold": 1000,
+    "weight": 5,
+    "timeCostModifier": 2,
+    "goldCostModifier": 2
   },
   {
     "id": 1,
     "name": "Casino",
     "info": "Wealthy and crimey",
-    "issues": [0, 3, 2, 0, 0],
+    "issues": [45, 45, 45, 45, 45],
     "kapitanId": 1,
+    "kapitanModifier": -30,
     "population": 1000,
-    "gold": 50
+    "gold": 1300,
+    "weight": 1,
+    "timeCostModifier": 2,
+    "goldCostModifier": 1.5
   },
   {
     "id": 2,
     "name": "Fishing Village",
     "info": "Rural poor",
-    "issues": [0, 1, 4, 0, 0],
+    "issues": [15, 20, 15, 25, 25],
     "kapitanId": 2,
+    "kapitanModifier": 0,
     "population": 1000,
-    "gold": 50
+    "gold": 500,
+    "weight": 1,
+    "timeCostModifier": 0.5,
+    "goldCostModifier": 0.5
   },
   {
     "id": 3,
     "name": "Port",
     "info": "Urban poor",
-    "issues": [0, 2, 3, 1, 0],
+    "issues": [50, 40, 40, 40, 50],
     "kapitanId": 3,
+    "kapitanModifier": -10,
     "population": 1000,
-    "gold": 25
+    "gold": 1000,
+    "weight": 2,
+    "timeCostModifier": 1,
+    "goldCostModifier": 1.5
   },
   {
     "id": 4,
     "name": "Cathedral",
     "info": "People love God. God be the glory.",
-    "issues": [0, 1, 0, 0, 4],
+    "issues": [35, 50, 35, 25, 15],
     "kapitanId": 4,
+    "kapitanModifier": 30,
     "population": 3000,
-    "gold": 25
+    "gold": 500,
+    "weight": 3,
+    "timeCostModifier": 0.5,
+    "goldCostModifier": 1
   },
   {
     "id": 5,
     "name": "Resort",
     "info": "Environmentalism and tourism",
-    "issues": [0, 0, 2, 3, 0],
+    "issues": [30, 30, 30, 30, 30],
     "kapitanId": 5,
+    "kapitanModifier": 0,
     "population": 500,
-    "gold": 10
+    "gold": 800,
+    "weight": 1,
+    "timeCostModifier": 1,
+    "goldCostModifier": 1
   }
 ]
