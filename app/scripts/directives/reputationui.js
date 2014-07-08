@@ -37,8 +37,6 @@ angular.module('partyanimalsDraftApp')
             var dataForActionDifficulty = {
               BD: scope.activity.difficulty,
               em: 10,
-              ITL: scope.activity.location.humanStance[scope.selectedIndex],
-              IDM: scope.activity.location.issues[scope.selectedIndex],
               OKRm: 1
             };
 

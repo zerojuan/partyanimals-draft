@@ -234,7 +234,16 @@ angular.module('partyanimalsDraftApp')
             success: result.success
           });
         }else if(result.type === 'SORTIE'){
-          
+          changedDistrict = setReputationForDistrict(result.value, result.district, true);
+          if($scope.scheduledActivities.length < actIndex){
+            $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
+          }
+
+          $scope.simulate.summaries.push({
+            text: result.name + ' at ' + result.district.name + ' increased reputation to ' + result.value +
+              '. They responded well to ' + result.stats.best,
+            success: result.success
+          });
         }else if(result.type === 'MOVE'){
           $scope.simulate.summaries.push({
             text: 'Travelled to ' + result.district.name,
