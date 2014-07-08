@@ -202,6 +202,7 @@ angular.module('partyanimalsDraftApp')
 
     $scope.simulate.onNextReady = function(result){
       var changedDistrict;
+      var message = '';
       if(result){
         if(result.type === 'STAT'){
           if(result.success){
@@ -212,12 +213,17 @@ angular.module('partyanimalsDraftApp')
             }
           }
 
+          if(result.issueIndex < 0){
+            message = result.name + ' at ' + result.district.name + ' failed due to lack of direction.';
+          }else{
+            message = result.name + ' ' + $scope.issues[result.issueIndex].name + ' at ' + result.district.name;
+          }
+
           $scope.simulate.summaries.push({
-            text: result.name + ' ' + $scope.issues[result.issueIndex].name + ' at ' + result.district.name,
+            text: message,
             success: result.success
           });
         }else if(result.type === 'REPUTATION'){
-          var message = '';
           if(result.success){
             changedDistrict = setReputationForDistrict(result.value, result.district, !result.isVs);
             if($scope.scheduledActivities.length < actIndex){

@@ -53,11 +53,20 @@
 }
 
 .province-view .district {
+  position: relative;
   float: left;
   width: 120px;
   height: 120px;
   background: #ccc;
   border: 1px solid #ddd;
+}
+
+.province-view .district .reputation {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 70px;
+  text-align: right;
 }
 
 .province-view .district.selected {
@@ -229,6 +238,20 @@
 
 .schedule .item-1 {
   height: 20px;
+}
+
+.summary-sim {
+  padding: 10px 10px;
+  margin: 10px 10px;
+  background: white;
+}
+
+.summary-sim td.success {
+  color: green;
+}
+
+.summary-sim td.danger {
+  color: red;
 }
 
 .activity-sim {

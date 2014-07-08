@@ -21,12 +21,16 @@
     </div>
     <div class="row simulation-container" ng-show="endTurn">
       <div>
-        <a ng-click="simulate.onEndTurn()">{{simulate.simulateText}}</a>
+        <a class="btn btn-success" ng-click="simulate.onEndTurn()">{{simulate.simulateText}}</a>
       </div>
-      <div>
-        <ul ng-repeat="summary in simulate.summaries">
-          <li><span>{{summary.text}}</span><span>{{summary.success}}</span></li>
-        </ul>
+      <div class="container summary-sim">
+        <div><h4>Day Summary</h4></div>
+        <table class="table table-striped">
+          <tr ng-repeat="summary in simulate.summaries">
+            <td>{{summary.text}}</td>
+            <td ng-class="{success: summary.success, danger: !summary.success}"><i class="glyphicon" ng-class="{'glyphicon-ok': summary.success, 'glyphicon-remove': !summary.success}"></i></td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

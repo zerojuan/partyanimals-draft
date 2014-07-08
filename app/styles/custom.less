@@ -58,6 +58,14 @@
     height: 120px;
     float: left;
     background: #ccc;
+    position: relative;
+    .reputation{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 70px;
+      text-align: right;
+    }
     &.selected{
       border: 2px solid blue;
     }
@@ -188,10 +196,25 @@
   .loopSchedules(10);
 }
 
+.summary-sim{
+  background: white;
+  margin: 10px 10px;
+  padding: 10px 10px;
+  td{
+    &.success{
+      color: green;
+    }
+    &.danger{
+      color: red;
+    }
+  }
+}
+
 .activity-sim{
   background: white;
   margin: 10px 0px;
   padding: 10px 0px;
+
   .stat-ui{
     table{
       .issue-bar{
