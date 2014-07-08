@@ -25,6 +25,7 @@ angular.module('partyanimalsDraftApp')
         scope.statAvailable = 1;
 
         var attributeFormula;
+        var modifier = 1;
 
         scope.$watch('activity', function(){
           scope.selectedIndex = -1;
@@ -33,6 +34,10 @@ angular.module('partyanimalsDraftApp')
           scope.done = false;
           scope.success = false;
           attributeFormula = $filter('attributeparser')(scope.activity.effect.attr);
+          var effectFormula = $filter('formulaparser')(scope.activity.effect.modifier);
+          console.log('Effect formula:',effectFormula);
+          modifier = effectFormula.formula(effectFormula.value);
+          console.log('Modifier: ', modifier);
         });
 
         //show stats
@@ -56,13 +61,13 @@ angular.module('partyanimalsDraftApp')
           scope.showPossibleIndex = index;
         };
 
-        scope.hidePossible = function(index){
+        scope.hidePossible = function(){
           scope.showPossibleIndex = -1;
         };
 
         scope.shouldDisable = function(index, issue){
           if(scope.selectedIndex >= 0){
-            return !(scope.selectedIndex === index);
+            return scope.selectedIndex !== index;
           }
           if(attributeFormula.isVs){
             return scope.activity.location.aiStance[index] === 0;
@@ -74,16 +79,16 @@ angular.module('partyanimalsDraftApp')
         scope.raiseStats = function(index){
           if(scope.selectedIndex === index){
             if(attributeFormula.isVs){
-              scope.activity.location.aiStance[index] += 1;
+              scope.activity.location.aiStance[index] -= modifier;
             }else{
-              scope.activity.location.humanStance[index] -= 1;
+              scope.activity.location.humanStance[index] -= modifier;
             }
             scope.selectedIndex = -1;
           }else{
             if(attributeFormula.isVs){
-              scope.activity.location.aiStance[index] -= 1;
+              scope.activity.location.aiStance[index] += modifier;
             }else{
-              scope.activity.location.humanStance[index] += 1;
+              scope.activity.location.humanStance[index] += modifier;
             }
             scope.selectedIndex = index;
           }

@@ -13,6 +13,7 @@ angular.module('partyanimalsDraftApp')
     return function (input) {
       var input = input.match(/([A-z,0-9]+)|([+-/])/g) || [];
       var formula = null;
+      var value = parseInt(input[0]);
       if(input[2] === 'amod'){
         formula = function(value, actionResult, successChance){
           return value + ((actionResult-successChance)*5);
@@ -21,9 +22,15 @@ angular.module('partyanimalsDraftApp')
         formula = function(value, districtMod){
           return value + (districtMod*10);
         }
+      }else{
+        value = eval(input.join(''));
+        console.log('Value: ', value);
+        formula = function(value){
+          return value;
+        }
       }
       return {
-        value: parseInt(input[0]),
+        value: value,
         formula: formula
       };
     };
