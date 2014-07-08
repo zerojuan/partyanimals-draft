@@ -54,6 +54,17 @@ angular.module('partyanimalsDraftApp')
           };
           scope.done = true;
           scope.success = true;
+          var parseVal = {
+            issue: scope.player.issueStats[scope.selectedIndex].name,
+            district: scope.activity.location.name
+          };
+          var message = '';
+          if(scope.success){
+            message = $filter('messageparser')(scope.activity.text.success[0], parseVal);
+          }else{
+            message = $filter('messageparser')(scope.activity.text.fail[0], parseVal);
+          }
+          scope.doneMessage = message;
           simCtrl.setDone(result);
         };
 
