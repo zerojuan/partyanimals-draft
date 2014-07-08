@@ -34,7 +34,7 @@
 <div ng-controller="AlertCtrl" class="custom-alert">
   <alert ng-repeat="alert in config.alerts" type="{{alert.type}}" close="closeAlert($index)"><strong>Warning!</strong> {{alert.msg}}</alert>
 </div>
-<province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelectedDistrict"></province-view>
+<province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelectedDistrict" show-reputation="true"></province-view>
 <div ng-show="selectedDistrict" class="pull-right district-desc reveal-animation">
   <h4>{{selectedDistrict.name}} <span><img src="images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span></h4>
   <span>{{selectedDistrict.info}}</span>

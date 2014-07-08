@@ -17,6 +17,10 @@ angular.module('partyanimalsDraftApp')
 
     PAFirebase.districtsRef.on('value',function(snapshot){
       $scope.districts = snapshot.val();
+      $scope.districts.forEach(function(val){
+        val.humanReputation = 0;
+        val.aiReputation = false;
+      });
       $scope.$apply();
     });
 

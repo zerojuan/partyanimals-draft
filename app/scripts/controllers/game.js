@@ -41,6 +41,8 @@ angular.module('partyanimalsDraftApp')
       if(!onDataChanged('districts')){
         $scope.districts = snapshot.val();
         $scope.districts.forEach(function(val){
+          val.humanReputation = 0;
+          val.aiReputation = 0;
           if(val.id === $scope.human.hq.id){
             val.isHQ = true;
             val.humanReputation = 50;
@@ -199,10 +201,11 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.simulate.onNextReady = function(result){
+      var changedDistrict;
       if(result){
         if(result.type === 'STAT'){
           if(result.success){
-            var changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, result.value > 0);
+            changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, result.value > 0);
             //update district data of the listed activities
             if($scope.scheduledActivities.length < actIndex){
               $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
@@ -214,7 +217,24 @@ angular.module('partyanimalsDraftApp')
             success: result.success
           });
         }else if(result.type === 'REPUTATION'){
+          var message = '';
+          if(result.success){
+            changedDistrict = setReputationForDistrict(result.value, result.district, !result.isVs);
+            if($scope.scheduledActivities.length < actIndex){
+              $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
+            }
+            message = result.name + ' at ' + result.district.name + ' resulting to a ' + result.value + ' ' +
+               (result.isVs ? ' decrease to opponent\'s reputation' : ' increase to our reputation.');
+          }else{
+            message = result.name + ' at ' + result.district.name + ' failed.';
+          }
 
+          $scope.simulate.summaries.push({
+            text: message,
+            success: result.success
+          });
+        }else if(result.type === 'SORTIE'){
+          
         }else if(result.type === 'MOVE'){
           $scope.simulate.summaries.push({
             text: 'Travelled to ' + result.district.name,
@@ -464,6 +484,22 @@ angular.module('partyanimalsDraftApp')
             val.humanStance[statIndex] += value;
           }else{
             val.aiStance[statIndex] += value;
+          }
+          changedDistrict = val;
+        }
+      });
+      // $scope.$apply();
+      return changedDistrict;
+    };
+
+    var setReputationForDistrict = function(value, district, isHuman){
+      var changedDistrict;
+      $scope.districts.forEach(function(val){
+        if(val.id === district.id){
+          if(isHuman){
+            val.humanReputation += value;
+          }else{
+            val.aiReputation += value;
           }
           changedDistrict = val;
         }

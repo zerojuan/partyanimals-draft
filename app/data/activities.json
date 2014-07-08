@@ -39,13 +39,13 @@
     "id": 2,
     "name": "Photo Op",
     "type": "REPUTATION",
-    "description": "Increase a district's awareness of an issue",
+    "description": "Increase your reputation in the district",
     "text": {
       "success": [
-        "Putting up posters was extremely effective!"
+        "That photo-op was extremely effective!"
       ],
       "fail": [
-        "Putting up posters has no effect"
+        "That photo-op failed"
       ]
     },
     "cost": {

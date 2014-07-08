@@ -9,7 +9,8 @@ angular.module('partyanimalsDraftApp')
       scope: {
         districts : '=',
         selectedDistrict  : '=',
-        changeSelected : '='
+        changeSelected : '=',
+        showReputation: '@'
       },
       link: function postLink(scope, element, attrs) {
         scope.selected = function(district){

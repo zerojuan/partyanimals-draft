@@ -24,7 +24,7 @@
   <div ng-switch-when="2" class="jumbotron">
     <h1>Select your HQ</h1>
     <div class="lead">
-      <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelected"></province-view>
+      <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelected" show-reputation="false"></province-view>
       <div ng-show="selectedDistrict" class="pull-right district-desc">
         <h4>{{selectedDistrict.name}}</h4>
         <span>{{selectedDistrict.info}}</span>
@@ -36,7 +36,7 @@
           </tr>
           <tr ng-repeat="issue in issues">
             <td>{{issue.name}}</td>
-            <td ng-class="{strong: selectedDistrict.issues[$index] >= issue.level && selectedDistrict.issues[$index] > 0}">{{selectedDistrict.issues[$index]}}</td>
+            <td ng-class="{strong: selectedDistrict.issues[$index] >= issue.level && selectedDistrict.issues[$index] > 0}">{{selectedDistrict.issues[$index] | difficultyparser}}</td>
             <td ng-class="{strong: selectedDistrict.issues[$index] <= issue.level && selectedDistrict.issues[$index] > 0}">{{issue.level}}</td>
           </tr>
         </table>
