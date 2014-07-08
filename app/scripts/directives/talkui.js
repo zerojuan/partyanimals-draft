@@ -17,9 +17,18 @@ angular.module('partyanimalsDraftApp')
         activity: '='
       },
       link: function postLink(scope, element, attrs, simCtrl) {
+        var result;
         scope.onDone = function(){
-          simCtrl.setDone();
-        }
+          scope.done = true;
+          simCtrl.setDone(result);
+        };
+
+        scope.$watch('activity', function(){
+          scope.done = false;
+          result = {
+            type: 'TALK'
+          };
+        });
       }
     };
   });

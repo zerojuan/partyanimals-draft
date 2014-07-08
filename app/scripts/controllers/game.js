@@ -244,6 +244,12 @@ angular.module('partyanimalsDraftApp')
               '. They responded well to ' + result.stats.best,
             success: result.success
           });
+        }else if(result.type === 'TALK'){
+          //TODO: get the real stat for the kapitan
+          $scope.simulate.summaries.push({
+            text: 'Talked with the Kapitan',
+            success: true
+          });
         }else if(result.type === 'MOVE'){
           $scope.simulate.summaries.push({
             text: 'Travelled to ' + result.district.name,
