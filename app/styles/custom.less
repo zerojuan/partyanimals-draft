@@ -100,7 +100,7 @@
 }
 
 .district-desc{
-  width: 50%;
+  width: 60%;
   h4 span{
     float: right;
     img{
@@ -134,6 +134,10 @@
   z-index: 100;
   text-align: center;
   margin-top: 30px;
+  .close-btn{
+    position: absolute;
+    top: 5px;
+  }
   .time{
     .right{
       border: 1px solid gray;
@@ -221,48 +225,49 @@
         width: 40%;
         text-align: center;
         position: relative;
-        .text{
-          float: left;
-          margin: 0 5px;
-        }
-        .bar{
-          float: left;
-          height: 5px;
-          width: 100px;
-          padding-top: 7px;
-          position: relative;
-          .base{
-            height: 5px;
-            width: 0px;
-            border: 1px solid gray;
-            position: absolute;
-            right: 0;
-            &.left{
-              left: 0;
-            }
-          }
-          .points{
-            height: 5px;
-            width: 0px;
-            background: blue;
-            right: 0px;
-            position: absolute;
-            &.left{
-              left: 0;
-            }
-          }
-          .loopLevel(@index) when (@index > 0){
-
-            .level-@{index}{
-              width: (20px *@index);
-            }
-            .loopLevel((@index - 1));
-          }
-          .loopLevel(5);
-        }
       }
     }
   }
+}
+
+.text{
+  float: left;
+  margin: 0 5px;
+}
+.bar{
+  float: left;
+  height: 5px;
+  width: 100px;
+  padding-top: 7px;
+  position: relative;
+  .base{
+    height: 5px;
+    width: 0px;
+    border: 1px solid gray;
+    position: absolute;
+    right: 0;
+    &.left{
+      left: 0;
+    }
+  }
+  .points{
+    height: 5px;
+    width: 0px;
+    background: blue;
+    right: 0px;
+    position: absolute;
+    &.left{
+      left: 0;
+    }
+  }
+  .loopLevel(@index) when (@index > 0){
+
+    .level-@{index}{
+      width: (20px *@index);
+    }
+    .loopLevel((@index - 1));
+  }
+  .loopLevel(5);
 }
 
 .custom-alert{
@@ -270,6 +275,33 @@
   top: 10px;
   right: 5px;
   width: 225px;
+}
+
+.district-stances{
+  display: flex;
+}
+
+.district-difficulty{
+  vertical-align: super;
+  font-size: 8pt;
+  &.VERY{
+    &.HIGH{
+      color: #017f05;
+    }
+    &.LOW{
+      color: red;
+    }
+  }
+  &.LOW{
+    color: #d85542;
+  }
+  &.NORMAL{
+    color: #7dc91a;
+  }
+  &.HIGH{
+    color: #337522;
+  }
+
 }
 
 .reveal-animation.ng-enter {

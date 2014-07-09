@@ -1,4 +1,7 @@
 <itinerary-view scheduled-activities="scheduledActivities" hours="hours" on-go="onItineraryGo">
+  <div class="close-btn">
+    <a ng-click="onItClicked()">[close]</a>
+  </div>
   <p>Location at EOD: {{futureLocation.name}}</p>
   <p>Cost: <span ng-class="{red: totalCost > totalCash}">$ {{totalCost}}</span></p>
   <p>Hours Free: {{timeLeft}}</p>

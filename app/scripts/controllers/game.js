@@ -51,28 +51,27 @@ angular.module('partyanimalsDraftApp')
       if(!onDataChanged('districts')){
         $scope.districts = snapshot.val();
         $scope.districts.forEach(function(val){
+          var i = 0;
           val.humanReputation = 0;
           val.aiReputation = 0;
+          val.humanStance = [0,0,0,0,0];
+          val.aiStance = [0,0,0,0,0];
           if(val.id === $scope.human.hq.id){
             val.isHQ = true;
             val.humanReputation = 50;
             val.hasHuman = true;
+            for(i = 0; i < 5; i++){
+              val.humanStance[i] = $scope.human.issueStats[i].level;
+            }
           }
           if(val.id === $scope.ai.hq.id){
             val.isAIHQ = true;
             val.hasAI = true;
             val.aiReputation = 50;
+            for(i = 0; i < 5; i++){
+              val.aiStance[i] = $scope.ai.issueStats[i].level;
+            }
             $scope.ai.hq = val;
-          }
-          // val.humanStance = [0,0,0,0,0];
-          // val.aiStance = [0,0,0,0,0];
-          val.humanStance = [];
-          val.aiStance = [];
-          for(var i = 0; i < 5; i++){
-            var rand = Math.floor(Math.random()*3);
-            val.aiStance.push(rand);
-            rand = Math.floor(Math.random()*$scope.human.issueStats[i].level);
-            val.humanStance.push(rand);
           }
 
         });

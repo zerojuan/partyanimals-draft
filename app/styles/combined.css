@@ -102,7 +102,7 @@
 }
 
 .district-desc {
-  width: 50%;
+  width: 60%;
 }
 
 .district-desc h4 span {
@@ -141,6 +141,11 @@
   text-align: center;
   background: white;
   border: 1px solid black;
+}
+
+.itinerary-view .close-btn {
+  position: absolute;
+  top: 5px;
 }
 
 .itinerary-view .time .right {
@@ -266,12 +271,12 @@
   text-align: center;
 }
 
-.activity-sim .stat-ui table .issue-bar .text {
+.text {
   float: left;
   margin: 0 5px;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar {
+.bar {
   position: relative;
   float: left;
   width: 100px;
@@ -279,7 +284,7 @@
   padding-top: 7px;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar .base {
+.bar .base {
   position: absolute;
   right: 0;
   width: 0;
@@ -287,11 +292,11 @@
   border: 1px solid gray;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar .base.left {
+.bar .base.left {
   left: 0;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar .points {
+.bar .points {
   position: absolute;
   right: 0;
   width: 0;
@@ -299,27 +304,27 @@
   background: blue;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar .points.left {
+.bar .points.left {
   left: 0;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar .level-5 {
+.bar .level-5 {
   width: 100px;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar .level-4 {
+.bar .level-4 {
   width: 80px;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar .level-3 {
+.bar .level-3 {
   width: 60px;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar .level-2 {
+.bar .level-2 {
   width: 40px;
 }
 
-.activity-sim .stat-ui table .issue-bar .bar .level-1 {
+.bar .level-1 {
   width: 20px;
 }
 
@@ -328,6 +333,35 @@
   top: 10px;
   right: 5px;
   width: 225px;
+}
+
+.district-stances {
+  display: flex;
+}
+
+.district-difficulty {
+  font-size: 8pt;
+  vertical-align: super;
+}
+
+.district-difficulty.VERY.HIGH {
+  color: #017f05;
+}
+
+.district-difficulty.VERY.LOW {
+  color: red;
+}
+
+.district-difficulty.LOW {
+  color: #d85542;
+}
+
+.district-difficulty.NORMAL {
+  color: #7dc91a;
+}
+
+.district-difficulty.HIGH {
+  color: #337522;
 }
 
 .reveal-animation.ng-enter {
