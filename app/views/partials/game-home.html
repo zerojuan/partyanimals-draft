@@ -16,7 +16,7 @@
       </div>
       <div ng-show="simulate.activeAct">
         {{simulate.activeAct.name}} @ {{simulate.activeAct.location.name}}
-        <activity-sim activity="simulate.activeAct" on-next-ready="simulate.onNextReady" player="currentPlayer" issues="issues"></activity-sim>
+        <activity-sim activity="simulate.activeAct" on-next-ready="simulate.onNextReady" player="currentPlayer" ai="ai" issues="issues"></activity-sim>
       </div>
     </div>
     <div class="row simulation-container" ng-show="endTurn">
@@ -63,7 +63,7 @@
         <div class="text">
           {{selectedDistrict.humanStance[$index]}}&nbsp;vs&nbsp;{{selectedDistrict.aiStance[$index]}}</div>
         <div class="bar">
-          <div class="base left"></div>
+          <div class="base left level-{{ai.issueStats[$index].level}}"></div>
           <div class="points left level-{{selectedDistrict.aiStance[$index]}}"></div>
         </div>
         </div>

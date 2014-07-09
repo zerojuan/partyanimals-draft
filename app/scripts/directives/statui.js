@@ -31,6 +31,7 @@ angular.module('partyanimalsDraftApp')
           scope.selectedIndex = -1;
           scope.issues = simCtrl.getIssues();
           scope.player = simCtrl.getPlayer();
+          scope.ai = simCtrl.getAI();
           scope.done = false;
           scope.success = false;
           attributeFormula = $filter('attributeparser')(scope.activity.effect.attr);
