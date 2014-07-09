@@ -33,6 +33,7 @@ angular.module('partyanimalsDraftApp')
             var totalReputation = 0;
             var maxIndex, maxValue, minIndex, minValue;
             maxIndex = maxValue = minIndex = minValue = 0;
+            scope.results = [];
             scope.activity.location.humanStance.forEach(function(val, i){
               var dataForCheck = {
                 random: Math.random() * 100,
@@ -53,17 +54,26 @@ angular.module('partyanimalsDraftApp')
               console.log('Check Action '+ scope.activity.name + ': Difficulty('+actionDifficulty+') vs Dice('+actionCheck+')');
               //only add the result value if you are successful
               var resultValue = $filter('formulaparser')(scope.activity.effect.modifier, {AR: Math.floor(actionCheck), AD: actionDifficulty});
+              var proposedValue = actionCheck - actionDifficulty;
+              var isIssueSuccessful = false;
               if(actionCheck > actionDifficulty){
                 totalReputation += resultValue;
+                isIssueSuccessful = true;
               }
 
-              if(resultValue > maxValue){
-                maxValue = resultValue;
+              scope.results.push({
+                success: isIssueSuccessful,
+                name: player.issueStats[i].name,
+                value: Math.floor(proposedValue)
+              });
+
+              if(proposedValue > maxValue){
+                maxValue = proposedValue;
                 maxIndex = i;
               }
 
-              if(i === 0 || resultValue < minValue){
-                minValue = resultValue;
+              if(i === 0 || proposedValue < minValue){
+                minValue = proposedValue;
                 minIndex = i;
               }
             });
@@ -71,8 +81,10 @@ angular.module('partyanimalsDraftApp')
             scope.success = true;
             scope.stats = {
               best: player.issueStats[maxIndex].name,
+              bestIndex: maxIndex,
               bestValue: maxValue,
               worst: player.issueStats[minIndex].name,
+              worstIndex: minIndex,
               worstValue: minValue
             };
 

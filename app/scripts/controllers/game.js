@@ -239,7 +239,7 @@ angular.module('partyanimalsDraftApp')
               $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
             }
             message = result.name + ' at ' + result.district.name + ' resulting to a ' + result.value + ' ' +
-               (result.isVs ? ' decrease to opponent\'s reputation' : ' increase to our reputation.');
+               (result.isVs ? ' decrease to opponent\'s reputation' : ' increase on our reputation.');
           }else{
             message = result.name + ' at ' + result.district.name + ' failed.';
           }
@@ -255,7 +255,7 @@ angular.module('partyanimalsDraftApp')
           }
 
           $scope.simulate.summaries.push({
-            text: result.name + ' at ' + result.district.name + ' increased reputation to ' + result.value +
+            text: result.name + ' at ' + result.district.name + ' increased reputation by ' + result.value +
               '. They responded well to ' + result.stats.best,
             success: result.success
           });
