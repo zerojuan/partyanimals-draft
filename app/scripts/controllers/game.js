@@ -23,6 +23,16 @@ angular.module('partyanimalsDraftApp')
     };
     $scope.currentPlayer = $scope.human;
 
+    PAFirebase.workhoursRef.on('value', function(snapshot){
+      onDataChanged('workhours');
+      var hours = snapshot.val();
+      $scope.hours = [];
+      for(var i = 0; i < hours; i++){
+        $scope.hours.push(9+i);
+      }
+      $scope.apply();
+    });
+
     PAFirebase.goldRef.on('value', function(snapshot){
       if(!onDataChanged('initialGold')){
         $scope.totalCash = snapshot.val();

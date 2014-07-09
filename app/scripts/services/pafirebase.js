@@ -17,4 +17,5 @@ angular.module('partyanimalsDraftApp')
     this.kapitansRef = new Firebase(url+'/kapitan');
     this.activitiesRef = new Firebase(url+'/activities');
     this.turnsPerGameRef = new Firebase(url+'/turnsPerGame');
+    this.workhoursRef = new Firebase(url+'/workhours');
   });
