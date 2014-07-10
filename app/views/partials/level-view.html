@@ -1,0 +1,8 @@
+<div class="level-view">
+  <div class="base-container {{direction}}" tooltip="Issue Level: {{lvl}} out of {{base}}">
+    <div class="base" ng-repeat="bases in baseArray"></div>
+  </div>
+  <div class="level-container {{direction}}" tooltip="Issue Level: {{lvl}} out of {{base}}">
+    <div class="level {{type}}" ng-repeat="lvls in levelArray"></div>
+  </div>
+</div>
