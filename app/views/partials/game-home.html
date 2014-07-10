@@ -56,16 +56,10 @@
 
       <td>
         <div class="district-stances">
-        <div class="bar">
-          <div class="base level-{{issue.level}}" tooltip="Max. Lvl: {{issue.level}}"></div>
-          <div class="points level-{{selectedDistrict.humanStance[$index]}}" tooltip="Local Lvl: {{selectedDistrict.humanStance[$index]}}"></div>
-        </div>
-        <div class="text">
+          <level-view base="issue.level" lvl="selectedDistrict.humanStance[$index]" direction="left" type="human"></level-view>
+          <div class="text">
           {{selectedDistrict.humanStance[$index]}}&nbsp;vs&nbsp;{{selectedDistrict.aiStance[$index]}}</div>
-        <div class="bar">
-          <div class="base left level-{{ai.issueStats[$index].level}}"></div>
-          <div class="points left level-{{selectedDistrict.aiStance[$index]}}"></div>
-        </div>
+          <level-view base="ai.issueStats[$index].level" lvl="selectedDistrict.aiStance[$index]" type="ai" direction="right"></level-view>
         </div>
       </td>
     </tr>

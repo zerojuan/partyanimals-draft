@@ -246,41 +246,6 @@
   float: left;
   margin: 0 5px;
 }
-.bar{
-  float: left;
-  height: 5px;
-  width: 100px;
-  padding-top: 7px;
-  position: relative;
-  .base{
-    height: 5px;
-    width: 0px;
-    border: 1px solid gray;
-    position: absolute;
-    right: 0;
-    &.left{
-      left: 0;
-    }
-  }
-  .points{
-    height: 5px;
-    width: 0px;
-    background: blue;
-    right: 0px;
-    position: absolute;
-    &.left{
-      left: 0;
-    }
-  }
-  .loopLevel(@index) when (@index > 0){
-
-    .level-@{index}{
-      width: (20px *@index);
-    }
-    .loopLevel((@index - 1));
-  }
-  .loopLevel(5);
-}
 
 .custom-alert{
   position: fixed;
@@ -312,6 +277,56 @@
   }
   &.HIGH{
     color: #337522;
+  }
+
+}
+
+.level-view{
+  position: relative;
+  float: left;
+  height: 5px;
+  width: 100px;
+  padding-top: 7px;
+
+  .base-container{
+    display:inline-flex;
+    position: absolute;
+    &.left{
+      right: 0;
+    }
+    &.right{
+      left: 0;
+    }
+    .base{
+      width: 10px;
+      height: 10px;
+      margin-left: 3px;
+      background: #e4e4e4;
+      border-radius: 50%;
+    }
+  }
+
+  .level-container{
+    display:inline-flex;
+    position: absolute;
+    &.left{
+      right: 0;
+    }
+    &.right{
+      left: 0;
+    }
+    .level{
+      width: 10px;
+      height: 10px;
+      margin-left: 3px;
+      &.ai{
+        background: #c26767;
+      }
+      &.human{
+        background: #6684cd;
+      }
+      border-radius: 50%;
+    }
   }
 
 }

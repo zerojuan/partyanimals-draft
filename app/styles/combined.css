@@ -289,58 +289,6 @@
   margin: 0 5px;
 }
 
-.bar {
-  position: relative;
-  float: left;
-  width: 100px;
-  height: 5px;
-  padding-top: 7px;
-}
-
-.bar .base {
-  position: absolute;
-  right: 0;
-  width: 0;
-  height: 5px;
-  border: 1px solid gray;
-}
-
-.bar .base.left {
-  left: 0;
-}
-
-.bar .points {
-  position: absolute;
-  right: 0;
-  width: 0;
-  height: 5px;
-  background: blue;
-}
-
-.bar .points.left {
-  left: 0;
-}
-
-.bar .level-5 {
-  width: 100px;
-}
-
-.bar .level-4 {
-  width: 80px;
-}
-
-.bar .level-3 {
-  width: 60px;
-}
-
-.bar .level-2 {
-  width: 40px;
-}
-
-.bar .level-1 {
-  width: 20px;
-}
-
 .custom-alert {
   position: fixed;
   top: 10px;
@@ -375,6 +323,63 @@
 
 .district-difficulty.HIGH {
   color: #337522;
+}
+
+.level-view {
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 5px;
+  padding-top: 7px;
+}
+
+.level-view .base-container {
+  position: absolute;
+  display: inline-flex;
+}
+
+.level-view .base-container.left {
+  right: 0;
+}
+
+.level-view .base-container.right {
+  left: 0;
+}
+
+.level-view .base-container .base {
+  width: 10px;
+  height: 10px;
+  margin-left: 3px;
+  background: #e4e4e4;
+  border-radius: 50%;
+}
+
+.level-view .level-container {
+  position: absolute;
+  display: inline-flex;
+}
+
+.level-view .level-container.left {
+  right: 0;
+}
+
+.level-view .level-container.right {
+  left: 0;
+}
+
+.level-view .level-container .level {
+  width: 10px;
+  height: 10px;
+  margin-left: 3px;
+  border-radius: 50%;
+}
+
+.level-view .level-container .level.ai {
+  background: #c26767;
+}
+
+.level-view .level-container .level.human {
+  background: #6684cd;
 }
 
 .reveal-animation.ng-enter {

@@ -30,7 +30,7 @@ angular.module('partyanimalsDraftApp')
       for(var i = 0; i < hours; i++){
         $scope.hours.push(9+i);
       }
-      $scope.apply();
+      $scope.$apply();
     });
 
     PAFirebase.goldRef.on('value', function(snapshot){

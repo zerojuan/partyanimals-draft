@@ -10,16 +10,10 @@
       <tr ng-repeat="issue in player.issueStats">
         <td>{{issue.name}} <strong>{{activity.location.issues[$index]}}</strong></td>
         <td class="issue-bar" ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">
-          <div class="bar">
-            <div class="base level-{{issue.level}}" tooltip="Max. Lvl: {{issue.level}}"></div>
-            <div class="points level-{{activity.location.humanStance[$index]}}" tooltip="Local Lvl: {{activity.location.humanStance[$index]}}"></div>
-          </div>
+          <level-view base="issue.level" lvl="activity.location.humanStance[$index]" direction="left" type="human"></level-view>
           <div class="text">
             {{activity.location.humanStance[$index]}}&nbsp;vs&nbsp;{{activity.location.aiStance[$index]}}</div>
-          <div class="bar">
-            <div class="base left level-{{ai.issueStats[$index].level}}"></div>
-            <div class="points left level-{{activity.location.aiStance[$index]}}"></div>
-          </div>
+          <level-view base="ai.issueStats[$index].level" lvl="activity.location.aiStance[$index]" type="ai" direction="right"></level-view>
         </td>
         <td ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">
           <a class="btn" ng-class="{disabled: shouldDisable($index, issue) }"ng-click="raiseStats($index)" ng-mouseover="showPossible($index)" ng-mouseleave="hidePossible($index)">
