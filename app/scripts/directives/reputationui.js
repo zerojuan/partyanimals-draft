@@ -52,7 +52,9 @@ angular.module('partyanimalsDraftApp')
             }
 
             var resultValue = $filter('formulaparser')(scope.activity.effect.modifier, {AR: Math.floor(actionCheck), AD: actionDifficulty});
-
+            if(scope.success && attributeParser.isVs){
+              resultValue = resultValue * -1;
+            }
             result = {
               value: resultValue,
               success: scope.success,
