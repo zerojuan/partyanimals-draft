@@ -26,7 +26,8 @@ angular.module('partyanimalsDraftApp')
         scope.$watch('activity', function(){
           scope.done = false;
           result = {
-            type: 'TALK'
+            type: 'TALK',
+            cost: scope.activity.cost
           };
         });
       }

@@ -90,6 +90,7 @@ angular.module('partyanimalsDraftApp')
 
             result = {
               value: totalReputation,
+              cost: scope.activity.cost,
               success: scope.success,
               type: 'SORTIE',
               district: scope.activity.location,

@@ -20,6 +20,7 @@ angular.module('partyanimalsDraftApp')
         var result;
         scope.onDone = function(){
           scope.done = true;
+          result.cost = scope.activity.cost;
           simCtrl.setDone(result);
         };
 

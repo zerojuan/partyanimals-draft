@@ -12,6 +12,10 @@
   color: red;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .list-group-item {
   margin: 0;
   border-bottom: 0;

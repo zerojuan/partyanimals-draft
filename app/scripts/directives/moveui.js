@@ -21,6 +21,7 @@ angular.module('partyanimalsDraftApp')
           type: 'MOVE',
           district: scope.activity.location,
           name: scope.activity.name,
+          cost: scope.activity.cost,
           success: true
         });
       }

@@ -60,6 +60,7 @@ angular.module('partyanimalsDraftApp')
           if(scope.selectedIndex === -1){
             scope.doneMessage = 'Lacking direction, your activity failed.';
             scope.success = false;
+            result.cost = scope.activity.cost;
             simCtrl.setDone(result);
             return;
           }
@@ -99,6 +100,7 @@ angular.module('partyanimalsDraftApp')
             message = $filter('messageparser')(scope.activity.text.fail[0], parseVal);
           }
           scope.doneMessage = message;
+          result.cost = scope.activity.cost;
           result.success = scope.success;
           simCtrl.setDone(result);
         };

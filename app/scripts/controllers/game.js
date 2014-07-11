@@ -73,7 +73,6 @@ angular.module('partyanimalsDraftApp')
             }
             $scope.ai.hq = val;
           }
-
         });
         $scope.$apply();
       }
@@ -201,6 +200,18 @@ angular.module('partyanimalsDraftApp')
         $scope.simulate.simulateText = 'End Day';
         $scope.simulate.activeAct = null;
         $scope.endTurn = true;
+        //add budget contributions
+        $scope.totalContribution = 0;
+        angular.forEach($scope.districts, function(val){
+          if(val.humanReputation - val.aiReputation >= 50){
+            $scope.simulate.summaries.push({
+              text: 'Campaign contributions from ' + val.name,
+              cost: val.gold,
+              success: true
+            });
+            $scope.totalContribution += val.gold;
+          }
+        });
         return;
       }
       $scope.simulate.simulateText = 'Next';
@@ -213,6 +224,7 @@ angular.module('partyanimalsDraftApp')
       var changedDistrict;
       var message = '';
       if(result){
+        var cost = result.cost.gold * -1;
         if(result.type === 'STAT'){
           if(result.success){
             changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, result.value > 0);
@@ -230,6 +242,7 @@ angular.module('partyanimalsDraftApp')
 
           $scope.simulate.summaries.push({
             text: message,
+            cost: cost,
             success: result.success
           });
         }else if(result.type === 'REPUTATION'){
@@ -246,6 +259,7 @@ angular.module('partyanimalsDraftApp')
 
           $scope.simulate.summaries.push({
             text: message,
+            cost: cost,
             success: result.success
           });
         }else if(result.type === 'SORTIE'){
@@ -257,18 +271,21 @@ angular.module('partyanimalsDraftApp')
           $scope.simulate.summaries.push({
             text: result.name + ' at ' + result.district.name + ' increased reputation by ' + result.value +
               '. They responded well to ' + result.stats.best,
+            cost: cost,
             success: result.success
           });
         }else if(result.type === 'TALK'){
           //TODO: get the real stat for the kapitan
           $scope.simulate.summaries.push({
             text: 'Talked with the Kapitan',
-            success: true
+            success: true,
+            cost: cost
           });
         }else if(result.type === 'MOVE'){
           $scope.simulate.summaries.push({
             text: 'Travelled to ' + result.district.name,
-            success: result.success
+            success: result.success,
+            cost: cost
           });
         }
       }
@@ -282,7 +299,7 @@ angular.module('partyanimalsDraftApp')
       $scope.endTurn = false;
 
       //advance game state
-      $scope.totalCash = $scope.totalCash - $scope.totalCost;
+      $scope.totalCash = $scope.totalCash - $scope.totalCost + $scope.totalContribution;
       $scope.turnsLeft -= 1;
       $scope.scheduledActivities = [];
       $scope.currentLocation = $scope.futureLocation;
