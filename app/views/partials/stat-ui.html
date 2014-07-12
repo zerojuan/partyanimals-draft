@@ -8,7 +8,7 @@
         <th></th>
       </tr>
       <tr ng-repeat="issue in player.issueStats">
-        <td>{{issue.name}} <strong>{{activity.location.issues[$index]}}</strong></td>
+        <td>{{issue.name}} <span class="district-difficulty {{activity.location.issues[$index] | difficultyparser}}">{{activity.location.issues[$index] | difficultyparser}}</span>
         <td class="issue-bar" ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">
           <level-view base="issue.level" lvl="activity.location.humanStance[$index]" direction="left" type="human"></level-view>
           <div class="text">
