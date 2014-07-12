@@ -23,21 +23,7 @@
       <div>
         <a class="btn btn-success" ng-click="simulate.onEndTurn()">{{simulate.simulateText}}</a>
       </div>
-      <div class="container summary-sim">
-        <div><h4>Day Summary</h4></div>
-        <table class="table table-striped">
-          <tr ng-repeat="summary in simulate.summaries">
-            <td>{{summary.text}}</td>
-            <td class="italic" ng-class="{red: summary.cost < 0}">${{summary.cost}}</td>
-            <td ng-class="{success: summary.success, danger: !summary.success}"><i class="glyphicon" ng-class="{'glyphicon-ok': summary.success, 'glyphicon-remove': !summary.success}"></i></td>
-          </tr>
-          <tr>
-            <td style="text-align: right;"><strong>Total:</strong></td>
-            <td class="italic" ng-class="{red: totalContribution - totalCost < 0}">${{totalContribution - totalCost}}</td>
-            <td></td>
-          </tr>
-        </table>
-      </div>
+      <summary-sim summaries="simulate.summaries" total-contribution="totalContribution" total-cost="totalCost"></summary-sim>
     </div>
   </div>
 </div>
