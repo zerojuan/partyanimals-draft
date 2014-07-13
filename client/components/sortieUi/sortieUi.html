@@ -1,0 +1,23 @@
+<div>
+  <div ng-hide="done">
+    <img src="assets/images/actions/sortie.jpg"></img>
+  </div>
+  <div ng-show="success && done">
+    <div class="sortie-results">
+      <table class="table table-striped">
+        <tr ng-repeat="result in results" ng-class="{best: $index == stats.bestIndex}">
+          <td>{{result.name}}</td>
+          <td>{{result.value}}</td>
+          <td ng-class="{success: result.success, danger: !result.success}"><i class="glyphicon" ng-class="{'glyphicon-ok': result.success, 'glyphicon-remove': !result.success}"></i></td>
+        </tr>
+      </table>
+    </div>
+    <img src="assets/images/actions/sortie-success.png"></img>
+  </div>
+  <div ng-show="fail">
+    <img src="assets/images/actions/sortie-fail.png"></img>
+  </div>
+  <p>
+    <a class="btn btn-success" ng-click="onDone()" ng-hide="done">Done</a>
+  </p>
+</div>

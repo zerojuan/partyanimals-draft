@@ -1,0 +1,126 @@
+@import 'bootstrap/less/bootstrap.less';
+@import 'font-awesome/less/font-awesome.less';
+
+@icon-font-path: '/bower_components/bootstrap/fonts/';
+@fa-font-path: '/bower_components/font-awesome/fonts';
+
+@lightblue: #C2ECE8;
+@peach: #FEE8C8;
+@pink: #ffbebc;
+
+/**
+ * App-wide Styles
+ */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 730px;
+    }
+}
+
+.overlay{
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  width:100%;
+  z-index: 250;
+  background: fade(@peach, 70%);;
+}
+
+.district-difficulty{
+  vertical-align: super;
+  font-size: 8pt;
+  &.VERY{
+    &.HIGH{
+      color: #017f05;
+    }
+    &.LOW{
+      color: red;
+    }
+  }
+  &.LOW{
+    color: #d85542;
+  }
+  &.NORMAL{
+    color: #7dc91a;
+  }
+  &.HIGH{
+    color: #337522;
+  }
+}
+
+.district-desc{
+  width: 60%;
+  h4 span{
+    float: right;
+    img{
+      width: 30px;
+      height: 30px;
+    }
+    font-size: 12px;
+  }
+  .strong{
+    color: green;
+    font-weight: bold;
+  }
+}
+
+.district-stances{
+  display: flex;
+}
+
+.red{
+  color: red;
+}
+
+.blue{
+  color: blue;
+}
+
+.italic{
+  font-style: italic;
+}
+
+.custom-alert{
+  position: fixed;
+  top: 10px;
+  right: 5px;
+  width: 225px;
+}
+
+.reveal-animation.ng-enter {
+  -webkit-animation: enter_sequence .5s linear; /* Safari/Chrome */
+  animation: enter_sequence .5s linear; /* IE10+ and Future Browsers */
+}
+@-webkit-keyframes enter_sequence {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+@keyframes enter_sequence {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+// injector
+@import 'game/game.less';
+@import 'main/main.less';
+@import 'activitySim/activitySim.less';
+@import 'itineraryView/itineraryView.less';
+@import 'levelView/levelView.less';
+@import 'moveUi/moveUi.less';
+@import 'provinceView/provinceView.less';
+@import 'reputationUi/reputationUi.less';
+@import 'sortieUi/sortieUi.less';
+@import 'statUi/statUi.less';
+@import 'summarySim/summarySim.less';
+@import 'talkUi/talkUi.less';
+// endinjector

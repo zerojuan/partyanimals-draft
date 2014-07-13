@@ -1,0 +1,12 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-show="showItinerary">
+  <div ng-include="'app/game/game.itinerary.html'"></div>
+</div>
+<div ng-switch="state">
+  <div ng-switch-when="home">
+    <div ng-include="'app/game/game.home.html'"></div>
+  </div>
+  <div ng-switch-when="kapitan">
+    <div ng-include="'app/game/game.kapitan.html'"></div>
+  </div>
+</div>
