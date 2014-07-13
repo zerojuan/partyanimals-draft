@@ -1,0 +1,49 @@
+.level-view{
+  position: relative;
+  float: left;
+  height: 5px;
+  width: 100px;
+  padding-top: 7px;
+
+  .base-container{
+    display:inline-flex;
+    position: absolute;
+    &.left{
+      right: 0;
+    }
+    &.right{
+      left: 0;
+    }
+    .base{
+      width: 10px;
+      height: 10px;
+      margin-left: 3px;
+      background: #e4e4e4;
+      border-radius: 50%;
+    }
+  }
+
+  .level-container{
+    display:inline-flex;
+    position: absolute;
+    &.left{
+      right: 0;
+    }
+    &.right{
+      left: 0;
+    }
+    .level{
+      width: 10px;
+      height: 10px;
+      margin-left: 3px;
+      &.ai{
+        background: #c26767;
+      }
+      &.human{
+        background: #6684cd;
+      }
+      border-radius: 50%;
+    }
+  }
+
+}

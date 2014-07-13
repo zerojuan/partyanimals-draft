@@ -1,0 +1,32 @@
+.province-view{
+  width: 255px;
+  height: 400px;
+  display: inline-block;
+  .district{
+    border: 1px solid #ddd;
+    width: 120px;
+    height: 120px;
+    float: left;
+    background: #ccc;
+    position: relative;
+    .reputation{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 70px;
+      text-align: right;
+    }
+    &.selected{
+      border: 2px solid blue;
+    }
+    &.love{
+      background: #00cc00;
+    }
+    &.hate{
+      background: #cc0000;
+    }
+    &.neutral{
+      background: #ccc;
+    }
+  }
+}

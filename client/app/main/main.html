@@ -1,0 +1,52 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div ng-switch="page">
+  <div ng-switch-when="1" class="jumbotron">
+    <h1>Design your platform:</h1>
+    <p class="lead">
+      <span>{{initialLimit}} pts. Left</span>
+      <ul class="list-group">
+        <li ng-repeat="thing in issues" class="list-group-item">
+          <div class="scaler">
+            <div class="left-btn"><a class="btn" ng-disabled="thing.level == 0" ng-click="minus(thing)"><i class="glyphicon glyphicon-chevron-left"></i></a></div>
+            <div class="center">
+              <h4>{{thing.name}} {{thing.level}}<h4>
+            </div>
+            <div class="right-btn"><a class="btn" ng-disabled="initialLimit == 0" ng-click="plus(thing)"><i class="glyphicon glyphicon-chevron-right"></i></a></div>
+
+            <div class="clearfix"></div>
+          </div>
+        </li>
+      </ul>
+    </p>
+    <p><a class="btn btn-lg btn-success" ng-click="nextPage()">Next</a></p>
+  </div>
+  <div ng-switch-when="2" class="jumbotron">
+    <h1>Select your HQ</h1>
+    <div class="lead">
+      <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelected" show-reputation="false"></province-view>
+      <div ng-show="selectedDistrict" class="pull-right district-desc" style="width: 50%;">
+        <h4>{{selectedDistrict.name}}</h4>
+        <span>{{selectedDistrict.info}}</span>
+        <table class="table table-striped">
+          <tr>
+            <td>Issue</td>
+            <td>You</td>
+          </tr>
+          <tr ng-repeat="issue in issues">
+            <td>{{issue.name}}<span class="district-difficulty {{selectedDistrict.issues[$index] | difficultyparser}}">{{selectedDistrict.issues[$index] | difficultyparser}}</span></td>
+            <td ng-class="{strong: selectedDistrict.issues[$index] <= issue.level && selectedDistrict.issues[$index] > 0}">{{issue.level}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <p>
+      <a class="btn btn-lg btn-success" ng-click="prevPage()" >Back</a>
+      <a class="btn btn-lg btn-success" ng-click="submit()" >Submit</a>
+    </p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>♥</p>
+</div>

@@ -1,0 +1,94 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title>Party Animals</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/app.css -->
+    <link rel="stylesheet" href="app/app.css">
+      <!-- injector:css -->
+      <!-- endinjector -->
+    <!-- endbuild -->
+  </head>
+  <body ng-app="partyanimalsDraftApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div ui-view="" class="container"></div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js(client) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/json3/lib/json3.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/firebase/firebase.js"></script>
+      <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+      <script src="bower_components/angularfire/angularfire.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,client}) app/app.js -->
+        <script src="app/app.js"></script>
+          <!-- injector:js -->
+          <script src="app/filters/difficultyparser/difficultyparser.filter.js"></script>
+          <script src="app/filters/formatcost/formatcost.filter.js"></script>
+          <script src="app/filters/formulaparser/formulaparser.filter.js"></script>
+          <script src="app/filters/itinerarytime/itinerarytime.filter.js"></script>
+          <script src="app/filters/messageparser/messageparser.filter.js"></script>
+          <script src="app/game/game.controller.js"></script>
+          <script src="app/main/main.controller.js"></script>
+          <script src="app/main/main.js"></script>
+          <script src="app/services/GameState/GameState.service.js"></script>
+          <script src="app/services/PAFirebase/PAFirebase.service.js"></script>
+          <script src="components/activitySim/activitySim.directive.js"></script>
+          <script src="components/alert/alert.component.js"></script>
+          <script src="components/itineraryView/itineraryView.directive.js"></script>
+          <script src="components/levelView/levelView.directive.js"></script>
+          <script src="components/moveUi/moveUi.directive.js"></script>
+          <script src="components/navbar/navbar.controller.js"></script>
+          <script src="components/provinceView/provinceView.directive.js"></script>
+          <script src="components/reputationUi/reputationUi.directive.js"></script>
+          <script src="components/sortieUi/sortieUi.directive.js"></script>
+          <script src="components/statUi/statUi.directive.js"></script>
+          <script src="components/summarySim/summarySim.directive.js"></script>
+          <script src="components/talkUi/talkUi.directive.js"></script>
+          <!-- endinjector -->
+        <!-- endbuild -->
+</body>
+</html>
