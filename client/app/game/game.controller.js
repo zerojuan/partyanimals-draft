@@ -74,6 +74,10 @@ angular.module('partyanimalsDraftApp')
             $scope.ai.hq = val;
           }
         });
+        GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
+
+        //tally district approval ratings
+        $scope.totalReputations = GameState.getTotalReputation();
         $scope.$apply();
       }
     });
@@ -190,6 +194,7 @@ angular.module('partyanimalsDraftApp')
       $scope.showOverlay = true;
       $scope.endTurn = false;
       actIndex = 0;
+      GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
     };
 
 
@@ -304,11 +309,14 @@ angular.module('partyanimalsDraftApp')
       $scope.scheduledActivities = [];
       $scope.currentLocation = $scope.futureLocation;
 
-      //TODO: update money when turn ends
-
       $scope.selectedDistrict.selected = false;
       $scope.selectedDistrict = null;
       movePlayerToLocation($scope.currentLocation, true);
+      GameState.updateTurn($scope.turnsLeft);
+      GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
+
+      //tally district approval ratings
+      $scope.totalReputations = GameState.getTotalReputation();
     };
 
     $scope.onKapSelected = function(kapitan){

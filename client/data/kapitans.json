@@ -1,50 +1,43 @@
-[
-  {
-    "id": 0,
-    "name": "Owlberto",
-    "image": "owlberto.png",
-    "description": "A professor at the main university, the owl represents the educated class who believe they know what\"s best for the island, while being out of touch with the realities of the less fortunate population.",
-    "likes": [1,2],
-    "hates": [2]
-  },
-  {
-    "id": 1,
-    "name": "Catorcio",
-    "image": "catorcio.png",
-    "description": "A reformed thug who has worked his way into respectability as a Kapitan.  He\"s not shy about using his underworld connections to advance his interests.",
-    "likes": [2],
-    "hates": [0]
-  },
-  {
-    "id": 2,
-    "name": "Pelicarpio",
-    "image": "pelicarpio.png",
-    "description": "The representative of the fishing village in the south of summer island. Mad because other islands are encroaching on their fishing grounds, and wants coastal security to be beefed up.",
-    "likes": [3,4],
-    "hates": [3]
-  },
-  {
-    "id": 3,
-    "name": "Victortle",
-    "image": "tortuga.png",
-    "description": "The head of a stevedore\"s union, is in constant conflict with Boo Tee Kee over workers\" rights,  As a tortoise, he has lived for many years (ie he should look a bit old)",
-    "likes": [4],
-    "hates": [1]
-  },
-  {
-    "id": 4,
-    "name": "Father Doglas",
-    "image": "doglas.png",
-    "description": "A priest who exerts great power in the main diocese of the capital. He is very close to the family of Crocopio Cortez. He is a fat old priest. very close to big business who makle big donations to the cathedral.",
-    "likes": [2],
-    "hates": [5]
-  },
-  {
-    "id": 5,
-    "name": "Alpacita",
-    "image": "alpaca.png",
-    "description": "A surfer /environmentalist that fights to keep her resort safe from big business.  Dislikes politicians, CEOs, religion, and anything that isn\"t hip and one with nature.",
-    "likes": [3],
-    "hates": [4]
-  }
-  ]
+[ {
+  "description" : "A professor at the main university, the owl represents the educated class who believe they know what\"s best for the island, while being out of touch with the realities of the less fortunate population.",
+  "hates" : [ 2 ],
+  "id" : 0,
+  "image" : "owlberto.png",
+  "likes" : [ 1, 2 ],
+  "name" : "Owlberto"
+}, {
+  "description" : "A reformed thug who has worked his way into respectability as a Kapitan.  He\"s not shy about using his underworld connections to advance his interests.",
+  "hates" : [ 0 ],
+  "id" : 1,
+  "image" : "catorcio.png",
+  "likes" : [ 2 ],
+  "name" : "Catorcio"
+}, {
+  "description" : "The representative of the fishing village in the south of summer island. Mad because other islands are encroaching on their fishing grounds, and wants coastal security to be beefed up.",
+  "hates" : [ 3 ],
+  "id" : 2,
+  "image" : "pelicarpio.png",
+  "likes" : [ 3, 4 ],
+  "name" : "Pelicarpio"
+}, {
+  "description" : "The head of a stevedore\"s union, is in constant conflict with Boo Tee Kee over workers\" rights,  As a tortoise, he has lived for many years (ie he should look a bit old)",
+  "hates" : [ 1 ],
+  "id" : 3,
+  "image" : "victortle.png",
+  "likes" : [ 4 ],
+  "name" : "Victortle"
+}, {
+  "description" : "A priest who exerts great power in the main diocese of the capital. He is very close to the family of Crocopio Cortez. He is a fat old priest. very close to big business who makle big donations to the cathedral.",
+  "hates" : [ 5 ],
+  "id" : 4,
+  "image" : "doglas.png",
+  "likes" : [ 2 ],
+  "name" : "Father Doglas"
+}, {
+  "description" : "A surfer /environmentalist that fights to keep her resort safe from big business.  Dislikes politicians, CEOs, religion, and anything that isn\"t hip and one with nature.",
+  "hates" : [ 4 ],
+  "id" : 5,
+  "image" : "alpacita.png",
+  "likes" : [ 3 ],
+  "name" : "Alpacita"
+} ]

@@ -1,6 +1,6 @@
 <div class="top-bar">
   <div class="pull-left">{{turnsLeft}} Days Until Election</div>
-  <div class="center" tooltip="Total Reputation">Total Reputation</div>
+  <reputation-panel reputations="totalReputations"></reputation-panel>
   <div class="pull-right" ng-class="{red: totalCash<0}">Funds: ${{totalCash}}</div>
 </div>
 <div class="overlay reveal-animation" ng-show="showOverlay">
