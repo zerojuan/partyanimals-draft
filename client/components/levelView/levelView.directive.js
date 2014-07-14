@@ -5,7 +5,6 @@ angular.module('partyanimalsDraftApp')
     return{
       templateUrl: 'components/levelView/levelView.html',
       restrict: 'E',
-      replace: true,
       scope: {
         base: '=',
         lvl: '=',
