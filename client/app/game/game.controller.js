@@ -3,7 +3,6 @@
 angular.module('partyanimalsDraftApp')
   .controller('GameCtrl', function ($scope, $http, PAFirebase, GameState) {
 
-    $scope.state = 'home';
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
     $scope.turnsLeft = GameState.getTurnsLeft();
@@ -19,7 +18,8 @@ angular.module('partyanimalsDraftApp')
       isNextReady: false
     };
     $scope.config = {
-      alerts: []
+      alerts: [],
+      state: 'home'
     };
     $scope.currentPlayer = $scope.human;
 
@@ -326,16 +326,12 @@ angular.module('partyanimalsDraftApp')
 
 
     $scope.onKapClicked = function(){
-      $scope.state = 'kapitan';
+      $scope.config.state = 'kapitan';
       $scope.showItinerary = false;
     };
 
     $scope.onItClicked = function(){
       $scope.showItinerary = !$scope.showItinerary;
-    };
-
-    $scope.onBackHome = function(){
-      $scope.state = 'home';
     };
 
     $scope.$watch('scheduledActivities', function(){

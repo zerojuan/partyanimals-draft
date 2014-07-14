@@ -16,6 +16,13 @@ angular.module('partyanimalsDraftApp')
       });
     };
 
+    $scope.onBackHome = function(){
+      if($scope.selectedKapitan){
+        $scope.selectedKapitan.active = false;
+      }
+      $scope.config.state = 'home';
+    };
+
     $scope.$watch('kapitans', function(){
       //divide the kapitans into two
       $scope.localKapitans = $scope.kapitans.filter(function(val){
