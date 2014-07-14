@@ -92,6 +92,10 @@ angular.module('partyanimalsDraftApp')
     PAFirebase.kapitansRef.on('value', function(snapshot){
       if(!onDataChanged('kapitans')){
         $scope.kapitans = snapshot.val();
+        angular.forEach($scope.kapitans, function(val){
+          val.humanRelations = 50;
+          val.aiRelations = 50;
+        });
         $scope.$apply();
       }
     });
@@ -135,7 +139,7 @@ angular.module('partyanimalsDraftApp')
       }
       $scope.selectedDistrict = district;
       $scope.selectedDistrict.selected = true;
-      $scope.selectedDistrict.kapitan = findKapitan($scope.selectedDistrict.kapitanId);
+      $scope.selectedDistrict.kapitan = $scope.findKapitan($scope.selectedDistrict.kapitanId);
       $scope.selectedDistrict.activities = [];
       //load activities for this item
       var moveActivity, inFutureLocation = null;
@@ -319,24 +323,7 @@ angular.module('partyanimalsDraftApp')
       $scope.totalReputations = GameState.getTotalReputation();
     };
 
-    $scope.onKapSelected = function(kapitan){
-      if($scope.selectedKapitan){
-        $scope.selectedKapitan.active = false;
-      }
-      $scope.selectedKapitan = kapitan;
-      $scope.selectedKapitan.active = true;
-      //likes
-      var likesData = [];
-      $scope.selectedKapitan.likes.forEach(function(val){
-        likesData.push(findKapitan(val));
-      });
-      var hatesData = [];
-      $scope.selectedKapitan.hates.forEach(function(val){
-        hatesData.push(findKapitan(val));
-      });
-      $scope.selectedKapitan.likesData = likesData;
-      $scope.selectedKapitan.hatesData = hatesData;
-    };
+
 
     $scope.onKapClicked = function(){
       $scope.state = 'kapitan';
@@ -383,7 +370,7 @@ angular.module('partyanimalsDraftApp')
       });
     }, true);
 
-    var findKapitan = function(id){
+    $scope.findKapitan = function(id){
       var retVal = null;
       $scope.kapitans.forEach(function(val){
         if(val.id === id){
