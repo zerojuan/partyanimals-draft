@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .directive('reputationPanel', function ($filter) {
+  .directive('reputationPanel', function ($filter, GameState) {
     return {
       templateUrl: 'components/reputationPanel/reputationPanel.html',
       restrict: 'E',
@@ -10,16 +10,22 @@ angular.module('partyanimalsDraftApp')
       },
       link: function postlink(scope){
         scope.$watch('reputations', function(newVal, oldVal){
-          if(newVal){
-            if(!oldVal){
-              oldVal = {
+          if(newVal && newVal[newVal.length-1]){
+            var prev = newVal[newVal.length-2];
+            var now = newVal[newVal.length-1];
+            if(!prev){
+              prev = {
                 human: {reputation: 0, votes:0},
-                ai: {reputation:0, votes:0}
+                ai: {reputation:0, votes:0},
+                turn: -1
               };
             }
 
-            scope.humanChange = newVal.human.reputation - oldVal.human.reputation;
-            scope.aiChange = newVal.ai.reputation - oldVal.ai.reputation;
+            scope.now = now;
+
+            scope.humanChange = now.human.reputation - prev.human.reputation;
+            scope.aiChange = now.ai.reputation - prev.ai.reputation;
+
           }
         });
 

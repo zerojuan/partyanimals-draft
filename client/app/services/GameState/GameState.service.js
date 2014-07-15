@@ -18,6 +18,8 @@ angular.module('partyanimalsDraftApp')
     that.kapitans = [];
     that.issues = [];
 
+    that.reputations = [];
+
     that.getTotalReputation = function(){
       //compute votes
       //compute total population
@@ -33,7 +35,8 @@ angular.module('partyanimalsDraftApp')
 
       //get % of votes / total population
       console.log('Total Votes: ', totalHuman);
-      return {
+      that.reputations.push({
+        turn: that.turnsLeft,
         human: {
           reputation: totalHuman/totalPopulation * 100,
           votes: totalHuman
@@ -42,7 +45,8 @@ angular.module('partyanimalsDraftApp')
           reputation: totalAi/totalPopulation * 100,
           votes: totalAi
         }
-      };
+      });
+      return that.reputations;
     };
 
     that.updateTurn = function(turn){
