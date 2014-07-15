@@ -1,8 +1,21 @@
-<div>
-  <div class="container">
-    <div>
-      <img src="assets/images/avatars/{{activity.location.kapitan.image}}"></img>
-      <h3>*BLAH BLAH BLAH* {{activity.location.kapitan.name}}</h3>
+<div class="talk-ui">
+  <div ng-switch="talkState" class="container">
+    <div ng-switch-when="choose">
+      <div>
+        <h3>Choose</h3>
+        <div class="choice">
+          <div class="avatar">
+            <img class="avatar-clickable" src="assets/images/avatars/{{activity.location.kapitan.image}}"></img><span>{{activity.location.kapitan.name}}</span>
+          </div>
+          <div class="avatar" ng-show="activity.location.specialist">
+            <img class="avatar-clickable" src="assets/images/avatars/{{activity.location.specialist.image}}"></img><span>{{activity.location.specialist.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-switch-when="talk">
+    </div>
+    <div ng-switch-default>
     </div>
   </div>
   <p>

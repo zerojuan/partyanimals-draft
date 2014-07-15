@@ -5,7 +5,7 @@
     <li ng-repeat="kapitan in localKapitans" class="kapitan-image">
       <div ng-show="!kapitan.active" class="feelings-label top">{{kapitan.feelingsToSelected | feelings}}</div>
       <div ng-show="!kapitan.active" class="feelings-label bottom">{{kapitan.feelingsForSelected | feelings}}</div>
-      <img src="assets/images/avatars/{{kapitan.image}}" ng-class="{active: kapitan.active}" ng-click="onKapSelected(kapitan)"></img>
+      <img class="avatar-clickable" src="assets/images/avatars/{{kapitan.image}}" ng-class="{active: kapitan.active}" ng-click="onKapSelected(kapitan)"></img>
     </li>
     </ul>
     <hr></hr>
@@ -13,7 +13,7 @@
     <li ng-repeat="kapitan in specialists" class="kapitan-image">
       <div ng-show="!kapitan.active" class="feelings-label top">{{kapitan.feelingsToSelected | feelings}}</div>
       <div ng-show="!kapitan.active" class="feelings-label bottom">{{kapitan.feelingsForSelected | feelings}}</div>
-      <img src="assets/images/avatars/{{kapitan.image}}" ng-class="{active: kapitan.active}" ng-click="onKapSelected(kapitan)"></img>
+      <img class="avatar-clickable" src="assets/images/avatars/{{kapitan.image}}" ng-class="{active: kapitan.active}" ng-click="onKapSelected(kapitan)"></img>
     </li>
     </ul>
     <div>
