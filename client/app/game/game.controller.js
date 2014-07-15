@@ -100,6 +100,13 @@ angular.module('partyanimalsDraftApp')
       }
     });
 
+    PAFirebase.eventsRef.on('value', function(snapshot){
+      if(!onDataChanged('events')){
+        $scope.eventsDb = snapshot.val();
+        GameState.eventsDb = $scope.eventsDb;
+      }
+    });
+
     PAFirebase.activitiesRef.on('value', function(snapshot){
       if(!onDataChanged('activities')){
         $scope.activities = snapshot.val();
@@ -141,6 +148,9 @@ angular.module('partyanimalsDraftApp')
       $scope.selectedDistrict.selected = true;
       $scope.selectedDistrict.kapitan = $scope.findKapitan($scope.selectedDistrict.kapitanId);
       $scope.selectedDistrict.activities = [];
+      if($scope.selectedDistrict.specialistId){
+        $scope.selectedDistrict.specialist = $scope.findKapitan($scope.selectedDistrict.specialistId);
+      }
       //load activities for this item
       var moveActivity, inFutureLocation = null;
       inFutureLocation = $scope.futureLocation.id === $scope.selectedDistrict.id;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .directive('talkUi', function () {
+  .directive('talkUi', function (GameState) {
     return {
       require: '^activitySim',
       templateUrl: 'components/talkUi/talkUi.html',
@@ -13,12 +13,30 @@ angular.module('partyanimalsDraftApp')
       link: function postLink(scope, element, attrs, simCtrl) {
         var result;
         scope.onDone = function(){
-          scope.done = true;
           simCtrl.setDone(result);
+        };
+
+        scope.gotoNext = function(id){
+          if(id > 0){
+            scope.dialog = GameState.getDialog(id, scope.event);
+            return;
+          }
+          scope.done = true;
+          scope.talkState = 'done';
+          scope.onDone();
+        };
+
+        scope.onSelect = function(character){
+          scope.selectedCharacter = character;
+          scope.talkState = 'talk';
+          scope.event = GameState.getEvent(character);
+          scope.dialog = GameState.getDialog(0, scope.event);
         };
 
         scope.$watch('activity', function(){
           scope.done = false;
+
+          scope.talkState = 'choose';
           result = {
             type: 'TALK',
             cost: scope.activity.cost

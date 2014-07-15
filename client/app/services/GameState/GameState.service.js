@@ -14,11 +14,32 @@ angular.module('partyanimalsDraftApp')
     that.turnsLeft = 15;
     that.initialCash = 1000;
 
+    that.eventsDb = [];
+
     that.districts = [];
     that.kapitans = [];
     that.issues = [];
 
     that.reputations = [];
+
+    that.getEvent = function(kapitan){
+      //search from list of kapitans
+      var events = that.findEventByKapitanId(kapitan.id);
+      return events[0];
+    };
+
+    that.findEventByKapitanId = function(kapitanId){
+      return that.eventsDb.filter(function(val){
+        return val.character === kapitanId;
+      });
+    };
+
+    that.getDialog = function(index, event){
+      console.log(event);
+      return _.find(event.dialog,function(val){
+        return val.id === index;
+      });
+    };
 
     that.getTotalReputation = function(){
       //compute votes

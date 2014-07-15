@@ -1,0 +1,184 @@
+[ {
+  "name": "Introducing Catorcio",
+  "character": 1,
+  "condition": "MET===0",
+  "dialog": [ {
+    "id": 0,
+    "text": "I am a cool person, don't you know. I'm a cat",
+    "next": 1
+  },{
+    "id": 1,
+    "text": "I eat mice cakes. Do you like to eat mice cakes?",
+    "choice": [ {
+      "text": "Yes of course!",
+      "next": 2
+    }, {
+      "text": "No thanks, bye",
+      "next": 3
+    }]
+  },{
+    "id": 2,
+    "text": "Haha, you are cool mouse.",
+    "next": 4
+  },{
+    "id": 3,
+    "text": "I kid, I kid.",
+    "next": 4
+  },{
+    "id": 4,
+    "text": "Seriously though, do you want some dough?",
+    "choice": [{
+      "text": "Umm, ok",
+      "effect": "GOLD+1000,MORALITY-10,RCVD+1,RELATIONSHIP+30",
+      "next": 5
+    },{
+      "text": "I can't accept that",
+      "effect": "RELATIONSHIP-30",
+      "next": 6
+    }]
+  },{
+    "id": 5,
+    "text": "Attaboy!",
+    "next": 7
+  },{
+    "id": 6,
+    "text": "Oh. Too bad.",
+    "next": 7
+  },{
+    "id": 7,
+    "text": "Well, see you next time",
+    "next": -1
+  }]
+}, {
+  "name": "Introducing Owlberto",
+  "character": 0,
+  "condition": "MET===0",
+  "dialog": [{
+    "id": 0,
+    "text": "Hello there, little mouse.",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "I believe it goes without saying that we are aligned in our goals for this town.",
+    "choice": [{
+        "text": "Yes, I believe we are.",
+        "effect": "RELATIONSHIP+10",
+        "next": 2
+      },{
+        "text": "Not exactly.",
+        "effect": "RELATIONSHIP-10",
+        "next": 3
+      }]
+  }, {
+    "id": 2,
+    "text": "Haha, yes. Good, then this could be a start of a beautiful partnership",
+    "next": -1
+  }, {
+    "id": 3,
+    "text": "Well, what exactly do you have in mind?",
+    "choice": [{
+      "text": "Let me tell you about my Education plan",
+      "next": 4
+    },{
+      "text": "There's a huge flaw in the oppositions Education platform",
+      "next": 5
+    }]
+  }, {
+    "id": 4,
+    "text": "Fantastic. That sounds like a good start, yes.",
+    "effect": "ISSUE0+1",
+    "next": -1
+  },{
+    "id": 5,
+    "text": "Agree. That's something they have to resolve quickly.",
+    "effect": "OISSUE0-1",
+    "next": -1
+  }]
+}, {
+  "name": "Introducing Pelicarpio",
+  "character": 2,
+  "condition": "MET===0",
+  "dialog": [{
+    "id": 0,
+    "text": "Hi, I'm Pelicarpio.",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "Cool. Bye.",
+    "next": -1
+  }]
+}, {
+  "name": "Introducing Victortle",
+  "character": 3,
+  "condition": "MET===0",
+  "dialog": [{
+    "id": 0,
+    "text": "Yep, these shells have seen better days.",
+    "next": 1
+  },{
+    "id": 1,
+    "text": "Soo. You're that guy. Well, good luck.",
+    "next": -1
+  }]
+}, {
+  "name": "Introducing Father Doglas",
+  "character": 4,
+  "condition": "MET===0",
+  "dialog": [{
+    "id": 0,
+    "text": "Welcome, my child.",
+    "next": 1
+  },{
+    "id": 1,
+    "text": "God bless you.",
+    "next": -1
+  }]
+}, {
+  "name": "Introducing Alpacita",
+  "character": 5,
+  "condition": "MET===0",
+  "dialog": [{
+    "id": 0,
+    "text": "Sup!",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "Gnarly",
+    "next": -1
+  }]
+}, {
+  "name": "Introducing Boo Tee Kee",
+  "character": 6,
+  "condition": "MET===0",
+  "dialog": [{
+    "id": 0,
+    "text": "Ni hao!",
+    "next": -1
+  }]
+}, {
+  "name": "Introducing Filipenguin",
+  "character": 7,
+  "condition": "MET===0",
+  "dialog": [{
+    "id": 0,
+    "text": "Knock Knock...",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "Ako maba",
+    "next": -1
+  }]
+}, {
+  "name": "Introducing Franciscrow",
+  "character": 8,
+  "condition": "MET===0",
+  "dialog": [{
+    "id": 0,
+    "text": "This meeting never took place.",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "We never met",
+    "next": -1
+  }]
+}]

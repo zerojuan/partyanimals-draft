@@ -5,20 +5,40 @@
         <h3>Choose</h3>
         <div class="choice">
           <div class="avatar">
-            <img class="avatar-clickable" src="assets/images/avatars/{{activity.location.kapitan.image}}"></img><span>{{activity.location.kapitan.name}}</span>
+            <img ng-click="onSelect(activity.location.kapitan)" class="avatar-clickable" src="assets/images/avatars/{{activity.location.kapitan.image}}"></img><span>{{activity.location.kapitan.name}}</span>
           </div>
           <div class="avatar" ng-show="activity.location.specialist">
-            <img class="avatar-clickable" src="assets/images/avatars/{{activity.location.specialist.image}}"></img><span>{{activity.location.specialist.name}}</span>
+            <img ng-click="onSelect(activity.location.specialist)" class="avatar-clickable" src="assets/images/avatars/{{activity.location.specialist.image}}"></img><span>{{activity.location.specialist.name}}</span>
           </div>
         </div>
       </div>
     </div>
     <div ng-switch-when="talk">
+      <div>
+        <h3>{{event.name}}</h3>
+        <div class="avatar">
+          <img class="avatar-clickable" src="assets/images/avatars/{{selectedCharacter.image}}"></img>
+        </div>
+        {{selectedCharacter.name}}: {{dialog.text}}
+        <div ng-show="dialog.choice">
+          <a class="btn" ng-click="gotoNext(choice.next)" ng-repeat="choice in dialog.choice">
+            {{choice.text}}
+          </a>
+        </div>
+        <div ng-hide="dialog.choice">
+          <a class="btn" ng-click="gotoNext(dialog.next)">(...)</a>
+        </div>
+      </div>
+    </div>
+    <div ng-switch-when="done">
+      <div>
+        Talking to {{selectedCharacter.name}} went well.
+      </div>
     </div>
     <div ng-switch-default>
     </div>
   </div>
-  <p>
-    <a class="btn btn-success" ng-click="onDone()" ng-class="{disabled: done}">Done</a>
-  </p>
+  <!-- <p>
+    <a class="btn btn-success" ng-click="onDone()" ng-show="talkState === 'done'" ng-class="{disabled: done}">Done</a>
+  </p> -->
 </div>
