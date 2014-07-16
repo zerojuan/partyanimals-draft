@@ -17,9 +17,11 @@
       <div>
         <h3>{{event.name}}</h3>
         <div class="avatar">
-          <img class="avatar-clickable" src="assets/images/avatars/{{selectedCharacter.image}}"></img>
+          <img class="avatar-clickable" src="assets/images/avatars/{{selectedCharacter.image}}"></img><span>{{selectedCharacter.name}}</span>
         </div>
-        {{selectedCharacter.name}}: {{dialog.text}}
+        <div class="dialog-text">
+        {{dialog.text}}
+        </div>
         <div ng-show="dialog.choice">
           <a class="btn" ng-click="gotoNext(choice.next)" ng-repeat="choice in dialog.choice">
             {{choice.text}}

@@ -35,7 +35,6 @@ angular.module('partyanimalsDraftApp')
     };
 
     that.getDialog = function(index, event){
-      console.log(event);
       return _.find(event.dialog,function(val){
         return val.id === index;
       });
