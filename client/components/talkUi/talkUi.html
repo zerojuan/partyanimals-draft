@@ -19,12 +19,12 @@
         <div class="avatar">
           <img class="avatar-clickable" src="assets/images/avatars/{{selectedCharacter.image}}"></img>
         </div>
-        <div class="dialog-text">
+        <div class="dialog-text" tooltip-html-unsafe="{{dialog.effect | eventeffecttooltip}}">
           <div class="arrow-up center"></div>
         {{dialog.text}}
         </div>
-        <div ng-show="dialog.choice">
-          <a class="btn" ng-click="gotoNext(choice.next)" ng-repeat="choice in dialog.choice">
+        <div ng-show="dialog.choice" >
+          <a class="btn" ng-click="gotoNext(choice.next)" ng-repeat="choice in dialog.choice" tooltip-html-unsafe="{{choice.effect | eventeffecttooltip}}">
             {{choice.text}}
           </a>
         </div>
