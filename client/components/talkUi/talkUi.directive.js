@@ -29,6 +29,7 @@ angular.module('partyanimalsDraftApp')
         scope.onSelect = function(character){
           scope.selectedCharacter = character;
           scope.talkState = 'talk';
+          result.kapitan = character;
           scope.event = GameState.getEvent(character);
           scope.dialog = GameState.getDialog(0, scope.event);
         };

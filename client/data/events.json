@@ -29,11 +29,11 @@
     "text": "Seriously though, do you want some dough?",
     "choice": [{
       "text": "Umm, ok",
-      "effect": "GOLD+1000,MORALITY-10,RCVD+1,RELATIONSHIP+30",
+      "effect": "GOLD+1000,MORALITY-10,BRIBEE+1,REL+30",
       "next": 5
     },{
       "text": "I can't accept that",
-      "effect": "RELATIONSHIP-30",
+      "effect": "REL-30",
       "next": 6
     }]
   },{
@@ -50,6 +50,126 @@
     "next": -1
   }]
 }, {
+  "name": "Laundromat",
+  "character": 1,
+  "condition": "MET>0",
+  "dialog": [{
+    "id": 0,
+    "text": "Your campaign might prove to be a good investment opportunity for me.",
+    "next": 1
+  },{
+    "id": 1,
+    "text": "Take this gold. And my Photography team too.",
+    "choice": [{
+      "text": "Thanks, this will prove useful.",
+      "effect": "GOLD+2000,CARD=LAUNDROMAT:20",
+      "next":2
+    },{
+      "text": "Umm. No thanks.",
+      "effect": "REL-10,MORALITY+10",
+      "next":3
+    }]
+  },{
+    "id": 2,
+    "text": "Great. Excellent!",
+    "next":-1
+  },{
+    "id": 3,
+    "text": "Haha. Your loss",
+    "next":-1
+  }]
+}, {
+  "name": "Cheapskate",
+  "character": 1,
+  "condition": "MET>0",
+  "dialog": [{
+    "id": 0,
+    "text": "Have you met Owlberto? I hate him",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "He owes me a lot of money but is acting like he don't",
+    "choice": [{
+      "text": "Owlberto sucks.",
+      "effect": "REL+10, REL_KAPITAN-Owlberto",
+      "next": 2
+    }, {
+      "text": "Sucks to be you.",
+      "effect": "REL-10",
+      "next": 3
+    }]
+  }, {
+    "id": 2,
+    "text": "IKR!",
+    "next": -1
+  }, {
+    "id": 3,
+    "text": "Sucks to be you too.",
+    "next": -1
+  }]
+}, {
+  "name": "Imported Knowledge",
+  "character": 0,
+  "condition": "MET>0",
+  "dialog": [{
+    "id": 0,
+    "text": "I want to export textbooks, I don't want to pay taxes.",
+    "choice": [{
+      "text": "I'll pay the taxes.",
+      "effect": "REL+10,GOLD-1000",
+      "next": 1
+      },{
+      "text": "I'll talk to my city hall contact",
+      "effect": "REL-10",
+      "next": 2
+      },{
+      "text": "I have a friend (Boo Tee Kee), that might help",
+      "effect": "QUEST=ImportedKnowledge",
+      "next": 3
+      }]
+    },{
+    "id": 1,
+    "text": "Thanks for the help.",
+    "next": -1
+    },{
+    "id": 2,
+    "text": "Thanks.",
+    "next": -1
+    },{
+    "id": 3,
+    "text": "Thanks. I'll hear from you soon.",
+    "next": -1
+    }]
+}, {
+  "name": "Nouveau Rich",
+  "character": 0,
+  "condition": "MET>0",
+  "dialog": [{
+    "id": 0,
+    "text": "I hate Catorcio. He is buying his way to high society.",
+    "next": 1
+  },{
+    "id": 1,
+    "text": "He is nothing but a criminal.",
+    "choice": [{
+      "text": "You're right, he is.",
+      "effect": "REL+30,REL_KAPITAN-Catorcio",
+      "next":2
+      },{
+      "text": "He left that life behind.",
+      "effect": "REL-30,REL_KAPITAN+Catorcio",
+      "next":3
+      }]
+  },{
+    "id": 2,
+    "text": "We need to do something about this.",
+    "next": -1
+  },{
+    "id": 3,
+    "text": "A leopard never changes his spots. He surely has a little leopard in him.",
+    "next": -1
+  }]
+}, {
   "name": "Introducing Owlberto",
   "character": 0,
   "condition": "MET===0",
@@ -62,11 +182,11 @@
     "text": "I believe it goes without saying that we are aligned in our goals for this town.",
     "choice": [{
         "text": "Yes, I believe we are.",
-        "effect": "RELATIONSHIP+10",
+        "effect": "REL+10",
         "next": 2
       },{
         "text": "Not exactly.",
-        "effect": "RELATIONSHIP-10",
+        "effect": "REL-10",
         "next": 3
       }]
   }, {
@@ -179,6 +299,124 @@
   }, {
     "id": 1,
     "text": "We never met",
+    "next": -1
+  }]
+}, {
+  "name": "Owlberto Chitchat",
+  "character": 0,
+  "condition": "DEFAULT",
+  "dialog": [{
+    "id": 0,
+    "text": "Let me tell you about my favorite 18th century visionary...",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "... blah * blah * ...",
+    "next": -1
+  }]
+}, {
+  "name": "Catorcio Chitchat",
+  "character": 1,
+  "condition": "DEFAULT",
+  "dialog": [{
+    "id": 0,
+    "text": "*play poker or something*",
+    "next": -1
+  }]
+}, {
+  "name": "Pelicarpio Chitchat",
+  "character": 2,
+  "condition": "DEFAULT",
+  "dialog": [{
+    "id": 0,
+    "text": "Grab some grub and fish with me.",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "That's some good fishin",
+    "next": -1
+  }]
+}, {
+  "name": "Victortle Chitchat",
+  "character": 3,
+  "condition": "DEFAULT",
+  "dialog":[{
+    "id": 0,
+    "text": "Mouse, I ain't got no time for no chit chat",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "But a few bottles wouldn't hurt",
+    "effect": "GOLD-50",
+    "next": 2
+  }, {
+    "id": 2,
+    "text": "*gulp gulp*",
+    "next": -1
+  }]
+}, {
+  "name": "Fr Doglas Chitchat",
+  "character": 4,
+  "condition": "DEFAULT",
+  "dialog": [{
+    "id": 0,
+    "text": "Bless you, my child.",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "* salvation and spirits *",
+    "next": -1
+  }]
+}, {
+  "name": "Alpacita Chitchat",
+  "character": 5,
+  "condition": "DEFAULT",
+  "dialog": [{
+    "id": 0,
+    "text": "Peace and love!",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "* surfing tips *",
+    "next": -1
+  }]
+}, {
+  "name": "Boo Tee Kee Chitchat",
+  "character": 6,
+  "condition": "DEFAULT",
+  "dialog": [{
+    "id": 0,
+    "text": "Looking for something?",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "* economics (the freaky kind) *",
+    "next": -1
+  }]
+}, {
+  "name": "Filipenguin Chitchat",
+  "character": 7,
+  "condition": "DEFAULT",
+  "dialog": [{
+    "id": 0,
+    "text": "Why did the chicken cross the road?",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "Hahahaha *share jokes *",
+    "next": -1
+  }]
+}, {
+  "name": "Franciscrow Chitchat",
+  "character": 8,
+  "condition": "DEFAULT",
+  "dialog": [{
+    "id": 0,
+    "text": "We don't have much to talk about.",
+    "next": 1
+  }, {
+    "id": 1,
+    "text": "* whispers carelessly* ",
     "next": -1
   }]
 }]

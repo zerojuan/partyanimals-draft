@@ -22,10 +22,45 @@ angular.module('partyanimalsDraftApp')
 
     that.reputations = [];
 
+    var combineName = function(name){
+      return name.split(' ').join('');
+    };
+
     that.getEvent = function(kapitan){
       //search from list of kapitans
       var events = that.findEventByKapitanId(kapitan.id);
-      return events[0];
+      //get events that satisfy conditions
+      var conditions = {
+        MET: that.humanStats.met[kapitan.id]
+      };
+      var event = that.findEventByFilter(conditions, events);
+      //mark this event as done
+      var stringId = combineName(event.name);
+      if(!that.humanStats.doneEvents[stringId]){
+        that.humanStats.doneEvents[stringId] = 0;
+      }
+      that.humanStats.doneEvents[stringId] += 1;
+      return event;
+    };
+
+    that.findEventByFilter = function(filter, events){
+      var event = _.find(events, function(val){
+        if(val.condition === 'DEFAULT'){
+          return false;
+        }
+        var isRepeat = that.humanStats.doneEvents[combineName(val.name)] > 0;
+        var res = eval(val.condition.replace('MET',filter.MET));
+        return !isRepeat && res;
+      });
+      if(event){
+        return event;
+      }else{
+        //get the default event
+        event = _.find(events, function(val){
+          return val.condition === 'DEFAULT';
+        });
+        return event;
+      }
     };
 
     that.findEventByKapitanId = function(kapitanId){

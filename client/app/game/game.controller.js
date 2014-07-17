@@ -23,6 +23,9 @@ angular.module('partyanimalsDraftApp')
     };
     $scope.currentPlayer = $scope.human;
 
+    $scope.human.met = [0,0,0,0,0,0,0,0,0];
+    $scope.human.doneEvents = [];
+
     PAFirebase.workhoursRef.on('value', function(snapshot){
       onDataChanged('workhours');
       var hours = snapshot.val();
@@ -295,6 +298,8 @@ angular.module('partyanimalsDraftApp')
           });
         }else if(result.type === 'TALK'){
           //TODO: get the real stat for the kapitan
+          var kapitan = result.kapitan;
+          $scope.human.met[kapitan.id] += 1;
           $scope.simulate.summaries.push({
             text: 'Talked with the Kapitan',
             success: true,
