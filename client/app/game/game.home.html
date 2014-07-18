@@ -32,8 +32,8 @@
 <div ng-show="selectedDistrict" class="pull-right district-desc reveal-animation">
   <h4>{{selectedDistrict.name}}
     <div>
-      <span><img src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
-      <span ng-show="selectedDistrict.specialist"><img src="assets/images/avatars/{{selectedDistrict.specialist.image}}"></img>{{selectedDistrict.specialist.name}}</span>
+      <span><img ng-src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
+      <span ng-show="selectedDistrict.specialist"><img ng-src="assets/images/avatars/{{selectedDistrict.specialist.image}}"></img>{{selectedDistrict.specialist.name}}</span>
     </div>
   </h4>
   <span>{{selectedDistrict.info}}</span>

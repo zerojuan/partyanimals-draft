@@ -5,10 +5,10 @@
         <h3>Choose</h3>
         <div class="choice">
           <div class="avatar">
-            <img ng-click="onSelect(activity.location.kapitan)" class="avatar-clickable" src="assets/images/avatars/{{activity.location.kapitan.image}}"></img><span>{{activity.location.kapitan.name}}</span>
+            <img ng-click="onSelect(activity.location.kapitan)" class="avatar-clickable" ng-src="assets/images/avatars/{{activity.location.kapitan.image}}"></img><span>{{activity.location.kapitan.name}}</span>
           </div>
           <div class="avatar" ng-show="activity.location.specialist">
-            <img ng-click="onSelect(activity.location.specialist)" class="avatar-clickable" src="assets/images/avatars/{{activity.location.specialist.image}}"></img><span>{{activity.location.specialist.name}}</span>
+            <img ng-click="onSelect(activity.location.specialist)" class="avatar-clickable" ng-src="assets/images/avatars/{{activity.location.specialist.image}}"></img><span>{{activity.location.specialist.name}}</span>
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
       <div>
         <h3>{{event.name}}</h3>
         <div class="avatar">
-          <img class="avatar-clickable" src="assets/images/avatars/{{selectedCharacter.image}}"></img>
+          <img class="avatar-clickable" ng-src="assets/images/avatars/{{selectedCharacter.image}}"></img>
         </div>
         <div class="dialog-text" tooltip-html-unsafe="{{dialog.effect | eventeffecttooltip}}">
           <div class="arrow-up center"></div>
