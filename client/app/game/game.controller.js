@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .controller('GameCtrl', function ($scope, $http, PAFirebase, GameState) {
+  .controller('GameCtrl', function ($scope, $rootScope, $http, PAFirebase, GameState) {
 
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
@@ -27,96 +27,123 @@ angular.module('partyanimalsDraftApp')
     $scope.human.morality = 50;
     $scope.human.doneEvents = [];
 
-    PAFirebase.workhoursRef.on('value', function(snapshot){
-      onDataChanged('workhours');
-      var hours = snapshot.val();
-      $scope.hours = [];
-      for(var i = 0; i < hours; i++){
-        $scope.hours.push(9+i);
-      }
-      $scope.$apply();
+    $rootScope.$on('$stateChangeSuccess',
+      function(event, toState, toParams, fromState, fromParams){
+      console.log('toState', toState);
+      PAFirebase.removeCallbacks();
+      addDataCallbacks();
     });
 
-    PAFirebase.goldRef.on('value', function(snapshot){
-      if(!onDataChanged('initialGold')){
-        $scope.totalCash = snapshot.val();
+    var changedList = {};
+    var onDataChanged = function(name){
+      if(changedList[name] !== undefined){
+        $scope.config.alerts.push({msg: 'Someone tweaked ' + name + '.', type: 'warning'});
         $scope.$apply();
+        return true;
+      }else{
+        changedList[name] = true;
+        return false;
       }
-    });
+    };
 
-    PAFirebase.turnsPerGameRef.on('value', function(snapshot){
-      if(!onDataChanged('turnsPerGame')){
-        $scope.turnsLeft = snapshot.val();
+    var addDataCallbacks = function(){
+      PAFirebase.workhoursRef.on('value', function(snapshot){
+        console.log('Loading data....');
+        onDataChanged('workhours');
+        var hours = snapshot.val();
+        $scope.hours = [];
+        for(var i = 0; i < hours; i++){
+          $scope.hours.push(9+i);
+        }
         $scope.$apply();
-      }
-    });
+      });
 
-    PAFirebase.districtsRef.on('value', function(snapshot){
-      if(!onDataChanged('districts')){
-        $scope.districts = snapshot.val();
-        $scope.districts.forEach(function(val){
-          var i = 0;
-          val.humanReputation = 0;
-          val.aiReputation = 0;
-          val.humanStance = [0,0,0,0,0];
-          val.aiStance = [0,0,0,0,0];
-          if(val.id === $scope.human.hq.id){
-            val.isHQ = true;
-            val.humanReputation = 50;
-            val.hasHuman = true;
-            for(i = 0; i < 5; i++){
-              val.humanStance[i] = $scope.human.issueStats[i].level;
+      PAFirebase.goldRef.on('value', function(snapshot){
+        if(!onDataChanged('initialGold')){
+          $scope.totalCash = snapshot.val();
+          $scope.$apply();
+        }
+      });
+
+      PAFirebase.turnsPerGameRef.on('value', function(snapshot){
+        if(!onDataChanged('turnsPerGame')){
+          $scope.turnsLeft = snapshot.val();
+          $scope.$apply();
+        }
+      });
+
+      PAFirebase.districtsRef.on('value', function(snapshot){
+        console.log('Districts');
+        if(!onDataChanged('districts')){
+          $scope.districts = snapshot.val();
+          $scope.districts.forEach(function(val){
+            var i = 0;
+            val.humanReputation = 0;
+            val.aiReputation = 0;
+            val.humanStance = [0,0,0,0,0];
+            val.aiStance = [0,0,0,0,0];
+            if(val.id === $scope.human.hq.id){
+              val.isHQ = true;
+              val.humanReputation = 50;
+              val.hasHuman = true;
+              for(i = 0; i < 5; i++){
+                val.humanStance[i] = $scope.human.issueStats[i].level;
+              }
             }
-          }
-          if(val.id === $scope.ai.hq.id){
-            val.isAIHQ = true;
-            val.hasAI = true;
-            val.aiReputation = 50;
-            for(i = 0; i < 5; i++){
-              val.aiStance[i] = $scope.ai.issueStats[i].level;
+            if(val.id === $scope.ai.hq.id){
+              val.isAIHQ = true;
+              val.hasAI = true;
+              val.aiReputation = 50;
+              for(i = 0; i < 5; i++){
+                val.aiStance[i] = $scope.ai.issueStats[i].level;
+              }
+              $scope.ai.hq = val;
             }
-            $scope.ai.hq = val;
-          }
-        });
-        GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
+          });
+          GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
 
-        //tally district approval ratings
-        $scope.totalReputations = GameState.getTotalReputation();
-        $scope.$apply();
-      }
-    });
+          //tally district approval ratings
+          $scope.totalReputations = GameState.getTotalReputation();
+          $scope.$apply();
+        }
+      });
 
-    PAFirebase.issuesRef.on('value', function(snapshot){
-      if(!onDataChanged('issues')){
-        $scope.issues = snapshot.val();
-        $scope.$apply();
-      }
-    });
+      PAFirebase.issuesRef.on('value', function(snapshot){
+        if(!onDataChanged('issues')){
+          $scope.issues = snapshot.val();
+          $scope.$apply();
+        }
+      });
 
-    PAFirebase.kapitansRef.on('value', function(snapshot){
-      if(!onDataChanged('kapitans')){
-        $scope.kapitans = snapshot.val();
-        angular.forEach($scope.kapitans, function(val){
-          val.humanRelations = 50;
-          val.aiRelations = 50;
-        });
-        $scope.$apply();
-      }
-    });
+      PAFirebase.kapitansRef.on('value', function(snapshot){
+        console.log('Kapitans');
+        if(!onDataChanged('kapitans')){
+          $scope.kapitans = snapshot.val();
+          angular.forEach($scope.kapitans, function(val){
+            val.humanRelations = 50;
+            val.aiRelations = 50;
+          });
+          $scope.$apply();
+        }
+      });
 
-    PAFirebase.eventsRef.on('value', function(snapshot){
-      if(!onDataChanged('events')){
-        $scope.eventsDb = snapshot.val();
-        GameState.eventsDb = $scope.eventsDb;
-      }
-    });
+      PAFirebase.eventsRef.on('value', function(snapshot){
+        if(!onDataChanged('events')){
+          $scope.eventsDb = snapshot.val();
+          GameState.eventsDb = $scope.eventsDb;
+        }
+      });
 
-    PAFirebase.activitiesRef.on('value', function(snapshot){
-      if(!onDataChanged('activities')){
-        $scope.activities = snapshot.val();
-        $scope.$apply();
-      }
-    });
+      PAFirebase.activitiesRef.on('value', function(snapshot){
+        if(!onDataChanged('activities')){
+          $scope.activities = snapshot.val();
+          $scope.$apply();
+        }
+      });
+    };
+
+    addDataCallbacks();
+
 
     $scope.addToItinerary = function(activity){
       $scope.showItinerary = true;
@@ -516,18 +543,6 @@ angular.module('partyanimalsDraftApp')
           }
         }
       });
-    };
-
-    var changedList = {};
-    var onDataChanged = function(name){
-      if(changedList[name] !== undefined){
-        $scope.config.alerts.push({msg: 'Someone tweaked ' + name + '.', type: 'warning'});
-        $scope.$apply();
-        return true;
-      }else{
-        changedList[name] = true;
-        return false;
-      }
     };
 
     var setStatForDistrict = function(statIndex, district, value, isHuman){
