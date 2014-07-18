@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .controller('GameCtrl', function ($scope, $rootScope, $http, PAFirebase, GameState) {
+  .controller('GameCtrl', function ($scope, $rootScope, $http, PAFirebase, GameState, $filter) {
 
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
@@ -28,8 +28,7 @@ angular.module('partyanimalsDraftApp')
     $scope.human.doneEvents = [];
 
     $rootScope.$on('$stateChangeSuccess',
-      function(event, toState, toParams, fromState, fromParams){
-      console.log('toState', toState);
+      function(){
       PAFirebase.removeCallbacks();
       addDataCallbacks();
     });
@@ -327,9 +326,12 @@ angular.module('partyanimalsDraftApp')
         }else if(result.type === 'TALK'){
           //TODO: get the real stat for the kapitan
           var kapitan = result.kapitan;
+          var total = result.total;
+          var localKapitan = $scope.findKapitan(kapitan.id);
+          localKapitan.humanRelations += total.reputation;
           $scope.human.met[kapitan.id] += 1;
           $scope.simulate.summaries.push({
-            text: 'Talked with the Kapitan',
+            text: 'Talked with the Kapitan ('+total.reputation+' Relationship)',
             success: true,
             cost: cost
           });
