@@ -24,6 +24,7 @@ angular.module('partyanimalsDraftApp')
     $scope.currentPlayer = $scope.human;
 
     $scope.human.met = [0,0,0,0,0,0,0,0,0];
+    $scope.human.morality = 50;
     $scope.human.doneEvents = [];
 
     PAFirebase.workhoursRef.on('value', function(snapshot){

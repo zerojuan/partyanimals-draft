@@ -108,36 +108,108 @@
     "next": -1
   }]
 }, {
-  "name": "Imported Knowledge",
+  "name": "Book Deal",
   "character": 0,
   "condition": "MET>0",
   "dialog": [{
-    "id": 0,
-    "text": "I want to export textbooks, I don't want to pay taxes.",
-    "choice": [{
-      "text": "I'll pay the taxes.",
-      "effect": "REL+10,GOLD-1000",
-      "next": 1
-      },{
-      "text": "I'll talk to my city hall contact",
-      "effect": "REL-10",
-      "next": 2
-      },{
-      "text": "I have a friend (Boo Tee Kee), that might help",
-      "effect": "QUEST=ImportedKnowledge",
-      "next": 3
+      "id": 0,
+      "conditions": [{
+        "condition": "MORALITY>=50",
+        "next": 1
+      }, {
+        "condition": "MORALITY<50",
+        "next": 2
       }]
     },{
     "id": 1,
-    "text": "Thanks for the help.",
-    "next": -1
+    "text": "A marvelous morning to you my good mouse.",
+    "choice": [{
+      "text": "A benevolent morning to you",
+      "effect": "REL+20",
+      "next": 3
+      },{
+      "text": "Good morning to you too.",
+      "next": 4
+      },{
+      "text": "Okay...",
+      "next": 4
+      }]
     },{
     "id": 2,
-    "text": "Thanks.",
+    "text": "I have nothing to say to you.",
     "next": -1
     },{
     "id": 3,
-    "text": "Thanks. I'll hear from you soon.",
+    "text": "Ah, what impressive wordplay!",
+    "next": 4
+    },{
+    "id": 4,
+    "conditions": [{
+      "condition": "ISSUE0>=3",
+      "next": 5
+      },{
+      "condition": "DEFAULT",
+      "next": 6
+      }]
+    },{
+    "id": 5,
+    "text": "I see you value a good education. I do as well, and I have an idea that will elevate education on Summer Island!",
+    "next": 7
+    },{
+    "id": 6,
+    "text": "Looks like you could use an upgrade to your education platform, and I have just the thing.",
+    "next": 7
+    },{
+    "id": 7,
+    "text": "I have actualized a single book that contains all the knowledge our children need to learn at school.",
+    "choice": [{
+      "text": "Impressive!",
+      "effect": "REL+20",
+      "next": 8
+      },{
+      "text": "Really, just one book?",
+      "next": 8
+      }]
+    },{
+    "id": 8,
+    "text": "Indeed! Now if only I could convince the local school to purchase it and replace the moldifying manuals.",
+    "choice": [{
+      "text": "How can I help?",
+      "next": 9
+      },{
+      "text": "So you want me too...",
+      "next": 9
+      }]
+    },{
+    "id": 9,
+    "text": "It would be greatly satisfying to me if you would promote the book during your campaign.",
+    "choice": [{
+      "text": "Sure, I'd be delighted to do it!",
+      "next": 10
+      },{
+      "text": "And what do I get in return?",
+      "effect": "REL-20",
+      "next": 11
+      },{
+      "text": "My campaign is not a marketing tool.",
+      "effect": "REL-30",
+      "next": 12
+      }]
+    },{
+    "id": 10,
+    "text": "Splendid! My publisher will be very... I mean, the children of this island will be indebted to you.",
+    "next": 13
+    },{
+    "id": 11,
+    "text": "I wasn't informed that we were conducting a business transaction.",
+    "next": 13
+    },{
+    "id": 12,
+    "text": "I'm insulted that you would imagine I am capable of thinking such a thing!",
+    "next": 13
+    },{
+    "id": 13,
+    "text": "Oh my, looks like I'm late for a lecture again. I must be off!",
     "next": -1
     }]
 }, {
@@ -175,43 +247,77 @@
   "condition": "MET===0",
   "dialog": [{
     "id": 0,
-    "text": "Hello there, little mouse.",
-    "next": 1
-  }, {
+    "conditions": [{
+      "condition": "MORALITY>=50",
+      "next": 1
+    }, {
+      "condition": "MORALITY<50",
+      "next": 2
+    }]
+  },{
     "id": 1,
-    "text": "I believe it goes without saying that we are aligned in our goals for this town.",
+    "text": "A marvelous morning to you my good mouse!",
     "choice": [{
-        "text": "Yes, I believe we are.",
-        "effect": "REL+10",
-        "next": 2
-      },{
-        "text": "Not exactly.",
-        "effect": "REL-10",
-        "next": 3
-      }]
+      "text": "What an admirable alliteration!",
+      "next": 3
+    },{
+      "text": "Good morning to you too.",
+      "next": 4
+    },{
+      "text": "Okay...",
+      "next": 4
+    }]
   }, {
     "id": 2,
-    "text": "Haha, yes. Good, then this could be a start of a beautiful partnership",
+    "text": "I have nothing to say to you.",
     "next": -1
   }, {
     "id": 3,
-    "text": "Well, what exactly do you have in mind?",
-    "choice": [{
-      "text": "Let me tell you about my Education plan",
-      "next": 4
-    },{
-      "text": "There's a huge flaw in the oppositions Education platform",
-      "next": 5
-    }]
+    "text": "Someone who appreciates alliteration, how wonderful!",
+    "effect": "REL+20",
+    "next": 4
   }, {
     "id": 4,
-    "text": "Fantastic. That sounds like a good start, yes.",
-    "effect": "ISSUE0+1",
-    "next": -1
+    "text": "What largess can I bestow upon you today?",
+    "choice": [{
+      "text": "You sure use intelligent words!",
+      "next": 5
+    },{
+      "text": "I'd like your support in the elections.",
+      "next": 6
+    },{
+      "text": "er...",
+      "next": -1
+    }]
   },{
     "id": 5,
-    "text": "Agree. That's something they have to resolve quickly.",
-    "effect": "OISSUE0-1",
+    "text": "Oh, they're really not THAT big. Here, look them up in the dictionary.",
+    "effect": "REL+20",
+    "next": 6
+  },{
+    "id": 6,
+    "text": "Before we go any further, tell me, what do you think of Catorcio?",
+    "choice": [{
+      "text": "He's a criminal, plain and simple.",
+      "next": 7
+    },{
+      "text": "He's trying to mend his ways.",
+      "next": 8
+    },{
+      "text": "Sorry, I don't really like him.",
+      "next": 8
+    }]
+  },{
+    "id": 7,
+    "text": "That's indubitably what I was telling Father Doglas, but he wouldn't listen.",
+    "next": 9
+  },{
+    "id": 8,
+    "text": "Hmm, I see...",
+    "next": 9
+  },{
+    "id": 9,
+    "text": "Oh, dear, would you look at the time! I have a class to attend! We will have to leave this discussion for some other time",
     "next": -1
   }]
 }, {

@@ -31,7 +31,8 @@ angular.module('partyanimalsDraftApp')
       var events = that.findEventByKapitanId(kapitan.id);
       //get events that satisfy conditions
       var conditions = {
-        MET: that.humanStats.met[kapitan.id]
+        MET: that.humanStats.met[kapitan.id],
+        MORALITY: that.humanStats.morality
       };
       var event = that.findEventByFilter(conditions, events);
       //mark this event as done
@@ -70,9 +71,32 @@ angular.module('partyanimalsDraftApp')
     };
 
     that.getDialog = function(index, event){
-      return _.find(event.dialog,function(val){
+      var conditions = {
+        MET: that.humanStats.met[event.character],
+        MORALITY: that.humanStats.morality,
+        ISSUE: that.humanStats.issueStats
+      };
+      var dialog =  _.find(event.dialog,function(val){
         return val.id === index;
       });
+      if(dialog.conditions){
+        console.log('Conditions: ', dialog.conditions);
+        var defaultCondition = null;
+        var selected = _.find(dialog.conditions, function(val){
+          if(val.condition === 'DEFAULT') {
+            defaultCondition = val;
+            return false;
+          }
+          return eval(val.condition.replace('MORALITY',conditions.MORALITY)
+                                   .replace('ISSUE0', conditions.ISSUE[0].level));
+        });
+        if(selected){
+          return that.getDialog(selected.next, event);
+        }else{
+          return that.getDialog(defaultCondition.next, event);
+        }
+      }
+      return dialog;
     };
 
     that.getTotalReputation = function(){
