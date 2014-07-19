@@ -27,7 +27,7 @@ angular.module('partyanimalsDraftApp')
             scope.aiChange = now.ai.reputation - prev.ai.reputation;
 
           }
-        });
+        }, true);
 
         scope.getChangeString = function(val){
           if(val > 0){
