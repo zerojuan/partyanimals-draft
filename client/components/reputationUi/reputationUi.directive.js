@@ -25,14 +25,14 @@ angular.module('partyanimalsDraftApp')
             var attributeParser = $filter('attributeparser')(scope.activity.effect.attr);
             var dataForCheck = {
               random: Math.random() * 100,
-              PKRm: 1,
+              PKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.humanRelations),
               em: 10,
-              OKRm: 1
+              OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
             };
             var dataForActionDifficulty = {
               BD: scope.activity.difficulty,
               em: 10,
-              OKRm: 1
+              OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
             };
 
             var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);

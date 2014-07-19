@@ -329,6 +329,12 @@ angular.module('partyanimalsDraftApp')
           var total = result.total;
           var localKapitan = $scope.findKapitan(kapitan.id);
           localKapitan.humanRelations += total.reputation;
+          if(localKapitan.type === 'KAPITAN'){
+            changedDistrict = setKapitanForDistrict(localKapitan, result.district);
+          }
+          if($scope.scheduledActivities.length < actIndex){
+            $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
+          }
           $scope.human.met[kapitan.id] += 1;
           $scope.simulate.summaries.push({
             text: 'Talked with the Kapitan ('+total.reputation+' Relationship)',
@@ -560,6 +566,14 @@ angular.module('partyanimalsDraftApp')
         }
       });
       // $scope.$apply();
+      return changedDistrict;
+    };
+
+    var setKapitanForDistrict = function(kapitan, district){
+      var changedDistrict = _.find($scope.districts, function(val){
+        return val.id === district.id;
+      });
+      changedDistrict.kapitan = kapitan;
       return changedDistrict;
     };
 

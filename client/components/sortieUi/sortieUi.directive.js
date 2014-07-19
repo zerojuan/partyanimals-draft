@@ -31,15 +31,15 @@ angular.module('partyanimalsDraftApp')
             scope.activity.location.humanStance.forEach(function(val, i){
               var dataForCheck = {
                 random: Math.random() * 100,
-                PKRm: 1,
+                PKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.humanRelations),
                 em: 10,
-                OKRm: 1
+                OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
               };
               var dataForActionDifficulty = {
                 BD: scope.activity.difficulty,
                 IDM: val,
                 em: 10,
-                OKRm: 1
+                OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
               };
 
               var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);

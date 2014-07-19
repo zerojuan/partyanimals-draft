@@ -29,7 +29,7 @@
     },
     "difficulty": 50,
     "actionDifficulty": "BD+IDM+em",
-    "actionCheck": "random+(PKRm*10)+em",
+    "actionCheck": "random+PKRm+em",
     "effect": {
       "attr": "DR",
       "modifier": "10+AR-AD"
@@ -54,7 +54,7 @@
     },
     "difficulty": 20,
     "actionDifficulty": "BD+em",
-    "actionCheck": "random+(PKRm*10)+em",
+    "actionCheck": "random+PKRm+em",
     "effect": {
       "attr": "DR",
       "modifier": "10"
@@ -81,8 +81,8 @@
       "hours": 2
     },
     "difficulty": 50,
-    "actionDifficulty": "(BD+em)+(OKRm*10)",
-    "actionCheck": "random+(PKRm*10)+em",
+    "actionDifficulty": "(BD+em)+(OKRm)",
+    "actionCheck": "random+PKRm+em",
     "effect":{
       "attr": "OIS",
       "modifier": "-1"
@@ -107,8 +107,8 @@
       "morality": -10
     },
     "difficulty": 60,
-    "actionDifficulty": "(BD+em)+(OKRm*10)",
-    "actionCheck": "random+(PKRm*10)+em",
+    "actionDifficulty": "(BD+em)+OKRm",
+    "actionCheck": "random+PKRm+em",
     "effect": {
       "attr": "DR",
       "modifier": "50+AR-AD"
@@ -136,7 +136,7 @@
     },
     "difficulty": 20,
     "actionDifficulty": "(BD+ITL*10)+IDM",
-    "actionCheck": "random+(PKRm*10)+em",
+    "actionCheck": "random+PKRm+em",
     "effect": {
       "attr": "IS",
       "modifier": "1"
@@ -161,8 +161,8 @@
       "morality": -10
     },
     "difficulty": 50,
-    "actionDifficulty": "(BD+em)+(OKRm*10)",
-    "actionCheck": "random+(PKRm*10)+em",
+    "actionDifficulty": "(BD+em)+OKRm",
+    "actionCheck": "random+PKRm+em",
     "effect": {
       "attr": "OR",
       "modifier": "10+AR-AD"

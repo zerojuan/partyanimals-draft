@@ -61,6 +61,7 @@ angular.module('partyanimalsDraftApp')
           scope.talkState = 'choose';
           result = {
             type: 'TALK',
+            district: scope.activity.location,
             cost: scope.activity.cost
           };
         });

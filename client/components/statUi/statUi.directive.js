@@ -62,7 +62,7 @@ angular.module('partyanimalsDraftApp')
           //success or fail?
           var dataForCheck = {
             random: Math.random() * 100,
-            PKRm: 1,
+            PKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.humanRelations),
             em: 10
           };
           var dataForActionDifficulty = {
@@ -70,7 +70,7 @@ angular.module('partyanimalsDraftApp')
             em: 10,
             ITL: scope.activity.location.humanStance[scope.selectedIndex],
             IDM: scope.activity.location.issues[scope.selectedIndex],
-            OKRm: 1
+            OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
           };
 
           var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);
