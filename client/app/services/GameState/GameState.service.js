@@ -70,11 +70,12 @@ angular.module('partyanimalsDraftApp')
       });
     };
 
-    that.getDialog = function(index, event){
+    that.getDialog = function(index, event, district){
       var conditions = {
         MET: that.humanStats.met[event.character],
         MORALITY: that.humanStats.morality,
-        ISSUE: that.humanStats.issueStats
+        ISSUE: that.humanStats.issueStats,
+        LREPUTATION: district.humanReputation
       };
       var dialog =  _.find(event.dialog,function(val){
         return val.id === index;
@@ -88,6 +89,7 @@ angular.module('partyanimalsDraftApp')
             return false;
           }
           return eval(val.condition.replace('MORALITY',conditions.MORALITY)
+                                   .replace('LREPUTATION', conditions.LREPUTATION)
                                    .replace('ISSUE0', conditions.ISSUE[0].level));
         });
         if(selected){

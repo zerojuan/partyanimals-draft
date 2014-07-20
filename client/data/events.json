@@ -4,49 +4,68 @@
   "condition": "MET===0",
   "dialog": [ {
     "id": 0,
-    "text": "I am a cool person, don't you know. I'm a cat",
-    "next": 1
+    "conditions": [{
+      "condition": "LREPUTATION>=50",
+      "next": 1
+    }, {
+      "condition": "LREPUTATION<50",
+      "next": 2
+    }]
   },{
     "id": 1,
-    "text": "I eat mice cakes. Do you like to eat mice cakes?",
+    "text": "Your rreputation preceedes you. My people say you have a chance at winning the election.",
     "choice": [ {
-      "text": "Yes of course!",
-      "next": 2
-    }, {
-      "text": "No thanks, bye",
+      "text": "I guess I'm worth your time now?",
       "next": 3
+    }, {
+      "text": "You have quite the reputation yourself.",
+      "next": 4
     }]
   },{
     "id": 2,
-    "text": "Haha, you are cool mouse.",
-    "next": 4
+    "text": "Sorry, but you're not worth my time, little mouse.",
+    "next": -1
   },{
     "id": 3,
-    "text": "I kid, I kid.",
+    "text": "I value my time and so should you. I also value information, so tell me...",
     "next": 4
   },{
     "id": 4,
-    "text": "Seriously though, do you want some dough?",
+    "text": "What do they say about me?",
     "choice": [{
-      "text": "Umm, ok",
-      "effect": "GOLD+1000,MORALITY-10,BRIBEE+1,REL+30",
+      "text": "Owlberto doesn't like you.",      
       "next": 5
     },{
-      "text": "I can't accept that",
+      "text": "You're a criminal.",
       "effect": "REL-30",
+      "next": 5
+    },{
+      "text": "You take care of you're friends.",
+      "effect": "REL+30",
       "next": 6
     }]
   },{
     "id": 5,
-    "text": "Attaboy!",
-    "next": 7
+    "text": "Creatures of prriviledge don't know what it's like to make your on the streets. Sometimes you need to get your paws dirrty.",
+    "choice": [{
+      "text": "I agree.",
+      "effect": "REL+10",
+      "next": 7
+    },{
+      "text": "You can't create change that way.",
+      "effect": "REL-10",
+      "next": 6
+    },{
+      "text": "I guess so.",
+      "next": 6
+    }]
   },{
     "id": 6,
-    "text": "Oh. Too bad.",
+    "text": "As long as my people arre taken care of, that's all that matters. That's what a good leader is.",
     "next": 7
   },{
     "id": 7,
-    "text": "Well, see you next time",
+    "text": "Hm, I'm informed there's a prrroblem I need to attend to. Let's continue this discussion another time.",
     "next": -1
   }]
 }, {
@@ -352,11 +371,87 @@
   "condition": "MET===0",
   "dialog": [{
     "id": 0,
-    "text": "Welcome, my child.",
-    "next": 1
+    "conditions": [{
+      "condition": "MORALITY>=50",
+      "next": 1
+    }, {
+      "condition": "MORALITY<50",
+      "next": 2
+    }]
   },{
     "id": 1,
-    "text": "God bless you.",
+    "text": "A blessed day to you my child.",
+    "choice": [{
+      "text": "And to you as well, Pader.",
+      "effect": "REL+10",
+      "next": 5
+    },{
+      "text": "Actually I've had a rough day.",
+      "effect": "REL-10",
+      "next": 6
+    }]
+  },{
+    "id": 2,
+    "text": "I cannot speak with you unless you confess your sins.",
+    "choice": [{
+      "text": "*Confess*",
+      "effect": "MORALITY+20,REL+20",
+      "next": 3
+    },{
+      "text": "*Refuse*",
+      "effect": "REL-20",
+      "next": 4
+    }]
+  },{
+    "id": 3,
+    "text": "You have confessed your sins. Do your penance and pray to the Almighty Bone for guidance.",
+    "next": -1
+  },{
+    "id": 4,
+    "text": "Then there is nothing more for us to discuss. I shall pray for your soul.",
+    "next": -1
+  },{
+    "id": 5,
+    "text": "Blessings come to those who are faithful to the Thigh Bone. That's why it worries me that Pelicarpio allows worship of the Shin Bone in his district.",
+    "choice": [{
+      "text": "That is troubling indeed.",
+      "effect": "REL+10",
+      "next": 7
+    },{
+      "text": "Freedom of religion is good!",
+      "effect": "REL-30",
+      "next": 8
+    },{
+      "text": "But isn't the Shin bone connected to the Thigh Bone?",
+      "effect": "REL-10",
+      "next": 8
+    }]
+  },{
+    "id": 6,
+    "text": "You must always count your blessings my child.",
+    "choice": [{
+      "text": "I hate it when people say that.",
+      "effect": "REL-10",
+      "next": 4
+    },{
+      "text": "I guess so...",
+      "next": 5
+    },{
+      "text": "Wise words, Pader.",
+      "effect": "REL+10",
+      "next": 5
+    }]
+  },{
+    "id": 7,
+    "text": "I'm so glad you agree, my child!",
+    "next": 9
+  },{
+    "id": 8,
+    "text": "Blessings come to those who are faithful to the Thigh Bone. That's why it worries me that Pelicarpio allows worship of the Shin Bone in his district.",
+    "next": 9
+  },{
+    "id": 9,
+    "text": "Oh dear, it's almost time for the service and I still need to write my sermon. Let us speak again my child. Be One with the Thigh Bone.",
     "next": -1
   }]
 }, {

@@ -38,7 +38,7 @@ angular.module('partyanimalsDraftApp')
             totalEffect.push(theEffects);
           }
           if(id > 0){
-            scope.dialog = GameState.getDialog(id, scope.event);
+            scope.dialog = GameState.getDialog(id, scope.event, scope.activity.location);
             return;
           }
           scope.done = true;
@@ -52,7 +52,7 @@ angular.module('partyanimalsDraftApp')
           scope.talkState = 'talk';
           result.kapitan = character;
           scope.event = GameState.getEvent(character);
-          scope.dialog = GameState.getDialog(0, scope.event);
+          scope.dialog = GameState.getDialog(0, scope.event, scope.activity.location);
         };
 
         scope.$watch('activity', function(){
