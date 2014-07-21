@@ -11,11 +11,13 @@ angular.module('partyanimalsDraftApp')
         issues: '=',
         player: '=',
         onNextReady: '=',
-        ai: '='
+        ai: '=',
+        hoursElapsed: '='
       },
       controller: function($scope){
         this.setDone = function(action){
           //call the main controller that we are done here
+          action.hours = $scope.activity.cost.hours;
           $scope.onNextReady(action);
         };
 

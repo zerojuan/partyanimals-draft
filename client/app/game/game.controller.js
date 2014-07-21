@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .controller('GameCtrl', function ($scope, $rootScope, $http, PAFirebase, GameState, $filter) {
+  .controller('GameCtrl', function ($scope, $rootScope, $http, PAFirebase, GameState, Aisim) {
 
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
@@ -9,6 +9,7 @@ angular.module('partyanimalsDraftApp')
     $scope.totalCash = GameState.getInitialCash();
     $scope.showItinerary = false;
     $scope.hours = [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+    $scope.hoursElapsed = 0;
     $scope.scheduledActivities = [];
     $scope.futureLocation = $scope.human.hq;
     $scope.currentLocation = $scope.human.hq;
@@ -97,6 +98,7 @@ angular.module('partyanimalsDraftApp')
                 val.aiStance[i] = $scope.ai.issueStats[i].level;
               }
               $scope.ai.hq = val;
+              $scope.ai.currentLocation = val;
             }
           });
           GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
@@ -185,23 +187,7 @@ angular.module('partyanimalsDraftApp')
       var moveActivity, inFutureLocation = null;
       inFutureLocation = $scope.futureLocation.id === $scope.selectedDistrict.id;
 
-
-      moveActivity = {
-        id: -1,
-        type: 'MOVE',
-        name: 'Move Here',
-        text: {
-          success: ['Moved to $place$'],
-          fail: ['Failed to move to $place$']
-        },
-        cost: {
-          gold: 100,
-          hours: 3
-        },
-        disabled: false,
-        location: angular.copy($scope.selectedDistrict)
-      };
-      moveActivity.cost = calculateMovementCost($scope.futureLocation, $scope.selectedDistrict);
+      moveActivity = GameState.generateMoveActivity($scope.futureLocation, $scope.selectedDistrict);
 
       if(isInSchedule(moveActivity)){
         moveActivity.wasScheduled = true;
@@ -237,6 +223,7 @@ angular.module('partyanimalsDraftApp')
       $scope.simulate.isNextReady = true;
       $scope.showOverlay = true;
       $scope.endTurn = false;
+      $scope.hoursElapsed = 0;
       actIndex = 0;
       GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
     };
@@ -355,6 +342,7 @@ angular.module('partyanimalsDraftApp')
           });
         }
       }
+      $scope.hoursElapsed += result.hours;
       $scope.simulate.isNextReady = true;
     };
 
@@ -373,6 +361,7 @@ angular.module('partyanimalsDraftApp')
       $scope.selectedDistrict.selected = false;
       $scope.selectedDistrict = null;
       movePlayerToLocation($scope.currentLocation, true);
+
       GameState.updateTurn($scope.turnsLeft);
       GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
 
@@ -414,6 +403,9 @@ angular.module('partyanimalsDraftApp')
       }, 0);
       $scope.timeLeft = $scope.hours.length - totalTime;
       $scope.totalCost = totalCost;
+      if($scope.scheduledActivities && $scope.scheduledActivities.length > 0){
+        Aisim.generateActivities($scope.activities, $scope.scheduledActivities);
+      }
     }, true);
 
     $scope.$watch('timeLeft', function(){
@@ -462,32 +454,6 @@ angular.module('partyanimalsDraftApp')
         }
       });
       return count;
-    };
-
-    var calculateMovementCost = function(start, end){
-      var cost = {
-        gold: 300,
-        hours: 3
-      };
-
-      var a = {
-        x: start.id % 2,
-        y: Math.floor(start.id / 2)
-      };
-      var b = {
-        x: end.id % 2,
-        y: Math.floor(end.id / 2)
-      };
-      var distance = Math.sqrt(Math.pow(a.x-b.x, 2)+Math.pow(a.y-b.y, 2));
-      if(distance === 2){
-        cost.gold *= 2;
-        cost.hours *= 2;
-      }else if(distance !== 1){
-        cost.gold = 500;
-        cost.hours = 4;
-      }
-
-      return cost;
     };
 
     var shouldDisable = function(activity){

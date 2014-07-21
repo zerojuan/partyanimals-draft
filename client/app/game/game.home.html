@@ -15,7 +15,7 @@
         <a ng-click="simulate.onNext()" class="btn btn-success" ng-class="{disabled: !simulate.isNextReady}">{{simulate.simulateText}}</a>
       </div>
       <div ng-show="simulate.activeAct">
-        {{simulate.activeAct.name}} @ {{simulate.activeAct.location.name}}
+        {{simulate.activeAct.name}} @ {{simulate.activeAct.location.name}} {{hoursElapsed+8 | itinerarytime}}
         <activity-sim activity="simulate.activeAct" on-next-ready="simulate.onNextReady" player="currentPlayer" ai="ai" issues="issues"></activity-sim>
       </div>
     </div>
@@ -32,8 +32,8 @@
 <div ng-show="selectedDistrict" class="pull-right district-desc reveal-animation">
   <h4>{{selectedDistrict.name}}
     <div>
-      <span><img ng-src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
-      <span ng-show="selectedDistrict.specialist"><img ng-src="assets/images/avatars/{{selectedDistrict.specialist.image}}"></img>{{selectedDistrict.specialist.name}}</span>
+      <span class="district-animal"><img ng-src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
+      <span class="district-animal" ng-show="selectedDistrict.specialist"><img ng-src="assets/images/avatars/{{selectedDistrict.specialist.image}}"></img>{{selectedDistrict.specialist.name}}</span>
     </div>
   </h4>
   <span>{{selectedDistrict.info}}</span>
