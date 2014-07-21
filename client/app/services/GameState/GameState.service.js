@@ -177,4 +177,59 @@ angular.module('partyanimalsDraftApp')
       return that.initialCash;
     };
 
+
+    that.calculateMovementCost = function(start, end){
+      var cost = {
+        gold: 300,
+        hours: 3
+      };
+
+      var a = {
+        x: start.id % 2,
+        y: Math.floor(start.id / 2)
+      };
+      var b = {
+        x: end.id % 2,
+        y: Math.floor(end.id / 2)
+      };
+      var distance = Math.sqrt(Math.pow(a.x-b.x, 2)+Math.pow(a.y-b.y, 2));
+      if(distance === 2){
+        cost.gold *= 2;
+        cost.hours *= 2;
+      }else if(distance !== 1){
+        cost.gold = 500;
+        cost.hours = 4;
+      }
+
+      return cost;
+    };
+
+    that.generateMoveActivity = function(start, dest){
+      var moveActivity = {
+        id: -1,
+        type: 'MOVE',
+        name: 'Move Here',
+        text: {
+          success: ['Moved to $place$'],
+          fail: ['Failed to move to $place$']
+        },
+        cost: {
+          gold: 100,
+          hours: 3
+        },
+        disabled: false,
+        location: angular.copy(dest)
+      };
+      moveActivity.cost = that.calculateMovementCost(start, dest);
+      return moveActivity;
+    };
+
+    that.getRandomNumberExcept = function(except, max){
+      var index = Math.floor(Math.random()*max);
+      if(index === except){
+        return that.getRandomNumberExcept(except, max);
+      }else{
+        return index;
+      }
+    };
   });

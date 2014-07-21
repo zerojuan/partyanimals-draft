@@ -67,8 +67,7 @@ angular.module('partyanimalsDraftApp')
         });
         //set ai selected district
         var aiHQ = null;
-        var index = Math.floor(Math.random()*$scope.districts.length-1);
-        index = (index === $scope.selectedDistrict.id) ? index+1 : index;
+        var index = GameState.getRandomNumberExcept($scope.selectedDistrict.id, $scope.districts.length);
         aiHQ = $scope.districts[index];
         GameState.setHuman($scope.issues, $scope.selectedDistrict);
         GameState.setAI(aiIssues, aiHQ);
