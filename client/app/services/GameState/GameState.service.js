@@ -51,6 +51,7 @@ angular.module('partyanimalsDraftApp')
         }
         var isRepeat = that.humanStats.doneEvents[combineName(val.name)] > 0;
         var res = eval(val.condition.replace('MET',filter.MET));
+        console.log('Good Event: '+val.name, filter.MET, isRepeat);
         return !isRepeat && res;
       });
       if(event){
@@ -71,6 +72,7 @@ angular.module('partyanimalsDraftApp')
     };
 
     that.getDialog = function(index, event, district){
+      console.log('MET:', that.humanStats.doneEvents);
       var conditions = {
         MET: that.humanStats.met[event.character],
         MORALITY: that.humanStats.morality,
@@ -93,9 +95,9 @@ angular.module('partyanimalsDraftApp')
                                    .replace('ISSUE0', conditions.ISSUE[0].level));
         });
         if(selected){
-          return that.getDialog(selected.next, event);
+          return that.getDialog(selected.next, event, district);
         }else{
-          return that.getDialog(defaultCondition.next, event);
+          return that.getDialog(defaultCondition.next, event, district);
         }
       }
       return dialog;
@@ -135,7 +137,9 @@ angular.module('partyanimalsDraftApp')
     };
 
     that.updateGameState = function(human, ai, districts, kapitans, issues){
+
       that.humanStats = human;
+      console.log('MET->GameState:', that.humanStats.doneEvents);
       that.aiStats = ai;
       that.districts = districts;
       that.kapitans = kapitans;

@@ -24,6 +24,7 @@
   },{
     "id": 2,
     "text": "Sorry, but you're not worth my time, little mouse.",
+    "willRepeat": true,
     "next": -1
   },{
     "id": 3,
@@ -33,7 +34,7 @@
     "id": 4,
     "text": "What do they say about me?",
     "choice": [{
-      "text": "Owlberto doesn't like you.",      
+      "text": "Owlberto doesn't like you.",
       "next": 5
     },{
       "text": "You're a criminal.",
@@ -289,6 +290,7 @@
   }, {
     "id": 2,
     "text": "I have nothing to say to you.",
+    "willRepeat": true,
     "next": -1
   }, {
     "id": 3,
@@ -409,6 +411,7 @@
   },{
     "id": 4,
     "text": "Then there is nothing more for us to discuss. I shall pray for your soul.",
+    "willRepeat": true,
     "next": -1
   },{
     "id": 5,

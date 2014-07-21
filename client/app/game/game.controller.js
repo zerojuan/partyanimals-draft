@@ -335,7 +335,13 @@ angular.module('partyanimalsDraftApp')
           if($scope.scheduledActivities.length < actIndex){
             $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
           }
-          $scope.human.met[kapitan.id] += 1;
+          console.log('Will Repeat?', result.willRepeat);
+          if(result.willRepeat){
+            $scope.human.doneEvents[result.name] = 0;
+          }else{
+            //if an event is unfinished and will happen again, then you haven't really met
+            $scope.human.met[kapitan.id] += 1;
+          }
           $scope.simulate.summaries.push({
             text: 'Talked with the Kapitan ('+total.reputation+' Relationship)',
             success: true,

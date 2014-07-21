@@ -32,7 +32,7 @@ angular.module('partyanimalsDraftApp')
           simCtrl.setDone(result);
         };
 
-        scope.gotoNext = function(id, effect){
+        scope.gotoNext = function(id, effect, dialog){
           if(effect){
             var theEffects = $filter('eventeffectparser')(effect);
             totalEffect.push(theEffects);
@@ -40,6 +40,11 @@ angular.module('partyanimalsDraftApp')
           if(id > 0){
             scope.dialog = GameState.getDialog(id, scope.event, scope.activity.location);
             return;
+          }
+          if(dialog.willRepeat){
+            result.willRepeat = true;
+          }else{
+            result.willRepeat = false;
           }
           scope.done = true;
           scope.talkState = 'done';
@@ -52,6 +57,7 @@ angular.module('partyanimalsDraftApp')
           scope.talkState = 'talk';
           result.kapitan = character;
           scope.event = GameState.getEvent(character);
+          result.name = scope.event.name.split(' ').join('');
           scope.dialog = GameState.getDialog(0, scope.event, scope.activity.location);
         };
 
