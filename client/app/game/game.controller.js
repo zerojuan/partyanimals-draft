@@ -124,6 +124,7 @@ angular.module('partyanimalsDraftApp')
             val.humanRelations = 50;
             val.aiRelations = 50;
           });
+          GameState.kapitans = $scope.kapitans;
           $scope.$apply();
         }
       });
@@ -559,9 +560,16 @@ angular.module('partyanimalsDraftApp')
 
     var processAIMove = function(aiResult){
       if(aiResult){
+        var changedDistrict;
         if(aiResult.type === 'MOVE'){
           console.log('MOVING...');
           movePlayerToLocation(aiResult.district, false);
+          GameState.aiStats.currentLocation = aiResult.district;
+        }else if(aiResult.type === 'REPUTATION'){
+          if(aiResult.success){
+            console.log('Applying reputation...');
+            changedDistrict = setReputationForDistrict(aiResult.value, aiResult.district, aiResult.isVs);
+          }
         }
       }
     };

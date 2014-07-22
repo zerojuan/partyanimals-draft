@@ -5,7 +5,7 @@ angular.module('partyanimalsDraftApp')
     var that = this;
 
     //generate ai affinities (which kapitans, he likes)
-    that.moralAffinity = Math.floor(Math.random()*100);
+    that.moralAffinity = 30; //Math.floor(Math.random()*100);
     //generate good/evil affinity (the likelihood to do morality)
     //generate appetite for greed (the likelihood for money making)
     that.ai = null;
@@ -36,6 +36,8 @@ angular.module('partyanimalsDraftApp')
         //bribe the shit out of it
         act = GameState.getActivity(5, activities);
         act.location = angular.copy(district);
+        act.location.kapitan = GameState.findKapitan(act.location.kapitanId);
+        console.log('Activity:::', act);
         that.scheduledActivities.push(act);
       }else{
         //does the kapitan like me?
@@ -82,6 +84,8 @@ angular.module('partyanimalsDraftApp')
           type: 'MOVE',
           district: activity.location
         };
+      }else if(activity.type === 'REPUTATION'){
+        return GameState.getReputationActivityResult(activity, true);
       }
     };
   });

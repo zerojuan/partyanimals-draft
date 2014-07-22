@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .directive('reputationUi', function ($filter) {
+  .directive('reputationUi', function ($filter, GameState) {
     return {
       require: '^activitySim',
       templateUrl: 'components/reputationUi/reputationUi.html',
@@ -21,49 +21,13 @@ angular.module('partyanimalsDraftApp')
         scope.$watch('activity', function(){
           if(scope.activity){
             scope.done = false;
-            //check the possible values here
-            var attributeParser = $filter('attributeparser')(scope.activity.effect.attr);
-            var dataForCheck = {
-              random: Math.random() * 100,
-              PKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.humanRelations),
-              em: 10,
-              OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
-            };
-            var dataForActionDifficulty = {
-              BD: scope.activity.difficulty,
-              em: 10,
-              OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
-            };
+            result = GameState.getReputationActivityResult(scope.activity);
 
-            var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);
-            var actionDifficulty = $filter('formulaparser')(scope.activity.actionDifficulty, dataForActionDifficulty);
-
-            console.log('Check Action '+ scope.activity.name + ': Difficulty('+actionDifficulty+') vs Dice('+actionCheck+')');
-            if(actionCheck > actionDifficulty){
-              scope.success = true;
-            }else{
-              scope.success = false;
-            }
-
-            var resultValue = $filter('formulaparser')(scope.activity.effect.modifier, {AR: Math.floor(actionCheck), AD: actionDifficulty});
-            if(scope.success && attributeParser.isVs){
-              resultValue = resultValue * -1;
-            }
-            result = {
-              value: resultValue,
-              success: scope.success,
-              type: 'REPUTATION',
-              district: scope.activity.location,
-              name: scope.activity.name,
-              isVs: attributeParser.isVs
-            };
-
-            if(scope.success){
+            if(result.success){
               scope.doneMessage = scope.activity.text.success[0];
             }else{
               scope.doneMessage = scope.activity.text.fail[0];
             }
-
 
           }
         });

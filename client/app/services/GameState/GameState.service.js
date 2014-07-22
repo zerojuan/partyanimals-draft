@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .service('GameState', function Gamestate($cookieStore) {
+  .service('GameState', function Gamestate($cookieStore, $filter) {
     var that = this;
     that.humanStats = {
       issueStats : null,
@@ -181,6 +181,57 @@ angular.module('partyanimalsDraftApp')
 
     that.getInitialCash = function(){
       return that.initialCash;
+    };
+
+    that.findKapitan = function(id){
+      console.log('Kapitans: ', that.kapitans);
+      return _.find(that.kapitans, function(val){
+        return val.id === id;
+      });
+    };
+
+    that.getReputationActivityResult = function(activity, isAI){
+      var attributeParser = $filter('attributeparser')(activity.effect.attr);
+      var PKRm = $filter('feelingstorollmodifier')(activity.location.kapitan.humanRelations);
+      var OKRm = $filter('feelingstorollmodifier')(activity.location.kapitan.aiRelations);
+      if(isAI){
+        PKRm = $filter('feelingstorollmodifier')(activity.location.kapitan.aiRelations);
+        OKRm = $filter('feelingstorollmodifier')(activity.location.kapitan.humanRelations);
+      }
+      var dataForCheck = {
+        random: Math.random() * 100,
+        PKRm: PKRm,
+        em: 10,
+        OKRm: OKRm
+      };
+      var dataForActionDifficulty = {
+        BD: activity.difficulty,
+        em: 10,
+        OKRm: OKRm
+      };
+
+      var actionCheck = $filter('formulaparser')(activity.actionCheck, dataForCheck);
+      var actionDifficulty = $filter('formulaparser')(activity.actionDifficulty, dataForActionDifficulty);
+      var success = false;
+      if(actionCheck > actionDifficulty){
+        success = true;
+      }
+
+      var resultValue = $filter('formulaparser')(activity.effect.modifier, {AR: Math.floor(actionCheck), AD: actionDifficulty});
+      if(success && attributeParser.isVs){
+        resultValue = resultValue * -1;
+      }
+      var result = {
+        value: resultValue,
+        success: success,
+        type: 'REPUTATION',
+        district: activity.location,
+        name: activity.name,
+        cost: activity.cost,
+        isVs: attributeParser.isVs
+      };
+
+      return result;
     };
 
 
