@@ -230,24 +230,18 @@ angular.module('partyanimalsDraftApp')
 
 
     $scope.simulate.onNext = function(){
+      //is turn done?
       if(actIndex > $scope.scheduledActivities.length-1){
-        //show result
-        //TODO: show results page
-        $scope.simulate.simulateText = 'End Day';
-        $scope.simulate.activeAct = null;
-        $scope.endTurn = true;
-        //add budget contributions
-        $scope.totalContribution = 0;
-        angular.forEach($scope.districts, function(val){
-          if(val.humanReputation - val.aiReputation >= 50){
-            $scope.simulate.summaries.push({
-              text: 'Campaign contributions from ' + val.name,
-              cost: val.gold,
-              success: true
-            });
-            $scope.totalContribution += val.gold;
-          }
-        });
+        wrapTurn();
+        //TODO: ask if there are still activities pending in the AI
+        var pendingMoves = Aisim.getPendingMovesCount();
+        while(pendingMoves > 0){
+          console.log('Pending Moves:', pendingMoves);
+          var aiResult = Aisim.simulateActivities($scope.hoursElapsed, true);
+          processAIMove(aiResult);
+          pendingMoves = Aisim.getPendingMovesCount();
+        }
+
         return;
       }
       $scope.simulate.simulateText = 'Next';
@@ -342,7 +336,10 @@ angular.module('partyanimalsDraftApp')
           });
         }
       }
+      //TODO: simulate enemy turn based on time elapsed
       $scope.hoursElapsed += result.hours;
+      var aiResult = Aisim.simulateActivities($scope.hoursElapsed);
+      processAIMove(aiResult);
       $scope.simulate.isNextReady = true;
     };
 
@@ -525,6 +522,25 @@ angular.module('partyanimalsDraftApp')
       });
     };
 
+    var wrapTurn = function(){
+      //show result
+      $scope.simulate.simulateText = 'End Day';
+      $scope.simulate.activeAct = null;
+      $scope.endTurn = true;
+      //add budget contributions
+      $scope.totalContribution = 0;
+      angular.forEach($scope.districts, function(val){
+        if(val.humanReputation - val.aiReputation >= 50){
+          $scope.simulate.summaries.push({
+            text: 'Campaign contributions from ' + val.name,
+            cost: val.gold,
+            success: true
+          });
+          $scope.totalContribution += val.gold;
+        }
+      });
+    };
+
     var setStatForDistrict = function(statIndex, district, value, isHuman){
       var changedDistrict;
       $scope.districts.forEach(function(val){
@@ -539,6 +555,15 @@ angular.module('partyanimalsDraftApp')
       });
       // $scope.$apply();
       return changedDistrict;
+    };
+
+    var processAIMove = function(aiResult){
+      if(aiResult){
+        if(aiResult.type === 'MOVE'){
+          console.log('MOVING...');
+          movePlayerToLocation(aiResult.district, false);
+        }
+      }
     };
 
     var setKapitanForDistrict = function(kapitan, district){

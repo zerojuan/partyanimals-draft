@@ -103,6 +103,12 @@ angular.module('partyanimalsDraftApp')
       return dialog;
     };
 
+    that.getActivity = function(id, activities){
+      return _.find(activities, function(val){
+        return val.id === id;
+      });
+    };
+
     that.getTotalReputation = function(){
       //compute votes
       //compute total population
