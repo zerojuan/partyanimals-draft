@@ -255,7 +255,7 @@ angular.module('partyanimalsDraftApp')
       var changedDistrict;
       var message = '';
       if(result){
-        var cost = result.cost.gold * -1;
+        var cost = (result.cost.gold * result.district.goldCostModifier) * -1;
         if(result.type === 'STAT'){
           if(result.success){
             changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, result.value > 0);
@@ -397,7 +397,7 @@ angular.module('partyanimalsDraftApp')
         return a + b.cost.hours;
       }, 0);
       var totalCost = $scope.scheduledActivities.reduce(function(a, b){
-        return a + b.cost.gold;
+        return a + (b.cost.gold*b.location.goldCostModifier);
       }, 0);
       $scope.timeLeft = $scope.hours.length - totalTime;
       $scope.totalCost = totalCost;

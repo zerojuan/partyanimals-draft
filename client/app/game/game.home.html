@@ -63,7 +63,7 @@
   <ul class="list-unstyled activity-list">
     <li ng-repeat="activity in selectedDistrict.activities" class="row" ng-class="{disabled: activity.disabled}">
       <div class="col-md-5" tooltip="{{activity.description}}">{{activity.name}}</div>
-      <div class="col-md-3">{{activity.cost.gold | formatcost}}</div>
+      <div class="col-md-3" tooltip="{{activity.cost.gold}} * {{activity.location.goldCostModifier}}">{{activity.cost.gold * activity.location.goldCostModifier | formatcost}}</div>
       <div class="col-md-2">{{activity.cost.hours}} hrs</div>
       <div class="col-md-1">
         <a class="btn" ng-click="addToItinerary(activity)" ng-show="!activity.disabled">
