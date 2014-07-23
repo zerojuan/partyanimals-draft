@@ -5,7 +5,7 @@ angular.module('partyanimalsDraftApp')
     var that = this;
 
     //generate ai affinities (which kapitans, he likes)
-    that.moralAffinity = 30; //Math.floor(Math.random()*100);
+    that.moralAffinity = Math.floor(Math.random()*100);
     //generate good/evil affinity (the likelihood to do morality)
     //generate appetite for greed (the likelihood for money making)
     that.ai = null;
@@ -13,7 +13,11 @@ angular.module('partyanimalsDraftApp')
 
     var getRandomDistrict = function(){
       var currId = GameState.getRandomNumberExcept(that.ai.currentLocation.id, GameState.districts.length);
-      return GameState.districts[currId];
+      var district = GameState.districts[currId];
+      if(!district.kapitan){
+        district.kapitan = GameState.findKapitan(district.kapitanId);
+      }
+      return district;
     };
 
 
@@ -28,12 +32,13 @@ angular.module('partyanimalsDraftApp')
       var act = null;
       //go to random district
       var district = getRandomDistrict();
-
+      that.moralAffinity = Math.floor(Math.random()*100);
       console.log('Going to district: ', district.name);
       that.scheduledActivities.push(GameState.generateMoveActivity(that.ai.currentLocation, district));
       //do i have loose morals?
       if(that.moralAffinity <= 50){
         //bribe the shit out of it
+        console.log('I should bribe ' + district.name);
         act = GameState.getActivity(5, activities);
         act.location = angular.copy(district);
         act.location.kapitan = GameState.findKapitan(act.location.kapitanId);
@@ -41,15 +46,17 @@ angular.module('partyanimalsDraftApp')
         that.scheduledActivities.push(act);
       }else{
         //does the kapitan like me?
-        // console.log('District:',district);
-        // if(district.kapitan.aiRelations > 50){
+        console.log('District:',district);
+        if(district.kapitan.aiRelations >= 50){
           //photo op!
+          console.log('I should try to photo op');
           act = GameState.getActivity(2, activities);
           act.location = angular.copy(district);
           that.scheduledActivities.push(act);
-        // }else{
-        //   //make kapitan like me
-        // }
+        }else{
+          //make kapitan like me
+          console.log('I should make kapitan like me');
+        }
       }
       markedHours = 0;
       activeIndex = 0;
@@ -61,11 +68,12 @@ angular.module('partyanimalsDraftApp')
       //should return a result
       console.log('Time elapsed: ', hour);
       var activeActivity = that.scheduledActivities[activeIndex];
+      if(!activeActivity){return;}
       if(ignoreTime){
         activeIndex++;
         return that.getResultFromActivity(activeActivity);
       }
-
+      console.log('Active activity?', activeActivity);
       if(markedHours + activeActivity.cost.hours <= hour){
         activeIndex++;
         markedHours = markedHours + activeActivity.cost.hours;
@@ -82,7 +90,8 @@ angular.module('partyanimalsDraftApp')
       if(activity.type === 'MOVE'){
         return {
           type: 'MOVE',
-          district: activity.location
+          district: activity.location,
+          cost: activity.cost
         };
       }else if(activity.type === 'REPUTATION'){
         return GameState.getReputationActivityResult(activity, true);

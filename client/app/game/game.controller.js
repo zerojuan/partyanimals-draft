@@ -61,6 +61,7 @@ angular.module('partyanimalsDraftApp')
       PAFirebase.goldRef.on('value', function(snapshot){
         if(!onDataChanged('initialGold')){
           $scope.totalCash = snapshot.val();
+          $scope.ai.totalCash = snapshot.val();
           $scope.$apply();
         }
       });
@@ -221,6 +222,7 @@ angular.module('partyanimalsDraftApp')
       //execute the itinerary
       $scope.simulate.simulateText = 'Start';
       $scope.simulate.summaries = [];
+      $scope.simulate.aiSummaries = [];
       $scope.simulate.isNextReady = true;
       $scope.showOverlay = true;
       $scope.endTurn = false;
@@ -256,6 +258,7 @@ angular.module('partyanimalsDraftApp')
       var message = '';
       if(result){
         var cost = (result.cost.gold * result.district.goldCostModifier) * -1;
+        var moralityCost = result.cost.morality ? result.cost.morality : 0;
         if(result.type === 'STAT'){
           if(result.success){
             changedDistrict = setStatForDistrict(result.issueIndex, result.district, result.value, result.value > 0);
@@ -336,6 +339,7 @@ angular.module('partyanimalsDraftApp')
             cost: cost
           });
         }
+        $scope.human.morality += moralityCost;
       }
       //TODO: simulate enemy turn based on time elapsed
       $scope.hoursElapsed += result.hours;
@@ -561,16 +565,36 @@ angular.module('partyanimalsDraftApp')
     var processAIMove = function(aiResult){
       if(aiResult){
         var changedDistrict;
+        var cost = (aiResult.cost.gold * aiResult.district.goldCostModifier) * -1;
+        var text = '';
         if(aiResult.type === 'MOVE'){
           console.log('MOVING...');
           movePlayerToLocation(aiResult.district, false);
           GameState.aiStats.currentLocation = aiResult.district;
+          $scope.simulate.aiSummaries.push({
+            text: 'AI Moved to '+aiResult.district.name,
+            success: true,
+            cost: cost
+          });
+          //subtract cost
         }else if(aiResult.type === 'REPUTATION'){
           if(aiResult.success){
-            console.log('Applying reputation...');
             changedDistrict = setReputationForDistrict(aiResult.value, aiResult.district, aiResult.isVs);
+            if(aiResult.cost.morality && aiResult.cost.morality < 0){
+              text = 'AI did something morally dubious to gain reputation.';
+            }else{
+              text = 'AI was able to increase their reputation in the area.';
+            }
+          }else{
+            text = 'Tried to raise their reputation, but failed.';
           }
+          $scope.simulate.aiSummaries.push({
+            text: text,
+            success: aiResult.success,
+            cost: cost
+          });
         }
+        $scope.ai.totalCash += cost;
       }
     };
 

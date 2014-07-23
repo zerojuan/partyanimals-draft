@@ -347,12 +347,64 @@
   "condition": "MET===0",
   "dialog": [{
     "id": 0,
-    "text": "Hi, I'm Pelicarpio.",
-    "next": 1
+    "text": "Good morning, ser.",
+    "choice": [{
+      "text": "Yuck! What's that smell?",
+      "effect": "REL-10",
+      "next": 1
+    },{
+      "text": "I see you just came from the Fish Market.",
+      "effect": "REL+10",
+      "next": 2
+    },{
+      "text": "How are you doing today?",
+      "next": 2
+    }]
   }, {
     "id": 1,
-    "text": "Cool. Bye.",
+    "text": "Sorry ser, I just come from da fish market.",
+    "choice": [{
+      "text": "Oh, I see. How was the market?",
+      "effect": "REL+10",
+      "next": 2
+    },{
+      "text": "And you didn't think to wash up first before meeting me?",
+      "effect": "REL-10",
+      "next": 3
+    }]
+  },{
+    "id": 2,
+    "text": "Ser! I sold many fish today. A good day for me!",
+    "choice": [{
+      "text": "Who's your best customer?",
+      "next": 4
+    },{
+      "text": "Can I talk to you about the elections?",
+      "next": 5
+    }]
+  },{
+    "id": 3,
+    "text": "Oh you're right ser! I'm so sorry! I will go home right now and wash. Good bye!",
     "next": -1
+  },{
+    "id": 4,
+    "text": "Alpacita ser! She buys our fish and makes artisanal organic pate with them.",
+    "choice": [{
+      "text": "Organic. Artisanal. Fish pate?",
+      "next": 6
+    },{
+      "text": "I'd like to try that sometime!",
+      "effect": "REL+10",
+      "next": 5
+    }]
+  },{
+    "id": 5,
+    "text": "I should go home ser and wash up because I smell. Maybe we can talk some other time.",
+    "next": -1
+  },{
+    "id": 6,
+    "text": "Ya I don't know what is that also, hehe.",
+    "next": 5
   }]
 }, {
   "name": "Introducing Victortle",
@@ -360,12 +412,77 @@
   "condition": "MET===0",
   "dialog": [{
     "id": 0,
-    "text": "Yep, these shells have seen better days.",
-    "next": 1
+    "conditions": [{
+      "condition": "GOLD>=500",
+      "next": 1
+    }, {
+      "condition": "GOLD<500",
+      "next": 2
+    }]
   },{
     "id": 1,
-    "text": "Soo. You're that guy. Well, good luck.",
+    "text": "Good morning! On behalf of the Worker's Alliance of Summer Island, I'm happy to accept your donation of $500.",
+    "choice": [{
+      "text": "Let it be known I stand with the proletariat!",
+      "effect": "REL+10,GOLD-500",
+      "next": 3
+    },{
+      "text": "Worker's Alliance?",
+      "next": 3
+    },{
+      "text": "Huh?",
+      "effect": "REL-10",
+      "next": 3
+    }]
+  },{
+    "id": 2,
+    "text": "Money talks, so if you don't have $500, who will respect you?",
     "next": -1
+  },{
+    "id": 3,
+    "text": "Sorry, I assume that you are a mouse that stands in solidarity with the proletariat!",
+    "choice": [{
+      "text": "You're absolutely right. Here's my donation.",
+      "effect": "GOLD-500,REL+10",
+      "next": 4
+    },{
+      "text": "Why do I feel like this is a shakedown?",
+      "effect": "REL-10",
+      "next": 2
+    },{
+      "text": "I can't spend campaign funds will nilly!",
+      "effect": "REL-10",
+      "next": 2
+    }]
+  },{
+    "id": 4,
+    "text": "Thank you for your kind donation!",
+    "choice": [{
+      "text": "So why the hard sell?",
+      "next": 5
+    },{
+      "text": "Who else supports the WASI?",
+      "next": 5
+    }]
+  },{
+    "id": 5,
+    "text": "The WASI needs all the help it can get. It stands together with Pelicarpio of the Fishing Village in our fight against the capitalists like Boo Tee Kee.",
+    "choice": [{
+      "text": "Can I count on the proletariat in this election?",
+      "next": 6
+    },{
+      "text": "But Boo Tee Kee provides you with jobs?",
+      "effect": "REL-10",
+      "next": 7
+    }]
+  },{
+    "id": 6,
+    "text": "WASI is appreciative of your contribution, but it will take more than that to garner our full support. Good day!",
+    "next": -1
+  },{
+    "id": 7,
+    "text": "Employing us and exploiting us are two different things.",
+    "next": 6
   }]
 }, {
   "name": "Introducing Father Doglas",
@@ -551,7 +668,64 @@
   "condition": "MET===0",
   "dialog": [{
     "id": 0,
-    "text": "Ni hao!",
+    "text": "Oh hello, new customer! Come in, come in! I give you big discount!",
+    "choice": [{
+      "text": "Sorry, just window shopping.",
+      "effect": "REL-10",
+      "next": 1
+    },{
+      "text": "Watcha got?",
+      "effect": "REL+10",
+      "next": 2
+    }]
+  },{
+    "id": 1,
+    "text": "Okey no ploblem, you tek a look-see ya?",
+    "next": 2
+  },{
+    "id": 2,
+    "text": "Oh, I show you somesing! Just come in today! Brand new Van!",
+    "choice": [{
+      "text": "Tell me more!",
+      "effect": "REL+10",
+      "next": 3
+    },{
+      "text": "What do I need a van for?",
+      "effect": "REL-10",
+      "next": 3
+    }]
+  },{
+    "id": 3,
+    "text": "It top of line! Good stereo, speed, and fuel efficient. Save time and money!",
+    "choice": [{
+      "text": "Sorry, not interested.",
+      "next": 4
+    },{
+      "text": "Nice, how much?",
+      "next": 5
+    }]
+  },{
+    "id": 4,
+    "text": "OK no ploblem! You come back soon I got somesing else!",
+    "next": -1
+  },{
+    "id": 5,
+    "text": "Well it depend. Van with customs. Cost $2000 with tax. But I have friend in custom. I can give you for $1000 but no receipt, OK?",
+    "choice": [{
+      "text": "I'm a law abiding citizen!",
+      "effect": "REL-10,GOLD-2000,CARD=Van:1",
+      "next": 6
+    },{
+      "text": "That's a great deal!",
+      "effect": "REL+10,GOLD-1000,CARD=Van:1",
+      "next": 6
+    },{
+      "text": "I think I'll pass for now.",
+      "next": -1
+    }]
+  },{
+    "id": 6,
+    "text": "Another satisfy customer! Tell your friend we got best deals!",
     "next": -1
   }]
 }, {

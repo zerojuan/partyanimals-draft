@@ -7,6 +7,7 @@ angular.module('partyanimalsDraftApp')
       restrict: 'E',
       scope: {
         summaries: '=',
+        aiSummaries: '=',
         totalContribution: '=',
         totalCost: '='
       }

@@ -1,7 +1,7 @@
 <div class="top-bar">
-  <div class="pull-left">{{turnsLeft}} Days Until Election</div>
+  <div class="pull-left" tooltip="Morality: {{human.morality}}">{{turnsLeft}} Days Until Election</div>
   <reputation-panel reputations="totalReputations"></reputation-panel>
-  <div class="pull-right" ng-class="{red: totalCash<0}">Funds: ${{totalCash}}</div>
+  <div class="pull-right" tooltip="AI Cash: {{ai.totalCash}}"ng-class="{red: totalCash<0}">Funds: ${{totalCash}}</div>
 </div>
 <div class="overlay reveal-animation" ng-show="showOverlay">
   <div class="container">
@@ -23,7 +23,7 @@
       <div>
         <a class="btn btn-success" ng-click="simulate.onEndTurn()">{{simulate.simulateText}}</a>
       </div>
-      <summary-sim summaries="simulate.summaries" total-contribution="totalContribution" total-cost="totalCost"></summary-sim>
+      <summary-sim summaries="simulate.summaries" ai-summaries="simulate.aiSummaries" total-contribution="totalContribution" total-cost="totalCost"></summary-sim>
     </div>
   </div>
 </div>

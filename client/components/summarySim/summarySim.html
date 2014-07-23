@@ -12,4 +12,10 @@
       <td></td>
     </tr>
   </table>
+  <table class="table table-striped">
+    <tr ng-repeat="summary in aiSummaries">
+      <td>{{summary.text}}</td>
+      <td ng-class="{success: summary.success, danger: !summary.success}"><i class="glyphicon" ng-class="{'glyphicon-ok': summary.success, 'glyphicon-remove': !summary.success}"></i></td>
+    </tr>
+  </table>
 </div>
