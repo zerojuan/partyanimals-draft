@@ -337,7 +337,7 @@
     "text": "My marvelous mouse, the creatures of my district have only the most altudinous of praises for you!",
     "choice": [{
       "text": "A great poet once said \"It doesn't matter if you win by an inch or a mile...\"",
-      "next": 5,
+      "next": 5
     },{
       "text": "Thanks for keeping me informed.",
       "next": 6
@@ -347,7 +347,7 @@
     "text": "My good mouse, miserable news! The creatures of my district place your ruthless rival in high esteem!",
     "choice": [{
       "text": "A great poet once said \"It doesn't matter if you win by an inch or a mile...\"",
-      "next": 5,
+      "next": 5
     },{
       "text": "Thanks for keeping me informed.",
       "next": 6

@@ -1,0 +1,9 @@
+[{
+  "id": "IdiotSon",
+  "name": "Idiot Son",
+  "effect": "GOLD-100"
+},{
+  "id": "BookDeal",
+  "name": "Book Deal",
+  "effect": "ISSUE0+1"
+}]
