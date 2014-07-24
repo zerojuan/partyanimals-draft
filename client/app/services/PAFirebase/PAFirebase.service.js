@@ -13,6 +13,7 @@ angular.module('partyanimalsDraftApp')
     that.turnsPerGameRef = new Firebase(url+'/turnsPerGame');
     that.workhoursRef = new Firebase(url+'/workhours');
     that.eventsRef = new Firebase(url+'/events');
+    that.cardsRef = new Firebase(url+'/cards');
 
     that.removeCallbacks = function(){
       that.platformPointsRef.off();
@@ -24,5 +25,6 @@ angular.module('partyanimalsDraftApp')
       that.turnsPerGameRef.off();
       that.workhoursRef.off();
       that.eventsRef.off();
+      that.cardsRef.off();
     };
   });

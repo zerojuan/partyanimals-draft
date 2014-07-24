@@ -58,6 +58,17 @@ angular.module('partyanimalsDraftApp')
         $scope.$apply();
       });
 
+      PAFirebase.cardsRef.on('value', function(snapshot){
+        onDataChanged('cards');
+        $scope.cards = snapshot.val();
+        _.forEach($scope.cards, function(val){
+          val.done = false;
+          val.turns = -1;
+        });
+        GameState.cards = $scope.cards;
+        $scope.$apply();
+      });
+
       PAFirebase.goldRef.on('value', function(snapshot){
         if(!onDataChanged('initialGold')){
           $scope.totalCash = snapshot.val();
@@ -313,22 +324,24 @@ angular.module('partyanimalsDraftApp')
           var kapitan = result.kapitan;
           var total = result.total;
           var localKapitan = $scope.findKapitan(kapitan.id);
-          localKapitan.humanRelations += total.reputation;
+          localKapitan.humanRelations += total.relationship;
           if(localKapitan.type === 'KAPITAN'){
             changedDistrict = setKapitanForDistrict(localKapitan, result.district);
           }
           if($scope.scheduledActivities.length < actIndex){
             $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
           }
-          console.log('Will Repeat?', result.willRepeat);
+
           if(result.willRepeat){
             $scope.human.doneEvents[result.name] = 0;
           }else{
             //if an event is unfinished and will happen again, then you haven't really met
             $scope.human.met[kapitan.id] += 1;
           }
+
+          $scope.human.morality += result.total.morality;
           $scope.simulate.summaries.push({
-            text: 'Talked with the Kapitan ('+total.reputation+' Relationship)',
+            text: 'Talked with the Kapitan ('+total.relationship+' Relationship)',
             success: true,
             cost: cost
           });

@@ -19,6 +19,7 @@ angular.module('partyanimalsDraftApp')
     that.districts = [];
     that.kapitans = [];
     that.issues = [];
+    that.cards = [];
 
     that.reputations = [];
 
@@ -73,11 +74,14 @@ angular.module('partyanimalsDraftApp')
 
     that.getDialog = function(index, event, district){
       console.log('MET:', that.humanStats.doneEvents);
+      var latestReputation = that.reputations[that.reputations.length - 1];
       var conditions = {
         MET: that.humanStats.met[event.character],
         MORALITY: that.humanStats.morality,
         ISSUE: that.humanStats.issueStats,
-        LREPUTATION: district.humanReputation
+        LREPUTATION: district.humanReputation,
+        GREPUTATION: latestReputation.human.reputation,
+        OGREPUTATION: latestReputation.ai.reputation
       };
       var dialog =  _.find(event.dialog,function(val){
         return val.id === index;
@@ -86,13 +90,22 @@ angular.module('partyanimalsDraftApp')
         console.log('Conditions: ', dialog.conditions);
         var defaultCondition = null;
         var selected = _.find(dialog.conditions, function(val){
+          console.log('Testing: ' + val.condition);
           if(val.condition === 'DEFAULT') {
             defaultCondition = val;
             return false;
           }
+          if(that.isCardCondition(val.condition)){
+            console.log('This is a card condition');
+            return that.evalCardCondition(val.condition);
+          }
           return eval(val.condition.replace('MORALITY',conditions.MORALITY)
+                                   .replace('GREPUTATION', conditions.GREPUTATION)
+                                   .replace('OGREPUTATION', conditions.OGREPUTATION)
                                    .replace('LREPUTATION', conditions.LREPUTATION)
-                                   .replace('ISSUE0', conditions.ISSUE[0].level));
+                                   .replace('ISSUE0', conditions.ISSUE[0].level)
+                                   .replace('ISSUE1', conditions.ISSUE[1].level)
+                                   .replace('ISSUE2', conditions.ISSUE[2].level));
         });
         if(selected){
           return that.getDialog(selected.next, event, district);
@@ -186,6 +199,37 @@ angular.module('partyanimalsDraftApp')
     that.findKapitan = function(id){
       console.log('Kapitans: ', that.kapitans);
       return _.find(that.kapitans, function(val){
+        return val.id === id;
+      });
+    };
+
+    that.isCardCondition = function(val){
+      var cond = val.split(/(CARD\?)(\w+)/g)
+                .filter(function(v){
+                  return v !== '';
+                });
+      return cond[0] === 'CARD?';
+    };
+
+    that.evalCardCondition = function(val){
+      var cond = val.split(/(CARD\?)(\w+)/g)
+                .filter(function(v){
+                  return v !== '';
+                });
+      if(cond[0] === 'CARD?'){
+        var card = that.findCard(cond[1]);
+        var isActive = false;
+        if(card && (card.done || card.turns > 0)){
+          isActive = true;
+        }
+        console.log('This card: ' + cond[1] + ' is ' + isActive);
+        return eval(isActive+cond[2]);
+      }
+      return false;
+    };
+
+    that.findCard = function(id){
+      return _.find(that.cards, function(val){
         return val.id === id;
       });
     };

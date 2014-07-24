@@ -291,6 +291,7 @@
     },{
     "id": 10,
     "text": "Splendid! My publisher will be very... I mean, the children of this island will be indebted to you.",
+    "effect": "CARD=BookDeal",
     "next": 13
     },{
     "id": 11,
@@ -366,7 +367,7 @@
     },{
       "text": "I wait with bated breath.",
       "effect": "REL+10",
-      "next": 9
+      "next": 10
     }]
   },{
     "id": 7,
@@ -380,45 +381,45 @@
   },{
     "id": 8,
     "text": "Heavens, no. The book is doing well thanks to you!",
-    "next": 9
+    "next": 10
   },{
     "id": 9,
     "text": "Heavens, no. The book is doing well, no thanks to you.",
-    "next": 9
+    "next": 10
   },{
-    "id": 9,
+    "id": 10,
     "text": "My son Owlfredo is in his final year at college, and he requires some on the job training. Would you do me the fantastic favor of hiring him for your campaign?",
     "choice": [{
       "text": "What's the catch?",
       "effect": "REL-10",
-      "next": 10
+      "next": 11
     },{
       "text": "What kind of skills does he have?",
-      "next": 10
+      "next": 11
     },{
       "text": "Anything for my favorite feathered friend!",
       "effect": "REL+10",
-      "next": 11
-    }]
-  },{
-    "id": 10,
-    "text": "Well to my supreme shame, Owlfredo isn't really the brightest bird in the flock. But if you keep him away from anything important it should be fine.",
-    "choice": [{
-      "text": "*Sigh* Okay I'll keep him occupied.",
-      "effect": "REL+10",
-      "next": 11
-    },{
-      "text": "Sincerest apologies, but my campaign cannot take on any dead weight.",
-      "effect": "REL-10",
       "next": 12
     }]
   },{
     "id": 11,
+    "text": "Well to my supreme shame, Owlfredo isn't really the brightest bird in the flock. But if you keep him away from anything important it should be fine.",
+    "choice": [{
+      "text": "*Sigh* Okay I'll keep him occupied.",
+      "effect": "REL+10",
+      "next": 12
+    },{
+      "text": "Sincerest apologies, but my campaign cannot take on any dead weight.",
+      "effect": "REL-10",
+      "next": 13
+    }]
+  },{
+    "id": 12,
     "text": "Splendid! I assure you i will repay the favor tenfold!",
     "effect": "CARD=IdiotSon,MORALITY-10",
     "next": -1
   },{
-    "id": 12,
+    "id": 13,
     "text": "While this deliberate decision is perfectly understandable, I must say I'm quite hurt!",
     "effect": "MORALITY+10",
     "next": -1
