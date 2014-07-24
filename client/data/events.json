@@ -70,33 +70,106 @@
     "next": -1
   }]
 }, {
-  "name": "Laundromat",
+  "name": "Beachfront Casino",
   "character": 1,
   "condition": "MET>0",
   "dialog": [{
     "id": 0,
-    "text": "Your campaign might prove to be a good investment opportunity for me.",
-    "next": 1
+    "conditions": [{
+      "condition": "GREPUTATION>=OGREPUTATION",
+      "next": 1
+    }, {
+      "condition": "GREPUTATION<OGREPUTATION",
+      "next": 2
+    }]
   },{
     "id": 1,
-    "text": "Take this gold. And my Photography team too.",
+    "text": "Looks like you're maintaining lead over your rrival. Good work!",
     "choice": [{
-      "text": "Thanks, this will prove useful.",
-      "effect": "GOLD+2000,CARD=LAUNDROMAT:20",
-      "next":2
-    },{
-      "text": "Umm. No thanks.",
-      "effect": "REL-10,MORALITY+10",
+      "text": "Thanks Captain Obvious. Can we get down to business?",
+      "effect": "REL+10",
       "next":3
+    },{
+      "text": "It's a marathon, not a sprint.",
+      "next":4
     }]
   },{
     "id": 2,
-    "text": "Great. Excellent!",
-    "next":-1
+    "text": "Your rrival has taken the lead in the polls. You have a lot of work ahead of you.",
+    "choice": [{
+      "text": "Thanks Captain Obvious. Can we get down to business?",
+      "effect": "REL+10",
+      "next":3
+    },{
+      "text": "It's a marathon, not a sprint.",
+      "next":4
+    }]
   },{
     "id": 3,
-    "text": "Haha. Your loss",
-    "next":-1
+    "text": "Straight to the point. Therre is hope for you yet!",
+    "next": 4
+  },{
+    "id": 4,
+    "conditions": [{
+      "condition": "ISSUE2>=4",
+      "next": 5
+    }, {
+      "condition": "ISSUE2<4",
+      "next": 5
+    }]
+  },{
+    "id": 5,
+    "text": "I see you're interrested in generrating employment. I am also keen on being a job creator.",
+    "next": 6
+  },{
+    "id": 5,
+    "text": "Employment is a very imporrtant issue for Summer Island. I have a project that I believe will be mutually beneficial.",
+    "next": 6
+  },{
+    "id": 6,
+    "text": "I want to open a casino next to the resort and attract rich whales to gamble there.",
+    "choice": [{
+      "text": "That will generate lots of income!",
+      "effect": "REL+10",
+      "next": 7
+    },{
+      "text": "How will that affect the environment?",
+      "effect": "REL-10",
+      "next": 8
+    }]
+  },{
+    "id": 7,
+    "text": "I see our thoughts are interrtwined! So, you will support this endeavourr?",
+    "choice": [{
+      "text": "Sure!",
+      "next": 9
+    },{
+      "text": "What do I get in return?",
+      "effect": "REL+10",
+      "next": 9
+    }]
+  },{
+    "id": 8,
+    "text": "Alpacita shared your concerns. I told her we will do our best to minimize environnment impact.",
+    "choice": [{
+      "text": "Well.. okay. But you owe me.",
+      "effect": "REL+10",
+      "next": 9
+    },{
+      "text": "Sorry, I can't do this.",
+      "effect": "REL-10",
+      "next": 10
+    }]
+  },{
+    "id": 9,
+    "text": "You have rraised yourself in my own and my distrrict's esteem. I look forrward to working more with you in the future.",
+    "effect": "MORALITY-10",
+    "next": -1
+  },{
+    "id": 10,
+    "text": "You disappont me, little mouse. Perrhaps your rrival will be more amenable.",
+    "effect": "MORALITY+10",
+    "next": -1
   }]
 }, {
   "name": "Cheapskate",
@@ -233,32 +306,121 @@
     "next": -1
     }]
 }, {
-  "name": "Nouveau Rich",
+  "name": "Idiot Son",
   "character": 0,
-  "condition": "MET>0",
+  "condition": "MET>1",
   "dialog": [{
     "id": 0,
-    "text": "I hate Catorcio. He is buying his way to high society.",
-    "next": 1
+    "conditions": [{
+      "condition": "MORALITY>=50",
+      "next": 1
+    }, {
+      "condition": "MORALITY<50",
+      "next": 2
+    }]
   },{
     "id": 1,
-    "text": "He is nothing but a criminal.",
-    "choice": [{
-      "text": "You're right, he is.",
-      "effect": "REL+30,REL_KAPITAN-Catorcio",
-      "next":2
-      },{
-      "text": "He left that life behind.",
-      "effect": "REL-30,REL_KAPITAN+Catorcio",
-      "next":3
-      }]
+    "conditions": [{
+      "condition": "LREPUTATION>=60",
+      "next": 3
+    }, {
+      "condition": "LREPUTATION<60",
+      "next": 4
+    }]
   },{
     "id": 2,
-    "text": "We need to do something about this.",
+    "text": "I have nothing to say to you.",
+    "willRepeat": true,
     "next": -1
   },{
     "id": 3,
-    "text": "A leopard never changes his spots. He surely has a little leopard in him.",
+    "text": "My marvelous mouse, the creatures of my district have only the most altudinous of praises for you!",
+    "choice": [{
+      "text": "A great poet once said \"It doesn't matter if you win by an inch or a mile...\"",
+      "next": 5,
+    },{
+      "text": "Thanks for keeping me informed.",
+      "next": 6
+    }]
+  },{
+    "id": 4,
+    "text": "My good mouse, miserable news! The creatures of my district place your ruthless rival in high esteem!",
+    "choice": [{
+      "text": "A great poet once said \"It doesn't matter if you win by an inch or a mile...\"",
+      "next": 5,
+    },{
+      "text": "Thanks for keeping me informed.",
+      "next": 6
+    }]
+  },{
+    "id": 5,
+    "text": "I'm... not familiar with that poet. You should enlighten me on his body of work later. In the meantime...",
+    "next": 6
+  },{
+    "id": 6,
+    "text": "I have a proposal for you, one in which you may help your favored friend.",
+    "choice": [{
+      "text": "You haven't written another book have you?",
+      "effect": "REL-10",
+      "next": 7
+    },{
+      "text": "I wait with bated breath.",
+      "effect": "REL+10",
+      "next": 9
+    }]
+  },{
+    "id": 7,
+    "conditions": [{
+      "condition": "CARD?BookDeal==true",
+      "next": 8
+    },{
+      "condition": "CARD?BookDeal==false",
+      "next": 9
+    }]
+  },{
+    "id": 8,
+    "text": "Heavens, no. The book is doing well thanks to you!",
+    "next": 9
+  },{
+    "id": 9,
+    "text": "Heavens, no. The book is doing well, no thanks to you.",
+    "next": 9
+  },{
+    "id": 9,
+    "text": "My son Owlfredo is in his final year at college, and he requires some on the job training. Would you do me the fantastic favor of hiring him for your campaign?",
+    "choice": [{
+      "text": "What's the catch?",
+      "effect": "REL-10",
+      "next": 10
+    },{
+      "text": "What kind of skills does he have?",
+      "next": 10
+    },{
+      "text": "Anything for my favorite feathered friend!",
+      "effect": "REL+10",
+      "next": 11
+    }]
+  },{
+    "id": 10,
+    "text": "Well to my supreme shame, Owlfredo isn't really the brightest bird in the flock. But if you keep him away from anything important it should be fine.",
+    "choice": [{
+      "text": "*Sigh* Okay I'll keep him occupied.",
+      "effect": "REL+10",
+      "next": 11
+    },{
+      "text": "Sincerest apologies, but my campaign cannot take on any dead weight.",
+      "effect": "REL-10",
+      "next": 12
+    }]
+  },{
+    "id": 11,
+    "text": "Splendid! I assure you i will repay the favor tenfold!",
+    "effect": "CARD=IdiotSon,MORALITY-10",
+    "next": -1
+  },{
+    "id": 12,
+    "text": "While this deliberate decision is perfectly understandable, I must say I'm quite hurt!",
+    "effect": "MORALITY+10",
     "next": -1
   }]
 }, {
