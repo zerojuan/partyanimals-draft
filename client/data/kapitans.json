@@ -1,64 +1,64 @@
 [ {
   "description" : "A professor at the main university, the owl represents the educated class who believe they know what\"s best for the island, while being out of touch with the realities of the less fortunate population.",
   "id" : 0,
-  "type": "KAPITAN",
   "image" : "owlberto.png",
-  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50],
-  "name" : "Owlberto"
+  "name" : "Owlberto",
+  "relations" : [ 50, 5, 50, 50, 75, 75, 50, 50, 50 ],
+  "type" : "KAPITAN"
 }, {
   "description" : "A reformed thug who has worked his way into respectability as a Kapitan.  He\"s not shy about using his underworld connections to advance his interests.",
   "id" : 1,
-  "type": "KAPITAN",
   "image" : "catorcio.png",
-  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50],
-  "name" : "Catorcio"
+  "name" : "Catorcio",
+  "relations" : [ 5, 50, 15, 15, 75, 5, 50, 50, 50 ],
+  "type" : "KAPITAN"
 }, {
   "description" : "The representative of the fishing village in the south of summer island. Mad because other islands are encroaching on their fishing grounds, and wants coastal security to be beefed up.",
   "id" : 2,
-  "type": "KAPITAN",
   "image" : "pelicarpio.png",
-  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50],
-  "name" : "Pelicarpio"
+  "name" : "Pelicarpio",
+  "relations" : [ 50, 50, 50, 90, 30, 90, 50, 50, 50 ],
+  "type" : "KAPITAN"
 }, {
   "description" : "The head of a stevedore\"s union, is in constant conflict with Boo Tee Kee over workers\" rights,  As a tortoise, he has lived for many years (ie he should look a bit old)",
   "id" : 3,
-  "type": "KAPITAN",
   "image" : "victortle.png",
-  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50],
-  "name" : "Victortle"
+  "name" : "Victortle",
+  "relations" : [ 30, 50, 90, 50, 80, 80, 50, 50, 50 ],
+  "type" : "KAPITAN"
 }, {
   "description" : "A priest who exerts great power in the main diocese of the capital. He is very close to the family of Crocopio Cortez. He is a fat old priest. very close to big business who makle big donations to the cathedral.",
   "id" : 4,
-  "type": "KAPITAN",
   "image" : "doglas.png",
-  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50],
-  "name" : "Father Doglas"
+  "name" : "Father Doglas",
+  "relations" : [ 80, 80, 80, 50, 50, 20, 50, 50, 50 ],
+  "type" : "KAPITAN"
 }, {
   "description" : "A surfer /environmentalist that fights to keep her resort safe from big business.  Dislikes politicians, CEOs, religion, and anything that isn\"t hip and one with nature.",
   "id" : 5,
-  "type": "KAPITAN",
   "image" : "alpacita.png",
-  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50],
-  "name" : "Alpacita"
+  "name" : "Alpacita",
+  "relations" : [ 80, 20, 97, 80, 20, 50, 50, 50, 50 ],
+  "type" : "KAPITAN"
 }, {
   "description" : "A smuggler (she prefers merchant) that settled in summer island after a dispute in her home country.  She quickly built an import/export empire that supplies summer islanders with all sorts of retail goods, food, etc. wants less import taxes and less coast guard so its easier to smuggle things in.  A cunning businesswoman but very loyal to friends and (extended) family).  Secretly smuggles in immigrant relatives. Willing to buy and sell almost anything and has lots of ridiculous business ideas.",
   "id" : 6,
-  "type": "SPECIALIST",
   "image" : "booteekee.png",
-  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50],
-  "name" : "Boo Tee Kee"
+  "name" : "Boo Tee Kee",
+  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50 ],
+  "type" : "SPECIALIST"
 }, {
   "description" : "Comes from an immigrant family in the south pole, made it big in showbiz as a comedian. He cannot be outside aircon for more than a few hours.  hates Piguel because they had rival noontime shows.",
   "id" : 7,
-  "type": "SPECIALIST",
   "image" : "filipenguin.png",
-  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50],
-  "name" : "Filipenguin"
+  "name" : "Filipenguin",
+  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50 ],
+  "type" : "SPECIALIST"
 }, {
   "description" : "Former police that became private detective.  He knows the pulse of the streets and can dig up dirt on your opponents. Franciscrow was the former police chief that was disgraced when the current police chief (hippopolita) revealed he was taking bribes.  He is angry and only lives to show the rest of the world that they are not as clean as they seem to be, primarily the new chief.",
   "id" : 8,
-  "type": "SPECIALIST",
   "image" : "franciscrow.png",
-  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50],
-  "name" : "Franciscrow"
+  "name" : "Franciscrow",
+  "relations" : [ 50, 50, 50, 50, 50, 50, 50, 50, 50 ],
+  "type" : "SPECIALIST"
 } ]
