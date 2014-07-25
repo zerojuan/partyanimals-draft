@@ -1,9 +1,26 @@
 [{
   "id": "IdiotSon",
   "name": "Idiot Son",
-  "effect": "GOLD-100"
+  "effect": "GOLD-100",
+  "done": false,
+  "infinite": true
 },{
   "id": "BookDeal",
   "name": "Book Deal",
-  "effect": "ISSUE0+1"
+  "effect": "ISSUE0+1",
+  "infinite": true
+},{
+  "id": "HurricaneOrwell",
+  "name": "Hurricane Boy",
+  "description": "Hurricane Boy wrecked havok on our beloved town.",
+  "effect": "DEMAND1-50,DEMAND3-50",
+  "infinite": false,
+  "turns": 5
+},{
+  "id": "DengueOutbreak",
+  "name": "Dengue Outbreak",
+  "description": "Dengue Outbreak is happening",
+  "effect": "DEMAND3-50",
+  "infinite": false,
+  "turns": 5
 }]

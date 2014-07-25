@@ -19,6 +19,18 @@ angular.module('partyanimalsDraftApp')
       return val;
     };
   })
+  .filter('activitytooltip', function($filter){
+    return function(input, values){
+      var html = '<div>';
+      html+='<p>'+input+'</p>';
+      html+='<p>Difficulty:'+values.BD+'</p>';
+      html+='<p>Your Relationship: '+$filter('feelings')(values.PKRm)+'</p>';
+      html+='<p>AI Relationship: '+$filter('feelings')(values.OKRm)+'</p>';
+
+      html+='</div>';
+      return html;
+    };
+  })
   .filter('attributeparser', function(){
     return function(input){
       if(input.charAt(0) === 'O'){

@@ -27,6 +27,7 @@
     </div>
   </div>
 </div>
+<cards-view cards="cards"></cards-view>
 <div ng-include="'components/alert/alert.html'"></div>
 <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelectedDistrict" show-reputation="true"></province-view>
 <div ng-show="selectedDistrict" class="pull-right district-desc reveal-animation">
@@ -62,7 +63,7 @@
   <h5>Activities</h5>
   <ul class="list-unstyled activity-list">
     <li ng-repeat="activity in selectedDistrict.activities" class="row" ng-class="{disabled: activity.disabled}">
-      <div class="col-md-5" tooltip="{{activity.description}}">{{activity.name}}</div>
+      <div class="col-md-5" tooltip-html-unsafe="{{activity.description | activitytooltip:activity.tooltipVals}}">{{activity.name}}</div>
       <div class="col-md-3" tooltip="{{activity.cost.gold}} * {{activity.location.goldCostModifier}}">{{activity.cost.gold * activity.location.goldCostModifier | formatcost}}</div>
       <div class="col-md-2">{{activity.cost.hours}} hrs</div>
       <div class="col-md-1">

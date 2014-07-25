@@ -64,6 +64,7 @@ angular.module('partyanimalsDraftApp')
         _.forEach($scope.cards, function(val){
           val.done = false;
           val.turns = -1;
+          val.active = false;
         });
         GameState.cards = $scope.cards;
         $scope.$apply();
@@ -215,6 +216,12 @@ angular.module('partyanimalsDraftApp')
         if(isInSchedule(newVal)){
           newVal.wasScheduled = true;
         }
+        //pkrm and stuff
+        newVal.tooltipVals = {
+          BD: val.difficulty,
+          PKRm: newVal.location.kapitan.humanRelations,
+          OKRm: newVal.location.kapitan.aiRelations
+        };
         //check if we are in the future location
         toggleDisable(newVal, shouldDisable);
 
@@ -338,6 +345,9 @@ angular.module('partyanimalsDraftApp')
             //if an event is unfinished and will happen again, then you haven't really met
             $scope.human.met[kapitan.id] += 1;
           }
+          if(total.cards && total.cards.length > 0){
+            $scope.cards = GameState.activateCards(total.cards);
+          }
 
           $scope.human.morality += result.total.morality;
           $scope.simulate.summaries.push({
@@ -420,6 +430,14 @@ angular.module('partyanimalsDraftApp')
       $scope.totalCost = totalCost;
       if($scope.scheduledActivities && $scope.scheduledActivities.length > 0){
         Aisim.generateActivities($scope.activities, $scope.scheduledActivities);
+      }
+    }, true);
+
+    $scope.$watch('cards', function(){
+      if($scope.cards){
+        console.log('Cards changed');
+        //apply changes to the game world
+
       }
     }, true);
 

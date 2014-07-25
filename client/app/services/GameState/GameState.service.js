@@ -211,6 +211,21 @@ angular.module('partyanimalsDraftApp')
       return cond[0] === 'CARD?';
     };
 
+    that.activateCards = function(cardIds){
+      _.forEach(cardIds, function(cardId){
+        that.activateCard(cardId);
+      });
+      return that.cards;
+    };
+
+    that.activateCard = function(cardId){
+      _.forEach(that.cards, function(card){
+        if(card.id === cardId){
+          card.active = true;
+        }
+      });
+    };
+
     that.evalCardCondition = function(val){
       var cond = val.split(/(CARD\?)(\w+)/g)
                 .filter(function(v){
