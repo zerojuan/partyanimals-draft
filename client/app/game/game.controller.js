@@ -201,7 +201,14 @@ angular.module('partyanimalsDraftApp')
       var moveActivity, inFutureLocation = null;
       inFutureLocation = $scope.futureLocation.id === $scope.selectedDistrict.id;
 
+      var tooltipVals = {
+        BD: 0,
+        PKRm: $scope.selectedDistrict.kapitan.humanRelations,
+        OKRm: $scope.selectedDistrict.kapitan.aiRelations
+      };
+
       moveActivity = GameState.generateMoveActivity($scope.futureLocation, $scope.selectedDistrict);
+      moveActivity.tooltipVals = angular.copy(tooltipVals);
 
       if(isInSchedule(moveActivity)){
         moveActivity.wasScheduled = true;
@@ -217,11 +224,8 @@ angular.module('partyanimalsDraftApp')
           newVal.wasScheduled = true;
         }
         //pkrm and stuff
-        newVal.tooltipVals = {
-          BD: val.difficulty,
-          PKRm: newVal.location.kapitan.humanRelations,
-          OKRm: newVal.location.kapitan.aiRelations
-        };
+        newVal.tooltipVals = angular.copy(tooltipVals);
+        newVal.tooltipVals.BD = val.difficulty;
         //check if we are in the future location
         toggleDisable(newVal, shouldDisable);
 

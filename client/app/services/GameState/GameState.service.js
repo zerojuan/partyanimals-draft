@@ -325,6 +325,7 @@ angular.module('partyanimalsDraftApp')
         id: -1,
         type: 'MOVE',
         name: 'Move Here',
+        description: 'Travel',
         text: {
           success: ['Moved to $place$'],
           fail: ['Failed to move to $place$']
