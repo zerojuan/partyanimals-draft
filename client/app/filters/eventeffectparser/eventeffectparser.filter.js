@@ -64,6 +64,9 @@ angular.module('partyanimalsDraftApp')
       if(!input){
         return;
       }
+      var str = "This will improve your relationship by a lot.";
+      var str1 = "This will improve your morality by a lot.";
+      var str2 = "But you will lose gold.";
       var effects = input.split(',');
       var html = '<ul class="list-unstyled">';
       effects.forEach(function(val){
