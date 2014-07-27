@@ -159,6 +159,10 @@
     "gold": 1000,
     "hours": 2
   },
+  "effect": {
+    "attr": "GOLD",
+    "modifier": "3000"
+  },
   "description": "Gamble at the Casino",
   "id": 9,
   "name": "Gamble",

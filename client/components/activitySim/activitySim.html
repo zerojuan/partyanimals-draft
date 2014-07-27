@@ -19,6 +19,10 @@
       <!-- Show reputation directive here -->
       <reputation-ui activity="activity"></reputation-ui>
     </div>
+    <div ng-switch-when="SPECIAL">
+      <!-- Show special directive here -->
+      <reputation-ui activity="activity"></reputation-ui>
+    </div>
     <div ng-switch-default>
       This is the default action {{activity.name}}
     </div>

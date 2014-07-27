@@ -220,9 +220,7 @@ angular.module('partyanimalsDraftApp')
 
       $scope.activities.forEach(function(val){
         var newVal = angular.copy(val);
-        console.log('This is gotts to be restricted', val.restriction);
         if(val.restriction && _.indexOf(val.restriction, $scope.selectedDistrict.id) < 0){
-
           return;
         }
         newVal.location = angular.copy($scope.selectedDistrict);
@@ -369,6 +367,24 @@ angular.module('partyanimalsDraftApp')
         }else if(result.type === 'MOVE'){
           $scope.simulate.summaries.push({
             text: 'Travelled to ' + result.district.name,
+            success: result.success,
+            cost: cost
+          });
+        }else if(result.type === 'SPECIAL'){
+          message = '';
+          if(result.attribute === 'MORALITY'){
+            message = 'Confession improved our morality';
+            $scope.human.morality += result.value;
+          }else if(result.attribute === 'GOLD'){
+            if(result.success){
+              message = 'Won a $'+result.value+'at the Casino';
+              $scope.totalCash += result.value;
+            }else{
+              message = 'Lost at the Casino.';
+            }
+          }
+          $scope.simulate.summaries.push({
+            text: message,
             success: result.success,
             cost: cost
           });

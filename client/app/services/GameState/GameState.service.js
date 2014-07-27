@@ -283,11 +283,12 @@ angular.module('partyanimalsDraftApp')
       var result = {
         value: resultValue,
         success: success,
-        type: 'REPUTATION',
+        type: activity.type,
         district: activity.location,
         name: activity.name,
         cost: activity.cost,
-        isVs: attributeParser.isVs
+        isVs: attributeParser.isVs,
+        attribute: attributeParser.value
       };
 
       return result;
