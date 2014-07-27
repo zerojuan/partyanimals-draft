@@ -59,30 +59,54 @@ angular.module('partyanimalsDraftApp')
       return total;
     };
   })
-  .filter('eventeffecttooltip', function(){
+  .filter('eventeffecttooltip', function($filter){
     return function(input){
       if(!input){
         return;
       }
-      var str = "This will improve your relationship by a lot.";
-      var str1 = "This will improve your morality by a lot.";
-      var str2 = "But you will lose gold.";
-      var effects = input.split(',');
-      var html = '<ul class="list-unstyled">';
-      effects.forEach(function(val){
-        var str = val.replace('GOLD', 'Gold')
-                    .replace('MORALITY', 'Morality:')
-                    .replace('BRIBEE', 'Bribee:')
-                    .replace('REL', 'Relationship:')
-                    .replace('REL_KAPITAN', 'Relationship with the other character:')
-                    .replace('CARD', 'Situation:')
-                    .replace('OISSUE0', 'Opponent\'s Education: ')
-                    .replace('ISSUE0', 'Education: ');
-        html+='<li>';
-        html+=str;
-        html+='</li>';
+      var effects = $filter('eventeffectparser')(input);
+      var positives = [],
+          negatives = [],
+          status = [];
+      var hasPositive = false;
+      _.forEach(effects, function(val){
+        if(val.attr === 'card'){
+          status.push(' gain ' + val.value + ' status');
+          return;
+        }
+        var qualifier = 'by a little';
+        if(Math.abs(val.value) > 20){
+          qualifier = 'by a lot';
+        }
+        if(val.value <= 0){
+          negatives.push(val.attr + ' ' + qualifier);
+        }else{
+          hasPositive = true;
+          positives.push(val.attr + ' ' + qualifier);
+        }
       });
-      html+='</ul>';
+
+      var message = '';
+
+      if(hasPositive){
+        message += 'This will improve your ' + positives.join(', ') + '.';
+      }
+
+      if(negatives.length > 0){
+        if(hasPositive){
+          message += 'But you ';
+        }else{
+          message += 'You ';
+        }
+        message += 'will lose ' + negatives.join(', ') + '.';
+      }
+
+      if(status.length > 0){
+        message += 'You will ' + status.join(', ') + '.';
+      }
+
+      var html = '<div class="campaign-manager"><img class="avatar-clickable small" src="assets/images/avatars/campaignmanager.png"></img><span>'+message+'</span>';
+
       return html;
     };
   });
