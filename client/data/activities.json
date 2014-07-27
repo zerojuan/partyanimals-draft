@@ -1,171 +1,171 @@
-[
-  {
-    "id": 3,
-    "name": "Talk to Kapitan",
-    "type": "TALK",
-    "description": "Talk to the district's Kapitan",
-    "cost": {
-      "gold": 0,
-      "hours": 2
-    },
-    "difficulty": 0
+[ {
+  "cost" : {
+    "gold" : 0,
+    "hours" : 2
   },
-  {
-    "id": 1,
-    "name": "Sortie",
-    "type": "SORTIE",
-    "description": "Increase the player's reputation in the district",
-    "text": {
-      "success": [
-        "The sortie was a $place$ was a success"
-      ],
-      "fail": [
-        "The sortie was a $place$ was a failure"
-      ]
-    },
-    "cost": {
-      "gold": 300,
-      "hours": 4
-    },
-    "difficulty": 50,
-    "actionDifficulty": "BD+IDM+em",
-    "actionCheck": "random+PKRm+em",
-    "effect": {
-      "attr": "DR",
-      "modifier": "10+AR-AD"
-    }
+  "description" : "Talk to the district's Kapitan",
+  "difficulty" : 0,
+  "id" : 3,
+  "name" : "Talk to Kapitan",
+  "type" : "TALK"
+}, {
+  "actionCheck" : "random+PKRm+em",
+  "actionDifficulty" : "BD+IDM+em",
+  "cost" : {
+    "gold" : 500,
+    "hours" : 4
   },
-  {
-    "id": 2,
-    "name": "Photo Op",
-    "type": "REPUTATION",
-    "description": "Increase your reputation in the district",
-    "text": {
-      "success": [
-        "That photo-op was extremely effective!"
-      ],
-      "fail": [
-        "That photo-op failed"
-      ]
-    },
-    "cost": {
-      "gold": 100,
-      "hours": 2
-    },
-    "difficulty": 20,
-    "actionDifficulty": "BD+em",
-    "actionCheck": "random+PKRm+em",
-    "effect": {
-      "attr": "DR",
-      "modifier": "10"
-    }
+  "description" : "Increase the player's reputation in the district",
+  "difficulty" : 50,
+  "effect" : {
+    "attr" : "DR",
+    "modifier" : "10+AR-AD"
   },
-  {
-    "id": 4,
-    "name": "Contest",
-    "description": "Reduce knowledge of the opponent's platform",
-    "type": "STAT",
-    "text": {
-      "header": [
-        "Select an opponent's issue to contest"
-      ],
-      "success": [
-        "The people were convinced of the weakness of the opponents $issue$"
-      ],
-      "fail": [
-        "You have failed to contest the opponent's stance on $issue$"
-      ]
-    },
-    "cost": {
-      "gold": 200,
-      "hours": 2
-    },
-    "difficulty": 50,
-    "actionDifficulty": "(BD+em)+(OKRm)",
-    "actionCheck": "random+PKRm+em",
-    "effect":{
-      "attr": "OIS",
-      "modifier": "-1"
-    }
+  "id" : 1,
+  "name" : "Sortie",
+  "text" : {
+    "fail" : [ "The sortie was a $place$ was a failure" ],
+    "success" : [ "The sortie was a $place$ was a success" ]
   },
-  {
-    "id": 5,
-    "name": "Bribe",
-    "type": "REPUTATION",
-    "description": "Increase your reputation greatly",
-    "text": {
-      "success": [
-        "You have bribed your way into popularity"
-      ],
-      "fail": [
-        "Your bribery attempt failed."
-      ]
-    },
-    "cost": {
-      "gold": 1500,
-      "hours": 2,
-      "morality": -10
-    },
-    "difficulty": 60,
-    "actionDifficulty": "(BD+em)+OKRm",
-    "actionCheck": "random+PKRm+em",
-    "effect": {
-      "attr": "DR",
-      "modifier": "50+AR-AD"
-    }
+  "type" : "SORTIE"
+}, {
+  "actionCheck" : "random+PKRm+em",
+  "actionDifficulty" : "BD+em",
+  "cost" : {
+    "gold" : 200,
+    "hours" : 2
   },
-  {
-    "id": 6,
-    "name": "Educate",
-    "type": "STAT",
-    "description": "Educate the district",
-    "text": {
-      "header": [
-        "Select an issue to educate this district in"
-      ],
-      "success": [
-        "You successfully educated the people on $issue$"
-      ],
-      "fail": [
-        "Your voter education campaign failed"
-      ]
-    },
-    "cost": {
-      "gold": 100,
-      "hours": 2
-    },
-    "difficulty": 20,
-    "actionDifficulty": "(BD+ITL*10)+IDM",
-    "actionCheck": "random+PKRm+em",
-    "effect": {
-      "attr": "IS",
-      "modifier": "1"
-    }
+  "description" : "Increase your reputation in the district",
+  "difficulty" : 20,
+  "effect" : {
+    "attr" : "DR",
+    "modifier" : "10"
   },
-  {
-    "id": 7,
-    "name": "Smear",
-    "type": "REPUTATION",
-    "description": "Reduce the opponent's reputation on the district",
-    "text":{
-      "success": [
-        "The smear campaign was successful"
-      ],
-      "fail": [
-        "The smear campaign was not effective"
-      ]
-    },
-    "cost": {
-      "gold": 500,
-      "hours": 2,
-      "morality": -10
-    },
-    "difficulty": 50,
-    "actionDifficulty": "(BD+em)+OKRm",
-    "actionCheck": "random+PKRm+em",
-    "effect": {
-      "attr": "OR",
-      "modifier": "10+AR-AD"
-    }
-  }
-]
+  "id" : 2,
+  "name" : "Photo Op",
+  "text" : {
+    "fail" : [ "That photo-op failed" ],
+    "success" : [ "That photo-op was extremely effective!" ]
+  },
+  "type" : "REPUTATION"
+}, {
+  "actionCheck" : "random+PKRm+em",
+  "actionDifficulty" : "(BD+em)+(OKRm)",
+  "cost" : {
+    "gold" : 300,
+    "hours" : 2
+  },
+  "description" : "Reduce knowledge of the opponent's platform",
+  "difficulty" : 50,
+  "effect" : {
+    "attr" : "OIS",
+    "modifier" : "-1"
+  },
+  "id" : 4,
+  "name" : "Contest",
+  "text" : {
+    "fail" : [ "You have failed to contest the opponent's stance on $issue$" ],
+    "header" : [ "Select an opponent's issue to contest" ],
+    "success" : [ "The people were convinced of the weakness of the opponents $issue$" ]
+  },
+  "type" : "STAT"
+}, {
+  "actionCheck" : "random+PKRm+em",
+  "actionDifficulty" : "(BD+em)+OKRm",
+  "cost" : {
+    "gold" : 2500,
+    "hours" : 2,
+    "morality" : -10
+  },
+  "description" : "Increase your reputation greatly",
+  "difficulty" : 60,
+  "effect" : {
+    "attr" : "DR",
+    "modifier" : "50+AR-AD"
+  },
+  "id" : 5,
+  "name" : "Bribe",
+  "text" : {
+    "fail" : [ "Your bribery attempt failed." ],
+    "success" : [ "You have bribed your way into popularity" ]
+  },
+  "type" : "REPUTATION"
+}, {
+  "actionCheck" : "random+PKRm+em",
+  "actionDifficulty" : "(BD+ITL*10)+IDM",
+  "cost" : {
+    "gold" : 200,
+    "hours" : 2
+  },
+  "description" : "Educate the district",
+  "difficulty" : 20,
+  "effect" : {
+    "attr" : "IS",
+    "modifier" : "1"
+  },
+  "id" : 6,
+  "name" : "Educate",
+  "text" : {
+    "fail" : [ "Your voter education campaign failed" ],
+    "header" : [ "Select an issue to educate this district in" ],
+    "success" : [ "You successfully educated the people on $issue$" ]
+  },
+  "type" : "STAT"
+}, {
+  "actionCheck" : "random+PKRm+em",
+  "actionDifficulty" : "(BD+em)+OKRm",
+  "cost" : {
+    "gold" : 700,
+    "hours" : 2,
+    "morality" : -10
+  },
+  "description" : "Reduce the opponent's reputation on the district",
+  "difficulty" : 50,
+  "effect" : {
+    "attr" : "OR",
+    "modifier" : "10+AR-AD"
+  },
+  "id" : 7,
+  "name" : "Smear",
+  "text" : {
+    "fail" : [ "The smear campaign was not effective" ],
+    "success" : [ "The smear campaign was successful" ]
+  },
+  "type" : "REPUTATION"
+}, {
+  "actionCheck": "random+PKRm",
+  "actionDifficulty": "0",
+  "cost": {
+    "gold": 0,
+    "hours": 2
+  },
+  "description": "Confess your sins to Pader Doglas",
+  "effect": {
+    "attr": "MORALITY",
+    "modifier": "20"
+  },
+  "difficulty": 0,
+  "id": 8,
+  "name": "Confession",
+  "text": {
+    "success": ["You have confessed your sins. Do your penance and pray to the Almighty Bone for guidance."]
+  },
+  "restriction": [4],
+  "type": "SPECIAL"
+}, {
+  "actionCheck": "random+PKRm+em",
+  "actionDifficulty": "(BD+em)+OKRm",
+  "cost": {
+    "gold": 1000,
+    "hours": 2
+  },
+  "description": "Gamble at the Casino",
+  "id": 9,
+  "name": "Gamble",
+  "text": {
+    "success": ["Congratulations, you won $gold$."],
+    "fail": ["Out of luck! You lost your money to the horses."]
+  },
+  "restriction": [1],
+  "type": "SPECIAL"
+}]

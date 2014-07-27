@@ -216,8 +216,15 @@ angular.module('partyanimalsDraftApp')
 
       toggleDisable(moveActivity, shouldDisable);
 
-      var activities = $scope.activities.map(function(val){
+      var activities = [];
+
+      $scope.activities.forEach(function(val){
         var newVal = angular.copy(val);
+        console.log('This is gotts to be restricted', val.restriction);
+        if(val.restriction && _.indexOf(val.restriction, $scope.selectedDistrict.id) < 0){
+
+          return;
+        }
         newVal.location = angular.copy($scope.selectedDistrict);
         //check if this is already selected
         if(isInSchedule(newVal)){
@@ -229,7 +236,7 @@ angular.module('partyanimalsDraftApp')
         //check if we are in the future location
         toggleDisable(newVal, shouldDisable);
 
-        return newVal;
+        activities.push(newVal);
       });
 
       if(moveActivity){
