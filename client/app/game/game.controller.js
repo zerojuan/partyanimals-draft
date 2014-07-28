@@ -357,7 +357,7 @@ angular.module('partyanimalsDraftApp')
           if(total.cards && total.cards.length > 0){
             $scope.cards = GameState.activateCards(total.cards);
           }
-
+          $scope.totalCash += result.total.gold;
           $scope.human.morality += result.total.morality;
           $scope.simulate.summaries.push({
             text: 'Talked with the Kapitan ('+total.relationship+' Relationship)',
@@ -591,6 +591,7 @@ angular.module('partyanimalsDraftApp')
       $scope.simulate.activeAct = null;
       $scope.endTurn = true;
       //add budget contributions
+      //TODO: List down extra curricular activities
       $scope.totalContribution = 0;
       angular.forEach($scope.districts, function(val){
         if(val.humanReputation - val.aiReputation >= 50){

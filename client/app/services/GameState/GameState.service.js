@@ -81,7 +81,8 @@ angular.module('partyanimalsDraftApp')
         ISSUE: that.humanStats.issueStats,
         LREPUTATION: district.humanReputation,
         GREPUTATION: latestReputation.human.reputation,
-        OGREPUTATION: latestReputation.ai.reputation
+        OGREPUTATION: latestReputation.ai.reputation,
+        REL: district.kapitan.humanRelations
       };
       var dialog =  _.find(event.dialog,function(val){
         return val.id === index;
@@ -103,6 +104,7 @@ angular.module('partyanimalsDraftApp')
                                    .replace('GREPUTATION', conditions.GREPUTATION)
                                    .replace('OGREPUTATION', conditions.OGREPUTATION)
                                    .replace('LREPUTATION', conditions.LREPUTATION)
+                                   .replace('REL', conditions.REL)
                                    .replace('ISSUE0', conditions.ISSUE[0].level)
                                    .replace('ISSUE1', conditions.ISSUE[1].level)
                                    .replace('ISSUE2', conditions.ISSUE[2].level));
