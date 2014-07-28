@@ -1,5 +1,11 @@
 <div>
   <!-- Depending on the type of action, show image -->
+  <div ng-switch="activity.name">
+    <div ng-switch-when="Gamble">
+      <img ng-show="success" ng-src="assets/images/actions/gamble-success.jpg"></img>
+      <img ng-hide="success" ng-src="assets/images/actions/gamble-fail.jpg"></img>
+    </div>
+  </div>
   <h3>{{doneMessage}}</h3>
   <p>
     <a class="btn btn-success" ng-click="onDone()" ng-class="{disabled: done}">Done</a>

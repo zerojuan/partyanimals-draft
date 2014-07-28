@@ -21,11 +21,13 @@ angular.module('partyanimalsDraftApp')
         scope.$watch('activity', function(){
           if(scope.activity){
             scope.done = false;
+            scope.success = false;
             result = GameState.getReputationActivityResult(scope.activity);
             var parseVal = {
               gold: result.value
             };
             console.log('Result:', result);
+            scope.success = result.success;
             if(result.success){
               scope.doneMessage = $filter('messageparser')(scope.activity.text.success[0], parseVal);
             }else{
