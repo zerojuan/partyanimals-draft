@@ -1,1438 +1,1450 @@
 [ {
-  "name": "Introducing Catorcio",
-  "character": 1,
-  "condition": "MET===0",
-  "dialog": [ {
-    "id": 0,
-    "conditions": [{
-      "condition": "LREPUTATION>=50",
-      "next": 1
+  "character" : 1,
+  "condition" : "MET===0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "LREPUTATION>=50",
+      "next" : 1
     }, {
-      "condition": "LREPUTATION<50",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "Your rreputation preceedes you. My people say you have a chance at winning the election.",
-    "choice": [ {
-      "text": "I guess I'm worth your time now?",
-      "next": 3
+      "condition" : "LREPUTATION<50",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "choice" : [ {
+      "next" : 3,
+      "text" : "I guess I'm worth your time now?"
     }, {
-      "text": "You have quite the reputation yourself.",
-      "next": 4
-    }]
-  },{
-    "id": 2,
-    "text": "Sorry, but you're not worth my time, little mouse.",
-    "willRepeat": true,
-    "next": -1
-  },{
-    "id": 3,
-    "text": "I value my time and so should you. I also value information, so tell me...",
-    "next": 4
-  },{
-    "id": 4,
-    "text": "What do they say about me?",
-    "choice": [{
-      "text": "Owlberto doesn't like you.",
-      "next": 5
-    },{
-      "text": "You're a criminal.",
-      "effect": "REL-30",
-      "next": 5
-    },{
-      "text": "You take care of you're friends.",
-      "effect": "REL+30",
-      "next": 6
-    }]
-  },{
-    "id": 5,
-    "text": "Creatures of prriviledge don't know what it's like to make your on the streets. Sometimes you need to get your paws dirrty.",
-    "choice": [{
-      "text": "I agree.",
-      "effect": "REL+10",
-      "next": 7
-    },{
-      "text": "You can't create change that way.",
-      "effect": "REL-10",
-      "next": 6
-    },{
-      "text": "I guess so.",
-      "next": 6
-    }]
-  },{
-    "id": 6,
-    "text": "As long as my people arre taken care of, that's all that matters. That's what a good leader is.",
-    "next": 7
-  },{
-    "id": 7,
-    "text": "Hm, I'm informed there's a prrroblem I need to attend to. Let's continue this discussion another time.",
-    "next": -1
-  }]
-}, {
-  "name": "Beachfront Casino",
-  "character": 1,
-  "condition": "MET>0",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "GREPUTATION>=OGREPUTATION",
-      "next": 1
+      "next" : 4,
+      "text" : "You have quite the reputation yourself."
+    } ],
+    "id" : 1,
+    "text" : "Your rreputation preceedes you. My people say you have a chance at winning the election."
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "Sorry, but you're not worth my time, little mouse.",
+    "willRepeat" : true
+  }, {
+    "id" : 3,
+    "next" : 4,
+    "text" : "I value my time and so should you. I also value information, so tell me..."
+  }, {
+    "choice" : [ {
+      "next" : 5,
+      "text" : "Owlberto doesn't like you."
     }, {
-      "condition": "GREPUTATION<OGREPUTATION",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "Looks like you're maintaining lead over your rrival. Good work!",
-    "choice": [{
-      "text": "Thanks Captain Obvious. Can we get down to business?",
-      "effect": "REL+10",
-      "next":3
-    },{
-      "text": "It's a marathon, not a sprint.",
-      "next":4
-    }]
-  },{
-    "id": 2,
-    "text": "Your rrival has taken the lead in the polls. You have a lot of work ahead of you.",
-    "choice": [{
-      "text": "Thanks Captain Obvious. Can we get down to business?",
-      "effect": "REL+10",
-      "next":3
-    },{
-      "text": "It's a marathon, not a sprint.",
-      "next":4
-    }]
-  },{
-    "id": 3,
-    "text": "Straight to the point. Therre is hope for you yet!",
-    "next": 4
-  },{
-    "id": 4,
-    "conditions": [{
-      "condition": "ISSUE2>=4",
-      "next": 5
+      "effect" : "REL-30",
+      "next" : 5,
+      "text" : "You're a criminal."
     }, {
-      "condition": "ISSUE2<4",
-      "next": 5
-    }]
-  },{
-    "id": 5,
-    "text": "I see you're interrested in generrating employment. I am also keen on being a job creator.",
-    "next": 6
-  },{
-    "id": 5,
-    "text": "Employment is a very imporrtant issue for Summer Island. I have a project that I believe will be mutually beneficial.",
-    "next": 6
-  },{
-    "id": 6,
-    "text": "I want to open a casino next to the resort and attract rich whales to gamble there.",
-    "choice": [{
-      "text": "That will generate lots of income!",
-      "effect": "REL+10",
-      "next": 7
-    },{
-      "text": "How will that affect the environment?",
-      "effect": "REL-10",
-      "next": 8
-    }]
-  },{
-    "id": 7,
-    "text": "I see our thoughts are interrtwined! So, you will support this endeavourr?",
-    "choice": [{
-      "text": "Sure!",
-      "next": 9
-    },{
-      "text": "What do I get in return?",
-      "effect": "REL+10",
-      "next": 9
-    }]
-  },{
+      "effect" : "REL+30",
+      "next" : 6,
+      "text" : "You take care of your friends."
+    } ],
+    "id" : 4,
+    "text" : "What do they say about me?"
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 7,
+      "text" : "I agree."
+    }, {
+      "effect" : "REL-10",
+      "next" : 6,
+      "text" : "You can't create change that way."
+    }, {
+      "next" : 6,
+      "text" : "I guess so."
+    } ],
+    "id" : 5,
+    "text" : "Creatures of prriviledge don't know what it's like to make your on the streets. Sometimes you need to get your paws dirrty."
+  }, {
+    "id" : 6,
+    "next" : 7,
+    "text" : "As long as my people arre taken care of, that's all that matters. That's what a good leader is."
+  }, {
+    "id" : 7,
+    "next" : -1,
+    "text" : "Hm, I'm informed there's a prrroblem I need to attend to. Let's continue this discussion another time."
+  }, {
     "id": 8,
-    "text": "Alpacita shared your concerns. I told her we will do our best to minimize environnment impact.",
-    "choice": [{
-      "text": "Well.. okay. But you owe me.",
-      "effect": "REL+10",
-      "next": 9
-    },{
-      "text": "Sorry, I can't do this.",
-      "effect": "REL-10",
-      "next": 10
-    }]
-  },{
-    "id": 9,
-    "text": "You have rraised yourself in my own and my distrrict's esteem. I look forrward to working more with you in the future.",
-    "effect": "MORALITY-10",
-    "next": -1
-  },{
-    "id": 10,
-    "text": "You disappont me, little mouse. Perrhaps your rrival will be more amenable.",
-    "effect": "MORALITY+10",
-    "next": -1
-  }]
+    "next": 7,
+    "text": "That is cerrtainly good to know."
+  } ],
+  "name" : "Introducing Catorcio"
 }, {
-  "name": "Investment",
-  "character": 1,
-  "condition": "MET>0",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "REL>=50",
-      "next": 1
-    },{
-      "condition": "REL<50",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "I have a prroposition for you.",
-    "choice": [{
-      "text": "I don't like the sound of that.",
-      "next": 3
-    },{
-      "text": "Let's hear it.",
-      "effect": "REL+10",
-      "next": 4
-    }]
-  },{
-    "id": 2,
-    "text": "I don't believe you arre commited friend. Come back some other time.",
-    "willRepeat": true,
-    "next": -1
-  },{
-    "id": 3,
-    "text": "Just hearr me out. You can take it or leave it.",
-    "next": 4
-  },{
-    "id": 4,
-    "text": "I'd like to invest $5000 in yourr campaign",
-    "choice": [{
-      "text": "And in return?",
-      "next": 5
-    },{
-      "text": "Wow, thanks!",
-      "effect": "GOLD+5000,REL+10,MORALITY-10",
-      "next": 6
-    },{
-      "text": "I can't accept it.",
-      "effect": "REL+10,MORALITY-10",
-      "next": 6
-    }]
-  },{
-    "id": 5,
-    "text": "Nothing, forr now. But I may need your help in the futurre.",
-    "choice": [{
-      "text": "So basically you're bribing me.",
-      "effect": "REL-10",
-      "next": 7
-    },{
-      "text": "Undertood. I appreciate your faith in me.",
-      "effect": "GOLD+5000,REL+10,MORALITY-10",
-      "next": 8
-    }]
-  },{
-    "id": 6,
-    "text": "Your naivete surrprises me sometimes. Very well then, until next time.",
-    "next": -1
-  },{
-    "id": 7,
-    "text": "\"Bribe\" is such a harsh word. I like to think of it as an exchange of favorrs.",
-    "choice": [{
-      "text": "I accept your generous offer.",
-      "effect": "GOLD+5000,REL+10,MORALITY-10",
-      "next": 8
-    },{
-      "text": "I cannot accept your offer.",
-      "effect": "REL-10,MORALITY+10",
-      "next": 6
-    }]
-  },{
-    "id": 8,
-    "text": "Excellent! I look forward to your victorious campaign.",
-    "next": -1
-  }]
-}, {
-  "name": "Book Deal",
-  "character": 0,
-  "condition": "MET>0",
-  "dialog": [{
-      "id": 0,
-      "conditions": [{
-        "condition": "MORALITY>=50",
-        "next": 1
-      }, {
-        "condition": "MORALITY<50",
-        "next": 2
-      }]
-    },{
-    "id": 1,
-    "text": "A marvelous morning to you my good mouse.",
-    "choice": [{
-      "text": "A benevolent morning to you",
-      "effect": "REL+20",
-      "next": 3
-      },{
-      "text": "Good morning to you too.",
-      "next": 4
-      },{
-      "text": "Okay...",
-      "next": 4
-      }]
-    },{
-    "id": 2,
-    "text": "I have nothing to say to you.",
-    "next": -1
-    },{
-    "id": 3,
-    "text": "Ah, what impressive wordplay!",
-    "next": 4
-    },{
-    "id": 4,
-    "conditions": [{
-      "condition": "ISSUE0>=3",
-      "next": 5
-      },{
-      "condition": "DEFAULT",
-      "next": 6
-      }]
-    },{
-    "id": 5,
-    "text": "I see you value a good education. I do as well, and I have an idea that will elevate education on Summer Island!",
-    "next": 7
-    },{
-    "id": 6,
-    "text": "Looks like you could use an upgrade to your education platform, and I have just the thing.",
-    "next": 7
-    },{
-    "id": 7,
-    "text": "I have actualized a single book that contains all the knowledge our children need to learn at school.",
-    "choice": [{
-      "text": "Impressive!",
-      "effect": "REL+20",
-      "next": 8
-      },{
-      "text": "Really, just one book?",
-      "next": 8
-      }]
-    },{
-    "id": 8,
-    "text": "Indeed! Now if only I could convince the local school to purchase it and replace the moldifying manuals.",
-    "choice": [{
-      "text": "How can I help?",
-      "next": 9
-      },{
-      "text": "So you want me too...",
-      "next": 9
-      }]
-    },{
-    "id": 9,
-    "text": "It would be greatly satisfying to me if you would promote the book during your campaign.",
-    "choice": [{
-      "text": "Sure, I'd be delighted to do it!",
-      "next": 10
-      },{
-      "text": "And what do I get in return?",
-      "effect": "REL-20",
-      "next": 11
-      },{
-      "text": "My campaign is not a marketing tool.",
-      "effect": "REL-30",
-      "next": 12
-      }]
-    },{
-    "id": 10,
-    "text": "Splendid! My publisher will be very... I mean, the children of this island will be indebted to you.",
-    "effect": "CARD=BookDeal",
-    "next": 13
-    },{
+  "character" : 1,
+  "condition" : "MET>0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "GREPUTATION>=OGREPUTATION",
+      "next" : 1
+    }, {
+      "condition" : "GREPUTATION<OGREPUTATION",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 3,
+      "text" : "Thanks Captain Obvious. Can we get down to business?"
+    }, {
+      "next" : 11,
+      "text" : "It's a marathon, not a sprint."
+    } ],
+    "id" : 1,
+    "text" : "Looks like you're maintaining lead over your rrival. Good work!"
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 3,
+      "text" : "Thanks Captain Obvious. Can we get down to business?"
+    }, {
+      "next" : 11,
+      "text" : "It's a marathon, not a sprint."
+    } ],
+    "id" : 2,
+    "text" : "Your rrival has taken the lead in the polls. You have a lot of work ahead of you."
+  }, {
+    "id" : 3,
+    "next" : 4,
+    "text" : "Straight to the point. Therre is hope for you yet!"
+  }, {
+    "conditions" : [ {
+      "condition" : "ISSUE2>=4",
+      "next" : 5
+    }, {
+      "condition" : "ISSUE2<4",
+      "next" : 5
+    } ],
+    "id" : 4
+  }, {
+    "id" : 5,
+    "next" : 6,
+    "text" : "I see you're interrested in generrating employment. I am also keen on being a job creator."
+  }, {
+    "id" : 5,
+    "next" : 6,
+    "text" : "Employment is a very imporrtant issue for Summer Island. I have a project that I believe will be mutually beneficial."
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 7,
+      "text" : "That will generate lots of income!"
+    }, {
+      "effect" : "REL-10",
+      "next" : 8,
+      "text" : "How will that affect the environment?"
+    } ],
+    "id" : 6,
+    "text" : "I want to open a casino next to the resort and attract rich whales to gamble there."
+  }, {
+    "choice" : [ {
+      "next" : 9,
+      "text" : "Sure!"
+    }, {
+      "effect" : "REL+10",
+      "next" : 9,
+      "text" : "What do I get in return?"
+    } ],
+    "id" : 7,
+    "text" : "I see our thoughts are interrtwined! So, you will support this endeavourr?"
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 9,
+      "text" : "Well.. okay. But you owe me."
+    }, {
+      "effect" : "REL-10",
+      "next" : 10,
+      "text" : "Sorry, I can't do this."
+    } ],
+    "id" : 8,
+    "text" : "Alpacita shared your concerns. I told her we will do our best to minimize environnment impact."
+  }, {
+    "effect" : "MORALITY-10",
+    "id" : 9,
+    "next" : -1,
+    "text" : "You have rraised yourself in my own and my distrrict's esteem. I look forrward to working more with you in the future."
+  }, {
+    "effect" : "MORALITY+10",
+    "id" : 10,
+    "next" : -1,
+    "text" : "You disappont me, little mouse. Perrhaps your rrival will be more amenable."
+  }, {
     "id": 11,
-    "text": "I wasn't informed that we were conducting a business transaction.",
-    "next": 13
-    },{
-    "id": 12,
-    "text": "I'm insulted that you would imagine I am capable of thinking such a thing!",
-    "next": 13
-    },{
-    "id": 13,
-    "text": "Oh my, looks like I'm late for a lecture again. I must be off!",
-    "next": -1
-    }]
+    "next": 4,
+    "text": "I suppose you are right."
+  }],
+  "name" : "Beachfront Casino"
 }, {
-  "name": "Idiot Son",
-  "character": 0,
-  "condition": "MET>1",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "MORALITY>=50",
-      "next": 1
+  "character" : 1,
+  "condition" : "MET>0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "REL>=50",
+      "next" : 1
     }, {
-      "condition": "MORALITY<50",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "conditions": [{
-      "condition": "LREPUTATION>=60",
-      "next": 3
+      "condition" : "REL<50",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "choice" : [ {
+      "next" : 3,
+      "text" : "I don't like the sound of that."
     }, {
-      "condition": "LREPUTATION<60",
-      "next": 4
-    }]
-  },{
-    "id": 2,
-    "text": "I have nothing to say to you.",
-    "willRepeat": true,
-    "next": -1
-  },{
-    "id": 3,
-    "text": "My marvelous mouse, the creatures of my district have only the most altudinous of praises for you!",
-    "choice": [{
-      "text": "A great poet once said \"It doesn't matter if you win by an inch or a mile...\"",
-      "next": 5
-    },{
-      "text": "Thanks for keeping me informed.",
-      "next": 6
-    }]
-  },{
-    "id": 4,
-    "text": "My good mouse, miserable news! The creatures of my district place your ruthless rival in high esteem!",
-    "choice": [{
-      "text": "A great poet once said \"It doesn't matter if you win by an inch or a mile...\"",
-      "next": 5
-    },{
-      "text": "Thanks for keeping me informed.",
-      "next": 6
-    }]
-  },{
-    "id": 5,
-    "text": "I'm... not familiar with that poet. You should enlighten me on his body of work later. In the meantime...",
-    "next": 6
-  },{
-    "id": 6,
-    "text": "I have a proposal for you, one in which you may help your favored friend.",
-    "choice": [{
-      "text": "You haven't written another book have you?",
-      "effect": "REL-10",
-      "next": 7
-    },{
-      "text": "I wait with bated breath.",
-      "effect": "REL+10",
-      "next": 10
-    }]
-  },{
-    "id": 7,
-    "conditions": [{
-      "condition": "CARD?BookDeal==true",
-      "next": 8
-    },{
-      "condition": "CARD?BookDeal==false",
-      "next": 9
-    }]
-  },{
-    "id": 8,
-    "text": "Heavens, no. The book is doing well thanks to you!",
-    "next": 10
-  },{
-    "id": 9,
-    "text": "Heavens, no. The book is doing well, no thanks to you.",
-    "next": 10
-  },{
+      "effect" : "REL+10",
+      "next" : 4,
+      "text" : "Let's hear it."
+    } ],
+    "id" : 1,
+    "text" : "I have a prroposition for you."
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "I don't believe you arre commited friend. Come back some other time.",
+    "willRepeat" : true
+  }, {
+    "id" : 3,
+    "next" : 4,
+    "text" : "Just hearr me out. You can take it or leave it."
+  }, {
+    "choice" : [ {
+      "next" : 5,
+      "text" : "And in return?"
+    }, {
+      "effect" : "GOLD+5000,REL+10,MORALITY-10",
+      "next" : 6,
+      "text" : "Wow, thanks!"
+    }, {
+      "effect" : "REL+10,MORALITY-10",
+      "next" : 6,
+      "text" : "I can't accept it."
+    } ],
+    "id" : 4,
+    "text" : "I'd like to invest $5000 in yourr campaign"
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 7,
+      "text" : "So basically you're bribing me."
+    }, {
+      "effect" : "GOLD+5000,REL+10,MORALITY-10",
+      "next" : 8,
+      "text" : "Undertood. I appreciate your faith in me."
+    } ],
+    "id" : 5,
+    "text" : "Nothing, forr now. But I may need your help in the futurre."
+  }, {
+    "id" : 6,
+    "next" : -1,
+    "text" : "Your naivete surrprises me sometimes. Very well then, until next time."
+  }, {
+    "choice" : [ {
+      "effect" : "GOLD+5000,REL+10,MORALITY-10",
+      "next" : 8,
+      "text" : "I accept your generous offer."
+    }, {
+      "effect" : "REL-10,MORALITY+10",
+      "next" : 6,
+      "text" : "I cannot accept your offer."
+    } ],
+    "id" : 7,
+    "text" : "\"Bribe\" is such a harsh word. I like to think of it as an exchange of favorrs."
+  }, {
+    "id" : 8,
+    "next" : -1,
+    "text" : "Excellent! I look forward to your victorious campaign."
+  } ],
+  "name" : "Investment"
+}, {
+  "character" : 0,
+  "condition" : "MET>0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "MORALITY>=50",
+      "next" : 1
+    }, {
+      "condition" : "MORALITY<50",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "choice" : [ {
+      "effect" : "REL+20",
+      "next" : 3,
+      "text" : "A benevolent morning to you"
+    }, {
+      "next" : 4,
+      "text" : "Good morning to you too."
+    }, {
+      "next" : 4,
+      "text" : "Okay..."
+    } ],
+    "id" : 1,
+    "text" : "A marvelous morning to you my good mouse."
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "I have nothing to say to you."
+  }, {
+    "id" : 3,
+    "next" : 4,
+    "text" : "Ah, what impressive wordplay!"
+  }, {
+    "conditions" : [ {
+      "condition" : "ISSUE0>=3",
+      "next" : 5
+    }, {
+      "condition" : "DEFAULT",
+      "next" : 6
+    } ],
+    "id" : 4
+  }, {
+    "id" : 5,
+    "next" : 7,
+    "text" : "I see you value a good education. I do as well, and I have an idea that will elevate education on Summer Island!"
+  }, {
+    "id" : 6,
+    "next" : 7,
+    "text" : "I notice that you could use an upgrade to your education platform, and I have just the thing."
+  }, {
+    "choice" : [ {
+      "effect" : "REL+20",
+      "next" : 8,
+      "text" : "Impressive!"
+    }, {
+      "next" : 8,
+      "text" : "Really, just one book?"
+    } ],
+    "id" : 7,
+    "text" : "I have actualized a single book that contains all the knowledge our children need to learn at school."
+  }, {
+    "choice" : [ {
+      "next" : 9,
+      "text" : "How can I help?"
+    }, {
+      "next" : 9,
+      "text" : "So you want me to..."
+    } ],
+    "id" : 8,
+    "text" : "Indeed! Now if only I could convince the local school to purchase it and replace the moldifying manuals."
+  }, {
+    "choice" : [ {
+      "next" : 10,
+      "text" : "Sure, I'd be delighted to do it!"
+    }, {
+      "effect" : "REL-20",
+      "next" : 11,
+      "text" : "And what do I get in return?"
+    }, {
+      "effect" : "REL-30",
+      "next" : 12,
+      "text" : "My campaign is not a marketing tool."
+    } ],
+    "id" : 9,
+    "text" : "It would be greatly gratifying to me if you would promote the book during your campaign."
+  }, {
+    "effect" : "CARD=BookDeal",
+    "id" : 10,
+    "next" : 13,
+    "text" : "Splendid! My publisher... I mean, the children of this island will be indebted to you."
+  }, {
+    "id" : 11,
+    "next" : 13,
+    "text" : "I wasn't informed that we were conducting a business transaction."
+  }, {
+    "id" : 12,
+    "next" : 13,
+    "text" : "I'm insulted that you would imagine I am capable of thinking such a thing!"
+  }, {
+    "id" : 13,
+    "next" : -1,
+    "text" : "Oh my, looks like I'm late for a lecture again. I must be off!"
+  } ],
+  "name" : "Book Deal"
+}, {
+  "character" : 0,
+  "condition" : "MET>1",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "MORALITY>=50",
+      "next" : 1
+    }, {
+      "condition" : "MORALITY<50",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "conditions" : [ {
+      "condition" : "LREPUTATION>=60",
+      "next" : 3
+    }, {
+      "condition" : "LREPUTATION<60",
+      "next" : 4
+    } ],
+    "id" : 1
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "I have nothing to say to you.",
+    "willRepeat" : true
+  }, {
+    "choice" : [ {
+      "next" : 5,
+      "text" : "A great poet once said \"It doesn't matter if you win by an inch or a mile...\""
+    }, {
+      "next" : 6,
+      "text" : "Thanks for keeping me informed."
+    } ],
+    "id" : 3,
+    "text" : "My marvelous mouse, the creatures of my district have only the most altudinous of praises for you!"
+  }, {
+    "choice" : [ {
+      "next" : 5,
+      "text" : "A great poet once said \"It doesn't matter if you win by an inch or a mile...\""
+    }, {
+      "next" : 6,
+      "text" : "Thanks for keeping me informed."
+    } ],
+    "id" : 4,
+    "text" : "My good mouse, miserable news! The creatures of my district place your ruthless rival in high esteem!"
+  }, {
+    "id" : 5,
+    "next" : 6,
+    "text" : "I'm... not familiar with that poet. You should enlighten me on his body of work later. In the meantime..."
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 7,
+      "text" : "You haven't written another book have you?"
+    }, {
+      "effect" : "REL+10",
+      "next" : 10,
+      "text" : "I wait with bated breath."
+    } ],
+    "id" : 6,
+    "text" : "I have a proposal for you, one in which you may help your favored friend."
+  }, {
+    "conditions" : [ {
+      "condition" : "CARD?BookDeal==true",
+      "next" : 8
+    }, {
+      "condition" : "CARD?BookDeal==false",
+      "next" : 9
+    } ],
+    "id" : 7
+  }, {
+    "id" : 8,
+    "next" : 10,
+    "text" : "Heavens, no. The book is doing well thanks to you!"
+  }, {
+    "id" : 9,
+    "next" : 10,
+    "text" : "Heavens, no. The book is doing well, no thanks to you."
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 11,
+      "text" : "What's the catch?"
+    }, {
+      "next" : 11,
+      "text" : "What kind of skills does he have?"
+    }, {
+      "effect" : "REL+10",
+      "next" : 12,
+      "text" : "Anything for my favorite feathered friend!"
+    } ],
+    "id" : 10,
+    "text" : "My son Owlfredo is in his final year at college, and he requires some on the job training. Would you do me the fantastic favor of hiring him for your campaign?"
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 12,
+      "text" : "*Sigh* Okay I'll keep him occupied."
+    }, {
+      "effect" : "REL-10",
+      "next" : 13,
+      "text" : "Sincerest apologies, but my campaign cannot take on any dead weight."
+    } ],
+    "id" : 11,
+    "text" : "Well to my supreme shame, Owlfredo isn't really the brightest bird in the flock. But if you keep him away from anything important it should be fine."
+  }, {
+    "effect" : "CARD=IdiotSon,MORALITY-10",
+    "id" : 12,
+    "next" : -1,
+    "text" : "Splendid! I assure you i will repay the favor tenfold!"
+  }, {
+    "effect" : "MORALITY+10",
+    "id" : 13,
+    "next" : -1,
+    "text" : "While this deliberate decision is perfectly understandable, I must say I'm quite hurt!"
+  } ],
+  "name" : "Idiot Son"
+}, {
+  "character" : 0,
+  "condition" : "MET===0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "MORALITY>=50",
+      "next" : 1
+    }, {
+      "condition" : "MORALITY<50",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "choice" : [ {
+      "next" : 3,
+      "text" : "To you as well, my oratorial owl!"
+    }, {
+      "next" : 4,
+      "text" : "Good morning to you too."
+    }, {
+      "next" : 4,
+      "text" : "Okay..."
+    } ],
+    "id" : 1,
+    "text" : "A marvelous morning to you my good mouse!"
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "I have nothing to say to you.",
+    "willRepeat" : true
+  }, {
+    "effect" : "REL+20",
+    "id" : 3,
+    "next" : 4,
+    "text" : "Someone who appreciates alliteration, how wonderful!"
+  }, {
+    "choice" : [ {
+      "next" : 5,
+      "text" : "You sure use intelligent words!"
+    }, {
+      "next" : 6,
+      "text" : "I'd like your support in the elections."
+    }, {
+      "next" : 6,
+      "text" : "er..."
+    } ],
+    "id" : 4,
+    "text" : "What largess can I bestow upon you today?"
+  }, {
+    "effect" : "REL+20",
+    "id" : 5,
+    "next" : 6,
+    "text" : "Oh, they're really not THAT big. Here, look them up in the dictionary."
+  }, {
+    "choice" : [ {
+      "next" : 7,
+      "text" : "He's a criminal, plain and simple."
+    }, {
+      "next" : 8,
+      "text" : "He's trying to mend his ways."
+    }, {
+      "next" : 8,
+      "text" : "Sorry, I don't really know him."
+    } ],
+    "id" : 6,
+    "text" : "Before we go any further, tell me, what do you think of Catorcio?"
+  }, {
+    "id" : 7,
+    "next" : 9,
+    "text" : "That's indubitably what I was telling Pader Doglas, but he wouldn't listen."
+  }, {
+    "id" : 8,
+    "next" : 9,
+    "text" : "Hmm, I see..."
+  }, {
+    "id" : 9,
+    "next" : -1,
+    "text" : "Oh, dear, would you look at the time! I have a class to attend! We will have to leave this discussion for some other time"
+  } ],
+  "name" : "Introducing Owlberto"
+}, {
+  "character" : 2,
+  "condition" : "MET>0",
+  "dialog" : [ {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 1,
+      "text" : "Good morning! How are the fish today?"
+    }, {
+      "effect" : "REL-10",
+      "next" : 2,
+      "text" : "Wow, you don't smell like fish!"
+    } ],
+    "id" : 0,
+    "text" : "Ser, good morning ser!"
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 3,
+      "text" : "I'm sorry to hear that."
+    }, {
+      "next" : 3,
+      "text" : "Oh well."
+    } ],
+    "id" : 1,
+    "text" : "I think they are happy ser, because I didn't cached them."
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 3,
+      "text" : "I'm sorry to hear that."
+    }, {
+      "next" : 3,
+      "text" : "Oh well."
+    } ],
+    "id" : 2,
+    "text" : "Ya cos I din't caught even one fish today."
+  }, {
+    "choice" : [ {
+      "next" : 4,
+      "text" : "Sorry I really don't know."
+    }, {
+      "effect" : "REL-10",
+      "next" : 5,
+      "text" : "Did you come from the market when you spoke to him?"
+    }, {
+      "next" : 6,
+      "text" : "Because you worship the Shin Bone"
+    } ],
+    "id" : 3,
+    "text" : "It's okay ser. Ser can I ask you a question? Someone tell me Pader Doglas does not like me. Why is that ser?"
+  }, {
+    "id" : 4,
+    "next" : -1,
+    "text" : "Okay tenk you anyway ser. I'm go to go home and do karaoke now."
+  }, {
+    "choice" : [ {
+      "next" : 4,
+      "text" : "Sorry, I really don't know"
+    }, {
+      "next" : 6,
+      "text" : "Just kidding. It's because you worship the Shin Bone."
+    } ],
+    "id" : 5,
+    "text" : "No ser I took a shower."
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 7,
+      "text" : "That's what I said!"
+    }, {
+      "effect" : "REL-10",
+      "next" : 7,
+      "text" : "But the Thigh Bone is larger, so you should worship the Thigh Bone."
+    } ],
+    "id" : 6,
+    "text" : "But ser, the Shin Bone's connected to da Thigh Bone! What's the problem?"
+  }, {
+    "id" : 7,
+    "next" : -1,
+    "text" : "I don't like fighting. Maybe if I give Pader some of Alpacita's Organic Artisanal fish pate he will like me more. Thank you for the inpo ser!"
+  } ],
+  "name" : "Shin Bone"
+}, {
+  "character" : 2,
+  "condition" : "MET===0",
+  "dialog" : [ {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 1,
+      "text" : "Yuck! What's that smell?"
+    }, {
+      "effect" : "REL+10",
+      "next" : 2,
+      "text" : "I see you just came from the Fish Market."
+    }, {
+      "next" : 2,
+      "text" : "How are you doing today?"
+    } ],
+    "id" : 0,
+    "text" : "Good morning, ser."
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 2,
+      "text" : "Oh, I see. How was the market?"
+    }, {
+      "effect" : "REL-10",
+      "next" : 3,
+      "text" : "And you didn't think to wash up first before meeting me?"
+    } ],
+    "id" : 1,
+    "text" : "Sorry ser, I just come from da fish market."
+  }, {
+    "choice" : [ {
+      "next" : 4,
+      "text" : "Who's your best customer?"
+    }, {
+      "next" : 5,
+      "text" : "Can I talk to you about the elections?"
+    } ],
+    "id" : 2,
+    "text" : "Ser! I sold many fish today. A good day for me!"
+  }, {
+    "id" : 3,
+    "next" : -1,
+    "text" : "Oh you're right ser! I'm so sorry! I will go home right now and wash. Good bye!"
+  }, {
+    "choice" : [ {
+      "next" : 6,
+      "text" : "Organic. Artisanal. Fish pate?"
+    }, {
+      "effect" : "REL+10",
+      "next" : 5,
+      "text" : "I'd like to try that sometime!"
+    } ],
+    "id" : 4,
+    "text" : "Alpacita ser! She buys our fish and makes artisanal organic pa-tey with them."
+  }, {
+    "id" : 5,
+    "next" : -1,
+    "text" : "I should go home ser and wash up because I smell. Maybe we can talk some other time."
+  }, {
+    "id" : 6,
+    "next" : 5,
+    "text" : "Ya I don't know what is that also, hehe."
+  } ],
+  "name" : "Introducing Pelicarpio"
+}, {
+  "character" : 3,
+  "condition" : "MET>0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "GOLD>=500",
+      "next" : 1
+    }, {
+      "condition" : "GOLD<500",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "choice" : [ {
+      "next" : 3,
+      "text" : "What is it?"
+    }, {
+      "effect" : "REL-10",
+      "next" : 3,
+      "text" : "Not getting \"donations\" lately?"
+    } ],
+    "id" : 1,
+    "text" : "I have some sad news to share with you today."
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "Still no money? I quess your campaign is not doing well, and that means I have no time for you.",
+    "willRepeat" : true
+  }, {
+    "choice" : [ {
+      "next" : 4,
+      "text" : "No health care, that's terrible!"
+    }, {
+      "effect" : "REL+10",
+      "next" : 4,
+      "text" : "I'm very sorry to hear that."
+    }, {
+      "effect" : "REL-10",
+      "next" : 5,
+      "text" : "I thought that was what the WASI is for?"
+    } ],
+    "id" : 3,
+    "text" : "One of our workers got injured today. He is inthe hospital and since his employer doesn't pay for health care he has to pay for it on his own."
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 6,
+      "text" : "9 cubs?! Doesn't WASI support family planning?"
+    }, {
+      "next" : 7,
+      "text" : "How can I help?"
+    } ],
+    "id" : 4,
+    "text" : "It's terrible. He's supporting 9 cubs. Who will feed them now?"
+  }, {
+    "id" : 5,
+    "next" : 7,
+    "text" : "We do our best but there are many of us and too few donations."
+  }, {
+    "id" : 6,
+    "next" : 7,
+    "text" : "That's not the point."
+  }, {
+    "choice" : [ {
+      "effect" : "GOLD-100,REL+10",
+      "next" : 8,
+      "text" : "*Give $100*"
+    }, {
+      "effect" : "GOLD-1000,REL+30",
+      "next" : 8,
+      "text" : "*Give $1000*"
+    }, {
+      "effect" : "REL-10",
+      "next" : 9,
+      "text" : "I can't donate, but if I win will mandate healthcare!"
+    } ],
+    "id" : 7,
+    "text" : "We are asking for donations to help pay for his medical bills. Any amount would be appreciated."
+  }, {
+    "id" : 8,
+    "next" : -1,
+    "text" : "Thanks for your donation friend, the workers will know where this came from."
+  }, {
+    "id" : 9,
+    "next" : -1,
+    "text" : "Hmph. That's not gonna help him now though, is it? Rest assured the WASI will remember this."
+  } ],
+  "name" : "Healthcare"
+}, {
+  "character" : 3,
+  "condition" : "MET===0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "GOLD>=500",
+      "next" : 1
+    }, {
+      "condition" : "GOLD<500",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10,GOLD-500",
+      "next" : 3,
+      "text" : "Let it be known I stand with the proletariat!"
+    }, {
+      "next" : 3,
+      "text" : "Worker's Alliance?"
+    }, {
+      "effect" : "REL-10",
+      "next" : 3,
+      "text" : "Huh?"
+    } ],
+    "id" : 1,
+    "text" : "Good morning! On behalf of the Worker's Alliance of Summer Island, I'm happy to accept your donation of $500."
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "Money talks, so if you don't have $500, who will respect you?"
+  }, {
+    "choice" : [ {
+      "effect" : "GOLD-500,REL+10",
+      "next" : 4,
+      "text" : "You're absolutely right. Here's my donation."
+    }, {
+      "effect" : "REL-10",
+      "next" : 2,
+      "text" : "Why do I feel like this is a shakedown?"
+    }, {
+      "effect" : "REL-10",
+      "next" : 2,
+      "text" : "I can't spend campaign funds will nilly!"
+    } ],
+    "id" : 3,
+    "text" : "Sorry, I assume that you are a mouse that stands in solidarity with the proletariat!"
+  }, {
+    "choice" : [ {
+      "next" : 5,
+      "text" : "So why the hard sell?"
+    }, {
+      "next" : 5,
+      "text" : "Who else supports the WASI?"
+    } ],
+    "id" : 4,
+    "text" : "Thank you for your kind donation!"
+  }, {
+    "choice" : [ {
+      "next" : 6,
+      "text" : "Can I count on the proletariat in this election?"
+    }, {
+      "effect" : "REL-10",
+      "next" : 7,
+      "text" : "But Boo Tee Kee provides you with jobs?"
+    } ],
+    "id" : 5,
+    "text" : "The WASI needs all the help it can get. It stands together with Pelicarpio of the Fishing Village in our fight against the capitalists like Boo Tee Kee."
+  }, {
+    "id" : 6,
+    "next" : -1,
+    "text" : "WASI is appreciative of your contribution, but it will take more than that to garner our full support. Good day!"
+  }, {
+    "id" : 7,
+    "next" : 6,
+    "text" : "Employing us and exploiting us are two different things."
+  } ],
+  "name" : "Introducing Victortle"
+}, {
+  "character" : 4,
+  "condition" : "MET>0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "MORALITY>=50",
+      "next" : 1
+    }, {
+      "condition" : "MORALITY<50",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 3,
+      "text" : "Bathala Bless you."
+    }, {
+      "effect" : "REL-20",
+      "next" : 3,
+      "text" : "Thigh Bone or Shin Bone"
+    }, {
+      "effect" : "REL+10",
+      "next" : 4,
+      "text" : "May the Bone be with you as well."
+    } ],
+    "id" : 1,
+    "text" : "May the Bone bless you."
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "I cannot speak with you unless you confess your sins."
+  }, {
+    "id" : 3,
+    "next" : 4,
+    "text" : "Don't mock me, child. I can appreciate a joke as much as anyone but I take matters of faith seriously."
+  }, {
+    "id" : 4,
+    "next" : 5,
+    "text" : "Speaking of Bone, I actually wanted to speak with you about something."
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 6,
+      "text" : "That is exciting!"
+    }, {
+      "next" : 7,
+      "text" : "How can I help you?"
+    } ],
+    "id" : 5,
+    "text" : "I seek to go on a pilgrimage to bring back a chip of the sacred Thigh Bone."
+  }, {
+    "id" : 6,
+    "next" : 7,
+    "text" : "Indeed it is! I'm so glad you share my excitement."
+  }, {
+    "choice" : [ {
+      "next" : 8,
+      "text" : "I'm a little short on cash right now, Pader."
+    }, {
+      "effect" : "GOLD-5000,REL+30,MORALITY-10",
+      "next" : 9,
+      "text" : "It would be my honor to fund this worthy endeavor."
+    }, {
+      "effect" : "REL-10",
+      "next" : 10,
+      "text" : "What do I get in return?"
+    } ],
+    "id" : 7,
+    "text" : "Unfortunately, it will be a costly experience. I need a good soul to provide the church with $5000 for expenses."
+  }, {
+    "id" : 8,
+    "next" : -1,
+    "text" : "I understand. Perhaps another generous soul will be able to donate money."
+  }, {
+    "id" : 9,
+    "next" : -1,
+    "text" : "I'm gratified that you feel that way my child. I'll make sure that my entire district knows of your generosity."
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10,MORALITY+10",
+      "next" : 8,
+      "text" : "I cannot use campaign funds this way."
+    }, {
+      "effect" : "REL+10,MORALITY-30",
+      "next" : 9,
+      "text" : "In that case I would be happy to fund your pilgrimage."
+    } ],
+    "id" : 10,
+    "text" : "If the blessing of the Thigh Bone are not good enough for you, rest assured I will let the district know of your generosity."
+  } ],
+  "name" : "Relic Hunter"
+}, {
+  "character" : 4,
+  "condition" : "MET===0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "MORALITY>=50",
+      "next" : 1
+    }, {
+      "condition" : "MORALITY<50",
+      "next" : 2
+    } ],
+    "id" : 0
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 5,
+      "text" : "And to you as well, Pader."
+    }, {
+      "effect" : "REL-10",
+      "next" : 6,
+      "text" : "Actually I've had a rough day."
+    } ],
+    "id" : 1,
+    "text" : "A blessed day to you my child."
+  }, {
+    "choice" : [ {
+      "effect" : "MORALITY+20,REL+20",
+      "next" : 3,
+      "text" : "*Confess*"
+    }, {
+      "effect" : "REL-20",
+      "next" : 4,
+      "text" : "*Refuse*"
+    } ],
+    "id" : 2,
+    "text" : "I cannot speak with you unless you confess your sins."
+  }, {
+    "id" : 3,
+    "next" : -1,
+    "text" : "You have confessed your sins. Do your penance and pray to the Almighty Bone for guidance."
+  }, {
+    "id" : 4,
+    "next" : -1,
+    "text" : "Then there is nothing more for us to discuss. I shall pray for your soul.",
+    "willRepeat" : true
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 7,
+      "text" : "That is troubling indeed."
+    }, {
+      "effect" : "REL-30",
+      "next" : 8,
+      "text" : "Freedom of religion is good!"
+    }, {
+      "effect" : "REL-10",
+      "next" : 10,
+      "text" : "But isn't the Shin bone connected to the Thigh Bone?"
+    } ],
+    "id" : 5,
+    "text" : "Blessings come to those who are faithful to the Thigh Bone. That's why it worries me that Pelicarpio allows worship of the Shin Bone in his district."
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 4,
+      "text" : "I hate it when people say that."
+    }, {
+      "next" : 5,
+      "text" : "I guess so..."
+    }, {
+      "effect" : "REL+10",
+      "next" : 5,
+      "text" : "Wise words, Pader."
+    } ],
+    "id" : 6,
+    "text" : "You must always count your blessings my child."
+  }, {
+    "id" : 7,
+    "next" : 9,
+    "text" : "I'm so glad you agree, my child!"
+  }, {
+    "id" : 8,
+    "next" : 9,
+    "text" : "An open mind is like a fortress with the gate left open."
+  }, {
+    "id" : 9,
+    "next" : -1,
+    "text" : "Oh dear, it's almost time for the service and I still need to write my sermon. Let us speak again my child. Be One with the Thigh Bone."
+  }, {
     "id": 10,
-    "text": "My son Owlfredo is in his final year at college, and he requires some on the job training. Would you do me the fantastic favor of hiring him for your campaign?",
-    "choice": [{
-      "text": "What's the catch?",
-      "effect": "REL-10",
-      "next": 11
-    },{
-      "text": "What kind of skills does he have?",
-      "next": 11
-    },{
-      "text": "Anything for my favorite feathered friend!",
-      "effect": "REL+10",
-      "next": 12
-    }]
-  },{
-    "id": 11,
-    "text": "Well to my supreme shame, Owlfredo isn't really the brightest bird in the flock. But if you keep him away from anything important it should be fine.",
-    "choice": [{
-      "text": "*Sigh* Okay I'll keep him occupied.",
-      "effect": "REL+10",
-      "next": 12
-    },{
-      "text": "Sincerest apologies, but my campaign cannot take on any dead weight.",
-      "effect": "REL-10",
-      "next": 13
-    }]
-  },{
-    "id": 12,
-    "text": "Splendid! I assure you i will repay the favor tenfold!",
-    "effect": "CARD=IdiotSon,MORALITY-10",
-    "next": -1
-  },{
-    "id": 13,
-    "text": "While this deliberate decision is perfectly understandable, I must say I'm quite hurt!",
-    "effect": "MORALITY+10",
-    "next": -1
-  }]
+    "next": 9,
+    "text": "Indeed, but the Thigh Bone is larger, and therefore more prominent."
+  } ],
+  "name" : "Introducing Pader Doglas"
 }, {
-  "name": "Introducing Owlberto",
-  "character": 0,
-  "condition": "MET===0",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "MORALITY>=50",
-      "next": 1
+  "character" : 5,
+  "condition" : "MET===0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "MORALITY>=50",
+      "next" : 1
     }, {
-      "condition": "MORALITY<50",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "A marvelous morning to you my good mouse!",
-    "choice": [{
-      "text": "What an admirable alliteration!",
-      "next": 3
-    },{
-      "text": "Good morning to you too.",
-      "next": 4
-    },{
-      "text": "Okay...",
-      "next": 4
-    }]
+      "condition" : "MORALITY<50",
+      "next" : 2
+    } ],
+    "id" : 0
   }, {
-    "id": 2,
-    "text": "I have nothing to say to you.",
-    "willRepeat": true,
-    "next": -1
-  }, {
-    "id": 3,
-    "text": "Someone who appreciates alliteration, how wonderful!",
-    "effect": "REL+20",
-    "next": 4
-  }, {
-    "id": 4,
-    "text": "What largess can I bestow upon you today?",
-    "choice": [{
-      "text": "You sure use intelligent words!",
-      "next": 5
-    },{
-      "text": "I'd like your support in the elections.",
-      "next": 6
-    },{
-      "text": "er...",
-      "next": -1
-    }]
-  },{
-    "id": 5,
-    "text": "Oh, they're really not THAT big. Here, look them up in the dictionary.",
-    "effect": "REL+20",
-    "next": 6
-  },{
-    "id": 6,
-    "text": "Before we go any further, tell me, what do you think of Catorcio?",
-    "choice": [{
-      "text": "He's a criminal, plain and simple.",
-      "next": 7
-    },{
-      "text": "He's trying to mend his ways.",
-      "next": 8
-    },{
-      "text": "Sorry, I don't really know him.",
-      "next": 8
-    }]
-  },{
-    "id": 7,
-    "text": "That's indubitably what I was telling Father Doglas, but he wouldn't listen.",
-    "next": 9
-  },{
-    "id": 8,
-    "text": "Hmm, I see...",
-    "next": 9
-  },{
-    "id": 9,
-    "text": "Oh, dear, would you look at the time! I have a class to attend! We will have to leave this discussion for some other time",
-    "next": -1
-  }]
-}, {
-  "name": "Shin Bone",
-  "character": 2,
-  "condition": "MET>0",
-  "dialog": [{
-    "id": 0,
-    "text": "Ser, good morning ser!",
-    "choice": [{
-      "text": "Good morning! How are the fish today?",
-      "effect": "REL+10",
-      "next": 1
-    },{
-      "text": "Wow, you don't smell like fish!",
-      "effect": "REL-10",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "I think they are happy ser, because I didn't cached them.",
-    "choice": [{
-      "text": "I'm sorry to hear that.",
-      "effect": "REL+10",
-      "next": 3
-    },{
-      "text": "Oh well.",
-      "next": 3
-    }]
-  },{
-    "id": 2,
-    "text": "Ya cos I din't caught even one fish today.",
-    "choice": [{
-      "text": "I'm sorry to hear that.",
-      "effect": "REL+10",
-      "next": 3
-    },{
-      "text": "Oh well.",
-      "next": 3
-    }]
-  },{
-    "id": 3,
-    "text": "It's okay ser. Ser can I ask you a question? Someone tell me Pader Doglas does not like me. Why is that ser?",
-    "choice": [{
-      "text": "Sorry I really don't know.",
-      "next": 4
-    },{
-      "text": "Did you come from the market when you spoke to him?",
-      "effect": "REL-10",
-      "next": 5
-    },{
-      "text": "Because you worship the Shin Bone",
-      "next": 6
-    }]
-  },{
-    "id": 4,
-    "text": "Okay tenk you anyway ser. I'm go to go home and do karaoke now.",
-    "next": -1
-  },{
-    "id": 5,
-    "text": "No ser I took a shower.",
-    "choice": [{
-      "text": "Sorry, I really don't know",
-      "next": 4
-    },{
-      "text": "Just kidding. It's because you worship the Shin Bone.",
-      "next": 6
-    }]
-  },{
-    "id": 6,
-    "text": "But ser, the Shin Bone's connected to da Thigh Bone! What's the problem?",
-    "choice": [{
-      "text": "That's what I said!",
-      "effect": "REL+10",
-      "next": 7
-    },{
-      "text": "But the Thigh Bone is larger, so you should worship the Thigh Bone.",
-      "effect": "REL-10",
-      "next": 7
-    }]
-  },{
-    "id": 7,
-    "text": "I don't like fighting. Maybe if I give Pader some of Alpacita's Organic Artisanal fish pate he will like me more. Thank you for the inpo ser!",
-    "next": -1
-  }]
-}, {
-  "name": "Introducing Pelicarpio",
-  "character": 2,
-  "condition": "MET===0",
-  "dialog": [{
-    "id": 0,
-    "text": "Good morning, ser.",
-    "choice": [{
-      "text": "Yuck! What's that smell?",
-      "effect": "REL-10",
-      "next": 1
-    },{
-      "text": "I see you just came from the Fish Market.",
-      "effect": "REL+10",
-      "next": 2
-    },{
-      "text": "How are you doing today?",
-      "next": 2
-    }]
-  }, {
-    "id": 1,
-    "text": "Sorry ser, I just come from da fish market.",
-    "choice": [{
-      "text": "Oh, I see. How was the market?",
-      "effect": "REL+10",
-      "next": 2
-    },{
-      "text": "And you didn't think to wash up first before meeting me?",
-      "effect": "REL-10",
-      "next": 3
-    }]
-  },{
-    "id": 2,
-    "text": "Ser! I sold many fish today. A good day for me!",
-    "choice": [{
-      "text": "Who's your best customer?",
-      "next": 4
-    },{
-      "text": "Can I talk to you about the elections?",
-      "next": 5
-    }]
-  },{
-    "id": 3,
-    "text": "Oh you're right ser! I'm so sorry! I will go home right now and wash. Good bye!",
-    "next": -1
-  },{
-    "id": 4,
-    "text": "Alpacita ser! She buys our fish and makes artisanal organic pate with them.",
-    "choice": [{
-      "text": "Organic. Artisanal. Fish pate?",
-      "next": 6
-    },{
-      "text": "I'd like to try that sometime!",
-      "effect": "REL+10",
-      "next": 5
-    }]
-  },{
-    "id": 5,
-    "text": "I should go home ser and wash up because I smell. Maybe we can talk some other time.",
-    "next": -1
-  },{
-    "id": 6,
-    "text": "Ya I don't know what is that also, hehe.",
-    "next": 5
-  }]
-}, {
-  "name": "Healthcare",
-  "character": 3,
-  "condition": "MET>0",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "GOLD>=500",
-      "next": 1
-    },{
-      "condition": "GOLD<500",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "I have some sad news to share with you today.",
-    "choice": [{
-      "text": "What is it?",
-      "next": 3
-    },{
-      "text": "Not getting \"donations\" lately?",
-      "effect": "REL-10",
-      "next": 3
-    }]
-  },{
-    "id": 2,
-    "text": "Still no money? I quess your campaign is not doing well, and that means I have no time for you.",
-    "willRepeat": true,
-    "next": -1
-  },{
-    "id": 3,
-    "text": "One of our workers got injured today. He is inthe hospital and since his employer doesn't pay for health care he has to pay for it on his own.",
-    "choice": [{
-      "text": "No health care, that's terrible!",
-      "next": 4
-    },{
-      "text": "I'm very sorry to hear that.",
-      "next": 4,
-      "effect": "REL+10"
-    },{
-      "text": "I thought that was what the WASI is for?",
-      "effect": "REL-10",
-      "next": 5
-    }]
-  },{
-    "id": 4,
-    "text": "It's terrible. He's supporting 9 cubs. Who will feed them now?",
-    "choice": [{
-      "text": "9 cubs?! Doesn't WASI support family planning?",
-      "effect": "REL-10",
-      "next": 6
-    },{
-      "text": "How can I help?",
-      "next": 7
-    }]
-  },{
-    "id": 5,
-    "text": "We do our best but there are many of us and too few donations.",
-    "next": 7
-  },{
-    "id": 6,
-    "text": "That's not the point.",
-    "next": 7
-  },{
-    "id": 7,
-    "text": "We are asking for donations to help pay for his medical bills. Any amount would be appreciated.",
-    "choice": [{
-      "text": "*Give $100*",
-      "effect": "GOLD-100,REL+10",
-      "next": 8
-    },{
-      "text": "*Give $1000*",
-      "effect": "GOLD-1000,REL+30",
-      "next": 8
-    },{
-      "text": "I can't donate, but if I win will mandate healthcare!",
-      "effect": "REL-10",
-      "next": 9
-    }]
-  },{
-    "id": 8,
-    "text": "Thanks for your donation friend, the workers will know where this came from.",
-    "next": -1
-  },{
-    "id": 9,
-    "text": "Hmph. That's not gonna help him now though, is it? Rest assured the WASI will remember this.",
-    "next": -1
-  }]
-}, {
-  "name": "Introducing Victortle",
-  "character": 3,
-  "condition": "MET===0",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "GOLD>=500",
-      "next": 1
+    "choice" : [ {
+      "next" : 3,
+      "text" : "Bat... hala? Is that like Valhalla?"
     }, {
-      "condition": "GOLD<500",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "Good morning! On behalf of the Worker's Alliance of Summer Island, I'm happy to accept your donation of $500.",
-    "choice": [{
-      "text": "Let it be known I stand with the proletariat!",
-      "effect": "REL+10,GOLD-500",
-      "next": 3
-    },{
-      "text": "Worker's Alliance?",
-      "next": 3
-    },{
-      "text": "Huh?",
-      "effect": "REL-10",
-      "next": 3
-    }]
-  },{
-    "id": 2,
-    "text": "Money talks, so if you don't have $500, who will respect you?",
-    "next": -1
-  },{
-    "id": 3,
-    "text": "Sorry, I assume that you are a mouse that stands in solidarity with the proletariat!",
-    "choice": [{
-      "text": "You're absolutely right. Here's my donation.",
-      "effect": "GOLD-500,REL+10",
-      "next": 4
-    },{
-      "text": "Why do I feel like this is a shakedown?",
-      "effect": "REL-10",
-      "next": 2
-    },{
-      "text": "I can't spend campaign funds will nilly!",
-      "effect": "REL-10",
-      "next": 2
-    }]
-  },{
-    "id": 4,
-    "text": "Thank you for your kind donation!",
-    "choice": [{
-      "text": "So why the hard sell?",
-      "next": 5
-    },{
-      "text": "Who else supports the WASI?",
-      "next": 5
-    }]
-  },{
-    "id": 5,
-    "text": "The WASI needs all the help it can get. It stands together with Pelicarpio of the Fishing Village in our fight against the capitalists like Boo Tee Kee.",
-    "choice": [{
-      "text": "Can I count on the proletariat in this election?",
-      "next": 6
-    },{
-      "text": "But Boo Tee Kee provides you with jobs?",
-      "effect": "REL-10",
-      "next": 7
-    }]
-  },{
-    "id": 6,
-    "text": "WASI is appreciative of your contribution, but it will take more than that to garner our full support. Good day!",
-    "next": -1
-  },{
-    "id": 7,
-    "text": "Employing us and exploiting us are two different things.",
-    "next": 6
-  }]
-}, {
-  "name": "Relic Hunter",
-  "character": 4,
-  "condition": "MET>0",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "MORALITY>=50",
-      "next": 1
-    },{
-      "condition": "MORALITY<50",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "May the Bone bless you.",
-    "choice": [{
-      "text": "Bathala Bless you.",
-      "effect": "REL-10",
-      "next": 3
-    },{
-      "text": "Thigh Bone or Shin Bone",
-      "effect": "REL-20",
-      "next": 3
-    },{
-      "text": "May the Bone be with you as well.",
-      "effect": "REL+10",
-      "next": 4
-    }]
-  },{
-    "id": 2,
-    "text": "I cannot speak with you unless you confess your sins.",
-    "next": -1
-  },{
-    "id": 3,
-    "text": "Don't mock me, child. I can appreciate a joke as much as anyone but I take matters of faith seriously.",
-    "next": 4
-  },{
-    "id": 4,
-    "text": "Speaking of Bone, I actually wanted to speak with you about something.",
-    "next": 5
-  },{
-    "id": 5,
-    "text": "I seek to go on a pilgrimage to bring back a chip of the sacred Thigh Bone.",
-    "choice": [{
-      "text": "That is exciting!",
-      "effect": "REL+10",
-      "next": 6
-    },{
-      "text": "How can I help you?",
-      "next": 7
-    }]
-  },{
-    "id": 6,
-    "text": "Indeed it is! I'm so glad you share my excitement.",
-    "next": 7
-  },{
-    "id": 7,
-    "text": "Unfortunately, it will be a costly experience. I need a good soul to provide the church with $5000 for expenses.",
-    "choice": [{
-      "text": "I'm a little short on cash right now, Pader.",
-      "next": 8
-    },{
-      "text": "It would be my honor to fund this worthy endeavor.",
-      "effect": "GOLD-5000,REL+30,MORALITY-10",
-      "next": 9
-    },{
-      "text": "What do I get in return?",
-      "effect": "REL-10",
-      "next": 10
-    }]
-  },{
-    "id": 8,
-    "text": "I understand. Perhaps another generous soul will be able to donate money.",
-    "next": -1
-  },{
-    "id": 9,
-    "text": "I'm gratified that you feel that way my child. I'll make sure that my entire district knows of your generosity.",
-    "next": -1
-  },{
-    "id": 10,
-    "text": "If the blessing of the Thigh Bone are not good enough for you, rest assured I will let the district know of your generosity.",
-    "choice": [{
-      "text": "I cannot use campaign funds this way.",
-      "effect": "REL-10,MORALITY+10",
-      "next": 8
-    },{
-      "text": "In that case I would be happy to fund your pilgrimage.",
-      "effect": "REL+10,MORALITY-30",
-      "next": 9
-    }]
-  }]
-}, {
-  "name": "Introducing Father Doglas",
-  "character": 4,
-  "condition": "MET===0",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "MORALITY>=50",
-      "next": 1
+      "effect" : "REL+10",
+      "next" : 4,
+      "text" : "May the Creator protect you."
     }, {
-      "condition": "MORALITY<50",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "A blessed day to you my child.",
-    "choice": [{
-      "text": "And to you as well, Pader.",
-      "effect": "REL+10",
-      "next": 5
-    },{
-      "text": "Actually I've had a rough day.",
-      "effect": "REL-10",
-      "next": 6
-    }]
-  },{
-    "id": 2,
-    "text": "I cannot speak with you unless you confess your sins.",
-    "choice": [{
-      "text": "*Confess*",
-      "effect": "MORALITY+20,REL+20",
-      "next": 3
-    },{
-      "text": "*Refuse*",
-      "effect": "REL-20",
-      "next": 4
-    }]
-  },{
-    "id": 3,
-    "text": "You have confessed your sins. Do your penance and pray to the Almighty Bone for guidance.",
-    "next": -1
-  },{
-    "id": 4,
-    "text": "Then there is nothing more for us to discuss. I shall pray for your soul.",
-    "willRepeat": true,
-    "next": -1
-  },{
-    "id": 5,
-    "text": "Blessings come to those who are faithful to the Thigh Bone. That's why it worries me that Pelicarpio allows worship of the Shin Bone in his district.",
-    "choice": [{
-      "text": "That is troubling indeed.",
-      "effect": "REL+10",
-      "next": 7
-    },{
-      "text": "Freedom of religion is good!",
-      "effect": "REL-30",
-      "next": 8
-    },{
-      "text": "But isn't the Shin bone connected to the Thigh Bone?",
-      "effect": "REL-10",
-      "next": 8
-    }]
-  },{
-    "id": 6,
-    "text": "You must always count your blessings my child.",
-    "choice": [{
-      "text": "I hate it when people say that.",
-      "effect": "REL-10",
-      "next": 4
-    },{
-      "text": "I guess so...",
-      "next": 5
-    },{
-      "text": "Wise words, Pader.",
-      "effect": "REL+10",
-      "next": 5
-    }]
-  },{
-    "id": 7,
-    "text": "I'm so glad you agree, my child!",
-    "next": 9
-  },{
-    "id": 8,
-    "text": "Blessings come to those who are faithful to the Thigh Bone. That's why it worries me that Pelicarpio allows worship of the Shin Bone in his district.",
-    "next": 9
-  },{
-    "id": 9,
-    "text": "Oh dear, it's almost time for the service and I still need to write my sermon. Let us speak again my child. Be One with the Thigh Bone.",
-    "next": -1
-  }]
-}, {
-  "name": "Introducing Alpacita",
-  "character": 5,
-  "condition": "MET===0",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "MORALITY>=50",
-      "next": 1
+      "effect" : "REL-10",
+      "next" : 5,
+      "text" : "Er.. okay?"
+    } ],
+    "id" : 1,
+    "text" : "Bathala bless you my friend."
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "I'm sorry, but I'm totally getting bad vibes from you.",
+    "willRepeat" : true
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 6,
+      "text" : "Supreme Being? Pader Doglas may have some issues with that."
     }, {
-      "condition": "MORALITY<50",
-      "next": 2
-    }]
-  }, {
-    "id": 1,
-    "text": "Bathala bless you my friend.",
-    "choice": [{
-      "text": "Bat... hala? Is that like Valhalla?",
-      "next": 3
+      "next" : 5,
+      "text" : "Ah, right. Okay then."
     }, {
-      "text": "May the Creator protect you.",
-      "effect": "REL+10",
-      "next": 4
+      "effect" : "REL+10",
+      "next" : 7,
+      "text" : "I feel much more enlightened now!"
+    } ],
+    "id" : 3,
+    "text" : "Bathala is the supreme being and creator of all this wonderful splendor!"
+  }, {
+    "id" : 4,
+    "next" : 5,
+    "text" : "It's so wonderful to meet someone who gives thanks to Bathala!"
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 8,
+      "text" : "I need some good vibes to help me win the election."
     }, {
-      "text": "Er.. okay?",
-      "effect": "REL-10",
-      "next": 5
-    }]
-  }, {
-    "id": 2,
-    "text": "I'm sorry, but I'm totally getting bad vibes from you.",
-    "willRepeat": true,
-    "next": -1
-  }, {
-    "id": 3,
-    "text": "Bathala is the supreme being and creator of all this wonderful splendor!",
-    "choice": [{
-      "text": "Supreme Being? Pader Doglas may have some issues with that.",
-      "effect": "REL-10",
-      "next": 6
-    },{
-      "text": "Ah, right. Okay then.",
-      "next": 5
-    },{
-      "text": "I feel much more enlightened now!",
-      "effect": "REL+10",
-      "next": 7
-    }]
-  }, {
-    "id": 4,
-    "text": "It's so wonderful to meet someone who gives thanks to Bathala!",
-    "next": 5
-  }, {
-    "id": 5,
-    "text": "So, how can we improve each other's karma today?",
-    "choice": [{
-      "text": "I need some good vibes to help me win the election.",
-      "effect": "REL+10",
-      "next": 8
-    },{
-      "text": "I'd like your support in the elections.",
-      "next": 8
-    },{
-      "text": "How.. what?",
-      "effect": "REL-10",
-      "next": 9
-    }]
-  },{
-    "id": 6,
-    "text": "The good Pader and I have very different spiritual views.",
-    "next": 5
-  },{
-    "id": 7,
-    "text": "I'm so happy to help you on the path to Enlightenment!",
-    "next": 5
-  },{
-    "id": 8,
-    "text": "Your honesty speaks to a good hear but our spirits need to be more intertwined before I can lend you my support.",
-    "next": 10
-  },{
-    "id": 9,
-    "text": "You know, I try to be open and accepting to all, but you're really just being mean. I have to cleanse this negativity now. Goodbye.",
-    "next": -1
-  },{
-    "id": 10,
-    "text": "Oh dear, it's time for my daily spiritual cleansing! Let's speak again soon. Bathala bless you!",
-    "next": -1
-  }]
-}, {
-  "name": "Paved Paradise",
-  "character": 5,
-  "condition": "MET>0",
-  "dialog": [{
-    "id": 0,
-    "conditions": [{
-      "condition": "MORALITY>=50",
-      "next": 1
+      "next" : 8,
+      "text" : "I'd like your support in the elections."
     }, {
-      "condition": "MORALITY<50",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "Namaste, my friend.",
-    "choice": [{
-      "text": "What happened to Bathala?",
-      "effect": "REL-10",
-      "next": 3
-    },{
-      "text": "Namaste",
-      "effect": "REL+10",
-      "next": 4
-    }]
-  },{
-    "id": 2,
-    "text": "Oh dear, you have a very unwelcome aura, I can't be around you.",
-    "willRepeat": true,
-    "next": -1
-  },{
-    "id": 3,
-    "text": "I respect a multiplicity of beliefs and philosophies. Why stick with one when you can have them all?",
-    "next": 4
-  },{
-    "id": 4,
-    "text": "I'm happy to see you my friend. I have heard some terrible news that truly disturbs my psyche.",
-    "choice": [{
-      "text": "Has your organic grocery run out of kale?",
-      "next": 5
-    },{
-      "text": "What is it?",
-      "next": 6
-    }]
-  },{
-    "id": 5,
-    "text": "No, even worse!",
-    "next": 6
-  },{
-    "id": 6,
-    "text": "Catorcio is planning to open up a casino resort!",
-    "choice": [{
-      "text": "Why is that bad? It provides employment.",
-      "effect": "REL-10",
-      "next": 7
-    },{
-      "text": "Won't the boost tourism?",
-      "effect": "REL-10",
-      "next": 7
-    },{
-      "text": "You're right, that's terrible!",
-      "effect": "REL+10",
-      "next": 8
-    }]
-  },{
-    "id": 7,
-    "text": "Any financial gain will totally be offset by the environmental and spiritual loss to the island. Plus it'll ruin my view of the sunset!",
-    "choice": [{
-      "text": "You're right, that's terrible!",
-      "effect": "REL+10",
-      "next": 8
-    },{
-      "text": "Why not talk to Catorcio about it?",
-      "effect": "REL-10",
-      "next": 9
-    }]
-  },{
-    "id": 8,
-    "text": "I'm so happy you feel the same way. Let our powers combine with Bathala and reject this encroachment on paradise!",
-    "next": -1
-  },{
-    "id": 9,
-    "text": "I don't trust Catorcio to do the right thing, and I am disappointed that you do. Namaste and goodbye!",
-    "next": -1
-  }]
-}, {
-  "name": "Introducing Boo Tee Kee",
-  "character": 6,
-  "condition": "MET===0",
-  "dialog": [{
-    "id": 0,
-    "text": "Oh hello, new customer! Come in, come in! I give you big discount!",
-    "choice": [{
-      "text": "Sorry, just window shopping.",
-      "effect": "REL-10",
-      "next": 1
-    },{
-      "text": "Watcha got?",
-      "effect": "REL+10",
-      "next": 2
-    }]
-  },{
-    "id": 1,
-    "text": "Okey no ploblem, you tek a look-see ya?",
-    "next": 2
-  },{
-    "id": 2,
-    "text": "Oh, I show you somesing! Just come in today! Brand new Van!",
-    "choice": [{
-      "text": "Tell me more!",
-      "effect": "REL+10",
-      "next": 3
-    },{
-      "text": "What do I need a van for?",
-      "effect": "REL-10",
-      "next": 3
-    }]
-  },{
-    "id": 3,
-    "text": "It top of line! Good stereo, speed, and fuel efficient. Save time and money!",
-    "choice": [{
-      "text": "Sorry, not interested.",
-      "next": 4
-    },{
-      "text": "Nice, how much?",
-      "next": 5
-    }]
-  },{
-    "id": 4,
-    "text": "OK no ploblem! You come back soon I got somesing else!",
-    "next": -1
-  },{
-    "id": 5,
-    "text": "Well it depend. Van with customs. Cost $2000 with tax. But I have friend in custom. I can give you for $1000 but no receipt, OK?",
-    "choice": [{
-      "text": "I'm a law abiding citizen!",
-      "effect": "REL-10,GOLD-2000,CARD=Van:1",
-      "next": 6
-    },{
-      "text": "That's a great deal!",
-      "effect": "REL+10,GOLD-1000,CARD=Van:1",
-      "next": 6
-    },{
-      "text": "I think I'll pass for now.",
-      "next": -1
-    }]
-  },{
-    "id": 6,
-    "text": "Another satisfy customer! Tell your friend we got best deals!",
-    "next": -1
-  }]
-}, {
-  "name": "Introducing Filipenguin",
-  "character": 7,
-  "condition": "MET===0",
-  "dialog": [{
-    "id": 0,
-    "text": "Knock Knock...",
-    "next": 1
+      "effect" : "REL-10",
+      "next" : 9,
+      "text" : "How.. what?"
+    } ],
+    "id" : 5,
+    "text" : "So, how can we improve each other's karma today?"
   }, {
-    "id": 1,
-    "text": "Ako maba",
-    "next": -1
-  }]
-}, {
-  "name": "Introducing Franciscrow",
-  "character": 8,
-  "condition": "MET===0",
-  "dialog": [{
-    "id": 0,
-    "text": "This meeting never took place.",
-    "next": 1
+    "id" : 6,
+    "next" : 5,
+    "text" : "The good Pader and I have very different spiritual views."
   }, {
-    "id": 1,
-    "text": "We never met",
-    "next": -1
-  }]
-}, {
-  "name": "Owlberto Chitchat",
-  "character": 0,
-  "condition": "DEFAULT",
-  "dialog": [{
-    "id": 0,
-    "text": "Let me tell you about my favorite 18th century visionary...",
-    "next": 1
+    "id" : 7,
+    "next" : 5,
+    "text" : "I'm so happy to help you on the path to Enlightenment!"
   }, {
-    "id": 1,
-    "text": "... blah * blah * ...",
-    "next": -1
-  }]
-}, {
-  "name": "Catorcio Chitchat",
-  "character": 1,
-  "condition": "DEFAULT",
-  "dialog": [{
-    "id": 0,
-    "text": "*play poker or something*",
-    "next": -1
-  }]
-}, {
-  "name": "Pelicarpio Chitchat",
-  "character": 2,
-  "condition": "DEFAULT",
-  "dialog": [{
-    "id": 0,
-    "text": "Grab some grub and fish with me.",
-    "next": 1
+    "id" : 8,
+    "next" : 10,
+    "text" : "Your honesty speaks to a good hear but our spirits need to be more intertwined before I can lend you my support."
   }, {
-    "id": 1,
-    "text": "That's some good fishin",
-    "next": -1
-  }]
+    "id" : 9,
+    "next" : -1,
+    "text" : "You know, I try to be open and accepting to all, but you're really just being mean. I have to cleanse this negativity now. Goodbye."
+  }, {
+    "id" : 10,
+    "next" : -1,
+    "text" : "Oh dear, it's time for my daily spiritual cleansing! Let's speak again soon. Bathala bless you!"
+  } ],
+  "name" : "Introducing Alpacita"
 }, {
-  "name": "Victortle Chitchat",
-  "character": 3,
-  "condition": "DEFAULT",
-  "dialog":[{
-    "id": 0,
-    "text": "Mouse, I ain't got no time for no chit chat",
-    "next": 1
+  "character" : 5,
+  "condition" : "MET>0",
+  "dialog" : [ {
+    "conditions" : [ {
+      "condition" : "MORALITY>=50",
+      "next" : 1
+    }, {
+      "condition" : "MORALITY<50",
+      "next" : 2
+    } ],
+    "id" : 0
   }, {
-    "id": 1,
-    "text": "But a few bottles wouldn't hurt",
-    "effect": "GOLD-50",
-    "next": 2
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 3,
+      "text" : "What happened to Bathala?"
+    }, {
+      "effect" : "REL+10",
+      "next" : 4,
+      "text" : "Namaste"
+    } ],
+    "id" : 1,
+    "text" : "Namaste, my friend."
   }, {
-    "id": 2,
-    "text": "*gulp gulp*",
-    "next": -1
-  }]
+    "id" : 2,
+    "next" : -1,
+    "text" : "Oh dear, you have a very unwelcome aura, I can't be around you.",
+    "willRepeat" : true
+  }, {
+    "id" : 3,
+    "next" : 4,
+    "text" : "I respect a multiplicity of beliefs and philosophies. Why stick with one when you can have them all?"
+  }, {
+    "choice" : [ {
+      "next" : 5,
+      "text" : "Has your organic grocery run out of kale?"
+    }, {
+      "next" : 6,
+      "text" : "What is it?"
+    } ],
+    "id" : 4,
+    "text" : "I'm happy to see you my friend. I have heard some terrible news that truly disturbs my psyche."
+  }, {
+    "id" : 5,
+    "next" : 6,
+    "text" : "No, even worse!"
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 7,
+      "text" : "Why is that bad? It provides employment."
+    }, {
+      "effect" : "REL-10",
+      "next" : 7,
+      "text" : "Won't the boost tourism?"
+    }, {
+      "effect" : "REL+10",
+      "next" : 8,
+      "text" : "You're right, that's terrible!"
+    } ],
+    "id" : 6,
+    "text" : "Catorcio is planning to open up a casino resort!"
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 8,
+      "text" : "You're right, that's terrible!"
+    }, {
+      "effect" : "REL-10",
+      "next" : 9,
+      "text" : "Why not talk to Catorcio about it?"
+    } ],
+    "id" : 7,
+    "text" : "Any financial gain will totally be offset by the environmental and spiritual loss to the island. Plus it'll ruin my view of the sunset!"
+  }, {
+    "id" : 8,
+    "next" : -1,
+    "text" : "I'm so happy you feel the same way. Let our powers combine with Bathala and reject this encroachment on paradise!"
+  }, {
+    "id" : 9,
+    "next" : -1,
+    "text" : "I don't trust Catorcio to do the right thing, and I am disappointed that you do. Namaste and goodbye!"
+  } ],
+  "name" : "Paved Paradise"
 }, {
-  "name": "Fr Doglas Chitchat",
-  "character": 4,
-  "condition": "DEFAULT",
-  "dialog": [{
-    "id": 0,
-    "text": "Bless you, my child.",
-    "next": 1
+  "character" : 6,
+  "condition" : "MET===0",
+  "dialog" : [ {
+    "choice" : [ {
+      "effect" : "REL-10",
+      "next" : 1,
+      "text" : "Sorry, just window shopping."
+    }, {
+      "effect" : "REL+10",
+      "next" : 2,
+      "text" : "Watcha got?"
+    } ],
+    "id" : 0,
+    "text" : "Oh hello, new customer! Come in, come in! I give you big discount!"
   }, {
-    "id": 1,
-    "text": "* salvation and spirits *",
-    "next": -1
-  }]
+    "id" : 1,
+    "next" : 2,
+    "text" : "Okey no ploblem, you tek a look-see ya?"
+  }, {
+    "choice" : [ {
+      "effect" : "REL+10",
+      "next" : 3,
+      "text" : "Tell me more!"
+    }, {
+      "effect" : "REL-10",
+      "next" : 3,
+      "text" : "What do I need a van for?"
+    } ],
+    "id" : 2,
+    "text" : "Oh, I show you somesing! Just come in today! Brand new Van!"
+  }, {
+    "choice" : [ {
+      "next" : 4,
+      "text" : "Sorry, not interested."
+    }, {
+      "next" : 5,
+      "text" : "Nice, how much?"
+    } ],
+    "id" : 3,
+    "text" : "It top of line! Good stereo, speed, and fuel efficient. Save time and money!"
+  }, {
+    "id" : 4,
+    "next" : -1,
+    "text" : "OK no ploblem! You come back soon I got somesing else!"
+  }, {
+    "choice" : [ {
+      "effect" : "REL-10,GOLD-2000,CARD=Van:1",
+      "next" : 6,
+      "text" : "I'm a law abiding citizen!"
+    }, {
+      "effect" : "REL+10,GOLD-1000,CARD=Van:1",
+      "next" : 6,
+      "text" : "That's a great deal!"
+    }, {
+      "next" : -1,
+      "text" : "I think I'll pass for now."
+    } ],
+    "id" : 5,
+    "text" : "Well it depend. Van with customs. Cost $2000 with tax. But I have friend in custom. I can give you for $1000 but no receipt, OK?"
+  }, {
+    "id" : 6,
+    "next" : -1,
+    "text" : "Another satisfy customer! Tell your friend we got best deals!"
+  } ],
+  "name" : "Introducing Boo Tee Kee"
 }, {
-  "name": "Alpacita Chitchat",
-  "character": 5,
-  "condition": "DEFAULT",
-  "dialog": [{
-    "id": 0,
-    "text": "Peace and love!",
-    "next": 1
+  "character" : 7,
+  "condition" : "MET===0",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "Knock Knock..."
   }, {
-    "id": 1,
-    "text": "* surfing tips *",
-    "next": -1
-  }]
+    "id" : 1,
+    "next" : -1,
+    "text" : "Ako maba"
+  } ],
+  "name" : "Introducing Filipenguin"
 }, {
-  "name": "Boo Tee Kee Chitchat",
-  "character": 6,
-  "condition": "DEFAULT",
-  "dialog": [{
-    "id": 0,
-    "text": "Looking for something?",
-    "next": 1
+  "character" : 8,
+  "condition" : "MET===0",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "This meeting never took place."
   }, {
-    "id": 1,
-    "text": "* economics (the freaky kind) *",
-    "next": -1
-  }]
+    "id" : 1,
+    "next" : -1,
+    "text" : "We never met"
+  } ],
+  "name" : "Introducing Franciscrow"
 }, {
-  "name": "Filipenguin Chitchat",
-  "character": 7,
-  "condition": "DEFAULT",
-  "dialog": [{
-    "id": 0,
-    "text": "Why did the chicken cross the road?",
-    "next": 1
+  "character" : 0,
+  "condition" : "DEFAULT",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "Let me tell you about my favorite 18th century visionary..."
   }, {
-    "id": 1,
-    "text": "Hahahaha *share jokes *",
-    "next": -1
-  }]
+    "id" : 1,
+    "next" : -1,
+    "text" : "... blah * blah * ..."
+  } ],
+  "name" : "Owlberto Chitchat"
 }, {
-  "name": "Franciscrow Chitchat",
-  "character": 8,
-  "condition": "DEFAULT",
-  "dialog": [{
-    "id": 0,
-    "text": "We don't have much to talk about.",
-    "next": 1
+  "character" : 1,
+  "condition" : "DEFAULT",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : -1,
+    "text" : "*play poker or something*"
+  } ],
+  "name" : "Catorcio Chitchat"
+}, {
+  "character" : 2,
+  "condition" : "DEFAULT",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "Grab some grub and fish with me."
   }, {
-    "id": 1,
-    "text": "* whispers carelessly* ",
-    "next": -1
-  }]
-}]
+    "id" : 1,
+    "next" : -1,
+    "text" : "That's some good fishin"
+  } ],
+  "name" : "Pelicarpio Chitchat"
+}, {
+  "character" : 3,
+  "condition" : "DEFAULT",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "Mouse, I ain't got no time for no chit chat"
+  }, {
+    "effect" : "GOLD-50",
+    "id" : 1,
+    "next" : 2,
+    "text" : "But a few bottles wouldn't hurt"
+  }, {
+    "id" : 2,
+    "next" : -1,
+    "text" : "*gulp gulp*"
+  } ],
+  "name" : "Victortle Chitchat"
+}, {
+  "character" : 4,
+  "condition" : "DEFAULT",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "Bless you, my child."
+  }, {
+    "id" : 1,
+    "next" : -1,
+    "text" : "* salvation and spirits *"
+  } ],
+  "name" : "Fr Doglas Chitchat"
+}, {
+  "character" : 5,
+  "condition" : "DEFAULT",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "Peace and love!"
+  }, {
+    "id" : 1,
+    "next" : -1,
+    "text" : "* surfing tips *"
+  } ],
+  "name" : "Alpacita Chitchat"
+}, {
+  "character" : 6,
+  "condition" : "DEFAULT",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "Looking for something?"
+  }, {
+    "id" : 1,
+    "next" : -1,
+    "text" : "* economics (the freaky kind) *"
+  } ],
+  "name" : "Boo Tee Kee Chitchat"
+}, {
+  "character" : 7,
+  "condition" : "DEFAULT",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "Why did the chicken cross the road?"
+  }, {
+    "id" : 1,
+    "next" : -1,
+    "text" : "Hahahaha *share jokes *"
+  } ],
+  "name" : "Filipenguin Chitchat"
+}, {
+  "character" : 8,
+  "condition" : "DEFAULT",
+  "dialog" : [ {
+    "id" : 0,
+    "next" : 1,
+    "text" : "We don't have much to talk about."
+  }, {
+    "id" : 1,
+    "next" : -1,
+    "text" : "* whispers carelessly* "
+  } ],
+  "name" : "Franciscrow Chitchat"
+} ]

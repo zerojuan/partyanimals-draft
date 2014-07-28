@@ -76,6 +76,7 @@ angular.module('partyanimalsDraftApp')
       console.log('MET:', that.humanStats.doneEvents);
       var latestReputation = that.reputations[that.reputations.length - 1];
       var conditions = {
+        GOLD: that.humanStats.totalCash,
         MET: that.humanStats.met[event.character],
         MORALITY: that.humanStats.morality,
         ISSUE: that.humanStats.issueStats,
@@ -105,6 +106,7 @@ angular.module('partyanimalsDraftApp')
                                    .replace('OGREPUTATION', conditions.OGREPUTATION)
                                    .replace('LREPUTATION', conditions.LREPUTATION)
                                    .replace('REL', conditions.REL)
+                                   .replace('GOLD', conditions.GOLD)
                                    .replace('ISSUE0', conditions.ISSUE[0].level)
                                    .replace('ISSUE1', conditions.ISSUE[1].level)
                                    .replace('ISSUE2', conditions.ISSUE[2].level));

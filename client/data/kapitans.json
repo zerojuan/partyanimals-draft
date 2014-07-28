@@ -20,7 +20,7 @@
   "relations" : [ 50, 50, 50, 90, 30, 90, 50, 50, 50 ],
   "type" : "KAPITAN"
 }, {
-  "description" : "The head of a stevedore\"s union, is in constant conflict with Boo Tee Kee over workers\" rights,  As a tortoise, he has lived for many years (ie he should look a bit old)",
+  "description" : "The head of a stevedore's union, is in constant conflict with Boo Tee Kee over workers\" rights,  As a tortoise, he has lived for many years (ie he should look a bit old)",
   "id" : 3,
   "image" : "victortle.png",
   "name" : "Victortle",
@@ -30,7 +30,7 @@
   "description" : "A priest who exerts great power in the main diocese of the capital. He is very close to the family of Crocopio Cortez. He is a fat old priest. very close to big business who makle big donations to the cathedral.",
   "id" : 4,
   "image" : "doglas.png",
-  "name" : "Father Doglas",
+  "name" : "Pader Doglas",
   "relations" : [ 80, 80, 80, 50, 50, 20, 50, 50, 50 ],
   "type" : "KAPITAN"
 }, {

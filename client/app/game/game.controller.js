@@ -25,6 +25,7 @@ angular.module('partyanimalsDraftApp')
     $scope.currentPlayer = $scope.human;
 
     $scope.human.met = [0,0,0,0,0,0,0,0,0];
+    $scope.human.totalCash = $scope.totalCash;
     $scope.human.morality = 50;
     $scope.human.doneEvents = [];
 
@@ -73,6 +74,7 @@ angular.module('partyanimalsDraftApp')
       PAFirebase.goldRef.on('value', function(snapshot){
         if(!onDataChanged('initialGold')){
           $scope.totalCash = snapshot.val();
+          $scope.human.totalCash = snapshot.val();
           $scope.ai.totalCash = snapshot.val();
           $scope.$apply();
         }
@@ -251,6 +253,7 @@ angular.module('partyanimalsDraftApp')
       $scope.simulate.summaries = [];
       $scope.simulate.aiSummaries = [];
       $scope.simulate.isNextReady = true;
+      $scope.simulate.miscFunds = 0;
       $scope.showOverlay = true;
       $scope.endTurn = false;
       $scope.hoursElapsed = 0;
@@ -358,6 +361,7 @@ angular.module('partyanimalsDraftApp')
             $scope.cards = GameState.activateCards(total.cards);
           }
           $scope.totalCash += result.total.gold;
+          $scope.simulate.miscFunds += result.total.gold;
           $scope.human.morality += result.total.morality;
           $scope.simulate.summaries.push({
             text: 'Talked with the Kapitan ('+total.relationship+' Relationship)',
@@ -378,6 +382,7 @@ angular.module('partyanimalsDraftApp')
           }else if(result.attribute === 'GOLD'){
             if(result.success){
               message = 'Won a $'+result.value+'at the Casino';
+              $scope.simulate.miscFunds += result.value;
               $scope.totalCash += result.value;
             }else{
               message = 'Lost at the Casino.';
@@ -406,6 +411,7 @@ angular.module('partyanimalsDraftApp')
 
       //advance game state
       $scope.totalCash = $scope.totalCash - $scope.totalCost + $scope.totalContribution;
+      $scope.human.totalCash = $scope.totalCash;
       $scope.turnsLeft -= 1;
       $scope.scheduledActivities = [];
       $scope.currentLocation = $scope.futureLocation;
@@ -592,6 +598,20 @@ angular.module('partyanimalsDraftApp')
       $scope.endTurn = true;
       //add budget contributions
       //TODO: List down extra curricular activities
+      var extraMessage = '';
+      if($scope.simulate.miscFunds > 0){
+        extraMessage = 'Earned $' + $scope.simulate.miscFunds + ' from misc. activities.';
+      }else{
+        extraMessage = 'Lost $' + $scope.simulate.miscFunds + ' to misc. items.';
+      }
+      if($scope.simulate.miscFunds !== 0){
+        $scope.simulate.summaries.push({
+          text: extraMessage,
+          cost: $scope.simulate.miscFunds,
+          success: $scope.simulate.miscFunds > 0
+        });
+      }
+
       $scope.totalContribution = 0;
       angular.forEach($scope.districts, function(val){
         if(val.humanReputation - val.aiReputation >= 50){
