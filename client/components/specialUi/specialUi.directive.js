@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .directive('specialUi', function (GameState) {
+  .directive('specialUi', function ($filter, GameState) {
     return {
       require: '^activitySim',
       templateUrl: 'components/specialUi/specialUi.html',
@@ -25,6 +25,7 @@ angular.module('partyanimalsDraftApp')
             var parseVal = {
               gold: result.value
             };
+            console.log('Result:', result);
             if(result.success){
               scope.doneMessage = $filter('messageparser')(scope.activity.text.success[0], parseVal);
             }else{
