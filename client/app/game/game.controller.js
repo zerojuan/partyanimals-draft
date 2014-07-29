@@ -91,6 +91,7 @@ angular.module('partyanimalsDraftApp')
         console.log('Districts');
         if(!onDataChanged('districts')){
           $scope.districts = snapshot.val();
+          var selectedDistrict = null;
           $scope.districts.forEach(function(val){
             var i = 0;
             val.humanReputation = 0;
@@ -104,6 +105,7 @@ angular.module('partyanimalsDraftApp')
               for(i = 0; i < 5; i++){
                 val.humanStance[i] = $scope.human.issueStats[i].level;
               }
+              selectedDistrict = val;
             }
             if(val.id === $scope.ai.hq.id){
               val.isAIHQ = true;
@@ -120,7 +122,9 @@ angular.module('partyanimalsDraftApp')
 
           //tally district approval ratings
           $scope.totalReputations = GameState.getTotalReputation();
+          $scope.changeSelectedDistrict(findDistrict(selectedDistrict.id));
           $scope.$apply();
+
         }
       });
 
@@ -154,7 +158,9 @@ angular.module('partyanimalsDraftApp')
       PAFirebase.activitiesRef.on('value', function(snapshot){
         if(!onDataChanged('activities')){
           $scope.activities = snapshot.val();
+          $scope.changeSelectedDistrict(findDistrict($scope.selectedDistrict.id));
           $scope.$apply();
+
         }
       });
     };
@@ -194,7 +200,13 @@ angular.module('partyanimalsDraftApp')
       }
       $scope.selectedDistrict = district;
       $scope.selectedDistrict.selected = true;
+      generateActivities();
+    };
+
+    var generateActivities = function(){
+      console.log('Generate activitieis?');
       $scope.selectedDistrict.kapitan = $scope.findKapitan($scope.selectedDistrict.kapitanId);
+      if(!$scope.selectedDistrict.kapitan) return;
       $scope.selectedDistrict.activities = [];
       if($scope.selectedDistrict.specialistId){
         $scope.selectedDistrict.specialist = $scope.findKapitan($scope.selectedDistrict.specialistId);
@@ -219,6 +231,8 @@ angular.module('partyanimalsDraftApp')
       toggleDisable(moveActivity, shouldDisable);
 
       var activities = [];
+
+      console.log('Activities: ', $scope.activities);
 
       $scope.activities.forEach(function(val){
         var newVal = angular.copy(val);
@@ -418,6 +432,8 @@ angular.module('partyanimalsDraftApp')
 
       $scope.selectedDistrict.selected = false;
       $scope.selectedDistrict = null;
+      $scope.selectedDistrict = findDistrict($scope.currentLocation.id);
+      $scope.selectedDistrict.selected = true;
       movePlayerToLocation($scope.currentLocation, true);
 
       GameState.updateTurn($scope.turnsLeft);
@@ -483,6 +499,7 @@ angular.module('partyanimalsDraftApp')
 
     $scope.findKapitan = function(id){
       var retVal = null;
+      if(!$scope.kapitans) return null;
       $scope.kapitans.forEach(function(val){
         if(val.id === id){
           retVal = val;
@@ -675,6 +692,12 @@ angular.module('partyanimalsDraftApp')
         }
         $scope.ai.totalCash += cost;
       }
+    };
+
+    var findDistrict = function(id){
+      return _.find($scope.districts, function(val){
+        return val.id === id;
+      });
     };
 
     var setKapitanForDistrict = function(kapitan, district){
