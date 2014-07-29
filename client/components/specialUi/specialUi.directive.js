@@ -33,7 +33,7 @@ angular.module('partyanimalsDraftApp')
             }else{
               scope.doneMessage = scope.activity.text.fail[0];
             }
-
+            scope.onDone();
           }
         });
       }
