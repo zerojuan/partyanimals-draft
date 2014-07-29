@@ -233,8 +233,6 @@ angular.module('partyanimalsDraftApp')
 
       var activities = [];
 
-      console.log('Activities: ', $scope.activities);
-
       $scope.activities.forEach(function(val){
         var newVal = angular.copy(val);
         if(val.restriction && _.indexOf(val.restriction, $scope.selectedDistrict.id) < 0){
@@ -433,8 +431,8 @@ angular.module('partyanimalsDraftApp')
 
       $scope.selectedDistrict.selected = false;
       $scope.selectedDistrict = null;
-      $scope.selectedDistrict = findDistrict($scope.currentLocation.id);
-      $scope.selectedDistrict.selected = true;
+      $scope.changeSelectedDistrict(findDistrict($scope.currentLocation.id));
+      // $scope.selectedDistrict.selected = true;
       movePlayerToLocation($scope.currentLocation, true);
 
       GameState.updateTurn($scope.turnsLeft);
