@@ -632,8 +632,8 @@
   }, {
     "choice" : [ {
       "effect" : "REL+10",
-      "next" : 7,
-      "text" : "That's what I said!"
+      "next" : 8,
+      "text" : "Don't worry I'll talk to him about it."
     }, {
       "effect" : "REL-10",
       "next" : 7,
@@ -645,6 +645,24 @@
     "id" : 7,
     "next" : -1,
     "text" : "I don't like fighting. Maybe if I give Pader some of Alpacita's Organic Artisanal fish pate he will like me more. Thank you for the inpo ser!"
+  }, {
+    "id": 8,
+    "conditions": [{
+      "condition": "REL4 > 50",
+      "next": 9
+    }, {
+      "condition": "DEFAULT",
+      "next": 10
+    }]
+  }, {
+    "id": 9,
+    "text": "Tenk yu ser! Here is an organic artisanal pa-tey from Alpacita. Meybe it helps!",
+    "effect": "REL+10",
+    "next": -1
+  }, {
+    "id": 10,
+    "text": "No it's ok ser. I think he doesn't like you either. I will fix it myself.",
+    "next": -1
   } ],
   "name" : "Shin Bone"
 }, {
@@ -1207,7 +1225,7 @@
     }, {
       "effect" : "REL-10",
       "next" : 7,
-      "text" : "Won't the boost tourism?"
+      "text" : "Won't that boost tourism?"
     }, {
       "effect" : "REL+10",
       "next" : 8,
@@ -1223,7 +1241,10 @@
     }, {
       "effect" : "REL-10",
       "next" : 9,
-      "text" : "Why not talk to Catorcio about it?"
+      "text" : "Don't worry, I'll talk to Catorcio about it"
+    }, {
+      "next": 12,
+      "text": "Perhaps this might change your mind (bribe $1000)"
     } ],
     "id" : 7,
     "text" : "Any financial gain will totally be offset by the environmental and spiritual loss to the island. Plus it'll ruin my view of the sunset!"
@@ -1232,9 +1253,40 @@
     "next" : -1,
     "text" : "I'm so happy you feel the same way. Let our powers combine with Bathala and reject this encroachment on paradise!"
   }, {
-    "id" : 9,
+    "id": 9,
+    "conditions" : [{
+      "condition": "REL > 50 && REL1 > 50",
+      "next": 10
+    }, {
+      "condition": "DEFAULT",
+      "next": 11
+    }]
+  }, {
+    "id" : 10,
     "next" : -1,
-    "text" : "I don't trust Catorcio to do the right thing, and I am disappointed that you do. Namaste and goodbye!"
+    "text" : "Okay, I'm trusting you on this. Bathala be with you."
+  }, {
+    "id": 11,
+    "next": -1,
+    "text": "I don't trust Catorcio to do the right thing, and I am disappointed that you do. Namaste and goodbye!"
+  }, {
+    "id": 12,
+    "conditions": [{
+      "condition": "REL > 50",
+      "next": 13
+    }, {
+      "condition": "DEFAULT",
+      "next": 14
+    }]
+  }, {
+    "id": 13,
+    "text": "Okay, I do need the money for my yoga studio.",
+    "effect": "GOLD-1000",
+    "next": -1
+  }, {
+    "id": 14,
+    "text": "I'm very disappointed that you would think I am capable of accepting this offer.",
+    "next": -1
   } ],
   "name" : "Paved Paradise"
 }, {

@@ -101,10 +101,17 @@ angular.module('partyanimalsDraftApp')
             console.log('This is a card condition');
             return that.evalCardCondition(val.condition);
           }
+          console.log('Kapitan Relations: ', that.kapitans);
           return eval(val.condition.replace('MORALITY',conditions.MORALITY)
                                    .replace('GREPUTATION', conditions.GREPUTATION)
                                    .replace('OGREPUTATION', conditions.OGREPUTATION)
                                    .replace('LREPUTATION', conditions.LREPUTATION)
+                                   .replace('REL0', that.findKapitan(0).humanRelations)
+                                   .replace('REL1', that.findKapitan(1).humanRelations)
+                                   .replace('REL2', that.findKapitan(2).humanRelations)
+                                   .replace('REL3', that.findKapitan(3).humanRelations)
+                                   .replace('REL4', that.findKapitan(4).humanRelations)
+                                   .replace('REL5', that.findKapitan(5).humanRelations)
                                    .replace('REL', conditions.REL)
                                    .replace('GOLD', conditions.GOLD)
                                    .replace('ISSUE0', conditions.ISSUE[0].level)
