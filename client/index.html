@@ -60,12 +60,14 @@
       <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
       <script src="bower_components/angularfire/angularfire.js"></script>
       <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/d3/d3.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/endgame/endgame.controller.js"></script>
           <script src="app/filters/difficultyparser/difficultyparser.filter.js"></script>
           <script src="app/filters/eventeffectparser/eventeffectparser.filter.js"></script>
           <script src="app/filters/feelings/feelings.filter.js"></script>
@@ -95,6 +97,7 @@
           <script src="components/statUi/statUi.directive.js"></script>
           <script src="components/summarySim/summarySim.directive.js"></script>
           <script src="components/talkUi/talkUi.directive.js"></script>
+          <script src="components/votingGraph/votingGraph.directive.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
 </body>

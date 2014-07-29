@@ -82,7 +82,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.turnsPerGameRef.on('value', function(snapshot){
         if(!onDataChanged('turnsPerGame')){
-          $scope.turnsLeft = snapshot.val();
+          //$scope.turnsLeft = snapshot.val();
+          $scope.turnsLeft = 3;
           $scope.$apply();
         }
       });
@@ -441,6 +442,12 @@ angular.module('partyanimalsDraftApp')
 
       //tally district approval ratings
       $scope.totalReputations = GameState.getTotalReputation();
+
+      //check if turns left is 0
+      if($scope.turnsLeft === 0){
+        $scope.config.state = 'end';
+      }
+
     };
 
 
