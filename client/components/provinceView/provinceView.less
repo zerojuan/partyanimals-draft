@@ -7,7 +7,6 @@
     width: 120px;
     height: 120px;
     float: left;
-
     background: #ccc;
     &.Casino{
       background-image: url('/assets/images/districts/casino.jpg');
@@ -27,14 +26,37 @@
     &.Cathedral{
       background-image: url('/assets/images/districts/cathedral.jpg');
     }
+    .label{
+      position: absolute;
+      bottom: 0;
+      position: absolute;
+      bottom: 0;
+      padding: 0;
+      text-align: center;
+      font-weight: normal;
+      width: 100%;
+      color: #333;
+      h4, p{
+        margin-bottom: 5px;
+      }
+    }
 
     position: relative;
     .reputation{
       position: absolute;
-      bottom: 0;
-      right: 0;
+      top: 30px;
+      left: 5px;
       width: 70px;
-      text-align: right;
+      font-size: 12px;
+      text-align: left;
+      p{
+        margin-bottom: 5px;
+      }
+    }
+    .indicators{
+      position: absolute;
+      top: 5px;
+      padding-left: 5px;
     }
     &.selected{
       border: 2px solid blue;

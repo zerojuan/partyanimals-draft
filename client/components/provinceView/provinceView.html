@@ -1,15 +1,21 @@
 <div class="province-view reveal-animation">
   <div ng-repeat="district in districts" class="district {{district.name.split(' ').join('')}}" ng-class="{selected: district.selected}" ng-click="selected(district)">
-    <p><h4>{{district.name}}</h4> {{district.population}}pi</p>
-    <div ng-show="showReputation" class="reputation">
-      <span class="blue">You: {{district.humanReputation}}%</span>
-      <span class="red">AI: {{district.aiReputation}}%</span>
+    <div class="label">
+      <h4>{{district.name}}</h4>
+      <p>{{district.population}}pi</p>
     </div>
-    <span ng-show="district.isHQ"><i class="glyphicon glyphicon-home blue"></i></span>
-    <span ng-show="district.isAIHQ"><i class="glyphicon glyphicon-home red"></i></span>
-    <span ng-show="district.hasHuman"><i class="glyphicon glyphicon-user blue"></i></span>
-    <span ng-show="district.hasAI"><i class="glyphicon glyphicon-user red"></i></span>
-    <span ng-show="district.aiReputation - district.humanReputation >= 50"><i class="glyphicon glyphicon-heart red"></i></span>
-    <span ng-show="district.humanReputation - district.aiReputation >= 50"><i class="glyphicon glyphicon-heart blue"></i></span>
+    <div ng-show="showReputation" class="reputation">
+      <p class="blue">You: {{district.humanReputation}}%</p>
+      <p class="red">AI: {{district.aiReputation}}%</p>
+    </div>
+    <div class="indicators">
+      <span ng-show="district.isHQ"><i class="glyphicon glyphicon-home blue"></i></span>
+      <span ng-show="district.isAIHQ"><i class="glyphicon glyphicon-home red"></i></span>
+      <span ng-show="district.hasHuman"><i class="glyphicon glyphicon-user blue"></i></span>
+      <span ng-show="district.hasAI"><i class="glyphicon glyphicon-user red"></i></span>
+      <span ng-show="district.aiReputation - district.humanReputation >= 50"><i class="glyphicon glyphicon-heart red"></i></span>
+      <span ng-show="district.humanReputation - district.aiReputation >= 50"><i class="glyphicon glyphicon-heart blue"></i></span>
+    </div>
+
   </div>
 </div>

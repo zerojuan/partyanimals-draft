@@ -600,9 +600,9 @@ angular.module('partyanimalsDraftApp')
       //TODO: List down extra curricular activities
       var extraMessage = '';
       if($scope.simulate.miscFunds > 0){
-        extraMessage = 'Earned $' + $scope.simulate.miscFunds + ' from misc. activities.';
+        extraMessage = 'Earned $' + $scope.simulate.miscFunds + ' from misc. activities';
       }else{
-        extraMessage = 'Lost $' + $scope.simulate.miscFunds + ' to misc. items.';
+        extraMessage = 'Lost $' + $scope.simulate.miscFunds + ' to misc. items';
       }
       if($scope.simulate.miscFunds !== 0){
         $scope.simulate.summaries.push({
