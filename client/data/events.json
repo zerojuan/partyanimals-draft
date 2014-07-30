@@ -47,7 +47,7 @@
   }, {
     "choice" : [ {
       "effect" : "REL+10",
-      "next" : 7,
+      "next" : 8,
       "text" : "I agree."
     }, {
       "effect" : "REL-10",
@@ -68,9 +68,9 @@
     "next" : -1,
     "text" : "Hm, I'm informed there's a prrroblem I need to attend to. Let's continue this discussion another time."
   }, {
-    "id": 8,
-    "next": 7,
-    "text": "That is cerrtainly good to know."
+    "id" : 8,
+    "next" : 7,
+    "text" : "That is cerrtainly good to know."
   } ],
   "name" : "Introducing Catorcio"
 }, {
@@ -174,10 +174,10 @@
     "next" : -1,
     "text" : "You disappont me, little mouse. Perrhaps your rrival will be more amenable."
   }, {
-    "id": 11,
-    "next": 4,
-    "text": "I suppose you are right."
-  }],
+    "id" : 11,
+    "next" : 4,
+    "text" : "I suppose you arre right."
+  } ],
   "name" : "Beachfront Casino"
 }, {
   "character" : 1,
@@ -205,7 +205,7 @@
   }, {
     "id" : 2,
     "next" : -1,
-    "text" : "I don't believe you arre commited friend. Come back some other time.",
+    "text" : "I don't believe you arre a true friend yet. Come back some other time.",
     "willRepeat" : true
   }, {
     "id" : 3,
@@ -644,25 +644,25 @@
   }, {
     "id" : 7,
     "next" : -1,
-    "text" : "I don't like fighting. Maybe if I give Pader some of Alpacita's Organic Artisanal fish pate he will like me more. Thank you for the inpo ser!"
+    "text" : "I don't tink dat's right ser.  Freedom of worship is garanteed da constipation. I will talk to Pader and bring him some Organic Artisan Pa-tey.!"
   }, {
-    "id": 8,
-    "conditions": [{
-      "condition": "REL4 > 50",
-      "next": 9
+    "conditions" : [ {
+      "condition" : "REL4 > 50",
+      "next" : 9
     }, {
-      "condition": "DEFAULT",
-      "next": 10
-    }]
+      "condition" : "DEFAULT",
+      "next" : 10
+    } ],
+    "id" : 8
   }, {
-    "id": 9,
-    "text": "Tenk yu ser! Here is an organic artisanal pa-tey from Alpacita. Meybe it helps!",
-    "effect": "REL+10",
-    "next": -1
+    "effect" : "REL+10",
+    "id" : 9,
+    "next" : -1,
+    "text" : "Tenk yu ser! Here is an organic artisan pa-tey from Alpacita. Meybe it helps!"
   }, {
-    "id": 10,
-    "text": "No it's ok ser. I think he doesn't like you either. I will fix it myself.",
-    "next": -1
+    "id" : 10,
+    "next" : -1,
+    "text" : "No it's ok ser. I think he doesn't like you either. I will fix it myself."
   } ],
   "name" : "Shin Bone"
 }, {
@@ -815,7 +815,7 @@
   }, {
     "id" : 9,
     "next" : -1,
-    "text" : "Hmph. That's not gonna help him now though, is it? Rest assured the WASI will remember this."
+    "text" : "Hmph. That's not gonna help him right now though, is it? Rest assured the WASI will remember this."
   } ],
   "name" : "Healthcare"
 }, {
@@ -864,7 +864,7 @@
       "text" : "I can't spend campaign funds will nilly!"
     } ],
     "id" : 3,
-    "text" : "Sorry, I assume that you are a mouse that stands in solidarity with the proletariat!"
+    "text" : "Sorry, I assume that you are a mouse that stand in solidarity with the proletariat!"
   }, {
     "choice" : [ {
       "next" : 5,
@@ -935,7 +935,7 @@
   }, {
     "id" : 4,
     "next" : 5,
-    "text" : "Speaking of Bone, I actually wanted to speak with you about something."
+    "text" : "Speaking of The Bone, I actually wanted to speak with you about something."
   }, {
     "choice" : [ {
       "effect" : "REL+10",
@@ -1077,9 +1077,9 @@
     "next" : -1,
     "text" : "Oh dear, it's almost time for the service and I still need to write my sermon. Let us speak again my child. Be One with the Thigh Bone."
   }, {
-    "id": 10,
-    "next": 9,
-    "text": "Indeed, but the Thigh Bone is larger, and therefore more prominent."
+    "id" : 10,
+    "next" : 9,
+    "text" : "Indeed, but the Thigh Bone is larger, and therefore more prominent."
   } ],
   "name" : "Introducing Pader Doglas"
 }, {
@@ -1243,8 +1243,8 @@
       "next" : 9,
       "text" : "Don't worry, I'll talk to Catorcio about it"
     }, {
-      "next": 12,
-      "text": "Perhaps this might change your mind (bribe $1000)"
+      "next" : 12,
+      "text" : "Perhaps this might change your mind (bribe $1000)"
     } ],
     "id" : 7,
     "text" : "Any financial gain will totally be offset by the environmental and spiritual loss to the island. Plus it'll ruin my view of the sunset!"
@@ -1253,40 +1253,40 @@
     "next" : -1,
     "text" : "I'm so happy you feel the same way. Let our powers combine with Bathala and reject this encroachment on paradise!"
   }, {
-    "id": 9,
-    "conditions" : [{
-      "condition": "REL > 50 && REL1 > 50",
-      "next": 10
+    "conditions" : [ {
+      "condition" : "REL > 50 && REL1 > 50",
+      "next" : 10
     }, {
-      "condition": "DEFAULT",
-      "next": 11
-    }]
+      "condition" : "DEFAULT",
+      "next" : 11
+    } ],
+    "id" : 9
   }, {
     "id" : 10,
     "next" : -1,
     "text" : "Okay, I'm trusting you on this. Bathala be with you."
   }, {
-    "id": 11,
-    "next": -1,
-    "text": "I don't trust Catorcio to do the right thing, and I am disappointed that you do. Namaste and goodbye!"
+    "id" : 11,
+    "next" : -1,
+    "text" : "I don't trust Catorcio to do the right thing, and I am disappointed that you do. Namaste and goodbye!"
   }, {
-    "id": 12,
-    "conditions": [{
-      "condition": "REL > 50",
-      "next": 13
+    "conditions" : [ {
+      "condition" : "REL > 50",
+      "next" : 13
     }, {
-      "condition": "DEFAULT",
-      "next": 14
-    }]
+      "condition" : "DEFAULT",
+      "next" : 14
+    } ],
+    "id" : 12
   }, {
-    "id": 13,
-    "text": "Okay, I do need the money for my yoga studio.",
-    "effect": "GOLD-1000",
-    "next": -1
+    "effect" : "GOLD-1000",
+    "id" : 13,
+    "next" : -1,
+    "text" : "Okay, I do need the money for my yoga studio."
   }, {
-    "id": 14,
-    "text": "I'm very disappointed that you would think I am capable of accepting this offer.",
-    "next": -1
+    "id" : 14,
+    "next" : -1,
+    "text" : "I'm very disappointed that you would think I am capable of accepting this offer."
   } ],
   "name" : "Paved Paradise"
 }, {
