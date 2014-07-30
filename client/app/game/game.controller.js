@@ -717,15 +717,35 @@ angular.module('partyanimalsDraftApp')
       var changedDistrict;
       $scope.districts.forEach(function(val){
         if(val.id === district.id){
+          var reps = null;
           if(isHuman){
-            val.humanReputation += value;
+            reps = capReputation(val.humanReputation, val.aiReputation, value);
+            val.humanReputation = reps.a;
+            val.aiReputation = reps.b;
           }else{
-            val.aiReputation += value;
+            reps = capReputation(val.aiReputation, val.humanReputation, value);
+            val.aiReputation = reps.a;
+            val.humanReputation = reps.b;
           }
           changedDistrict = val;
         }
       });
       // $scope.$apply();
       return changedDistrict;
+    };
+
+    var capReputation = function(a, b, add){
+      var diff = 100 - (a+add + b);
+      if(diff < 0){
+          b += diff;
+      }
+      if(a+add > 100){
+          add = 100 - a;
+          b = 0;
+      }
+      return {
+          b: b,
+          a: a+add
+      };
     };
   });

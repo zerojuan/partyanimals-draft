@@ -21,7 +21,7 @@ angular.module('partyanimalsDraftApp')
         });
 
 
-        var margin = {top: 20, right: 80, bottom: 30, left: 50},
+        var margin = {top: 20, right: 80, bottom: 30, left: 30},
             width = 740 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
 
