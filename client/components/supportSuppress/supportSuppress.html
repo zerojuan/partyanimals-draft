@@ -1,0 +1,20 @@
+<div class="support-suppress">
+  <h3>Cash Left: ${{cash}} <span class="evil" ng-show="costSuppress > 0"> - {{costSuppress}}</span><span class="good" ng-show="costSupport>0"> - {{costSupport}}</span><span ng-show="costSupport>0 || costSuppress>0"> = ${{cash - costSupport - costSuppress}}</span></h3>
+  <div class="province-container">
+    <div ng-repeat="district in districts" class="district-container col-xs-4">
+      <div class="district {{district.name.split(' ').join('')}}">
+        <strong>{{district.name}}</strong> {{district.humanProjectedVote}} vs {{district.aiProjectedVote}}
+        <div class="avatar">
+          <img tooltip="{{district.kapitan.humanRelations | feelings}}" class="avatar-clickable" ng-src="assets/images/avatars/{{district.kapitan.image}}"></img>
+        </div>
+        <div class="btn-container">
+          <a class="btn good" ng-class="{selected: district.manipulate === 1}" ng-click="supportThis(district)">Support</a>
+          <a class="btn evil" ng-class="{selected: district.manipulate === -1}" ng-click="suppressThis(district)">Suppress</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>
+    <a class="btn btn-success" ng-click="onDone()">To the Precincts!</a>
+  </p>
+</div>

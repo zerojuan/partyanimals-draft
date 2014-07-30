@@ -361,4 +361,27 @@ angular.module('partyanimalsDraftApp')
         return index;
       }
     };
+
+    that.projectVote = function(population, reputation){
+      var vote = (population*0.8) * reputation / 100;
+      if(vote === 0){
+        vote = Math.random() * 20;
+      }
+      return Math.floor(vote);
+    };
+
+    that.capReputation = function(a, b, add){
+      var diff = 100 - (a+add + b);
+      if(diff < 0){
+          b += diff;
+      }
+      if(a+add > 100){
+          add = 100 - a;
+          b = 0;
+      }
+      return {
+          b: b,
+          a: a+add
+      };
+    };
   });

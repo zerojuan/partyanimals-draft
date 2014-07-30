@@ -1,0 +1,56 @@
+@good: #77c05b;
+@evil: #c25f5c;
+.support-suppress{
+  .good{
+    color: @good;
+  }
+  .evil{
+    color: @evil;
+  }
+  .district{
+    height: 60px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    position: relative;
+    .avatar{
+      position: absolute;
+      right: 0;
+      top: 0;
+      img{
+        width: 30px;
+        height: 30px;
+        margin-top: -10px;
+        margin-right: -10px;
+      }
+    }
+    .btn-container{
+      display: inline-flex;
+      margin-top: 15px;
+      .btn{
+        border-radius: 0;
+        width: 99px;
+        margin: 0;
+        border: none;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        &.good{
+          background: lighten(@good, 20%);
+          color: lighten(@good, 10%);
+          &.selected{
+            color: white;
+            background: darken(@good, 10%);
+          }
+        }
+        &.evil{
+          color: lighten(@evil, 10%);
+          background: lighten(@evil, 20%);
+          &.selected{
+            color: white;
+            background: darken(@evil, 10%);
+          }
+        }
+
+      }
+    }
+  }
+}

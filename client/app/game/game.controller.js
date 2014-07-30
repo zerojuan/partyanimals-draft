@@ -719,11 +719,11 @@ angular.module('partyanimalsDraftApp')
         if(val.id === district.id){
           var reps = null;
           if(isHuman){
-            reps = capReputation(val.humanReputation, val.aiReputation, value);
+            reps = GameState.capReputation(val.humanReputation, val.aiReputation, value);
             val.humanReputation = reps.a;
             val.aiReputation = reps.b;
           }else{
-            reps = capReputation(val.aiReputation, val.humanReputation, value);
+            reps = GameState.capReputation(val.aiReputation, val.humanReputation, value);
             val.aiReputation = reps.a;
             val.humanReputation = reps.b;
           }
@@ -732,20 +732,5 @@ angular.module('partyanimalsDraftApp')
       });
       // $scope.$apply();
       return changedDistrict;
-    };
-
-    var capReputation = function(a, b, add){
-      var diff = 100 - (a+add + b);
-      if(diff < 0){
-          b += diff;
-      }
-      if(a+add > 100){
-          add = 100 - a;
-          b = 0;
-      }
-      return {
-          b: b,
-          a: a+add
-      };
     };
   });
