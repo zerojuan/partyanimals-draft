@@ -65,7 +65,6 @@ angular.module('partyanimalsDraftApp')
         $scope.cards = snapshot.val();
         _.forEach($scope.cards, function(val){
           val.done = false;
-          val.turns = -1;
           val.active = false;
         });
         GameState.cards = $scope.cards;
@@ -84,7 +83,7 @@ angular.module('partyanimalsDraftApp')
       PAFirebase.turnsPerGameRef.on('value', function(snapshot){
         if(!onDataChanged('turnsPerGame')){
           $scope.turnsLeft = snapshot.val();
-          // $scope.turnsLeft = 1;
+          // $scope.turnsLeft = 10;
           $scope.$apply();
         }
       });
@@ -287,6 +286,11 @@ angular.module('partyanimalsDraftApp')
       GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
     };
 
+    $scope.onHideEventPanel = function(){
+      $scope.showOverlay = false;
+      $scope.showEvent = false;
+    };
+
 
     $scope.simulate.onNext = function(){
       //is turn done?
@@ -473,6 +477,13 @@ angular.module('partyanimalsDraftApp')
         $scope.config.state = 'end';
       }
 
+      if($scope.turnsLeft === 9){
+        $scope.showEvent = true;
+        $scope.cards = GameState.activateCards(['HurricaneOrwell']);
+        $scope.currEventCard = GameState.getCard('HurricaneOrwell');
+        $scope.showOverlay = true;
+      }
+
     };
 
 
@@ -514,13 +525,6 @@ angular.module('partyanimalsDraftApp')
       }
     }, true);
 
-    $scope.$watch('cards', function(){
-      if($scope.cards){
-        console.log('Cards changed');
-        //apply changes to the game world
-
-      }
-    }, true);
 
     $scope.$watch('timeLeft', function(){
       if(!$scope.selectedDistrict) {return;}
@@ -675,6 +679,38 @@ angular.module('partyanimalsDraftApp')
               cost: 100,
               success: false
             });
+          }else if(card.id === 'HurricaneOrwell'){
+            card.turns--;
+            console.log('Card Turns: ', card.turns);
+            if(card.turns < 0){
+              card.active = false;
+              card.description = card.descriptionDone;
+              $scope.showEvent = true;
+              $scope.currEventCard = card;
+
+              $scope.showOverlay = true;
+              return;
+            }
+            var txt = '';
+            var random = Math.random() * 100;
+            if(random < 25){
+              //reduce everyone's reputation
+              txt = 'Voters are blaming politicos for the slow disaster relief efforts, reducing our overall reputation.';
+              reduceReputations(true, true);
+            }else if(random < 50){
+              //reduce my reputation
+              txt = 'People are blaming you for ' + card.name + '.';
+              reduceReputations(true, false);
+            }else{
+              //reduce enemy reputation
+              txt = 'Your opponent\'s administration has bungled the disaster relief efforts.';
+              reduceReputations(false, true);
+            }
+            $scope.simulate.summaries.push({
+              text: txt,
+              cost: 0,
+              success: false
+            });
           }
         }
       });
@@ -688,6 +724,23 @@ angular.module('partyanimalsDraftApp')
             success: true
           });
           $scope.totalContribution += val.gold;
+        }
+      });
+    };
+
+    var reduceReputations = function(affectsHuman, affectsAI){
+      _.forEach($scope.districts, function(district){
+        if(affectsHuman){
+          district.humanReputation -= Math.floor(Math.random() * 20 + 5);
+          if(district.humanReputation < 0){
+            district.humanReputation = 0;
+          }
+        }
+        if(affectsAI){
+          district.aiReputation -= Math.floor(Math.random() * 20 + 5);
+          if(district.aiReputation < 0){
+            district.aiReputation = 0;
+          }
         }
       });
     };

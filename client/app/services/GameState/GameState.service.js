@@ -238,6 +238,12 @@ angular.module('partyanimalsDraftApp')
       });
     };
 
+    that.getCard = function(cardId){
+      return _.find(that.cards, function(card){
+        return card.id === cardId;
+      });
+    };
+
     that.evalCardCondition = function(val){
       var cond = val.split(/(CARD\?)(\w+)/g)
                 .filter(function(v){

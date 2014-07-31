@@ -4,7 +4,20 @@
   <div class="pull-right" tooltip="AI Cash: {{ai.totalCash}}"ng-class="{red: totalCash<0}">Funds: ${{totalCash}}</div>
 </div>
 <div class="overlay reveal-animation" ng-show="showOverlay">
-  <div class="container">
+  <div ng-show="showEvent" class="container">
+
+    <div class="row simulation-container">
+      <div class="event-container">
+        <a ng-click="onHideEventPanel()" class="btn btn-success">Close</a>
+      </div>
+      <div class="activity-sim">
+        <h3>{{currEventCard.name}}</h3>
+        <img ng-class="{failed: !currEventCard.active}" src="assets/images/actions/typhoon.jpg"></img>
+        <h4>{{currEventCard.description}}</h4>
+      </div>
+    </div>
+  </div>
+  <div ng-hide="showEvent" class="container">
     <div class="row">
       <div class="col-md-4">
         <h3>Simulating</h3>
@@ -75,7 +88,7 @@
 </div>
 <div class="bottom">
     <div>
-      <a class="btn btn-default" ng-click="onItClicked()">Itinerary</a>
+      <a class="btn btn-success" ng-click="onItClicked()">Itinerary</a>
       <a class="btn btn-default" ng-click="onKapClicked()">Kapitans</a>
     </div>
 </div>

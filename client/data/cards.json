@@ -11,8 +11,9 @@
   "infinite": true
 },{
   "id": "HurricaneOrwell",
-  "name": "Hurricane Boy",
-  "description": "Hurricane Boy wrecked havok on our beloved town.",
+  "name": "Typhoon Hai-man",
+  "description": "A devastating typhoon makes landfall in Summer Island!",
+  "descriptionDone": "The deluge has come and gone. The Summerian spirit is water proof!",
   "effect": "DEMAND1-50,DEMAND3-50",
   "infinite": false,
   "turns": 5
