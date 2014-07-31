@@ -36,11 +36,14 @@ angular.module('partyanimalsDraftApp')
                 OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations),
                 GCMod: scope.activity.location.goldCostModifier,
                 TCMod: scope.activity.location.timeCostModifier,
-                KMod: scope.activity.location.kapitanModifier
+                KMod: scope.activity.location.kapitanModifier,
+                IDM: scope.activity.location.issues[i],
+                IDS: val
               };
               var dataForActionDifficulty = {
                 BD: scope.activity.difficulty,
-                IDM: val,
+                IDM: scope.activity.location.issues[i],
+                IDS: val,
                 em: 10,
                 OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations),
                 GCMod: scope.activity.location.goldCostModifier,

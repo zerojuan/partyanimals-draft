@@ -739,6 +739,32 @@ angular.module('partyanimalsDraftApp')
             success: aiResult.success,
             cost: cost
           });
+        }else if(aiResult.type === 'TALK'){
+          if(aiResult.success){
+            var localKapitan = $scope.findKapitan(aiResult.district.kapitanId);
+            localKapitan.aiRelations += aiResult.value;
+            if(localKapitan.type === 'KAPITAN'){
+              changedDistrict = setKapitanForDistrict(localKapitan, aiResult.district);
+            }
+            $scope.simulate.aiSummaries.push({
+              text: 'AI improved his relationship with ' + localKapitan.name,
+              success: aiResult.success,
+              cost: 0
+            });
+          }
+        }else if(aiResult.type === 'STAT'){
+          if(aiResult.success){
+            changedDistrict = setStatForDistrict(aiResult.issueIndex, aiResult.district, aiResult.value, false);
+            text = 'AI improved their ' + $scope.issues[aiResult.issueIndex].name + ' at ' + aiResult.district.name;
+          }else{
+            text = 'AI tried their platform education campaign but failed.';
+          }
+
+          $scope.simulate.aiSummaries.push({
+            text: text,
+            cost: 0,
+            success: aiResult.success
+          });
         }
         $scope.ai.totalCash += cost;
       }

@@ -261,6 +261,48 @@ angular.module('partyanimalsDraftApp')
       });
     };
 
+    that.getStatActivityResult = function(activity){
+      console.log('ISSUE STATS: ', that.aiStats, activity.location.aiStance);
+      var issueIndex = _.findIndex(that.aiStats.issueStats, function(issue, i){
+        if(activity.location.aiStance[i] < issue.level){
+          return true;
+        }
+        return false;
+      });
+      if(issueIndex < 0){
+        return {
+          type: 'STAT',
+          success: false,
+          district: activity.location,
+          cost: {
+            gold: 0
+          }
+        };
+      }
+      return {
+        type: 'STAT',
+        success: true,
+        issueIndex: issueIndex,
+        value: 1,
+        cost: {
+          gold: 0
+        },
+        district: activity.location
+      };
+    };
+
+    that.getAITalkResult = function(activity){
+      return {
+        success: true,
+        cost: {
+          gold: 0
+        },
+        type: 'TALK',
+        value: 30,
+        district: activity.location
+      };
+    };
+
     that.getReputationActivityResult = function(activity, isAI){
       var attributeParser = $filter('attributeparser')(activity.effect.attr);
       var PKRm = $filter('feelingstorollmodifier')(activity.location.kapitan.humanRelations);

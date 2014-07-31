@@ -5,7 +5,7 @@ angular.module('partyanimalsDraftApp')
     var that = this;
 
     //generate ai affinities (which kapitans, he likes)
-    that.moralAffinity = Math.floor(Math.random()*100);
+    that.moralAffinity = Math.floor(80);//Math.random()*100);
     //generate good/evil affinity (the likelihood to do morality)
     //generate appetite for greed (the likelihood for money making)
     that.ai = null;
@@ -44,6 +44,14 @@ angular.module('partyanimalsDraftApp')
         act.location.kapitan = GameState.findKapitan(act.location.kapitanId);
         console.log('Activity:::', act);
         that.scheduledActivities.push(act);
+        var act2 = GameState.getActivity(6, activities);
+        act2.location = angular.copy(district);
+        act2.location.kapitan = GameState.findKapitan(act2.location.kapitanId);
+        that.scheduledActivities.push(act2);
+        var act3 = GameState.getActivity(3, activities);
+        act3.location = angular.copy(district);
+        act3.location.kapitan = GameState.findKapitan(act.location.kapitanId);
+        that.scheduledActivities.push(act3);
       }else{
         //does the kapitan like me?
         console.log('District:',district);
@@ -52,10 +60,15 @@ angular.module('partyanimalsDraftApp')
           console.log('I should try to photo op');
           act = GameState.getActivity(2, activities);
           act.location = angular.copy(district);
+          act.location.kapitan = GameState.findKapitan(act.location.kapitanId);
           that.scheduledActivities.push(act);
         }else{
           //make kapitan like me
           console.log('I should make kapitan like me');
+          act = GameState.getActivity(3, activities);
+          act.location = angular.copy(district);
+          act.location.kapitan = GameState.findKapitan(act.location.kapitanId);
+          that.scheduledActivities.push(act);
         }
       }
       markedHours = 0;
@@ -95,6 +108,11 @@ angular.module('partyanimalsDraftApp')
         };
       }else if(activity.type === 'REPUTATION'){
         return GameState.getReputationActivityResult(activity, true);
+      }else if(activity.type === 'STAT'){
+        console.log('STAT??????');
+        return GameState.getStatActivityResult(activity, true);
+      }else if(activity.type === 'TALK'){
+        return GameState.getAITalkResult(activity, true);
       }
     };
   });
