@@ -117,7 +117,7 @@
       "next" : 5
     }, {
       "condition" : "ISSUE2<4",
-      "next" : 5
+      "next" : 12
     } ],
     "id" : 4
   }, {
@@ -125,7 +125,7 @@
     "next" : 6,
     "text" : "I see you're interrested in generrating employment. I am also keen on being a job creator."
   }, {
-    "id" : 5,
+    "id" : 12,
     "next" : 6,
     "text" : "Employment is a very imporrtant issue for Summer Island. I have a project that I believe will be mutually beneficial."
   }, {
@@ -833,7 +833,7 @@
   }, {
     "choice" : [ {
       "effect" : "REL+10,GOLD-500",
-      "next" : 3,
+      "next" : 4,
       "text" : "Let it be known I stand with the proletariat!"
     }, {
       "next" : 3,

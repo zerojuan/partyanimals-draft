@@ -120,6 +120,16 @@ angular.module('partyanimalsDraftApp')
               $scope.ai.currentLocation = val;
             }
           });
+          _.forEach($scope.human.issueStats, function(val){
+            if(val.level < 5){
+              val.level += 1;
+            }
+          });
+          _.forEach($scope.ai.issueStats, function(val){
+            if(val.level < 5){
+              val.level += 1;
+            }
+          });
           GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
 
           //tally district approval ratings
@@ -245,6 +255,7 @@ angular.module('partyanimalsDraftApp')
         if(isInSchedule(newVal)){
           newVal.wasScheduled = true;
         }
+
         //pkrm and stuff
         newVal.tooltipVals = angular.copy(tooltipVals);
         newVal.tooltipVals.BD = val.difficulty;
@@ -374,6 +385,20 @@ angular.module('partyanimalsDraftApp')
           }
           if(total.cards && total.cards.length > 0){
             $scope.cards = GameState.activateCards(total.cards);
+            //apply cards
+            _.forEach($scope.cards, function(card){
+              if(card.active && !card.applied){
+                if(card.id === 'BookDeal'){
+                  _.forEach($scope.districts, function(district){
+                    if(district.humanStance[0] < 5){
+                      district.humanStance[0] += 1;
+                    }
+                  });
+                  card.applied = true;
+                }
+              }
+            });
+            GameState.cards = $scope.cards;
           }
           $scope.totalCash += result.total.gold;
           $scope.simulate.miscFunds += result.total.gold;
@@ -547,6 +572,13 @@ angular.module('partyanimalsDraftApp')
     };
 
     var shouldDisable = function(activity){
+        if(activity.id === 4){
+          if(_.every(activity.location.aiStance, function(val){
+            return val === 0;
+            })){
+              return true;
+          }
+        }
         if(activity.type === 'MOVE'){
           //disable only if there are no other
           if(howManyMovementScheduled() === 0 &&
@@ -559,7 +591,7 @@ angular.module('partyanimalsDraftApp')
         if(isInSchedule(activity)){
           return false;
         }
-        if($scope.timeLeft - activity.cost.hours < 0){
+        if($scope.timeLeft - (activity.cost.hours*activity.location.timeCostModifier) < 0){
           return true;
         }
         if(activity.location.id !== $scope.futureLocation.id){
@@ -635,6 +667,17 @@ angular.module('partyanimalsDraftApp')
           success: $scope.simulate.miscFunds > 0
         });
       }
+      _.forEach($scope.cards, function(card){
+        if(card.active){
+          if(card.id === 'IdiotSon'){
+            $scope.simulate.summaries.push({
+              text: 'Lost $100 from our intern, Owlberto\'s son',
+              cost: 100,
+              success: false
+            });
+          }
+        }
+      });
 
       $scope.totalContribution = 0;
       angular.forEach($scope.districts, function(val){

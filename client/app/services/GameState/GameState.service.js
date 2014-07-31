@@ -233,6 +233,7 @@ angular.module('partyanimalsDraftApp')
       _.forEach(that.cards, function(card){
         if(card.id === cardId){
           card.active = true;
+          card.applied = false;
         }
       });
     };
@@ -327,6 +328,10 @@ angular.module('partyanimalsDraftApp')
       }else if(distance !== 1){
         cost.gold = 500;
         cost.hours = 4;
+      }
+
+      if(cost.hours * end.timeCostModifier > 8){
+        cost.hours = Math.floor(8 / end.timeCostModifier);
       }
 
       return cost;
