@@ -33,13 +33,19 @@ angular.module('partyanimalsDraftApp')
                 random: Math.random() * 100,
                 PKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.humanRelations),
                 em: 10,
-                OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
+                OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations),
+                GCMod: scope.activity.location.goldCostModifier,
+                TCMod: scope.activity.location.timeCostModifier,
+                KMod: scope.activity.location.kapitanModifier
               };
               var dataForActionDifficulty = {
                 BD: scope.activity.difficulty,
                 IDM: val,
                 em: 10,
-                OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
+                OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations),
+                GCMod: scope.activity.location.goldCostModifier,
+                TCMod: scope.activity.location.timeCostModifier,
+                KMod: scope.activity.location.kapitanModifier
               };
 
               var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);

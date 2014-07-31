@@ -65,7 +65,7 @@
     <li ng-repeat="activity in selectedDistrict.activities" class="row" ng-class="{disabled: activity.disabled}">
       <div class="col-md-5" tooltip-html-unsafe="{{activity.description | activitytooltip:activity.tooltipVals}}">{{activity.name}}</div>
       <div class="col-md-3" tooltip="{{activity.cost.gold}} * {{activity.location.goldCostModifier}}">{{activity.cost.gold * activity.location.goldCostModifier | formatcost}}</div>
-      <div class="col-md-2">{{activity.cost.hours}} hrs</div>
+      <div class="col-md-2">{{activity.cost.hours * activity.location.timeCostModifier}} hrs</div>
       <div class="col-md-1">
         <a class="btn" ng-click="addToItinerary(activity)" ng-show="!activity.disabled">
         <i ng-class="{'glyphicon-plus': !activity.wasScheduled, 'glyphicon-minus': activity.wasScheduled}" class="glyphicon"></i></a>

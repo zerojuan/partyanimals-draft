@@ -475,7 +475,7 @@ angular.module('partyanimalsDraftApp')
       }
       //get the total time
       var totalTime = $scope.scheduledActivities.reduce(function(a, b){
-        return a + b.cost.hours;
+        return a + (b.cost.hours * b.location.timeCostModifier);
       }, 0);
       var totalCost = $scope.scheduledActivities.reduce(function(a, b){
         return a + (b.cost.gold*b.location.goldCostModifier);

@@ -14,6 +14,9 @@ angular.module('partyanimalsDraftApp')
                         .replace('BD', values.BD)
                         .replace('ITL', values.ITL)
                         .replace('IDM', values.IDM)
+                        .replace('KMod', values.KMod)
+                        .replace('GCMod', values.GCMod)
+                        .replace('TCMod', values.TCMod)
                         .replace('em', values.em);
       var val = eval(parsed);
       return val;
