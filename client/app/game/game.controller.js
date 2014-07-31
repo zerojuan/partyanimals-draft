@@ -31,6 +31,7 @@ angular.module('partyanimalsDraftApp')
 
     $rootScope.$on('$stateChangeSuccess',
       function(){
+        console.log('Successfully changed state');
       PAFirebase.removeCallbacks();
       addDataCallbacks();
     });
@@ -159,7 +160,7 @@ angular.module('partyanimalsDraftApp')
       PAFirebase.activitiesRef.on('value', function(snapshot){
         if(!onDataChanged('activities')){
           $scope.activities = snapshot.val();
-          $scope.changeSelectedDistrict(findDistrict($scope.selectedDistrict.id));
+          $scope.changeSelectedDistrict(findDistrict($scope.human.hq.id));
           $scope.$apply();
 
         }
@@ -199,6 +200,7 @@ angular.module('partyanimalsDraftApp')
       if($scope.selectedDistrict){
         $scope.selectedDistrict.selected = false;
       }
+      console.log('Changing selected district');
       $scope.selectedDistrict = district;
       $scope.selectedDistrict.selected = true;
       generateActivities();
