@@ -29,6 +29,15 @@ html {
         max-width: 730px;
     }
 }
+@filterString: ~"grayscale(100%)";
+img{
+  &.failed{
+      -webkit-filter: @filterString;
+      -moz-filter: @filterString;
+      filter: @filterString;
+
+  }
+}
 
 .overlay{
   position: fixed;

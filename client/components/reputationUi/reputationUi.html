@@ -1,4 +1,10 @@
 <div>
   <!-- Depending on the type of action, show image -->
+  <div ng-switch="activity.name">
+    <div ng-switch-when="Photo Op">
+      <img ng-class="{failed: !success}" ng-src="assets/images/actions/photoop_{{districtName}}.jpg">
+    </div>
+    <div ng-switch-default><img ng-class="{failed: !success}" ng-src="assets/images/actions/{{activity.name | lowercase}}.jpg"></img></div>
+  </div>
   <h3>{{doneMessage}}</h3>
 </div>

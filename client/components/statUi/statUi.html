@@ -24,9 +24,11 @@
     </table>
   </div>
   <div class="container" ng-show="success">
+    <img ng-src="assets/images/actions/{{activity.name | lowercase}}.jpg">
     <div><h4>{{doneMessage}}</h4></div>
   </div>
   <div class="container" ng-show="done && !success">
+    <img class="failed" ng-src="assets/images/actions/{{activity.name | lowercase}}.jpg">
     <div><h4>{{doneMessage}}</h4></div>
   </div>
   <p>

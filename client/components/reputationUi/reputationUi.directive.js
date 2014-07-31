@@ -22,7 +22,8 @@ angular.module('partyanimalsDraftApp')
           if(scope.activity){
             scope.done = false;
             result = GameState.getReputationActivityResult(scope.activity);
-
+            scope.success = result.success;
+            scope.districtName = scope.activity.location.name.split(' ').join('').toLowerCase();
             if(result.success){
               scope.doneMessage = scope.activity.text.success[0];
             }else{
