@@ -6,7 +6,36 @@ angular.module('partyanimalsDraftApp')
       .state('main', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+          platformPoints: function($q, PAFirebase){
+            var deferred = $q.defer();
+
+            PAFirebase.platformPointsRef.on('value', function(snapshot){
+              deferred.resolve(snapshot.val());
+            });
+            return deferred.promise;
+          },
+          issues: function($q, PAFirebase){
+            var deferred = $q.defer();
+            PAFirebase.issuesRef.on('value', function(snapshot){
+              deferred.resolve(snapshot.val());
+            });
+            return deferred.promise;
+          },
+          districts: function($q, PAFirebase){
+            var deferred = $q.defer();
+            PAFirebase.districtsRef.on('value',function(snapshot){
+              var districts = snapshot.val();
+              _.forEach(districts, function(val){
+                val.humanReputation = 0;
+                val.aiReputation = false;
+              });
+              deferred.resolve(districts);
+            });
+            return deferred.promise;
+          }
+        }
       })
       .state('game', {
         url: '/game',

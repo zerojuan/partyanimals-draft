@@ -1,28 +1,14 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .controller('MainCtrl', function ($scope, $http, $location, PAFirebase, GameState) {
-      PAFirebase.platformPointsRef.on('value', function(snapshot){
-        $scope.initialLimit = snapshot.val();
-        $scope.$apply();
-      });
-      $scope.initialLimit = 0;
+  .controller('MainCtrl', function ($scope, $http, $location, PAFirebase, GameState, platformPoints, districts, issues) {
+      console.log('Platform Points: ', platformPoints);
+      $scope.initialLimit = platformPoints;
       $scope.page = 1;
       $scope.selectedDistrict = null;
 
-      PAFirebase.issuesRef.on('value', function(snapshot){
-        $scope.issues = snapshot.val();
-        $scope.$apply();
-      });
-
-      PAFirebase.districtsRef.on('value',function(snapshot){
-        $scope.districts = snapshot.val();
-        $scope.districts.forEach(function(val){
-          val.humanReputation = 0;
-          val.aiReputation = false;
-        });
-        $scope.$apply();
-      });
+      $scope.issues = issues;
+      $scope.districts = districts;
 
       $scope.plus = function(thing){
         if($scope.initialLimit > 0){
