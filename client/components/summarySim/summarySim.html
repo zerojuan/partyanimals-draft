@@ -1,7 +1,7 @@
 <div class="container summary-sim">
   <div><h4>Day Summary</h4></div>
   <table class="table table-striped">
-    <tr ng-repeat="summary in summaries">
+    <tr ng-repeat="summary in summaries" class="staggering">
       <td>{{summary.text}}</td>
       <td class="italic" ng-class="{red: summary.cost < 0}">${{summary.cost}}</td>
       <td ng-class="{success: summary.success, danger: !summary.success}"><i class="glyphicon" ng-class="{'glyphicon-ok': summary.success, 'glyphicon-remove': !summary.success}"></i></td>
@@ -13,7 +13,7 @@
     </tr>
   </table>
   <table class="table table-striped">
-    <tr ng-repeat="summary in aiSummaries">
+    <tr ng-repeat="summary in aiSummaries" class="staggering">
       <td>{{summary.text}}</td>
       <td ng-class="{success: summary.success, danger: !summary.success}"><i class="glyphicon" ng-class="{'glyphicon-ok': summary.success, 'glyphicon-remove': !summary.success}"></i></td>
     </tr>

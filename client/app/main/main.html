@@ -1,12 +1,12 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div ng-switch="page">
-  <div ng-switch-when="1" class="jumbotron">
+<div ng-switch="page" class="my-switch-container">
+  <div ng-switch-when="1" class="my-switch-animation">
     <h1>Design your platform:</h1>
     <p class="lead">
       <span>{{initialLimit}} pts. Left</span>
       <ul class="list-group">
-        <li ng-repeat="thing in issues" class="list-group-item">
+        <li ng-repeat="thing in issues" class="list-group-item staggering">
           <div class="scaler">
             <div class="left-btn"><a class="btn" ng-disabled="thing.level == 0" ng-click="minus(thing)"><i class="glyphicon glyphicon-chevron-left"></i></a></div>
             <div class="center">
@@ -21,7 +21,7 @@
     </p>
     <p><a class="btn btn-lg btn-success" ng-click="nextPage()">Next</a></p>
   </div>
-  <div ng-switch-when="2" class="jumbotron">
+  <div ng-switch-when="2" class="my-switch-animation">
     <h1>Select your HQ</h1>
     <div class="lead">
       <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelected" show-reputation="false"></province-view>

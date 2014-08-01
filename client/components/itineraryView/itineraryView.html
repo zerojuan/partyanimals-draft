@@ -2,7 +2,7 @@
   <h3>Itinerary</h3>
   <div class="schedule">
 
-    <div ng-repeat="activity in scheduledActivities" class="schedule-item item-{{activity.cost.hours * activity.location.timeCostModifier}}">
+    <div ng-repeat="activity in scheduledActivities" class="staggering schedule-item item-{{activity.cost.hours * activity.location.timeCostModifier}}">
       <h5>{{activity.name}} @{{activity.location.name}}</h5>
     </div>
   </div>

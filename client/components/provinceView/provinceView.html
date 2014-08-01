@@ -1,5 +1,5 @@
 <div class="province-view reveal-animation">
-  <div ng-repeat="district in districts" class="district {{district.name.split(' ').join('')}}" ng-class="{selected: district.selected}" ng-click="selected(district)">
+  <div ng-repeat="district in districts" class="district staggering {{district.name.split(' ').join('')}}" ng-class="{selected: district.selected}" ng-click="selected(district)">
     <div class="label">
       <h4>{{district.name}}</h4>
       <p>{{district.population}}pi</p>

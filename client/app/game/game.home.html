@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  <div ng-hide="showEvent" class="container">
+  <div ng-hide="showEvent" class="container reveal-animation">
     <div class="row">
       <div class="col-md-4">
         <h3>Simulating</h3>
@@ -75,7 +75,7 @@
   </table>
   <h5>Activities</h5>
   <ul class="list-unstyled activity-list">
-    <li ng-repeat="activity in selectedDistrict.activities" class="row" ng-class="{disabled: activity.disabled}">
+    <li ng-repeat="activity in selectedDistrict.activities" class="row staggering" ng-class="{disabled: activity.disabled}">
       <div class="col-md-5" tooltip-html-unsafe="{{activity.description | activitytooltip:activity.tooltipVals}}">{{activity.name}}</div>
       <div class="col-md-3" tooltip="{{activity.cost.gold}} * {{activity.location.goldCostModifier}}">{{activity.cost.gold * activity.location.goldCostModifier | formatcost}}</div>
       <div class="col-md-2">{{activity.cost.hours * activity.location.timeCostModifier}} hrs</div>

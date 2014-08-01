@@ -45,7 +45,7 @@ img{
   bottom:0;
   left:0;
   width:100%;
-  z-index: 250;
+  z-index: 1100;
   background: fade(@peach, 70%);;
 }
 
@@ -128,8 +128,17 @@ img{
 }
 
 .reveal-animation.ng-enter {
-  -webkit-animation: enter_sequence .5s linear; /* Safari/Chrome */
-  animation: enter_sequence .5s linear; /* IE10+ and Future Browsers */
+  -webkit-animation: enter_sequence .2s linear; /* Safari/Chrome */
+  animation: enter_sequence .2s linear; /* IE10+ and Future Browsers */
+  .itinerary-view{
+    -webkit-animation: enter_sequence .5s linear; /* Safari/Chrome */
+    animation: enter_sequence .5s linear; /* IE10+ and Future Browsers */
+  }
+}
+.reveal-animation.ng-hide{
+  -webkit-animation: hide_sequence .2s linear; /* Safari/Chrome */
+  animation: hide_sequence .2s linear; /* IE10+ and Future Browsers */
+
 }
 @-webkit-keyframes enter_sequence {
   from { opacity:0; }
@@ -138,6 +147,86 @@ img{
 @keyframes enter_sequence {
   from { opacity:0; }
   to { opacity:1; }
+}
+@-webkit-keyframes hide_sequence {
+  from { opacity:1; margin-top: 0px;}
+  to { opacity:0; margin-top: -10px;}
+}
+@keyframes hide_sequence {
+  from { opacity:1; margin-top: 0px;}
+  to { opacity:0; margin-top: -10px;}
+}
+
+.staggering.ng-enter,
+.staggering.ng-leave,
+.staggering.ng-move{
+  /* standard transition code */
+  -webkit-transition: .2s linear all;
+  transition: .2s linear all;
+  opacity:0;
+}
+.staggering.ng-enter-stagger {
+  /* this will have a 100ms delay between each successive leave animation */
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+
+  /* in case the stagger doesn't work then these two values
+   must be set to 0 to avoid an accidental CSS inheritance */
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s;
+}
+.staggering.ng-enter.ng-enter-active {
+  /* standard transition styles */
+  opacity:1;
+}
+.staggering.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.staggering.ng-move {
+  opacity:0.5;
+}
+.staggering.ng-move.ng-move-active {
+  opacity:1;
+}
+
+.staggering.ng-leave{
+  -webkit-transition: .5s linear all;
+  transition: .5s linear all;
+  opacity: 0;
+}
+
+.my-switch-container {
+  position:relative;
+  height:700px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.my-switch-animation.ng-enter,
+.my-switch-animation.ng-leave {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+  height:700px;
+  width: 100%;
+
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+}
+
+.my-switch-animation.ng-enter {
+  left:100%;
+}
+
+.my-switch-animation.ng-leave,
+.my-switch-animation.ng-enter.ng-enter-active {
+  left:0;
+}
+
+.my-switch-animation.ng-leave.ng-leave-active {
+  left:-100%;
 }
 
 // injector
