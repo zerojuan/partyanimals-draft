@@ -1,5 +1,5 @@
 <div class="row">
-  <div ng-repeat="simMessage in simMessages">
+  <div ng-repeat="simMessage in simMessages" class="staggering">
     <div ng-switch="simMessage.type" class="voting-sim-messages">
       <div ng-switch-when="OFFICIAL" class="official">
         {{simMessage.message}} : <strong>{{simMessage.vote.human}}</strong>({{simMessage.vote.humanProjected}}) vs <strong>{{simMessage.vote.ai}}</strong>({{simMessage.vote.aiProjected}})

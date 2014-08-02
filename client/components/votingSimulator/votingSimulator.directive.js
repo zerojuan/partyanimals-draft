@@ -182,7 +182,7 @@ angular.module('partyanimalsDraftApp')
           scope.aiVote += count.ai;
         }
 
-        stopTime = $interval(updateElection, 1000);
+        stopTime = $interval(updateElection, 2000);
 
 
       }

@@ -8,22 +8,22 @@ angular.module('partyanimalsDraftApp')
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl',
         resolve: {
-          platformPoints: function($q, PAFirebase){
+          platformPoints: ['$q', 'PAFirebase', function($q, PAFirebase){
             var deferred = $q.defer();
 
             PAFirebase.platformPointsRef.on('value', function(snapshot){
               deferred.resolve(snapshot.val());
             });
             return deferred.promise;
-          },
-          issues: function($q, PAFirebase){
+          }],
+          issues: ['$q', 'PAFirebase', function($q, PAFirebase){
             var deferred = $q.defer();
             PAFirebase.issuesRef.on('value', function(snapshot){
               deferred.resolve(snapshot.val());
             });
             return deferred.promise;
-          },
-          districts: function($q, PAFirebase){
+          }],
+          districts: ['$q', 'PAFirebase', function($q, PAFirebase){
             var deferred = $q.defer();
             PAFirebase.districtsRef.on('value',function(snapshot){
               var districts = snapshot.val();
@@ -34,7 +34,7 @@ angular.module('partyanimalsDraftApp')
               deferred.resolve(districts);
             });
             return deferred.promise;
-          }
+          }]
         }
       })
       .state('game', {
