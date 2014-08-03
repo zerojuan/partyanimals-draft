@@ -68,7 +68,7 @@ angular.module('partyanimalsDraftApp')
           var dataForActionDifficulty = {
             BD: scope.activity.difficulty,
             em: 10,
-            ITL: scope.activity.location.humanStance[scope.selectedIndex],
+            IDS: scope.activity.location.humanStance[scope.selectedIndex],
             IDM: scope.activity.location.issues[scope.selectedIndex],
             OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
           };
