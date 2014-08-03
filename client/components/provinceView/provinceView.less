@@ -3,6 +3,7 @@
   height: 400px;
   display: inline-block;
   .district{
+    transition: border 0.2s ease;
     border: 1px solid #ddd;
     width: 120px;
     height: 120px;
@@ -26,22 +27,36 @@
     position: relative;
     .reputation{
       position: absolute;
-      top: 30px;
-      left: 5px;
-      width: 70px;
-      font-size: 12px;
-      text-align: left;
-      p{
-        margin-bottom: 5px;
-      }
+      top: 0px;
+      width: 100%;
+      // font-size: 12px;
+      text-align: center;
     }
     .indicators{
       position: absolute;
-      top: 5px;
+      top: 30px;
       padding-left: 5px;
     }
     &.selected{
+      border: 2px dashed blue;
+    }
+    &.human-border{
       border: 2px solid blue;
+    }
+    &.ai-border{
+      border: 2px solid red;
+    }
+    &.ai-border.human-border:before{
+      position: absolute; display: block; content: '';
+      border: 2px solid blue;
+      height: 100%; width: 100%;
+      box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+    }
+    &.has-both:before {
+        position: absolute; display: block; content: '';
+        border: 2px dashed blue;
+        height: 100%; width: 100%;
+        box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
     }
     &.love{
       background: #00cc00;
