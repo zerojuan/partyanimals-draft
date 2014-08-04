@@ -771,7 +771,7 @@ angular.module('partyanimalsDraftApp')
           movePlayerToLocation(aiResult.district, false);
           GameState.aiStats.currentLocation = aiResult.district;
           $scope.simulate.aiSummaries.push({
-            text: 'AI Moved to '+aiResult.district.name,
+            text: 'Crocopio Moved to '+aiResult.district.name,
             success: true,
             cost: cost
           });
@@ -780,12 +780,12 @@ angular.module('partyanimalsDraftApp')
           if(aiResult.success){
             changedDistrict = setReputationForDistrict(aiResult.value, aiResult.district, aiResult.isVs);
             if(aiResult.cost.morality && aiResult.cost.morality < 0){
-              text = 'AI did something morally dubious to gain reputation.';
+              text = 'Crocopio did something morally dubious to gain reputation.';
             }else{
-              text = 'AI was able to increase their reputation in the area.';
+              text = 'Crocopio was able to increase his reputation in the area.';
             }
           }else{
-            text = 'Tried to raise their reputation, but failed.';
+            text = 'Tried to raise his reputation, but failed.';
           }
           $scope.simulate.aiSummaries.push({
             text: text,
@@ -800,7 +800,7 @@ angular.module('partyanimalsDraftApp')
               changedDistrict = setKapitanForDistrict(localKapitan, aiResult.district);
             }
             $scope.simulate.aiSummaries.push({
-              text: 'AI improved his relationship with ' + localKapitan.name,
+              text: 'Crocopio improved his relationship with ' + localKapitan.name,
               success: aiResult.success,
               cost: 0
             });
@@ -808,9 +808,9 @@ angular.module('partyanimalsDraftApp')
         }else if(aiResult.type === 'STAT'){
           if(aiResult.success){
             changedDistrict = setStatForDistrict(aiResult.issueIndex, aiResult.district, aiResult.value, false);
-            text = 'AI improved their ' + $scope.issues[aiResult.issueIndex].name + ' at ' + aiResult.district.name;
+            text = 'Crocopio improved his ' + $scope.issues[aiResult.issueIndex].name + ' at ' + aiResult.district.name;
           }else{
-            text = 'AI tried their platform education campaign but failed.';
+            text = 'Crocopio tried his platform education campaign but failed.';
           }
 
           $scope.simulate.aiSummaries.push({

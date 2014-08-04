@@ -1,13 +1,17 @@
 <div class="center" >
-  <span ng-class="{'green': humanChange > 0, 'gray': humanChange === 0, 'red': humanChange < 0}" tooltip="{{getChangeString(humanChange)}}">
-    <i class="glyphicon" ng-class="{'glyphicon-chevron-up': humanChange > 0, 'glyphicon-minus': humanChange === 0, 'glyphicon-chevron-down': humanChange < 0}"></i>
-  </span>
-  <span tooltip="Votes: {{now.human.votes}} vs {{now.ai.votes}}">
-    <span class="blue">{{now.human.reputation | number:2}}</span>
-    <span>vs</span>
-    <span class="red">{{now.ai.reputation | number:2}}</span>
-  </span>
-  <span ng-class="{'green': aiChange > 0, 'gray': aiChange === 0, 'red': aiChange < 0}" tooltip="{{getChangeString(aiChange)}}">
-    <i class="glyphicon" ng-class="{'glyphicon-chevron-up': aiChange > 0, 'glyphicon-minus': aiChange === 0, 'glyphicon-chevron-down': aiChange < 0}"></i>
-  </span>
+  <div class="content">
+    <img src="/assets/images/avatars/mouseyMale.jpg"></img>
+    <span ng-class="{'green': humanChange > 0, 'gray': humanChange === 0, 'red': humanChange < 0}" tooltip="{{getChangeString(humanChange)}}">
+      <i class="glyphicon" ng-class="{'glyphicon-chevron-up': humanChange > 0, 'glyphicon-minus': humanChange === 0, 'glyphicon-chevron-down': humanChange < 0}"></i>
+    </span>
+    <span tooltip="Votes: {{now.human.votes}} vs {{now.ai.votes}}">
+      <span class="blue">{{now.human.reputation | number:2}}</span>
+      <span><strong>vs</strong></span>
+      <span class="red">{{now.ai.reputation | number:2}}</span>
+    </span>
+    <span ng-class="{'green': aiChange > 0, 'gray': aiChange === 0, 'red': aiChange < 0}" tooltip="{{getChangeString(aiChange)}}">
+      <i class="glyphicon" ng-class="{'glyphicon-chevron-up': aiChange > 0, 'glyphicon-minus': aiChange === 0, 'glyphicon-chevron-down': aiChange < 0}"></i>
+    </span>
+    <img src="/assets/images/avatars/crocopio.jpg"></img>
+  </div>
 </div>

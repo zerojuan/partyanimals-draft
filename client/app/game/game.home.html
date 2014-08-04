@@ -1,7 +1,7 @@
 <div class="top-bar">
-  <div class="pull-left" tooltip="Morality: {{human.morality}}">{{turnsLeft}} Days Until Election</div>
+  <div class="pull-left" tooltip="Morality: {{human.morality}}"><strong>{{turnsLeft}}</strong> Days Until Election</div>
   <reputation-panel reputations="totalReputations"></reputation-panel>
-  <div class="pull-right" tooltip="AI Cash: {{ai.totalCash}}"ng-class="{red: totalCash<0}">Funds: ${{totalCash}}</div>
+  <div class="pull-right" tooltip="Crocopio Cash: {{ai.totalCash}}"ng-class="{red: totalCash<0}">Funds: <strong>${{totalCash | number}}</strong></div>
 </div>
 <div class="overlay reveal-animation" ng-show="showOverlay">
   <div ng-show="showEvent" class="container">
@@ -45,21 +45,22 @@
 <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelectedDistrict" show-reputation="true"></province-view>
 <div ng-show="selectedDistrict" class="pull-right district-desc reveal-animation">
   <h4>{{selectedDistrict.name}}
-    <div>
-      <span class="district-animal" tooltip="{{selectedDistrict.kapitan.humanRelations | feelings}}"><img ng-src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
-      <span class="district-animal" ng-show="selectedDistrict.specialist"><img ng-src="assets/images/avatars/{{selectedDistrict.specialist.image}}"></img>{{selectedDistrict.specialist.name}}</span>
-    </div>
+    &nbsp;<span>{{selectedDistrict.info}}</span>
   </h4>
-  <span>{{selectedDistrict.info}}</span>
+  <div class="district-status">
+    <span class="district-animal" tooltip="{{selectedDistrict.kapitan.humanRelations | feelings}}"><img ng-src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
+    <span class="district-animal" ng-show="selectedDistrict.specialist"><img ng-src="assets/images/avatars/{{selectedDistrict.specialist.image}}"></img>{{selectedDistrict.specialist.name}}</span>
+  </div>
+
   <table class="table table-striped">
     <tr>
       <th>Issue</th>
-      <th style="text-align: center;">You vs AI</th>
+      <th style="text-align: center;">You vs Crocopio</th>
     </tr>
     <tr ng-repeat="issue in human.issueStats">
       <td>
         <div>
-          {{issue.name}}<span class="district-difficulty {{selectedDistrict.issues[$index] | difficultyparser}}">{{selectedDistrict.issues[$index] | difficultyparser}}</span>
+          {{issue.name}}<span class="district-difficulty {{selectedDistrict.issues[$index] | difficultyparser}}" tooltip="{{selectedDistrict.name}} voters have a {{selectedDistrict.issues[$index] | difficultyparser}} demand for {{issue.name}}">{{selectedDistrict.issues[$index] | difficultyparser}}</span>
         </div>
       </td>
 

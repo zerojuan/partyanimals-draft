@@ -28,7 +28,7 @@ angular.module('partyanimalsDraftApp')
       html+='<p>'+input+'</p>';
       html+='<p>Difficulty: '+values.BD+'</p>';
       html+='<p>Your Relationship: '+$filter('feelings')(values.PKRm)+'</p>';
-      html+='<p>AI Relationship: '+$filter('feelings')(values.OKRm)+'</p>';
+      html+='<p>Crocopio Relationship: '+$filter('feelings')(values.OKRm)+'</p>';
 
       html+='</div>';
       return html;
