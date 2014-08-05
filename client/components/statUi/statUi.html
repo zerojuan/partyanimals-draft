@@ -4,16 +4,17 @@
     <table class="table table-striped">
       <tr>
         <th>Issue</th>
-        <th class="issue-bar">You vs Crocopio</th>
+        <th>Difficulty</th>
+        <th>Satisfaction</th>
         <th></th>
       </tr>
       <tr ng-repeat="issue in player.issueStats">
         <td>{{issue.name}} <span class="district-difficulty {{activity.location.issues[$index] | difficultyparser}}">{{activity.location.issues[$index] | difficultyparser}}</span>
+        <td>{{activity.location.issues[$index] | difficultyparser}}</td>
         <td class="issue-bar" ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">
-          <level-view base="issue.level" lvl="activity.location.humanStance[$index]" direction="left" type="human"></level-view>
-          <div class="text">
-            {{activity.location.humanStance[$index]}}&nbsp;vs&nbsp;{{activity.location.aiStance[$index]}}</div>
-          <level-view base="ai.issueStats[$index].level" lvl="activity.location.aiStance[$index]" type="ai" direction="right"></level-view>
+          <div class="district-stances">
+            <issue-level-view base="5" human-lvl="activity.location.humanStance[$index]" ai-lvl="activity.location.aiStance[$index]"></issue-level-view>
+          </div>
         </td>
         <td ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">
           <a class="btn" ng-class="{disabled: shouldDisable($index, issue) }"ng-click="raiseStats($index)" ng-mouseover="showPossible($index)" ng-mouseleave="hidePossible($index)">

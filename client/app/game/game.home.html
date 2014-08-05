@@ -55,21 +55,18 @@
   <table class="table table-striped">
     <tr>
       <th>Issue</th>
-      <th style="text-align: center;">You vs Crocopio</th>
+      <th style="text-align: right;">Satisfaction</th>
     </tr>
     <tr ng-repeat="issue in human.issueStats">
       <td>
         <div>
-          {{issue.name}}<span class="district-difficulty {{selectedDistrict.issues[$index] | difficultyparser}}" tooltip="{{selectedDistrict.name}} voters have a {{selectedDistrict.issues[$index] | difficultyparser}} demand for {{issue.name}}">{{selectedDistrict.issues[$index] | difficultyparser}}</span>
+          {{issue.name}}
         </div>
       </td>
 
-      <td>
+      <td style="text-align: right;">
         <div class="district-stances">
-          <level-view base="issue.level" lvl="selectedDistrict.humanStance[$index]" direction="left" type="human"></level-view>
-          <div class="text">
-          {{selectedDistrict.humanStance[$index]}}&nbsp;vs&nbsp;{{selectedDistrict.aiStance[$index]}}</div>
-          <level-view base="ai.issueStats[$index].level" lvl="selectedDistrict.aiStance[$index]" type="ai" direction="right"></level-view>
+          <issue-level-view base="5" human-lvl="selectedDistrict.humanStance[$index]" ai-lvl="selectedDistrict.aiStance[$index]"></issue-level-view>
         </div>
       </td>
     </tr>

@@ -1,0 +1,11 @@
+<div class="level-view" tooltip="Issue Level: {{lvl}} out of {{base}}">
+  <div class="base-container left">
+    <div class="base staggering" ng-repeat="bases in baseArray"></div>
+  </div>
+  <div class="level-container right">
+    <div class="level human staggering" ng-repeat="lvls in humanArray"></div>
+  </div>
+  <div class="level-container left">
+    <div class="level ai staggering" ng-repeat="lvls in aiArray"></div>
+  </div>
+</div>
