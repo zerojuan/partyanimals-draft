@@ -1,0 +1,40 @@
+.reputation-bar{
+  width: 90px;
+  margin: 0px 2px 0px 12.5px;
+  position: relative;
+  .change{
+    z-index: 50;
+    position: absolute;
+    .glyphicon{
+      font-size: 9px;
+    }
+    &.ai-change{
+      right: 5px;
+      top: -6px;
+    }
+    &.green{
+      color: lighten(green, 20%);
+    }
+    &.human-change{
+      left: 5px;
+      top: -6px;
+    }
+  }
+  .base{
+    position: absolute;
+    height: 10px;
+    width: 100%;
+    background: #e3e3e3;
+  }
+  .human{
+    position: absolute;
+    height: 10px;
+    background: darken(@human, 10%);
+  }
+  .ai{
+    position: absolute;
+    right: 0px;
+    height: 10px;
+    background: darken(@ai, 10%);
+  }
+}

@@ -1,0 +1,11 @@
+<div class="reputation-bar">
+  <span class="change human-change" ng-class="{'green': humanChange > 0, 'gray': humanChange === 0, 'red': humanChange < 0}" tooltip="{{getChangeString(humanChange)}}">
+    <i class="glyphicon" ng-class="{'glyphicon-chevron-up': humanChange > 0, 'glyphicon-minus': humanChange === 0, 'glyphicon-chevron-down': humanChange < 0}"></i>
+  </span>
+  <div class="base"></div>
+  <div class="human"  style="width: {{90 * human/100}}px;"></div>
+  <div class="ai" style="width: {{90 * ai/100}}px;"></div>
+  <span class="change ai-change" ng-class="{'green': aiChange > 0, 'gray': aiChange === 0, 'red': aiChange < 0}" tooltip="{{getChangeString(aiChange)}}">
+    <i class="glyphicon" ng-class="{'glyphicon-chevron-up': aiChange > 0, 'glyphicon-minus': aiChange === 0, 'glyphicon-chevron-down': aiChange < 0}"></i>
+  </span>
+</div>
