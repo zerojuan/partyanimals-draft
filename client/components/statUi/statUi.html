@@ -4,12 +4,12 @@
     <table class="table table-striped">
       <tr>
         <th>Issue</th>
-        <th>Difficulty</th>
-        <th>Satisfaction</th>
+        <th style="text-align: center;">Difficulty</th>
+        <th class="issue-bar">Satisfaction</th>
         <th></th>
       </tr>
       <tr ng-repeat="issue in player.issueStats">
-        <td>{{issue.name}} <span class="district-difficulty {{activity.location.issues[$index] | difficultyparser}}">{{activity.location.issues[$index] | difficultyparser}}</span>
+        <td style="text-align: left;">{{issue.name}}</td>
         <td>{{activity.location.issues[$index] | difficultyparser}}</td>
         <td class="issue-bar" ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">
           <div class="district-stances">
