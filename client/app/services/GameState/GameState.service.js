@@ -162,6 +162,17 @@ angular.module('partyanimalsDraftApp')
       return that.reputations;
     };
 
+    that.resetReputations = function(){
+      that.reputations = [];
+    };
+
+    that.updateDistrictReputationHistory = function(districts){
+      _.forEach(districts, function(district){
+        district.humanReputations.push(district.humanReputation);
+        district.aiReputations.push(district.aiReputation);
+      });
+    };
+
     that.updateTurn = function(turn){
       that.turnsLeft = turn;
     };

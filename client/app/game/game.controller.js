@@ -84,6 +84,7 @@ angular.module('partyanimalsDraftApp')
         if(!onDataChanged('turnsPerGame')){
           $scope.turnsLeft = snapshot.val();
           // $scope.turnsLeft = 1;
+          GameState.resetReputations();
           $scope.$apply();
         }
       });
@@ -99,6 +100,8 @@ angular.module('partyanimalsDraftApp')
             val.aiReputation = 0;
             val.humanStance = [0,0,0,0,0];
             val.aiStance = [0,0,0,0,0];
+            val.humanReputations = [];
+            val.aiReputations = [];
             if(val.id === $scope.human.hq.id){
               val.isHQ = true;
               val.humanReputation = 50;
@@ -130,7 +133,8 @@ angular.module('partyanimalsDraftApp')
             }
           });
           GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
-
+          GameState.updateDistrictReputationHistory($scope.districts);
+          
           //tally district approval ratings
           $scope.totalReputations = GameState.getTotalReputation();
           $scope.changeSelectedDistrict(findDistrict(selectedDistrict.id));
@@ -468,7 +472,7 @@ angular.module('partyanimalsDraftApp')
 
       GameState.updateTurn($scope.turnsLeft);
       GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
-
+      GameState.updateDistrictReputationHistory($scope.districts);
       //tally district approval ratings
       $scope.totalReputations = GameState.getTotalReputation();
 

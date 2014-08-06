@@ -5,7 +5,7 @@
       <p>{{district.population}}pi</p>
     </div>
     <div ng-show="showReputation" class="reputation">
-      <reputation-bar human="district.humanReputation" ai="district.aiReputation"></reputation-bar>
+      <reputation-bar human-reputations="district.humanReputations" ai-reputations="district.aiReputations"></reputation-bar>
     </div>
     <div class="indicators">
       <span ng-show="district.isHQ"><i class="glyphicon glyphicon-home blue"></i></span>

@@ -6,17 +6,24 @@ angular.module('partyanimalsDraftApp')
       templateUrl: 'components/reputationBar/reputationBar.html',
       restrict: 'E',
       scope: {
-        ai: '=',
-        human: '='
+        aiReputations: '=',
+        humanReputations: '='
       },
       link: function (scope) {
-        scope.$watch('human', function(newVal, oldVal){
-          scope.humanChange = newVal - oldVal;
-        });
+        scope.$watch('humanReputations', function(newVal){
+          console.log('Human Reputations: ', scope.humanReputations);
+          //scope.humanChange = newVal - oldVal;
+          scope.human = newVal[newVal.length - 1];
+          var previous = newVal[newVal.length - 2] ? newVal[newVal.length - 2] : 0;
+          scope.humanChange = newVal[newVal.length - 1] - previous;
+        }, true);
 
-        scope.$watch('ai', function(newVal, oldVal){
-          scope.aiChange = newVal - oldVal;
-        });
+        scope.$watch('aiReputations', function(newVal){
+          //scope.aiChange = newVal - oldVal;
+          scope.ai = newVal[newVal.length - 1];
+          var previous = newVal[newVal.length - 2] ? newVal[newVal.length - 2] : 0;
+          scope.aiChange = newVal[newVal.length - 1] - previous;
+        }, true);
       }
     };
   });
