@@ -9,6 +9,7 @@ angular.module('partyanimalsDraftApp')
         reputations: '='
       },
       link: function postlink(scope){
+        scope.showGraph = false;
         scope.$watch('reputations', function(newVal, oldVal){
           if(newVal && newVal[newVal.length-1]){
             var prev = newVal[newVal.length-2];

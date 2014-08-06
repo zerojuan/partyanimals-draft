@@ -164,6 +164,7 @@ angular.module('partyanimalsDraftApp')
 
     that.resetReputations = function(){
       that.reputations = [];
+      return that.reputations;
     };
 
     that.updateDistrictReputationHistory = function(districts){

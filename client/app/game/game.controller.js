@@ -84,7 +84,8 @@ angular.module('partyanimalsDraftApp')
         if(!onDataChanged('turnsPerGame')){
           $scope.turnsLeft = snapshot.val();
           // $scope.turnsLeft = 1;
-          GameState.resetReputations();
+          GameState.turnsLeft = $scope.turnsLeft;
+          $scope.totalReputations = GameState.resetReputations();
           $scope.$apply();
         }
       });
@@ -134,7 +135,7 @@ angular.module('partyanimalsDraftApp')
           });
           GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
           GameState.updateDistrictReputationHistory($scope.districts);
-          
+
           //tally district approval ratings
           $scope.totalReputations = GameState.getTotalReputation();
           $scope.changeSelectedDistrict(findDistrict(selectedDistrict.id));

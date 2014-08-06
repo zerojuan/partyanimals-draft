@@ -5,6 +5,7 @@
   .content{
     background: rgb(255, 187, 0);
     float: none;
+    cursor: pointer;
     width: 50%;
     height: 40px;
     margin-left: auto;
@@ -21,5 +22,21 @@
     .glyphicon{
       font-size: 12px;
     }
+    &.selected{
+      background: darken(rgb(255, 187, 0), 5%);
+      box-shadow: 0px 3px 3px #888888;
+    }
+    &:hover{
+      background: darken(rgb(255, 187, 0), 5%);
+    }
+  }
+  .graph{
+    background: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 70;
+    border-top: 4px solid darken(rgb(255, 187, 0), 5%);
+    box-shadow: 0px 5px 5px #888888;
   }
 }

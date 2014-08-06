@@ -1,5 +1,5 @@
 <div class="center" >
-  <div class="content">
+  <div class="content" ng-class="{selected: showGraph}"ng-click="showGraph = !showGraph;">
     <img src="/assets/images/avatars/mouseyMale.jpg"></img>
     <span ng-class="{'green': humanChange > 0, 'gray': humanChange === 0, 'red': humanChange < 0}" tooltip="{{getChangeString(humanChange)}}">
       <i class="glyphicon" ng-class="{'glyphicon-chevron-up': humanChange > 0, 'glyphicon-minus': humanChange === 0, 'glyphicon-chevron-down': humanChange < 0}"></i>
@@ -13,5 +13,9 @@
       <i class="glyphicon" ng-class="{'glyphicon-chevron-up': aiChange > 0, 'glyphicon-minus': aiChange === 0, 'glyphicon-chevron-down': aiChange < 0}"></i>
     </span>
     <img src="/assets/images/avatars/crocopio.jpg"></img>
+  </div>
+  <div class="graph container" ng-show="showGraph">
+    <h3>Reputation Over Time</h3>
+    <voting-graph reputations="reputations"></voting-graph>
   </div>
 </div>
