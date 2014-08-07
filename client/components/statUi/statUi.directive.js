@@ -35,6 +35,34 @@ angular.module('partyanimalsDraftApp')
           console.log('Modifier: ', modifier);
         });
 
+        scope.getADandAC = function(index){
+          var dataForCheck = {
+            random: 50,
+            PKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.humanRelations),
+            em: 10
+          };
+          var dataForActionDifficulty = {
+            BD: scope.activity.difficulty,
+            em: 10,
+            IDS: scope.activity.location.humanStance[index],
+            IDM: scope.activity.location.issues[index],
+            OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
+          };
+
+          var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);
+          var actionDifficulty = $filter('formulaparser')(scope.activity.actionDifficulty, dataForActionDifficulty);
+
+          return {
+            difficulty: $filter('difficultyparser')(actionCheck, actionDifficulty),
+            PKRm: dataForCheck.PKRm,
+            OKRm: dataForActionDifficulty.OKRm,
+            humanFeelings: $filter('feelingstowards')(scope.activity.location.kapitan.humanRelations),
+            aiFeelings: $filter('feelingstowards')(scope.activity.location.kapitan.aiRelations),
+            IDS: dataForActionDifficulty.IDS,
+            IDM: dataForActionDifficulty.IDM
+          };
+        };
+
         //show stats
         scope.onDone = function(){
 

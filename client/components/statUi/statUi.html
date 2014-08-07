@@ -10,7 +10,7 @@
       </tr>
       <tr ng-repeat="issue in player.issueStats">
         <td style="text-align: left;">{{issue.name}}</td>
-        <td>{{activity.location.issues[$index] | difficultyparser}}</td>
+        <td><span tooltip-html-unsafe="{{getADandAC($index) | difficultytooltip}}">{{getADandAC($index).difficulty}}</span></td>
         <td class="issue-bar" ng-class="{strong: activity.location.issues[$index] <= issue.level && activity.location.issues[$index] > 0}">
           <div class="district-stances">
             <issue-level-view base="5" human-lvl="activity.location.humanStance[$index]" ai-lvl="activity.location.aiStance[$index]"></issue-level-view>

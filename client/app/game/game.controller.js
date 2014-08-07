@@ -288,6 +288,8 @@ angular.module('partyanimalsDraftApp')
       $scope.endTurn = false;
       $scope.hoursElapsed = 0;
       actIndex = 0;
+      //TODO: generate AI moves here
+      Aisim.generateActivities($scope.activities, $scope.scheduledActivities);
       GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
     };
 
@@ -300,6 +302,7 @@ angular.module('partyanimalsDraftApp')
     $scope.simulate.onNext = function(){
       //is turn done?
       if(actIndex > $scope.scheduledActivities.length-1){
+        console.log('Turn is supper done!');
         wrapTurn();
         //TODO: ask if there are still activities pending in the AI
         var pendingMoves = Aisim.getPendingMovesCount();

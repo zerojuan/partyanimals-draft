@@ -20,6 +20,25 @@ angular.module('partyanimalsDraftApp')
       }
     };
   })
+  .filter('feelingstowards', function(){
+    return function(feeling){
+      if(feeling <= 10){
+        return 'Hates';
+      }else if(feeling > 10 && feeling <= 25){
+        return 'Distrusts';
+      }else if(feeling > 25 && feeling <= 45){
+        return 'Dislikes';
+      }else if(feeling > 45 && feeling <= 70){
+        return 'is Indifferent towards';
+      }else if(feeling > 70 && feeling <= 85){
+        return 'Likes';
+      }else if(feeling > 85 && feeling <= 95){
+        return 'Trusts';
+      }else if(feeling > 95){
+        return 'Loves';
+      }
+    };
+  })
   .filter('feelingstomodifier', function(){
     return function(feeling){
       if(feeling <= 10){
