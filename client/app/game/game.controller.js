@@ -501,10 +501,6 @@ angular.module('partyanimalsDraftApp')
       $scope.showItinerary = false;
     };
 
-    $scope.onItClicked = function(){
-      $scope.showItinerary = !$scope.showItinerary;
-    };
-
     $scope.$watch('scheduledActivities', function(){
       //get the last movement location
       var futureLocationFound = false;

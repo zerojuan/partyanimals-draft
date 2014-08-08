@@ -42,7 +42,10 @@
 </div>
 <cards-view cards="cards"></cards-view>
 <div ng-include="'components/alert/alert.html'"></div>
-<province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelectedDistrict" show-reputation="true"></province-view>
+<div class="row col-xs-5">
+  <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelectedDistrict" show-reputation="true"></province-view>
+  <div ng-include="'app/game/game.itinerary.html'"></div>
+</div>
 <div ng-show="selectedDistrict" class="pull-right district-desc reveal-animation">
   <h4>{{selectedDistrict.name}}
     &nbsp;<span>{{selectedDistrict.info}}</span>
@@ -86,7 +89,6 @@
 </div>
 <div class="bottom container">
     <div class="content">
-      <a class="btn btn-success" ng-click="onItClicked()">Itinerary</a>
       <a class="btn btn-default" ng-click="onKapClicked()">Kapitans</a>
     </div>
 </div>
