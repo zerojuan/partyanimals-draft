@@ -82,8 +82,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.turnsPerGameRef.on('value', function(snapshot){
         if(!onDataChanged('turnsPerGame')){
-          $scope.turnsLeft = snapshot.val();
-          // $scope.turnsLeft = 1;
+          // $scope.turnsLeft = snapshot.val();
+          $scope.turnsLeft = 10;
           GameState.turnsLeft = $scope.turnsLeft;
           $scope.totalReputations = GameState.resetReputations();
           $scope.$apply();
@@ -661,7 +661,6 @@ angular.module('partyanimalsDraftApp')
       $scope.simulate.activeAct = null;
       $scope.endTurn = true;
       //add budget contributions
-      //TODO: List down extra curricular activities
       var extraMessage = '';
       if($scope.simulate.miscFunds > 0){
         extraMessage = 'Earned $' + $scope.simulate.miscFunds + ' from misc. activities';
@@ -685,13 +684,12 @@ angular.module('partyanimalsDraftApp')
             });
           }else if(card.id === 'HurricaneOrwell'){
             card.turns--;
-            console.log('Card Turns: ', card.turns);
             if(card.turns < 0){
               card.active = false;
               card.description = card.descriptionDone;
               $scope.showEvent = true;
               $scope.currEventCard = card;
-
+              $scope.scheduledActivities = [];
               $scope.showOverlay = true;
               return;
             }
