@@ -1,39 +1,5 @@
 <div class="row" ng-controller="KapitanCtrl">
-  <div class="col-md-5">
-    <h3>{{selectedKapitan.name}}</h3>
-    <ul class="list-inline animal-list">
-    <li ng-repeat="kapitan in localKapitans" class="kapitan-image">
-      <div ng-show="!kapitan.active" class="feelings-label top">{{kapitan.feelingsToSelected | feelings}}</div>
-      <div ng-show="!kapitan.active" class="feelings-label bottom">{{kapitan.feelingsForSelected | feelings}}</div>
-      <img class="avatar-clickable" ng-src="assets/images/avatars/{{kapitan.image}}" ng-class="{active: kapitan.active}" ng-click="onKapSelected(kapitan)"></img>
-    </li>
-    </ul>
-    <hr></hr>
-    <ul class="list-inline animal-list">
-    <li ng-repeat="kapitan in specialists" class="kapitan-image">
-      <div ng-show="!kapitan.active" class="feelings-label top">{{kapitan.feelingsToSelected | feelings}}</div>
-      <div ng-show="!kapitan.active" class="feelings-label bottom">{{kapitan.feelingsForSelected | feelings}}</div>
-      <img class="avatar-clickable" ng-src="assets/images/avatars/{{kapitan.image}}" ng-class="{active: kapitan.active}" ng-click="onKapSelected(kapitan)"></img>
-    </li>
-    </ul>
-    <div>
-      <a class="btn btn-default" ng-click="onBackHome()">Back</a>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div>
-      <h3>Feelings towards You</h3>
-      <span>{{selectedKapitan.humanRelations | feelings}}</span>
-    </div>
-    <div>
-      <h3>Feelings towards Crocopio</h3>
-      <span>{{selectedKapitan.aiRelations | feelings}}</span>
-    </div>
-    <div>
-      <h3>Description</h3>
-      <p>{{selectedKapitan.description}}</p>
-    </div>
-  </div>
+  <kapitan-graph kapitans="localKapitans" selected-kapitan="selectedKapitan"></kapitan-graph>
 </div>
 <div>
 

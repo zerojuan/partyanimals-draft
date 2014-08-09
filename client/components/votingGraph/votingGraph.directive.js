@@ -16,10 +16,16 @@ angular.module('partyanimalsDraftApp')
             width = 740 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom;
 
-        var x = d3.scale.linear().range([0, width]);
-        var y = d3.scale.linear().range([height, 0]);
+        var color = d3.scale.category20();
 
-        var color = d3.scale.category10();
+        var force = d3.layout.force()
+            .charge(-120)
+            .linkDistance(30)
+            .size([width, height]);
+
+        var svg = d3.select(".graph").append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
         color.domain(['ai', 'human']);
 
