@@ -17,6 +17,7 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.onBackHome = function(){
+      console.log('Going back home');
       if($scope.selectedKapitan){
         $scope.selectedKapitan.active = false;
       }

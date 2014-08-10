@@ -17,7 +17,7 @@ angular.module('partyanimalsDraftApp')
 
         var color = d3.scale.linear()
             .domain([0, 50, 100])
-            .range(['red', 'gray', 'green']);
+            .range(['red', '#ccc', 'green']);
         var strokeWidth = d3.scale.linear()
             .domain([0, 50, 100])
             .range([10, 3, 10]);
@@ -31,12 +31,18 @@ angular.module('partyanimalsDraftApp')
           .attr('width', width)
           .attr('height', height);
 
-        // var defs = svg.append('defs')
-        //   .append('clippath')
-        //     .attr('id', 'g-mug-clip')
-        //     .append('circle')
-        //       .attr('r', 20);
+        //legend
+        var legend = d3.select('.legend-bar').selectAll('.legend-block')
+          .data([0, 20, 30, 40, 50, 60, 70, 80, 90, 100]).enter().append('div')
+          .attr('class', 'legend-block')
+          .style('background', function(d){
+            return color(d);
+          });
 
+        var selectKapitan = function(d){
+          scope.selectedKapitan = d;
+          scope.$apply();
+        };
 
         function transition(path) {
           path.transition()
@@ -86,6 +92,7 @@ angular.module('partyanimalsDraftApp')
               name: 'Mousey',
               x: 100,
               y: 130,
+              description: 'This is you.',
               image: 'mouseyMale.jpg',
               weight: 1,
               width: 50,
@@ -98,6 +105,7 @@ angular.module('partyanimalsDraftApp')
               y: 130,
               name: 'Crocopio',
               image: 'crocopio.jpg',
+              description: 'The incumbent.',
               weight: 1,
               width: 50,
               height: 50,
@@ -134,13 +142,29 @@ angular.module('partyanimalsDraftApp')
               .enter().append('g')
                 .attr('transform', function(d){return 'translate('+d.x+','+d.y+')';})
                 .call(force.drag);
-
+            node.append('circle')
+              .attr('cx', 0)
+              .attr('cy', 0)
+              .attr('r', function(d){
+                if(d.id < 0){
+                  return 30;
+                }
+                return 20;
+              })
+              .style('fill', '#ccc')
+              .style('stroke-width', 1.5)
+              .style('stroke', '#ccc');
             node.append('svg:image')
               .attr('x', function(d){return -d.width/2;})
               .attr('y', function(d){return -d.height/2;})
               .attr('width', function(d){ return d.width;})
               .attr('height', function(d){return d.height;})
-              .attr('clip-path', 'url(#g-mug-clip)')
+              .attr('clip-path', function(d){
+                if(d.id < 0){
+                  return 'url(/game#g-player-mug-clip)';
+                }
+                return 'url(/game#g-mug-clip)';
+              })
               .attr('xlink:href',function(d){return 'assets/images/avatars/'+d.image;});
               // node.append('circle')
               //    .attr('cx', 0)
@@ -149,7 +173,12 @@ angular.module('partyanimalsDraftApp')
               //    .style('stroke', 'black')
               //    .style('fill', 'transparent')
               //    .style('stroke-width', 5);
-            node.on('mouseover', function(d){
+            var showHighlight = function(d, context){
+              selectKapitan(d);
+              d3.select(context).select('circle')
+                .transition()
+                .duration(500)
+                .style('fill', '#eee');
               link2.each(function(l){
                 if(d.id < 0){
                   if(l.target.id === d.id){
@@ -160,9 +189,14 @@ angular.module('partyanimalsDraftApp')
                   d3.select(this).style('stroke-opacity', '1').call(transition);
                 }
               });
-            });
+            };
 
-            node.on('mouseout', function(d){
+            var hideHighlight = function(d, context){
+              selectKapitan(null);
+              d3.select(context).select('circle')
+                .transition()
+                .duration(500)
+                .style('fill', '#ccc');
               link2.each(function(l){
                 if(d.id < 0){
                   if(l.target.id === d.id){
@@ -173,6 +207,20 @@ angular.module('partyanimalsDraftApp')
                   d3.select(this).style('stroke-opacity', '0');
                 }
               });
+            };
+            node.on('mouseover', function(d){
+              showHighlight(d, this);
+            });
+
+            node.on('mouseout', function(d){
+              hideHighlight(d, this);
+            });
+
+            node.on('touchend', function(d){
+              link2.each(function(){
+                d3.select(this).style('stroke-opacity', '0');
+              });
+              showHighlight(d, this);
             });
 
             force.on('tick', function() {

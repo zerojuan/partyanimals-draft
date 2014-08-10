@@ -1,12 +1,28 @@
-<div class="container">
-  <h3>Hey This is the Graph</h3>
+<div class="container kapitan-graph">
+  <h3>Summer Island Relationship Chart</h3>
   <div id="kap-chart">
     <svg id="mySvg" width="80" height="80">
       <defs id="mdef">
         <clippath id="g-mug-clip">
-          <circle r="20"></circle>
+          <circle r="15"></circle>
+        </clippath>
+        <clippath id="g-player-mug-clip">
+          <circle r="25"></circle>
         </clippath>
       </defs>
     </svg>
+    <div class="legend">
+      <div class="text">Hate</div>
+      <div class="legend-bar"></div>
+      <div class="text">Love</div>
+    </div>
+  </div>
+  <div ng-hide="selectedKapitan">
+    <i>Mouse over a character to see their relationships</i>
+  </div>
+  <div ng-show="selectedKapitan">
+    <img ng-src="assets/images/avatars/{{selectedKapitan.image}}"></img>
+    <h3>{{selectedKapitan.name}}</h3>
+    <span>{{selectedKapitan.description}}</span>
   </div>
 </div>
