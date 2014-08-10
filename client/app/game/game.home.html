@@ -1,6 +1,6 @@
 <div class="top-bar">
   <div class="pull-left" tooltip="Morality: {{human.morality}}"><strong>{{turnsLeft}}</strong> Days Until Election</div>
-  <reputation-panel reputations="totalReputations"></reputation-panel>
+  <reputation-panel reputations="totalReputations" kapitans="kapitans"></reputation-panel>
   <div class="pull-right" tooltip="Crocopio Cash: {{ai.totalCash}}"ng-class="{red: totalCash<0}">Funds: <strong>${{totalCash | number}}</strong></div>
 </div>
 <div class="overlay reveal-animation" ng-show="showOverlay">

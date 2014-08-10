@@ -6,7 +6,8 @@ angular.module('partyanimalsDraftApp')
       templateUrl: 'components/reputationPanel/reputationPanel.html',
       restrict: 'E',
       scope: {
-        reputations: '='
+        reputations: '=',
+        kapitans: '='
       },
       link: function postlink(scope){
         scope.showGraph = false;
