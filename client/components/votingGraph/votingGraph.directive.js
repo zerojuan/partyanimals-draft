@@ -16,6 +16,9 @@ angular.module('partyanimalsDraftApp')
             width = 740 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom;
 
+         var x = d3.scale.linear().range([0, width]);
+        var y = d3.scale.linear().range([height, 0]);
+
         var color = d3.scale.category20();
 
         var force = d3.layout.force()

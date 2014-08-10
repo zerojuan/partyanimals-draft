@@ -15,22 +15,34 @@ angular.module('partyanimalsDraftApp')
             width = 740 - margin.left - margin.right,
             height = 400 - margin.top - margin.bottom;
 
-        var color = d3.scale.category20();
+        var color = d3.scale.linear()
+            .domain([0, 50, 100])
+            .range(['red', 'gray', 'green']);
+        var strokeWidth = d3.scale.linear()
+            .domain([0, 50, 100])
+            .range([10, 3, 10]);
 
         var force = d3.layout.force()
             .charge(-120)
             .linkDistance(200)
             .size([width, height]);
 
-        var svg = d3.select('.chart').append('svg')
+        var svg = d3.select('#mySvg')
           .attr('width', width)
           .attr('height', height);
 
+        // var defs = svg.append('defs')
+        //   .append('clippath')
+        //     .attr('id', 'g-mug-clip')
+        //     .append('circle')
+        //       .attr('r', 20);
+
+
         function transition(path) {
           path.transition()
-              .duration(7500)
-              .attrTween('stroke-dasharray', tweenDash)
-              .each('end', function() { d3.select(this).call(transition); });
+              .duration(500)
+              .attrTween('stroke-dasharray', tweenDash);
+              //.each('end', function() { d3.select(this).call(transition); });
         }
 
         function tweenDash() {
@@ -95,25 +107,73 @@ angular.module('partyanimalsDraftApp')
               .nodes(nodes)
               .links(links)
               .start();
+              // patterns.append('polygon')
+              //   .attr('points', '5,0 10,10 0,10');
+
             var link = svg.selectAll('.link')
                 .data(links);
             link.enter().append('path')
                 .attr('class', 'link')
-                // .style('stroke-dasharray', '4,4')
-                .style('stroke-width', function(d) { return Math.sqrt(d.value); })
-                .call(transition);
+                .style('stroke', function(d){ return color(d.value);})
+                .style('stroke-width', function(d) {
+                  return strokeWidth(d.value);
+                })
+                .style('stroke-opacity', 0.1);
+                // .call(transition);
+
+            var link2 = svg.selectAll('.link-2')
+                  .data(links);
+              link2.enter().append('path')
+                  .attr('class', 'link-2')
+                  .style('stroke', function(d){ return color(d.value);})
+                  .style('stroke-width', function(d) { return strokeWidth(d.value);  })
+                  .style('stroke-opacity', 0);
 
             var node = svg.selectAll('.node')
                 .data(nodes)
-              .enter().append('svg:image')
-               .attr('x', function(d){return d.x-d.width/2;})
-               .attr('y', function(d){return d.y-d.height/2;})
-               .attr('width', function(d){ return d.width;})
-               .attr('height', function(d){return d.height;})
-               .attr('xlink:href', function(d){return 'assets/images/avatars/'+d.image;})
-               .call(force.drag);
+              .enter().append('g')
+                .attr('transform', function(d){return 'translate('+d.x+','+d.y+')';})
+                .call(force.drag);
 
+            node.append('svg:image')
+              .attr('x', function(d){return -d.width/2;})
+              .attr('y', function(d){return -d.height/2;})
+              .attr('width', function(d){ return d.width;})
+              .attr('height', function(d){return d.height;})
+              .attr('clip-path', 'url(#g-mug-clip)')
+              .attr('xlink:href',function(d){return 'assets/images/avatars/'+d.image;});
+              // node.append('circle')
+              //    .attr('cx', 0)
+              //    .attr('cy', 0)
+              //    .attr('r', 20)
+              //    .style('stroke', 'black')
+              //    .style('fill', 'transparent')
+              //    .style('stroke-width', 5);
+            node.on('mouseover', function(d){
+              link2.each(function(l){
+                if(d.id < 0){
+                  if(l.target.id === d.id){
+                    d3.select(this).style('stroke-opacity', '1').call(transition);
+                  }
+                }
+                if(l.source.id === d.id){
+                  d3.select(this).style('stroke-opacity', '1').call(transition);
+                }
+              });
+            });
 
+            node.on('mouseout', function(d){
+              link2.each(function(l){
+                if(d.id < 0){
+                  if(l.target.id === d.id){
+                    d3.select(this).style('stroke-opacity', '0');
+                  }
+                }
+                if(l.source.id === d.id){
+                  d3.select(this).style('stroke-opacity', '0');
+                }
+              });
+            });
 
             force.on('tick', function() {
               // link.attr('x1', function(d) { return d.source.x; })
@@ -131,8 +191,18 @@ angular.module('partyanimalsDraftApp')
                       d.target.x + ',' +
                       d.target.y;
               });
-              node.attr('x', function(d) { return d.x-d.width/2; })
-                  .attr('y', function(d) { return d.y-d.height/2; });
+              link2.attr('d', function(d) {
+                  var dx = d.target.x - d.source.x,
+                      dy = d.target.y - d.source.y,
+                      dr = Math.sqrt(dx * dx + dy * dy);
+                  return 'M' +
+                      d.source.x + ',' +
+                      d.source.y + 'A' +
+                      dr + ',' + dr + ' 0 0,1 ' +
+                      d.target.x + ',' +
+                      d.target.y;
+              });
+              node.attr('transform', function(d){return 'translate('+d.x+','+d.y+')';});
             });
           }
         });
