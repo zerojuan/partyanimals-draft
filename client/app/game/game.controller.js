@@ -156,7 +156,7 @@ angular.module('partyanimalsDraftApp')
         if(!onDataChanged('kapitans')){
           $scope.kapitans = snapshot.val();
           angular.forEach($scope.kapitans, function(val){
-            val.humanRelations =Math.random() * 100;
+            val.humanRelations =50;
             val.aiRelations = 50;
           });
           GameState.kapitans = $scope.kapitans;
