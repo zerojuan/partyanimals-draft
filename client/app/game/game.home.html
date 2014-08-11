@@ -63,7 +63,7 @@
     <tr ng-repeat="issue in human.issueStats">
       <td>
         <div>
-          {{issue.name}}
+          {{issue.name}}<span tooltip="{{selectedDistrict.issues[$index] | demandexplainer}}" class="district-difficulty {{selectedDistrict.issues[$index] | demandparser}}">{{selectedDistrict.issues[$index] | demandparser}}</span>
         </div>
       </td>
 

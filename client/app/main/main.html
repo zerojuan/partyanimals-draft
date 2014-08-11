@@ -34,7 +34,7 @@
             <td>You</td>
           </tr>
           <tr ng-repeat="issue in issues">
-            <td>{{issue.name}}<span class="district-difficulty {{selectedDistrict.issues[$index] | difficultyparser}}">{{selectedDistrict.issues[$index] | difficultyparser}}</span></td>
+            <td>{{issue.name}}<span tooltip="{{selectedDistrict.issues[$index] | demandexplainer}}" class="district-difficulty {{selectedDistrict.issues[$index] | demandparser}}">{{selectedDistrict.issues[$index] | demandparser}}</span></td>
             <td ng-class="{strong: selectedDistrict.issues[$index] <= issue.level && selectedDistrict.issues[$index] > 0}">{{issue.level}}</td>
           </tr>
         </table>

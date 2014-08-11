@@ -36,6 +36,7 @@ angular.module('partyanimalsDraftApp')
         //set ai issues
         var aiIssues = [];
         //randomize aiIssues:
+        //create AI personality
         $scope.issues.forEach(function(val, i){
           var newVal = angular.copy(val);
           if(i === 0){

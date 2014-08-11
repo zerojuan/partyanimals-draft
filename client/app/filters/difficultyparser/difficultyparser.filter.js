@@ -68,4 +68,15 @@ angular.module('partyanimalsDraftApp')
         return 'LOW';
       }
     };
+  })
+  .filter('demandexplainer', function(){
+    return function(input){
+      if(input < 30){
+        return 'Locals care for this issue a lot. They respond well to candidates with a developed platform on this issue';
+      }else if(input < 45){
+        return 'Locals don\'t particularly care for this issue but they\'ll still appreciate your platform';
+      }else{
+        return 'Locals don\'t care for this issue.';
+      }
+    };
   });
