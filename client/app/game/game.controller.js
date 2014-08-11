@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .controller('GameCtrl', function ($scope, $rootScope, $http, PAFirebase, GameState, Aisim) {
+  .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim) {
 
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
@@ -381,7 +381,7 @@ angular.module('partyanimalsDraftApp')
           var kapitan = result.kapitan;
           var total = result.total;
           var localKapitan = $scope.findKapitan(kapitan.id);
-          localKapitan.humanRelations += total.relationship;
+          updateKapitanRelations(localKapitan, total.relationship, true);
           if(localKapitan.type === 'KAPITAN'){
             changedDistrict = setKapitanForDistrict(localKapitan, result.district);
           }
@@ -797,7 +797,7 @@ angular.module('partyanimalsDraftApp')
         }else if(aiResult.type === 'TALK'){
           if(aiResult.success){
             var localKapitan = $scope.findKapitan(aiResult.district.kapitanId);
-            localKapitan.aiRelations += aiResult.value;
+            updateKapitanRelations(localKapitan, aiResult.value, false);
             if(localKapitan.type === 'KAPITAN'){
               changedDistrict = setKapitanForDistrict(localKapitan, aiResult.district);
             }
@@ -828,6 +828,27 @@ angular.module('partyanimalsDraftApp')
     var findDistrict = function(id){
       return _.find($scope.districts, function(val){
         return val.id === id;
+      });
+    };
+
+    var updateKapitanRelations = function(kapitan, relationUpgrade, isHuman){
+      var kapId = kapitan.id;
+      _.forEach($scope.kapitans, function(kap){
+        if(kap.id === kapId){
+          if(isHuman){
+            kap.humanRelations += relationUpgrade;
+          }else{
+            kap.aiRelations += relationUpgrade;
+          }
+
+          return;
+        }
+        var feelingsModifier = $filter('feelingstomodifier')(kap.relations[kapId]);
+        if(isHuman){
+          kap.humanRelations += feelingsModifier * relationUpgrade;
+        }else{
+          kap.aiRelations += feelingsModifier * relationUpgrade;
+        }
       });
     };
 
