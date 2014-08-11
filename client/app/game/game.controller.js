@@ -152,11 +152,10 @@ angular.module('partyanimalsDraftApp')
       });
 
       PAFirebase.kapitansRef.on('value', function(snapshot){
-        console.log('Kapitans');
         if(!onDataChanged('kapitans')){
           $scope.kapitans = snapshot.val();
           angular.forEach($scope.kapitans, function(val){
-            val.humanRelations =50;
+            val.humanRelations = 50;
             val.aiRelations = 50;
           });
           GameState.kapitans = $scope.kapitans;
