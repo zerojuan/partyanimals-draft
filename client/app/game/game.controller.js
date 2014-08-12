@@ -6,6 +6,7 @@ angular.module('partyanimalsDraftApp')
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
     $scope.turnsLeft = GameState.getTurnsLeft();
+    $scope.totalTurns = 25;
     $scope.totalCash = GameState.getInitialCash();
     $scope.showItinerary = false;
     $scope.showOverlay = true;
@@ -89,6 +90,7 @@ angular.module('partyanimalsDraftApp')
         $scope.config.loadedItems += 1;
         if(!onDataChanged('turnsPerGame')){
           $scope.turnsLeft = snapshot.val();
+          $scope.totalTurns = snapshot.val();
           // $scope.turnsLeft = 10;
           GameState.turnsLeft = $scope.turnsLeft;
           $scope.totalReputations = GameState.resetReputations();

@@ -7,14 +7,53 @@
   <div ng-switch-when="WELCOME" class="container">
     <div class="row simulation-container">
       <div class="event-container">
-        <progressbar ng-hide="config.loadedItems===9" value="config.loadedItems" max="9" class="reveal-animation"></progressbar>
-        <a ng-show="config.loadedItems===9" ng-click="onHideEventPanel()" class="btn btn-success">Close</a>
+
       </div>
-      <div class="activity-sim" ng-show="config.loadedItems===9">
-        <h3>Mousey faces Crocopio</h3>
-        <p><img ng-src="assets/images/avatars/mouseyMale.jpg"></img>Mousey a native of {{human.hq.name}} has announced his candidacy for Mayor of Summer Island.</p>
-        <p><img class="avatar-clickable" ng-src="assets/images/avatars/crocopio.jpg"></img>Mayor Crocopio, meanwhile, sets up his HQ in {{ai.hq.name}}</p>
-        <p><img class="avatar-clickable" ng-src="assets/images/avatars/campaignmanager.png">I am your campaign manager. Let's work hard ok.</p>
+      <div class="activity-sim row newspaper" >
+        <div ng-hide="config.loadedItems===9" class="col-xs-12 reveal-animation">
+          <progressbar  value="config.loadedItems" max="9" ></progressbar>
+        </div>
+        <div ng-show="config.loadedItems===9" class="reveal-animation">
+          <div class="col-xs-12">
+            <div class="title">
+              <h1>Summer Times</h1><h4>Last Week<span class="red">s</span> New<span class="red">'</span>s Today</h4>
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <hr>
+            <h4 class="right">Issue {{totalTurns+1 - turnsLeft}}</h4>
+          </div>
+          <div class="container body">
+              <div class="left col-xs-7 headline">
+                <h2>Crocopio Eyes Re-Election</h2>
+                <img ng-src="assets/images/avatars/crocopio.jpg"></img>
+                <p>Mayor Crocopio sets up his campaign HQ in <b>{{ai.hq.name}}</b>.</p>
+                <p>"We don't change horses mid-stream. We move Forward!", explained Mayor Crocopio. "My own 5 point agenda on <platform-enumerator candidate="ai"></platform-enumerator> is exactly what we need."</p>
+              </div>
+              <div class="left col-xs-5 boxed">
+                <h3>Mousey Faces Crocopio</h3>
+                <img class="failed" ng-src="assets/images/avatars/mouseyMale.jpg"></img>
+                <p>Mousey, a native of <b>{{human.hq.name}}</b> has announced his candidacy for Mayor of Summer Island.</p>
+                <p>"We need Change in Summer Island, which is why I'm proposing a 5 point plan focusing on <platform-enumerator candidate="human"></platform-enumerator>", said the mayoralty hopeful.</p>
+              </div>
+              <div class="left col-xs-4">
+                <h3>Local Author Writes Book </h3>
+                <p>Last week at his Kapitolyo library, <b>Owlberto</b> announces the most important book ever written in Summer Island.</p>
+              </div>
+              <div class="left col-xs-4">
+                <h3><b>Opinion:</b> How To Win Elections </h3>
+                <p>In this day and age, the Kapitans hold sway over their districts. <b>Win their favor</b> and their district will be more than willing to hear you out.</p>
+              </div>
+              <div class="left col-xs-4">
+                <h3><b>Initial Polls</b></h3>
+                <p><poll-explainer total-reputations="totalReputations" ai="ai" human="human"></poll-explainer></p>
+              </div>
+
+          </div>
+          <div class="col-xs-12 done-btn">
+            <div ng-show="config.loadedItems===9" ng-click="onHideEventPanel()" class="btn btn-success">Done Reading</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
