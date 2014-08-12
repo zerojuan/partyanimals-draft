@@ -3,9 +3,22 @@
   <reputation-panel reputations="totalReputations" kapitans="kapitans"></reputation-panel>
   <div class="pull-right" tooltip="Crocopio Cash: {{ai.totalCash}}"ng-class="{red: totalCash<0}">Funds: <strong>${{totalCash | number}}</strong></div>
 </div>
-<div class="overlay reveal-animation" ng-show="showOverlay">
-  <div ng-show="showEvent" class="container">
-
+<div class="overlay reveal-animation" ng-show="showOverlay" ng-switch="config.overlayState">
+  <div ng-switch-when="WELCOME" class="container">
+    <div class="row simulation-container">
+      <div class="event-container">
+        <progressbar ng-hide="config.loadedItems===9" value="config.loadedItems" max="9" class="reveal-animation"></progressbar>
+        <a ng-show="config.loadedItems===9" ng-click="onHideEventPanel()" class="btn btn-success">Close</a>
+      </div>
+      <div class="activity-sim" ng-show="config.loadedItems===9">
+        <h3>Mousey faces Crocopio</h3>
+        <p><img ng-src="assets/images/avatars/mouseyMale.jpg"></img>Mousey a native of {{human.hq.name}} has announced his candidacy for Mayor of Summer Island.</p>
+        <p><img class="avatar-clickable" ng-src="assets/images/avatars/crocopio.jpg"></img>Mayor Crocopio, meanwhile, sets up his HQ in {{ai.hq.name}}</p>
+        <p><img class="avatar-clickable" ng-src="assets/images/avatars/campaignmanager.png">I am your campaign manager. Let's work hard ok.</p>
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="EVENT" class="container">
     <div class="row simulation-container">
       <div class="event-container">
         <a ng-click="onHideEventPanel()" class="btn btn-success">Close</a>
@@ -17,7 +30,7 @@
       </div>
     </div>
   </div>
-  <div ng-hide="showEvent" class="container reveal-animation">
+  <div ng-switch-when="SIMULATION" class="container reveal-animation">
     <div class="row">
       <div class="col-md-4">
         <h3>Simulating</h3>

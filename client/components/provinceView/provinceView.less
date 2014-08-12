@@ -37,14 +37,67 @@
       top: 30px;
       padding-left: 5px;
     }
-    &.selected{
-      border: 2px dashed blue;
-    }
+
     &.human-border{
       border: 2px solid blue;
     }
     &.ai-border{
       border: 2px solid red;
+    }
+    &.neighbor{
+
+      border: 2px dashed blue;
+    }
+    &.selected{
+      -webkit-animation: glowborder .2s ease-in-out infinite; /* Safari/Chrome */
+      animation: glowborder .2s ease-in-out infinite; /* IE10+ and Future Browsers */
+      border: 2px dashed blue;
+    }
+    .direction{
+      -webkit-animation: growfont 1s ease-in-out infinite; /* Safari/Chrome */
+      animation: growfont 1s ease-in-out infinite; /* IE10+ and Future Browsers */
+      position: relative;
+      width: 100%;
+      height: 100%;
+      font-size: 40px;
+      opacity: .5;
+      z-index: 60;
+      .up{
+        position: absolute;
+        left: 30%;
+        bottom: -15px;
+      }
+      .down{
+        position: absolute;
+        left: 30%;
+        top: -15px;
+      }
+      .right{
+        position: absolute;
+        left: -10px;
+        top: 30%;
+      }
+      .left{
+        position: absolute;
+        right: -10px;
+        top: 30%;
+      }
+    }
+    @-webkit-keyframes growfont {
+      from { font-size: 20px; }
+      to { font-size: 40px; }
+    }
+    @keyframes growfont {
+      from { font-size: 20px; }
+      to { font-size: 40px; }
+    }
+    @-webkit-keyframes glowborder {
+      from { border-width: 1px; }
+      to { border-width: 2px; }
+    }
+    @keyframes glowborder {
+      from { border-width: 1px; }
+      to { border-width: 2px; }
     }
     &.ai-border.human-border:before{
       position: absolute; display: block; content: '';

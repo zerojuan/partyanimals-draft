@@ -195,8 +195,9 @@ angular.module('partyanimalsDraftApp')
       $cookieStore.put('humanStats', that.humanStats);
     };
 
-    that.setAI = function(issueStats, hq){
+    that.setAI = function(issueStats, hq, personality){
       that.aiStats.issueStats = issueStats;
+      that.aiStats.personality = personality;
       that.aiStats.hq = hq;
       $cookieStore.put('aiStats', that.aiStats);
     };

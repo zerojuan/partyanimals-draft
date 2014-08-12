@@ -4,6 +4,11 @@
       <h4>{{district.name}}</h4>
       <p>{{district.population}}pi</p>
     </div>
+    <div ng-show="isNeighbor(district)" class="direction">
+      <div class="{{getArrowDirection(district)}}">
+        <i class="glyphicon glyphicon-arrow-{{getArrowDirection(district)}}"></i>
+      </div>
+    </div>
     <div ng-show="showReputation" class="reputation">
       <reputation-bar human-reputations="district.humanReputations" ai-reputations="district.aiReputations"></reputation-bar>
     </div>
