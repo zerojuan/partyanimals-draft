@@ -34,30 +34,61 @@ angular.module('partyanimalsDraftApp')
 
       $scope.submit = function(){
         //set ai issues
-        var aiIssues = [];
-        //randomize aiIssues:
-        //create AI personality
-        $scope.issues.forEach(function(val, i){
-          var newVal = angular.copy(val);
-          if(i === 0){
-            newVal.level = 3;
-          }else if(i === 1){
-            newVal.level = 1;
-          }else if(i === 2){
-            newVal.level = 1;
-          }else if(i === 3){
-            newVal.level = 0;
-          }else if(i === 4){
-            newVal.level = 0;
-          }
-          aiIssues.push(newVal);
+        var aiIssues = angular.copy($scope.issues);
+        _.forEach(aiIssues, function(val){
+          val.level = 0;
         });
-        //set ai selected district
-        var aiHQ = null;
         var index = GameState.getRandomNumberExcept($scope.selectedDistrict.id, $scope.districts.length);
-        aiHQ = $scope.districts[index];
+        var aiHQ = $scope.districts[index];
+        var personality = {};
+        switch(index){
+          case 4:
+          case 0:
+                personality.favoredKapitans = [0,4];
+                personality.type = 'ELITIST';
+                break;
+          case 2:
+          case 3:
+                personality.favoredKapitans = [2,3];
+                personality.type = 'POPULIST';
+                break;
+          case 1:
+          case 5:
+                personality.favoredKapitans = [1,5];
+                personality.type = 'MONEY';
+                break;
+        }
+
+        switch(index){
+          case 4:
+                //focus on religion
+                aiIssues[4].level = 5;
+                break;
+          case 0:
+                //focus on education and law and order
+                aiIssues[0].level = 3;
+                aiIssues[1].level = 2;
+                break;
+          case 2:
+          case 3:
+                aiIssues[2].level = 2;
+                aiIssues[3].level = 3;
+                break;
+          case 1:
+                aiIssues[0].level = 2;
+                aiIssues[1].level = 2;
+                aiIssues[2].level = 2;
+                aiIssues[3].level = 2;
+                aiIssues[4].level = 2;
+                break;
+          case 5:
+                aiIssues[3].level = 4;
+                aiIssues[4].level = 1;
+                break;
+        }
+
         GameState.setHuman($scope.issues, $scope.selectedDistrict);
-        GameState.setAI(aiIssues, aiHQ);
+        GameState.setAI(aiIssues, aiHQ, personality);
         $location.path('/game');
       };
 

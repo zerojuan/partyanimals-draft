@@ -8,6 +8,7 @@ angular.module('partyanimalsDraftApp')
     $scope.turnsLeft = GameState.getTurnsLeft();
     $scope.totalCash = GameState.getInitialCash();
     $scope.showItinerary = false;
+    $scope.showOverlay = true;
     $scope.hours = [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
     $scope.hoursElapsed = 0;
     $scope.scheduledActivities = [];
@@ -20,7 +21,9 @@ angular.module('partyanimalsDraftApp')
     };
     $scope.config = {
       alerts: [],
-      state: 'home'
+      state: 'home',
+      loadedItems: 0,
+      overlayState: 'WELCOME' //WELCOME, EVENT, SIMULATION, WEEKLY
     };
     $scope.currentPlayer = $scope.human;
 
@@ -31,7 +34,7 @@ angular.module('partyanimalsDraftApp')
 
     $rootScope.$on('$stateChangeSuccess',
       function(){
-        console.log('Successfully changed state');
+      $scope.config.loadedItems = 0;
       PAFirebase.removeCallbacks();
       addDataCallbacks();
     });
@@ -50,7 +53,7 @@ angular.module('partyanimalsDraftApp')
 
     var addDataCallbacks = function(){
       PAFirebase.workhoursRef.on('value', function(snapshot){
-        console.log('Loading data....');
+        $scope.config.loadedItems += 1;
         onDataChanged('workhours');
         var hours = snapshot.val();
         $scope.hours = [];
@@ -61,6 +64,7 @@ angular.module('partyanimalsDraftApp')
       });
 
       PAFirebase.cardsRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
         onDataChanged('cards');
         $scope.cards = snapshot.val();
         _.forEach($scope.cards, function(val){
@@ -72,6 +76,7 @@ angular.module('partyanimalsDraftApp')
       });
 
       PAFirebase.goldRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
         if(!onDataChanged('initialGold')){
           $scope.totalCash = snapshot.val();
           $scope.human.totalCash = snapshot.val();
@@ -81,6 +86,7 @@ angular.module('partyanimalsDraftApp')
       });
 
       PAFirebase.turnsPerGameRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
         if(!onDataChanged('turnsPerGame')){
           $scope.turnsLeft = snapshot.val();
           // $scope.turnsLeft = 10;
@@ -91,36 +97,45 @@ angular.module('partyanimalsDraftApp')
       });
 
       PAFirebase.districtsRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
         console.log('Districts');
         if(!onDataChanged('districts')){
           $scope.districts = snapshot.val();
           var selectedDistrict = null;
-          $scope.districts.forEach(function(val){
+          $scope.districts.forEach(function(district){
             var i = 0;
-            val.humanReputation = 0;
-            val.aiReputation = 0;
-            val.humanStance = [0,0,0,0,0];
-            val.aiStance = [0,0,0,0,0];
-            val.humanReputations = [];
-            val.aiReputations = [];
-            if(val.id === $scope.human.hq.id){
-              val.isHQ = true;
-              val.humanReputation = 50;
-              val.hasHuman = true;
+            district.humanReputation = district.humanReputation ? district.humanReputation : 0;
+            district.aiReputation = district.aiReputation ? district.aiReputation : Math.random() * 10 + 5;
+            district.humanStance = [0,0,0,0,0];
+            district.aiStance = [0,0,0,0,0];
+            district.humanReputations = [0];
+            district.aiReputations = [0];
+            //drip reputation to neighbors
+            if(district.id === $scope.human.hq.id){
+              district.isHQ = true;
+              district.humanReputation = 60;
+              district.hasHuman = true;
               for(i = 0; i < 5; i++){
-                val.humanStance[i] = $scope.human.issueStats[i].level;
+                district.humanStance[i] = $scope.human.issueStats[i].level;
               }
-              selectedDistrict = val;
+              district.neighbors.forEach(function(neighborIndex){
+                console.log('NeighborIndex:', neighborIndex);
+                $scope.districts[neighborIndex].humanReputation = 25;
+              });
+              selectedDistrict = district;
             }
-            if(val.id === $scope.ai.hq.id){
-              val.isAIHQ = true;
-              val.hasAI = true;
-              val.aiReputation = 50;
+            if(district.id === $scope.ai.hq.id){
+              district.isAIHQ = true;
+              district.hasAI = true;
+              district.aiReputation = 60;
               for(i = 0; i < 5; i++){
-                val.aiStance[i] = $scope.ai.issueStats[i].level;
+                district.aiStance[i] = $scope.ai.issueStats[i].level;
               }
-              $scope.ai.hq = val;
-              $scope.ai.currentLocation = val;
+              district.neighbors.forEach(function(neighborIndex){
+                $scope.districts[neighborIndex].aiReputation = 20;
+              });
+              $scope.ai.hq = district;
+              $scope.ai.currentLocation = district;
             }
           });
           _.forEach($scope.human.issueStats, function(val){
@@ -145,6 +160,7 @@ angular.module('partyanimalsDraftApp')
       });
 
       PAFirebase.issuesRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
         if(!onDataChanged('issues')){
           $scope.issues = snapshot.val();
           $scope.$apply();
@@ -152,6 +168,7 @@ angular.module('partyanimalsDraftApp')
       });
 
       PAFirebase.kapitansRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
         if(!onDataChanged('kapitans')){
           $scope.kapitans = snapshot.val();
           angular.forEach($scope.kapitans, function(val){
@@ -164,6 +181,7 @@ angular.module('partyanimalsDraftApp')
       });
 
       PAFirebase.eventsRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
         if(!onDataChanged('events')){
           $scope.eventsDb = snapshot.val();
           GameState.eventsDb = $scope.eventsDb;
@@ -171,6 +189,7 @@ angular.module('partyanimalsDraftApp')
       });
 
       PAFirebase.activitiesRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
         if(!onDataChanged('activities')){
           $scope.activities = snapshot.val();
           $scope.changeSelectedDistrict(findDistrict($scope.human.hq.id));
@@ -213,16 +232,14 @@ angular.module('partyanimalsDraftApp')
       if($scope.selectedDistrict){
         $scope.selectedDistrict.selected = false;
       }
-      console.log('Changing selected district');
       $scope.selectedDistrict = district;
       $scope.selectedDistrict.selected = true;
       generateActivities();
     };
 
     var generateActivities = function(){
-      console.log('Generate activitieis?');
       $scope.selectedDistrict.kapitan = $scope.findKapitan($scope.selectedDistrict.kapitanId);
-      if(!$scope.selectedDistrict.kapitan) return;
+      if(!$scope.selectedDistrict.kapitan) {return;}
       $scope.selectedDistrict.activities = [];
       if($scope.selectedDistrict.specialistId){
         $scope.selectedDistrict.specialist = $scope.findKapitan($scope.selectedDistrict.specialistId);
@@ -284,17 +301,17 @@ angular.module('partyanimalsDraftApp')
       $scope.simulate.isNextReady = true;
       $scope.simulate.miscFunds = 0;
       $scope.showOverlay = true;
+      $scope.config.overlayState = 'SIMULATION';
       $scope.endTurn = false;
       $scope.hoursElapsed = 0;
       actIndex = 0;
-      //TODO: generate AI moves here
+
       Aisim.generateActivities($scope.activities, $scope.scheduledActivities);
       GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
     };
 
     $scope.onHideEventPanel = function(){
       $scope.showOverlay = false;
-      $scope.showEvent = false;
     };
 
 
@@ -485,7 +502,7 @@ angular.module('partyanimalsDraftApp')
       }
 
       if($scope.turnsLeft === 9){
-        $scope.showEvent = true;
+        $scope.config.overlayState = 'EVENT';
         $scope.cards = GameState.activateCards(['HurricaneOrwell']);
         $scope.currEventCard = GameState.getCard('HurricaneOrwell');
         $scope.showOverlay = true;
@@ -494,6 +511,16 @@ angular.module('partyanimalsDraftApp')
     };
 
 
+    $scope.findKapitan = function(id){
+      var retVal = null;
+      if(!$scope.kapitans) {return null;}
+      $scope.kapitans.forEach(function(val){
+        if(val.id === id){
+          retVal = val;
+        }
+      });
+      return retVal;
+    };
 
     $scope.onKapClicked = function(){
       $scope.config.state = 'kapitan';
@@ -536,16 +563,13 @@ angular.module('partyanimalsDraftApp')
       });
     }, true);
 
-    $scope.findKapitan = function(id){
-      var retVal = null;
-      if(!$scope.kapitans) return null;
-      $scope.kapitans.forEach(function(val){
-        if(val.id === id){
-          retVal = val;
-        }
-      });
-      return retVal;
-    };
+    $scope.$watch('config.loadedItems', function(){
+      if($scope.config.loadedItems === 9){
+        //analyze the data?
+
+      }
+    });
+
 
     var isInSchedule = function(activity){
       var retVal = false;
@@ -686,7 +710,7 @@ angular.module('partyanimalsDraftApp')
             if(card.turns < 0){
               card.active = false;
               card.description = card.descriptionDone;
-              $scope.showEvent = true;
+              $scope.config.overlayState = 'EVENT';
               $scope.currEventCard = card;
               $scope.scheduledActivities = [];
               $scope.showOverlay = true;
