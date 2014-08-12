@@ -6,7 +6,7 @@
     </div>
     <div ng-show="isNeighbor(district)" class="direction">
       <div class="{{getArrowDirection(district)}}">
-        <i class="glyphicon glyphicon-arrow-{{getArrowDirection(district)}}"></i>
+        <i class="glyphicon" ng-class="{'glyphicon-resize-horizontal': getArrowDirection(district) === 'left' || getArrowDirection(district) === 'right', 'glyphicon-resize-vertical': getArrowDirection(district) === 'up' || getArrowDirection(district) === 'down'}"></i>
       </div>
     </div>
     <div ng-show="showReputation" class="reputation">

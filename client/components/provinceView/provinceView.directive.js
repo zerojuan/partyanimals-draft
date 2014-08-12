@@ -34,12 +34,10 @@ angular.module('partyanimalsDraftApp')
         scope.getArrowDirection = function(district){
           var selected = convertTo2D(scope.selectedDistrict.id, 2);
           var neighbor = convertTo2D(district.id, 2);
-          console.log(selected, neighbor);
-          //is left
+          
           if(neighbor.x < selected.x && neighbor.y === selected.y){
             return 'left';
           }
-          //is above
           if(neighbor.x > selected.x && neighbor.y === selected.y){
             return 'right';
           }
