@@ -49,8 +49,8 @@
       border: 2px dashed blue;
     }
     &.selected{
-      -webkit-animation: glowborder .2s ease-in-out infinite; /* Safari/Chrome */
-      animation: glowborder .2s ease-in-out infinite; /* IE10+ and Future Browsers */
+      // -webkit-animation: glowborder .2s ease-in-out infinite; /* Safari/Chrome */
+      // animation: glowborder .2s ease-in-out infinite; /* IE10+ and Future Browsers */
       border: 2px dashed blue;
     }
     .direction{
@@ -84,6 +84,33 @@
         top: 30%;
       }
     }
+    .selection-marker{
+      -webkit-animation: glow .2s ease-in-out; /* Safari/Chrome */
+      animation: glow .2s ease-in-out; /* IE10+ and Future Browsers */
+      position: absolute;
+      top: 10%;
+      left: 25%;
+      color: darken(@human, 10%);
+      font-size: 50px;
+    }
+    .has-human, .has-ai{
+      position: absolute;
+    }
+    .has-human{
+      bottom: 40px;
+      left: 30px;
+    }
+    .has-ai{
+      bottom: 40px;
+      right: 30px;
+    }
+    .avatar-clickable{
+      width: 35px;
+      height: 35px;
+      -webkit-box-shadow: 1px 4px 8px 1px rgba(0,0,0,0.75);
+      -moz-box-shadow: 1px 4px 8px 1px rgba(0,0,0,0.75);
+      box-shadow: 1px 4px 8px 1px rgba(0,0,0,0.75);
+    }
     @-webkit-keyframes growfont {
       from { font-size: 20px; }
       to { font-size: 30px; }
@@ -92,13 +119,13 @@
       from { font-size: 20px; }
       to { font-size: 30px; }
     }
-    @-webkit-keyframes glowborder {
-      from { border-width: 1px; }
-      to { border-width: 2px; }
+    @-webkit-keyframes glow {
+      from { opacity: .5; }
+      to {opacity: .8; }
     }
-    @keyframes glowborder {
-      from { border-width: 1px; }
-      to { border-width: 2px; }
+    @keyframes glow {
+      from { opacity: .5; }
+      to {opacity: .8; }
     }
     &.ai-border.human-border:before{
       position: absolute; display: block; content: '';

@@ -100,7 +100,6 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.districtsRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        console.log('Districts');
         if(!onDataChanged('districts')){
           $scope.districts = snapshot.val();
           var selectedDistrict = null;

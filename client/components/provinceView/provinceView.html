@@ -4,6 +4,12 @@
       <h4>{{district.name}}</h4>
       <p>{{district.population}}pi</p>
     </div>
+    <div ng-show="district.hasAI" class="has-ai">
+      <img class="avatar-clickable" src="assets/images/avatars/crocopio.jpg"></img>
+    </div>
+    <div ng-show="district.hasHuman" class="has-human">
+      <img class="avatar-clickable" src="assets/images/avatars/mouseyMale.jpg"></img>
+    </div>
     <div ng-show="isNeighbor(district)" class="direction">
       <div class="{{getArrowDirection(district)}}">
         <i class="glyphicon" ng-class="{'glyphicon-resize-horizontal': getArrowDirection(district) === 'left' || getArrowDirection(district) === 'right', 'glyphicon-resize-vertical': getArrowDirection(district) === 'up' || getArrowDirection(district) === 'down'}"></i>
