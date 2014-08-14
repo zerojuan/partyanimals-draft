@@ -11,7 +11,6 @@ angular.module('partyanimalsDraftApp')
       },
       link: function (scope) {
         scope.$watch('humanReputations', function(newVal){
-          console.log('Human Reputations: ', scope.humanReputations);
           //scope.humanChange = newVal - oldVal;
           scope.human = newVal[newVal.length - 1];
           var previous = newVal[newVal.length - 2] ? newVal[newVal.length - 2] : 0;

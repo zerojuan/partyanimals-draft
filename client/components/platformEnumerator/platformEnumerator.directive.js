@@ -18,7 +18,7 @@ angular.module('partyanimalsDraftApp')
         });
 
         if(proposedPlatforms.length === scope.candidate.issueStats.length){
-          scope.platforms = 'Everything';
+          scope.platforms = ['Everything'];
         }else{
           scope.platforms = proposedPlatforms;
         }

@@ -4,10 +4,12 @@ angular.module('partyanimalsDraftApp')
   .service('GameState', function Gamestate($cookieStore, $filter) {
     var that = this;
     that.humanStats = {
+      name: 'Mousey',
       issueStats : null,
       hq: null
     };
     that.aiStats = {
+      name: 'Crocopio',
       issueStats: null,
       hq: null
     };

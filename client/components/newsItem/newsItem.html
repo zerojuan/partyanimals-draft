@@ -1,0 +1,25 @@
+<div class="left col-xs-{{data.columns}}" ng-switch="type">
+  <div ng-switch-when="POLL">
+    <h2>{{data.winner.name}} Leads {{data.loser.name}} by <b class="red">{{data.pts | number:2}}</b></h2>
+    <p>{{data.p1}}</p>
+    <p>{{data.p2}}</p>
+  </div>
+  <div ng-switch-when="OPINION">
+    <h2><b>Opinion:</b>{{data.headline}}</h2>
+    <p>{{data.p1}}</p>
+    <p>{{data.p2}}</p>
+  </div>
+  <div ng-switch-when="MONEY">
+    <h2>{{data.candidate}} Is Running On Empty</h2>
+    <p>Someone is losing money. {{data.p1}}</p>
+    <p>{{data.p2}}</p>
+  </div>
+  <div ng-switch-when="BULWARKS">
+    <h2></h2>
+  </div>
+  <div ng-switch-when="EVENT">
+    <h2><b>NEWS FLASH</b> {{data.headline}}</h2>
+    <p>{{data.p1}}</p>
+    <p>{{data.p2}}</p>
+  </div>
+</div>

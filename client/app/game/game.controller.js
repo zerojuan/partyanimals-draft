@@ -7,6 +7,7 @@ angular.module('partyanimalsDraftApp')
     $scope.ai = GameState.getAI();
     $scope.turnsLeft = GameState.getTurnsLeft();
     $scope.totalTurns = 25;
+    $scope.daysInAWeek = 5;
     $scope.totalCash = GameState.getInitialCash();
     $scope.showItinerary = false;
     $scope.showOverlay = true;
@@ -500,12 +501,18 @@ angular.module('partyanimalsDraftApp')
       //check if turns left is 0
       if($scope.turnsLeft === 0){
         $scope.config.state = 'end';
+        return;
       }
 
       if($scope.turnsLeft === 9){
         $scope.config.overlayState = 'EVENT';
         $scope.cards = GameState.activateCards(['HurricaneOrwell']);
         $scope.currEventCard = GameState.getCard('HurricaneOrwell');
+        $scope.showOverlay = true;
+      }
+
+      if(($scope.totalTurns - $scope.turnsLeft) % $scope.daysInAWeek === 0){
+        $scope.config.overlayState = 'WEEKLY';
         $scope.showOverlay = true;
       }
 
@@ -521,6 +528,15 @@ angular.module('partyanimalsDraftApp')
         }
       });
       return retVal;
+    };
+
+    $scope.onNewsClicked = function(){
+      $scope.showOverlay = true;
+      if($scope.totalTurns - $scope.turnsLeft < $scope.daysInAWeek){
+        $scope.config.overlayState = 'WELCOME';
+      }else{
+        $scope.config.overlayState = 'WEEKLY';
+      }
     };
 
     $scope.onKapClicked = function(){
