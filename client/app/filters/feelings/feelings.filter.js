@@ -58,6 +58,14 @@ angular.module('partyanimalsDraftApp')
       }
     };
   })
+  .filter('feelingscolor', function(){
+    var color = d3.scale.linear()
+        .domain([0, 50, 100])
+        .range(['red', '#ccc', 'green']);
+    return function(feeling){
+      return color(feeling);
+    };
+  })
   .filter('feelingstorollmodifier', function(){
     return function(feeling){
       if(feeling <= 10){

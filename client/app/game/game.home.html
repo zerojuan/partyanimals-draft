@@ -103,7 +103,7 @@
     &nbsp;<span>{{selectedDistrict.info}}</span>
   </h4>
   <div class="district-status">
-    <span class="district-animal" tooltip="{{selectedDistrict.kapitan.humanRelations | feelings}}"><img ng-src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
+    <span class="district-animal" tooltip="{{selectedDistrict.kapitan.humanRelations | feelings}}"><img style="border: 2px solid {{selectedDistrict.kapitan.humanRelations | feelingscolor}};" ng-src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
     <span class="district-animal" ng-show="selectedDistrict.specialist"><img ng-src="assets/images/avatars/{{selectedDistrict.specialist.image}}"></img>{{selectedDistrict.specialist.name}}</span>
   </div>
 
