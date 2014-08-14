@@ -436,6 +436,15 @@ angular.module('partyanimalsDraftApp')
       return Math.floor(vote);
     };
 
+    that.capFeelings = function(newFeelings){
+      if(newFeelings < 0){
+        return 0;
+      }else if(newFeelings > 100){
+        return 100;
+      }
+      return newFeelings;
+    };
+
     that.capReputation = function(a, b, add){
       var diff = 100 - (a+add + b);
       if(diff < 0){

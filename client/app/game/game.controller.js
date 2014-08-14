@@ -860,18 +860,17 @@ angular.module('partyanimalsDraftApp')
       _.forEach($scope.kapitans, function(kap){
         if(kap.id === kapId){
           if(isHuman){
-            kap.humanRelations += relationUpgrade;
+            kap.humanRelations = GameState.capFeelings(relationUpgrade + kap.humanRelations);
           }else{
-            kap.aiRelations += relationUpgrade;
+            kap.aiRelations = GameState.capFeelings(relationUpgrade + kap.aiRelations);
           }
-
           return;
         }
         var feelingsModifier = $filter('feelingstomodifier')(kap.relations[kapId]);
         if(isHuman){
-          kap.humanRelations += feelingsModifier * relationUpgrade;
+          kap.humanRelations = GameState.capFeelings(kap.humanRelations + feelingsModifier * relationUpgrade);
         }else{
-          kap.aiRelations += feelingsModifier * relationUpgrade;
+          kap.aiRelations = GameState.capFeelings(kap.aiRelations + feelingsModifier * relationUpgrade);
         }
       });
     };
