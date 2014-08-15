@@ -11,14 +11,14 @@ angular.module('partyanimalsDraftApp')
         districts: '=',
         kapitans: '=',
         cash: '=',
-        onOfficialVote: '='
+        simMessages: '=',
+        done: '='
       },
       link: function (scope) {
         var stopTime,
             districtsCounted = 0,
             actions = 0;
-        scope.simMessages = [];
-
+        scope.electionDone = false;
         function updateElection(){
           actions++;
           var currDistrict = scope.districts[districtsCounted];
@@ -113,7 +113,7 @@ angular.module('partyanimalsDraftApp')
                 message: 'You lost. Better luck next time'
               });
             }
-
+            scope.done = true;
             $interval.cancel(stopTime);
           }
         }
@@ -186,7 +186,12 @@ angular.module('partyanimalsDraftApp')
           district.aiVote = count.ai;
         }
 
-        stopTime = $interval(updateElection, 2000);
+        if(!scope.done){
+          stopTime = $interval(updateElection, 2000);
+          scope.simMessages = [];
+        }else{
+          scope.electionDone = true;
+        }
 
 
       }

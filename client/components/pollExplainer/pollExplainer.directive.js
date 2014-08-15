@@ -14,7 +14,7 @@ angular.module('partyanimalsDraftApp')
       link: function (scope) {
 
         scope.$watch('totalReputations', function(){
-          if(scope.totalReputations){
+          if(scope.totalReputations && scope.totalReputations.length > 0){
               scope.topPoll = scope.totalReputations[scope.totalReputations.length-1];
               scope.lead = Math.abs(scope.topPoll.ai.reputation - scope.topPoll.human.reputation);
               if(scope.topPoll.ai.reputation > scope.topPoll.human.reputation){

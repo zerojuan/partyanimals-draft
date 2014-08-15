@@ -29,6 +29,7 @@ angular.module('partyanimalsDraftApp')
     };
     $scope.currentPlayer = $scope.human;
 
+    $scope.human.bribe = 0;
     $scope.human.met = [0,0,0,0,0,0,0,0,0];
     $scope.human.totalCash = $scope.totalCash;
     $scope.human.morality = 50;
@@ -90,10 +91,10 @@ angular.module('partyanimalsDraftApp')
       PAFirebase.turnsPerGameRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
         if(!onDataChanged('turnsPerGame')){
-          $scope.turnsLeft = 1;
-          $scope.totalTurns = 1;
-          //$scope.turnsLeft = snapshot.val();
-          //$scope.totalTurns = snapshot.val();
+          // $scope.turnsLeft = 1;
+          // $scope.totalTurns = 1;
+          $scope.turnsLeft = snapshot.val();
+          $scope.totalTurns = snapshot.val();
 
           GameState.turnsLeft = $scope.turnsLeft;
           $scope.totalReputations = GameState.resetReputations();
@@ -383,6 +384,10 @@ angular.module('partyanimalsDraftApp')
                (result.isVs ? ' decrease to opponent\'s reputation' : ' increase on our reputation.');
           }else{
             message = result.name + ' at ' + result.district.name + ' failed.';
+          }
+
+          if(result.name === 'Bribe'){
+            $scope.human.bribe += 1;
           }
 
           $scope.simulate.summaries.push({

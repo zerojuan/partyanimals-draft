@@ -1,4 +1,4 @@
-<div class="left col-xs-{{data.columns}}" ng-switch="type">
+<div class="left col-xs-{{data.columns}} news-item" ng-switch="type">
   <div ng-switch-when="POLL">
     <h2>{{data.winner.name}} Leads {{data.loser.name}} by <b class="red">{{data.pts | number:2}}</b></h2>
     <p>{{data.p1}}</p>
@@ -14,12 +14,47 @@
     <p>Someone is losing money. {{data.p1}}</p>
     <p>{{data.p2}}</p>
   </div>
+  <div ng-switch-when="MONEY.END">
+    <h2>{{data.headline}}</h2>
+    <img class="failed" src="/assets/images/avatars/campaignmanager.png"></img>
+    <p>{{data.p1}}</p>
+    <p>{{data.p2}}</p>
+    <p><i>{{data.comment}}</i>, Crocopio says in an interview.</p>
+  </div>
+  <div ng-switch-when="MORALITY">
+    <h2>Pader Doglas: {{data.headline}}</h2>
+    <img width="100%" src="/assets/images/actions/photoop_cathedral.jpg"></img>
+    <p>As the community's morality pundit, Pader Doglas has&nbsp;<b>{{data.feelings}}</b>&nbsp;over Mousey's political future.</p>
+  </div>
   <div ng-switch-when="BULWARKS">
     <h2></h2>
+  </div>
+  <div ng-switch-when="BRIBERY">
+    <h2>{{data.headline}}</h2>
+    <img src="/assets/images/actions/bribe.jpg" width="60%"></img>
+    <p>Crocopio has cited at least <b>{{data.instance}}</b> incidents of bribery. {{data.p1}}</p>
+    <p><i>{{data.comment}}</i>, Pilatopus explains in an interview.</p>
   </div>
   <div ng-switch-when="EVENT">
     <h2><b>NEWS FLASH</b> {{data.headline}}</h2>
     <p>{{data.p1}}</p>
     <p>{{data.p2}}</p>
+  </div>
+  <div ng-switch-when="KAPITAN">
+    <h3><b>{{data.sample.name}}</b> to Mousey: "{{data.didWin}}"</h3>
+    <img class="failed" ng-src="/assets/images/avatars/{{data.sample.image}}"></img>
+    <img class="failed" ng-src="/assets/images/avatars/{{data.kap2[0].image}}"></img>
+    <img class="failed" ng-src="/assets/images/avatars/{{data.kap2[1].image}}"></img>
+    <p><b>{{data.kap2[0].name}}</b> and <b>{{data.kap2[1].name}}</b> also close allies.</p>
+  </div>
+  <div ng-switch-when="RESULT">
+    <h2 class="uppercase"><b>{{data.winner.name}} Wins By <span class="red">{{data.voteMargin}}</span></b></h2>
+    <div class="center"><img ng-src="/assets/images/actions/{{data.img}}"></img></div>
+    <p>
+      {{data.intro}} the victor, <b>{{data.winner.name}}</b>, was officially declared Mayor-elect after winning by <b>{{data.intro2}}</b>.
+    </p>
+    <p>
+      <i>{{data.follow}}</i>{{data.follow2}}
+    </p>
   </div>
 </div>

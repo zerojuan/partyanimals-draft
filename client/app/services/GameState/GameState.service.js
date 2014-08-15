@@ -327,6 +327,7 @@ angular.module('partyanimalsDraftApp')
       });
       if(issueIndex < 0){
         return {
+          name: activity.name,
           type: 'STAT',
           success: false,
           district: activity.location,
@@ -337,6 +338,7 @@ angular.module('partyanimalsDraftApp')
       }
       return {
         type: 'STAT',
+        name: activity.name,
         success: true,
         issueIndex: issueIndex,
         value: 1,

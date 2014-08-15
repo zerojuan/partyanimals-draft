@@ -7,10 +7,10 @@
     </div>
     <div ng-switch-when="sim" class="row">
       <div class="col-xs-12">
-        <h2 style="text-align: center;"><span class="human-vote">{{humanVote}}</span> vs <span class="ai-vote">{{aiVote}}</span></h2>
+        <h2 style="text-align: center;"><span class="human-vote">{{votes.human}}</span> vs <span class="ai-vote">{{votes.ai}}</span></h2>
       </div>
       <div class="col-xs-7">
-        <voting-simulator districts="districts" kapitans="kapitans" cash="totalCash" human-vote="humanVote" ai-vote="aiVote" on-official-vote="onOfficialVote"></voting-simulator>
+        <voting-simulator done="done" sim-messages="sim.activities" districts="districts" kapitans="kapitans" cash="totalCash" human-vote="votes.human" ai-vote="votes.ai"></voting-simulator>
       </div>
       <div class="col-xs-5">
         <div class="panel panel-default">
@@ -28,8 +28,19 @@
             </tr>
           </table>
         </div>
-        <div class="btn btn-success">Done</div>
+        <div class="btn btn-success" ng-show="done" ng-click="onSimulationDone()">Done</div>
       </div>
     </div>
+    <div ng-switch-when="summary" class="row">
+      <div class="col-xs-12 newspaper" style="padding-top: 20px;">
+        <end-paper done="done" human="human" ai="ai" districts="districts" kapitans="kapitans" cash="totalCash" human-vote="votes.human" ai-vote="votes.ai">
+          <div class="btn btn-success" ng-click="onGoBack()"><h4>Back</h4></div>
+        </end-paper>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>♥</p>
   </div>
 </div>
