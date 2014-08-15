@@ -90,8 +90,8 @@ angular.module('partyanimalsDraftApp')
       PAFirebase.turnsPerGameRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
         if(!onDataChanged('turnsPerGame')){
-          $scope.turnsLeft = 10;
-          $scope.totalTurns = 10;
+          $scope.turnsLeft = 1;
+          $scope.totalTurns = 1;
           //$scope.turnsLeft = snapshot.val();
           //$scope.totalTurns = snapshot.val();
 

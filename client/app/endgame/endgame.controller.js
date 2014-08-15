@@ -22,10 +22,19 @@ angular.module('partyanimalsDraftApp')
           }
         });
       }
+      _.forEach($scope.districts, function(val){
+        val.aiProjectedVote = Math.floor(Math.random() * 500 + 1000);
+        val.humanProjectedVote = Math.floor(Math.random() * 500 + 1000);
+      });
+      $scope.human.totalCash = -1000;
+      $scope.ai.totalCash = 1000;
     }
 
-    //mockData();
+    mockData();
 
+    $scope.onOfficialVote = function(district, vote){
+
+    };
 
     $scope.onPreparationDone = function(){
       $scope.state = 'sim';

@@ -10,7 +10,8 @@ angular.module('partyanimalsDraftApp')
         aiVote: '=',
         districts: '=',
         kapitans: '=',
-        cash: '='
+        cash: '=',
+        onOfficialVote: '='
       },
       link: function (scope) {
         var stopTime,
@@ -95,7 +96,7 @@ angular.module('partyanimalsDraftApp')
               message: 'Official Result: ' + currDistrict.name,
               vote: voteCount
             });
-            calculateVotes(voteCount);
+            calculateVotes(voteCount, currDistrict);
             districtsCounted++;
           }
 
@@ -122,7 +123,8 @@ angular.module('partyanimalsDraftApp')
             human: 0,
             ai: 0,
             humanProjected: district.humanProjectedVote,
-            aiProjected: district.aiProjectedVote
+            aiProjected: district.aiProjectedVote,
+            district: district
           };
           var portion = district.population * 0.75;
           ret.human = portion * (district.humanReputation / 100);
@@ -177,9 +179,11 @@ angular.module('partyanimalsDraftApp')
           return ret;
         }
 
-        function calculateVotes(count){
+        function calculateVotes(count, district){
           scope.humanVote += count.human;
           scope.aiVote += count.ai;
+          district.humanVote = count.human;
+          district.aiVote = count.ai;
         }
 
         stopTime = $interval(updateElection, 2000);

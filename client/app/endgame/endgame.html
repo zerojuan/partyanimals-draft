@@ -3,11 +3,33 @@
     <div ng-switch-when="prep">
       <h2>Final Day Preparations</h2>
       <voting-graph reputations="totalReputations"></voting-graph>
-      <support-suppress districts="districts" kapitans="kapitans" cash="totalCash" done="onPreparationDone"></support-suppress>
+      <support-suppress districts="districts" kapitans="kapitans" cash="human.totalCash" done="onPreparationDone"></support-suppress>
     </div>
-    <div ng-switch-when="sim">
-      <h2 style="text-align: center;"><span class="human-vote">{{humanVote}}</span> vs <span class="ai-vote">{{aiVote}}</span></h2>
-      <voting-simulator districts="districts" kapitans="kapitans" cash="totalCash" human-vote="humanVote" ai-vote="aiVote"></voting-simulator>
+    <div ng-switch-when="sim" class="row">
+      <div class="col-xs-12">
+        <h2 style="text-align: center;"><span class="human-vote">{{humanVote}}</span> vs <span class="ai-vote">{{aiVote}}</span></h2>
+      </div>
+      <div class="col-xs-7">
+        <voting-simulator districts="districts" kapitans="kapitans" cash="totalCash" human-vote="humanVote" ai-vote="aiVote" on-official-vote="onOfficialVote"></voting-simulator>
+      </div>
+      <div class="col-xs-5">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="text-align: center;"><h4>Official Quik Count</h4></div>
+          <table class="table table-striped">
+            <tr>
+              <th>District</th>
+              <th>{{human.name}}</th>
+              <th>{{ai.name}}</th>
+            </tr>
+            <tr ng-repeat="district in districts">
+              <td><span ng-class="{'bold green': district.humanVote > district.aiVote}">{{district.name}}</span></td>
+              <td><span ng-class="{bold: district.humanVote > district.aiVote}">{{district.humanVote}}</span> <span class="gray">({{district.humanProjectedVote}})</span></td>
+              <td><span ng-class="{bold: district.aiVote > district.humanVote}">{{district.aiVote}}</span> <span class="gray">({{district.aiProjectedVote}})</span></td>
+            </tr>
+          </table>
+        </div>
+        <div class="btn btn-success">Done</div>
+      </div>
     </div>
   </div>
 </div>

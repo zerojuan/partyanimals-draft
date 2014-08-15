@@ -26,7 +26,6 @@ angular.module('partyanimalsDraftApp')
             var parseVal = {
               gold: result.value
             };
-            console.log('Result:', result);
             scope.success = result.success;
             if(result.success){
               scope.doneMessage = $filter('messageparser')(scope.activity.text.success[0], parseVal);
