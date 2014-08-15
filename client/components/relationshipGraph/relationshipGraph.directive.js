@@ -98,7 +98,6 @@ angular.module('partyanimalsDraftApp')
             });
             nodes = nodes.concat(humanNodes).concat(aiNodes);
             var extranodesLength = aiNodes.length + humanNodes.length;
-            console.log('Extranodes length: ', extranodesLength);
             _.forEach(nodes, function(node, i){
               if(node.isHumanChild) {return;}
               if(node.isAIChild) {return;}
@@ -135,7 +134,6 @@ angular.module('partyanimalsDraftApp')
                 .style('stroke-width', 1.5)
                 .style('stroke-opacity', 0.5);
             link.style('stroke', function(d){
-              console.log('Strole Value: ', d.target.value, ' vs ', d.source.value);
               return color(d.target.value);
             });
             node = svg.selectAll('.node')

@@ -237,6 +237,41 @@ angular.module('partyanimalsDraftApp')
       return cond[0] === 'CARD?';
     };
 
+    that.setTyphoonDistricts = function(activities, districts){
+      var disasterZones = [
+        [0,1,3],
+        [1,3,5],
+        [3,4,5],
+        [2,4,5],
+        [0,2,4]
+      ];
+      var disasterZone = disasterZones[Math.floor(Math.random()*5)];
+      //set activities with id 9
+      var reliefActivity = _.find(activities, function(val){
+        return val.id === 10;
+      });
+      reliefActivity.restriction = disasterZone;
+      _.forEach(districts, function(val){
+        console.log('DisasterZone: ', disasterZone, 'ID: ', val.id);
+        for(var i = 0; i < disasterZone.length; i++){
+          if(disasterZone[i] === val.id){
+            console.log('Found');
+            val.isHurricane = true;
+          }
+        }
+      });
+    };
+
+    that.unsetTyphoonDistricts = function(activities, districts){
+      _.forEach(districts, function(val){
+         val.isHurricane = false;
+      });
+      var reliefActivity = _.find(activities, function(val){
+        return val.id === 10;
+      });
+      reliefActivity.restriction = [-1];
+    };
+
     that.activateCards = function(cardIds){
       _.forEach(cardIds, function(cardId){
         that.activateCard(cardId);

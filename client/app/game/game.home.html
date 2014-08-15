@@ -14,7 +14,7 @@
         </div>
         <welcome-paper ng-show="config.loadedItems===9" human="human" ai="ai" total-reputations="totalReputations" issue="1">
           <div class="col-xs-12 done-btn">
-            <div ng-show="config.loadedItems===9" ng-click="onHideEventPanel()" class="btn btn-success">Done Reading</div>
+            <div ng-show="config.loadedItems===9" ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
           </div>
         </welcome-paper>
       </div>
@@ -26,7 +26,7 @@
       <div class="activity-sim row newspaper" >
         <weekly-paper human="human" ai="ai" total-reputations="totalReputations" issue="{{((totalTurns-turnsLeft)/daysInAWeek)+1}}">
           <div class="col-xs-12 done-btn">
-            <div ng-show="config.loadedItems===9" ng-click="onHideEventPanel()" class="btn btn-success">Done Reading</div>
+            <div ng-show="config.loadedItems===9" ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
           </div>
         </weekly-paper>
       </div>
@@ -35,12 +35,25 @@
   <div ng-switch-when="EVENT" class="container">
     <div class="row simulation-container">
       <div class="event-container">
-        <a ng-click="onHideEventPanel()" class="btn btn-success">Close</a>
       </div>
-      <div class="activity-sim">
-        <h3>{{currEventCard.name}}</h3>
-        <img ng-class="{failed: !currEventCard.active}" src="assets/images/actions/typhoon.jpg"></img>
-        <h4>{{currEventCard.description}}</h4>
+      <div class="activity-sim row newspaper">
+        <div class="col-xs-12">
+          <div class="title">
+            <h1>{{currEventCard.name}}</h1>
+            <hr></hr>
+          </div>
+        </div>
+
+        <div class="col-xs-9">
+          <img ng-class="{failed: !currEventCard.active}" class="leading" src="assets/images/actions/typhoon.jpg"></img>
+        </div>
+        <div class="col-xs-3">
+          <h4>{{currEventCard.description}}</h4>
+          <p>{{currEventCard.details}}</p>
+        </div>
+        <div class="col-xs-12 done-btn">
+          <div ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
+        </div>
       </div>
     </div>
   </div>

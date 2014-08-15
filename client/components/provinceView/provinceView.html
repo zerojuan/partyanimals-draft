@@ -19,6 +19,7 @@
       <reputation-bar human-reputations="district.humanReputations" ai-reputations="district.aiReputations"></reputation-bar>
     </div>
     <div class="indicators">
+      <span ng-show="district.isHurricane"><img class="avatar-clickable" src="/assets/images/avatars/typhoon.jpg"></img></span>
       <span ng-show="district.isHQ"><i class="glyphicon glyphicon-home blue"></i></span>
       <span ng-show="district.isAIHQ"><i class="glyphicon glyphicon-home red"></i></span>
       <span ng-show="district.aiReputation - district.humanReputation >= 50"><i class="glyphicon glyphicon-heart red"></i></span>

@@ -90,9 +90,11 @@ angular.module('partyanimalsDraftApp')
       PAFirebase.turnsPerGameRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
         if(!onDataChanged('turnsPerGame')){
-          $scope.turnsLeft = snapshot.val();
-          $scope.totalTurns = snapshot.val();
-          // $scope.turnsLeft = 10;
+          $scope.turnsLeft = 10;
+          $scope.totalTurns = 10;
+          //$scope.turnsLeft = snapshot.val();
+          //$scope.totalTurns = snapshot.val();
+
           GameState.turnsLeft = $scope.turnsLeft;
           $scope.totalReputations = GameState.resetReputations();
           $scope.$apply();
@@ -269,8 +271,14 @@ angular.module('partyanimalsDraftApp')
 
       $scope.activities.forEach(function(val){
         var newVal = angular.copy(val);
-        if(val.restriction && _.indexOf(val.restriction, $scope.selectedDistrict.id) < 0){
-          return;
+
+        if(val.restriction){
+          if(val.restriction[0] === -1){
+            return;
+          }
+          if(_.indexOf(val.restriction, $scope.selectedDistrict.id) < 0){
+            return;
+          }
         }
         newVal.location = angular.copy($scope.selectedDistrict);
         //check if this is already selected
@@ -457,6 +465,16 @@ angular.module('partyanimalsDraftApp')
             }else{
               message = 'Lost at the Casino.';
             }
+          }else if(result.attribute === 'DR'){
+            if(result.success){
+              changedDistrict = setReputationForDistrict(result.value, result.district, true);
+              if($scope.scheduledActivities.length < actIndex){
+                $scope.scheduledActivities[actIndex].location = angular.copy(changedDistrict);
+              }
+              message = 'Disaster Relief ' + result.value + ' Reputation';
+            }else{
+              message = 'Failed Disaster Relief';
+            }
           }
           $scope.simulate.summaries.push({
             text: message,
@@ -508,6 +526,7 @@ angular.module('partyanimalsDraftApp')
         $scope.config.overlayState = 'EVENT';
         $scope.cards = GameState.activateCards(['HurricaneOrwell']);
         $scope.currEventCard = GameState.getCard('HurricaneOrwell');
+        GameState.setTyphoonDistricts($scope.activities, $scope.districts);
         $scope.showOverlay = true;
       }
 
@@ -727,6 +746,8 @@ angular.module('partyanimalsDraftApp')
             if(card.turns < 0){
               card.active = false;
               card.description = card.descriptionDone;
+              card.details = card.detailsDone;
+              GameState.unsetTyphoonDistricts($scope.activities, $scope.districts);
               $scope.config.overlayState = 'EVENT';
               $scope.currEventCard = card;
               $scope.scheduledActivities = [];
@@ -772,13 +793,13 @@ angular.module('partyanimalsDraftApp')
 
     var reduceReputations = function(affectsHuman, affectsAI){
       _.forEach($scope.districts, function(district){
-        if(affectsHuman){
+        if(affectsHuman && district.isHurricane){
           district.humanReputation -= Math.floor(Math.random() * 20 + 5);
           if(district.humanReputation < 0){
             district.humanReputation = 0;
           }
         }
-        if(affectsAI){
+        if(affectsAI && district.isHurricane){
           district.aiReputation -= Math.floor(Math.random() * 20 + 5);
           if(district.aiReputation < 0){
             district.aiReputation = 0;
