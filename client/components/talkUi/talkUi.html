@@ -25,7 +25,7 @@
         </div>
         <div ng-show="dialog.choice" >
           <a class="btn" ng-click="gotoNext(choice.next, choice.effect, dialog)" ng-repeat="choice in dialog.choice" tooltip-html-unsafe="{{choice.effect | eventeffecttooltip}}">
-            {{choice.text}}
+            <span class="number">{{$index+1}}</span> {{choice.text}}
           </a>
         </div>
         <div ng-hide="dialog.choice">
