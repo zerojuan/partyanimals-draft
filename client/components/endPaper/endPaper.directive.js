@@ -43,7 +43,7 @@ angular.module('partyanimalsDraftApp')
                 data.intro2 = 'a narrow margin';
               }
               if(data.winner === scope.ai){
-                data.follow = '"The voice of the people is the voice of God. God must want me to serve for another term."';
+                data.follow = '"The voice of the people is the voice of Thigh Bone. Thigh Bone wants me to serve for another term."';
                 data.follow2 = ', explains Catorcio as he prepares for his next election.';
               }else{
                 data.follow = '"We shall enact Change. Change we can believe in."';
