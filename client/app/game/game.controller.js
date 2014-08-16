@@ -97,7 +97,6 @@ angular.module('partyanimalsDraftApp')
           $scope.totalTurns = snapshot.val();
 
           GameState.turnsLeft = $scope.turnsLeft;
-          $scope.totalReputations = GameState.resetReputations();
           $scope.$apply();
         }
       });
@@ -157,7 +156,6 @@ angular.module('partyanimalsDraftApp')
           GameState.updateDistrictReputationHistory($scope.districts);
 
           //tally district approval ratings
-          $scope.totalReputations = GameState.getTotalReputation();
           $scope.changeSelectedDistrict(findDistrict(selectedDistrict.id));
           $scope.$apply();
 
@@ -608,6 +606,7 @@ angular.module('partyanimalsDraftApp')
       if($scope.config.loadedItems === 9){
         //analyze the data?
 
+        $scope.totalReputations = GameState.getTotalReputation();
       }
     });
 
