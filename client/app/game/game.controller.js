@@ -2,7 +2,7 @@
 
 angular.module('partyanimalsDraftApp')
   .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim) {
-
+    $scope.dataLoadSize = 10;
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
     $scope.turnsLeft = GameState.getTurnsLeft();
@@ -64,6 +64,12 @@ angular.module('partyanimalsDraftApp')
           $scope.hours.push(9+i);
         }
         $scope.$apply();
+      });
+
+      PAFirebase.weekdaysRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
+        onDataChanged('weekdays');
+        $scope.daysInAWeek = snapshot.val();
       });
 
       PAFirebase.cardsRef.on('value', function(snapshot){
@@ -603,7 +609,7 @@ angular.module('partyanimalsDraftApp')
     }, true);
 
     $scope.$watch('config.loadedItems', function(){
-      if($scope.config.loadedItems === 9){
+      if($scope.config.loadedItems === $scope.dataLoadSize){
         //analyze the data?
 
         $scope.totalReputations = GameState.getTotalReputation();

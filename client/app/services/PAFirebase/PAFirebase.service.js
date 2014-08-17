@@ -14,8 +14,10 @@ angular.module('partyanimalsDraftApp')
     that.workhoursRef = new Firebase(url+'/workhours');
     that.eventsRef = new Firebase(url+'/events');
     that.cardsRef = new Firebase(url+'/cards');
+    that.weekdaysRef = new Firebase(url+'/weekdays');
 
     that.removeCallbacks = function(){
+      that.weekdaysRef.off();
       that.platformPointsRef.off();
       that.goldRef.off();
       that.districtsRef.off();

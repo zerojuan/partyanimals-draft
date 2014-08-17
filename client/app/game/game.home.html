@@ -8,13 +8,13 @@
     <div class="row simulation-container">
       <div class="event-container"></div>
       <div class="activity-sim row newspaper" >
-        <div ng-hide="config.loadedItems===9" class="col-xs-12 reveal-animation">
+        <div ng-hide="config.loadedItems===dataLoadSize" class="col-xs-12 reveal-animation">
           Loading...
-          <progressbar  value="config.loadedItems" max="9" ></progressbar>
+          <progressbar  value="config.loadedItems" max="dataLoadSize" ></progressbar>
         </div>
-        <welcome-paper ng-show="config.loadedItems===9" human="human" ai="ai" total-reputations="totalReputations" issue="1">
+        <welcome-paper ng-show="config.loadedItems===dataLoadSize" human="human" ai="ai" total-reputations="totalReputations" issue="1">
           <div class="col-xs-12 done-btn">
-            <div ng-show="config.loadedItems===9" ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
+            <div ng-show="config.loadedItems===dataLoadSize" ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
           </div>
         </welcome-paper>
       </div>
@@ -26,7 +26,7 @@
       <div class="activity-sim row newspaper" >
         <weekly-paper human="human" ai="ai" total-reputations="totalReputations" issue="{{((totalTurns-turnsLeft)/daysInAWeek)+1}}">
           <div class="col-xs-12 done-btn">
-            <div ng-show="config.loadedItems===9" ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
+            <div ng-show="config.loadedItems===dataLoadSize" ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
           </div>
         </weekly-paper>
       </div>
