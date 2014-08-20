@@ -135,6 +135,7 @@ angular.module('partyanimalsDraftApp')
       });
     };
 
+
     that.getTotalReputation = function(){
       //compute votes
       //compute total population
@@ -225,6 +226,12 @@ angular.module('partyanimalsDraftApp')
     that.findKapitan = function(id){
       console.log('Kapitans: ', that.kapitans);
       return _.find(that.kapitans, function(val){
+        return val.id === id;
+      });
+    };
+
+    that.findDistrict = function(id, districts){
+      return _.find(districts, function(val){
         return val.id === id;
       });
     };
