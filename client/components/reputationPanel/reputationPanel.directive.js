@@ -5,6 +5,7 @@ angular.module('partyanimalsDraftApp')
     return {
       templateUrl: 'components/reputationPanel/reputationPanel.html',
       restrict: 'E',
+      replace: true,
       scope: {
         reputations: '=',
         kapitans: '='
