@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .directive('gameLayer', function (Utils, GameState) {
+  .directive('gameLayer', function (Utils, GameState, GameModel) {
     return {
       template: '<div id="phaserGame"></div>',
       restrict: 'E',
@@ -13,6 +13,7 @@ angular.module('partyanimalsDraftApp')
       link: function (scope) {
         var districtGroup;
         var chipsGroup;
+        var districtArray = [];
         var districtsImages = [
           'kapitolyo',
           'casino',
@@ -28,35 +29,34 @@ angular.module('partyanimalsDraftApp')
           });
           game.load.image('mousey', './assets/images/avatars/mouseyMale.jpg');
           game.load.image('croc', './assets/images/avatars/crocopio.jpg');
+          game.load.image('bg', './assets/images/districts/normal2.png');
         }
 
         function create() {
 
           var centerX = game.world.width / 2;
 
+          game.add.tileSprite(0,0,1280, 720, 'bg');
+
           districtGroup = game.add.group();
           chipsGroup = game.add.group();
 
           _.forEach(districtsImages, function(val,i){
-            var district = new Phaser.Group(game, districtGroup, val);
+            var district = new GameModel.District(game, districtGroup, val, onDistrictClicked, this);
             var x = Math.floor(i%2);
             var y = Math.floor(i/2);
-            var sprite = new Phaser.Sprite(game, 0, 0, val);
-            sprite.inputEnabled = true;
-            sprite.anchor.set(0.5);
-            sprite.events.onInputDown.add(onDistrictClicked, this);
-            district.x = x*120 + centerX - 60;
-            district.y = y*120 + 120;
-            district.add(sprite);
-            districtGroup.add(district);
+            district.base.x = x*120 + centerX - 60;
+            district.base.y = y*120 + 120;
+            districtGroup.add(district.base);
+            districtArray.push(district);
           });
 
           var mouseySprite = new Phaser.Sprite(game, 0, 0, 'mousey');
           mouseySprite.anchor.set(0.5);
-          mouseySprite.scale.x = mouseySprite.scale.y = .5;
+          mouseySprite.scale.x = mouseySprite.scale.y = 0.5;
           var crocSprite = new Phaser.Sprite(game, 0, 0, 'croc');
           crocSprite.anchor.set(0.5);
-          crocSprite.scale.x = crocSprite.scale.y = .5;
+          crocSprite.scale.x = crocSprite.scale.y = 0.5;
           chipsGroup.add(crocSprite);
           chipsGroup.add(mouseySprite);
 
@@ -73,21 +73,23 @@ angular.module('partyanimalsDraftApp')
         }
 
         function _findDistrict(name){
-          districtGroup.forEach(function(district){
-            console.log(district.name, name);
-            if(district.name === name){
-              district.alpha = 0.5;
-
-              game.add.tween(chipsGroup.getAt(1)).to( { x: district.x, y: district.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
-            }else{
-              district.alpha = 1;
-            }
+          return _.find(districtArray, function(district){
+            return district.name === name;
           });
         }
 
         function _updateDistrictDetails(){
-          _.forEach(GameState.districts, function(district){
-            
+          _.forEach(GameState.districts, function(d){
+            //find equivalent
+            var district = _findDistrict(Utils.combineDistrictName(d.name));
+            console.log(d);
+            district.label.text = d.name;
+            if(d.hasHuman){
+              game.add.tween(chipsGroup.getAt(1)).to( { x: district.base.x, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
+            }
+            if(d.hasAI){
+              game.add.tween(chipsGroup.getAt(0)).to( { x: district.base.x, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
+            }
           });
         }
 
