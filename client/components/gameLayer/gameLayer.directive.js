@@ -99,10 +99,14 @@ angular.module('partyanimalsDraftApp')
         scope.$watch('selectedDistrict', function(){
           if(scope.selectedDistrict){
             _updateDistrictDetails();
-            _findDistrict(Utils.combineDistrictName(scope.selectedDistrict.name));
+            // _findDistrict(Utils.combineDistrictName(scope.selectedDistrict.name));
           }
         });
 
+        scope.$on('GAME:turn', function(){
+          _updateDistrictDetails();
+          // _findDistrict(Utils.combineDistrictName(scope.selectedDistrict.name));
+        });
 
       }
     };

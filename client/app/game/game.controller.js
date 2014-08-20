@@ -209,7 +209,8 @@ angular.module('partyanimalsDraftApp')
     $scope.$watch('config.loadedItems', function(){
       if($scope.config.loadedItems === $scope.dataLoadSize){
         $scope.totalReputations = GameState.getTotalReputation();
-        $scope.selectedDistrict = GameState.findDistrict($scope.human.hq.id, $scope.districts);
+        // $scope.selectedDistrict = GameState.findDistrict($scope.human.hq.id, $scope.districts);
+        $rootScope.$broadcast('GAME:turn');
       }
     });
 
@@ -217,8 +218,14 @@ angular.module('partyanimalsDraftApp')
       $scope.showOverlay = false;
     };
 
+    $scope.closeDistrictDetails = function(){
+      $scope.selectedDistrict = null;
+    };
+
     $scope.selectDistrict = function(id){
       $scope.selectedDistrict = GameState.findDistrict(id, $scope.districts);
+      //supply selected district with a kapitan
+      $scope.selectedDistrict.kapitan = GameState.findKapitan($scope.selectedDistrict.kapitanId);
       $scope.$apply();
     };
   });
