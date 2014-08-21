@@ -28,6 +28,31 @@
   }
 }
 
+.tab{
+  text-align: center;
+  .header{
+    background: rgb(255, 187, 0);
+    float: none;
+    cursor: pointer;
+    height: 40px;
+    margin-top: -9px;
+    padding-top: 9px;
+    &.selected{
+      background: darken(rgb(255, 187, 0), 5%);
+      box-shadow: 0px 3px 3px #888888;
+    }
+    &:hover{
+      background: darken(rgb(255, 187, 0), 5%);
+    }
+  }
+  .content{
+    background: white;
+    position: absolute;
+    border-top: 4px solid darken(rgb(255, 187, 0), 5%);
+    box-shadow: 0px 5px 5px #888888;
+  }
+}
+
 .district-desc{
   width: 60%;
   h4 span{
