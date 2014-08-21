@@ -1,8 +1,10 @@
-<div class="tab">
+<div class="tab lightblue">
   <div class="header" ng-class="{selected: showGraph}" ng-click="showGraph = !showGraph">
     <span>Kapitans</span>
   </div>
   <div class="content container" ng-show="showGraph">
-    <h3>This is the data</h3>
+    <div class="row" ng-controller="KapitanCtrl">
+      <kapitan-graph kapitans="localKapitans" selected-kapitan="selectedKapitan"></kapitan-graph>
+    </div>
   </div>
 </div>

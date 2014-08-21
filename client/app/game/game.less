@@ -30,6 +30,20 @@
 
 .tab{
   text-align: center;
+  &.lightblue{
+    .header{
+      background: @lightblue;
+      &.selected{
+        background: darken(@lightblue, 5%);
+      }
+      &:hover{
+        background: darken(@lightblue, 5%);
+      }
+    }
+    .content{
+      border-top: 4px solid darken(@lightblue, 5%);
+    }
+  }
   .header{
     background: rgb(255, 187, 0);
     float: none;
