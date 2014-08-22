@@ -6,10 +6,12 @@ angular.module('partyanimalsDraftApp')
       templateUrl: 'components/teamTab/teamTab.html',
       restrict: 'E',
       scope: {
-        human: '='
+        human: '=',
+        staff: '='
       },
       link: function (scope) {
         scope.showGraph = false;
+        
       }
     };
   });

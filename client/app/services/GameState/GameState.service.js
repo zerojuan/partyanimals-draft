@@ -223,6 +223,12 @@ angular.module('partyanimalsDraftApp')
       return that.initialCash;
     };
 
+    that.findTrait = function(id, traits){
+      return _.find(traits, function(val){
+        return val.id === id;
+      });
+    };
+
     that.findKapitan = function(id){
       console.log('Kapitans: ', that.kapitans);
       return _.find(that.kapitans, function(val){

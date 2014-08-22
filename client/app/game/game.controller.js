@@ -2,7 +2,7 @@
 
 angular.module('partyanimalsDraftApp')
   .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim) {
-    $scope.dataLoadSize = 10;
+    $scope.dataLoadSize = 12;
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
     $scope.turnsLeft = GameState.getTurnsLeft();
@@ -55,6 +55,20 @@ angular.module('partyanimalsDraftApp')
     };
 
     var addDataCallbacks = function(){
+      PAFirebase.staffersRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
+        onDataChanged('staffers');
+        $scope.staffers = snapshot.val();
+        $scope.$apply();
+      });
+
+      PAFirebase.traitsRef.on('value', function(snapshot){
+        $scope.config.loadedItems += 1;
+        onDataChanged('traits');
+        $scope.traits = snapshot.val();
+        $scope.$apply();
+      });
+
       PAFirebase.workhoursRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
         onDataChanged('workhours');
@@ -209,7 +223,19 @@ angular.module('partyanimalsDraftApp')
     $scope.$watch('config.loadedItems', function(){
       if($scope.config.loadedItems === $scope.dataLoadSize){
         $scope.totalReputations = GameState.getTotalReputation();
-        // $scope.selectedDistrict = GameState.findDistrict($scope.human.hq.id, $scope.districts);
+        //combine traits to the staffers
+        _.forEach($scope.staffers, function(staffer){
+          staffer.traits = [];
+          _.forEach(staffer.traitsId, function(val){
+            staffer.traits.push(GameState.findTrait(val, $scope.traits));
+          });
+        });
+
+        $scope.human.staff = [];
+        $scope.human.staff.push($scope.staffers[0]);
+        $scope.human.staff.push($scope.staffers[1]);
+        $scope.human.staff.push($scope.staffers[2]);
+
         $rootScope.$broadcast('GAME:turn');
       }
     });

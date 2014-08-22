@@ -3,6 +3,13 @@
     <span>Team</span>
   </div>
   <div class="content container" ng-show="showGraph">
-    <h3>This is the data</h3>
+    <ul class="list list-unstyled">
+      <li ng-repeat="s in staff">
+        {{s.name}}
+        <span ng-repeat="trait in s.traits">
+          <i>{{trait.name}}</i>,
+        </span>
+      </li>
+    </ul>
   </div>
 </div>

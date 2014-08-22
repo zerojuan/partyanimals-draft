@@ -1,0 +1,55 @@
+[{
+  "id": "finance",
+  "name": "Finance",
+  "effect": {
+    "attr": "COST",
+    "modifier": "-COST*(0.20*LEVEL)"
+  },
+  "level": 0,
+  "description": "Reduces cost of action"
+},{
+  "id": "pr",
+  "name": "Public Relations",
+  "effect": {
+    "attr": "SORTIE_SUCCESS",
+    "modifier": "-10%"
+  },
+  "level": 0,
+  "description": "Increases success in reputation building actions"
+},{
+  "id": "educator",
+  "name": "Educator",
+  "effect": {
+    "attr": "ISSUE0",
+    "modifier": "0"
+  },
+  "level": 0,
+  "description": "Increases success in improving Education platform"
+},{
+  "id": "doctor",
+  "name": "Doctor",
+  "effect": {
+    "attr": "ISSUE1",
+    "modifier": 0
+  },
+  "level": 0,
+  "description": "Increases success in improving Health platform"
+},{
+  "id": "lawyer",
+  "name": "Lawyer",
+  "effect": {
+    "attr": "ISSUE2",
+    "modifier": 0
+  },
+  "level": 0,
+  "description": "Increases success in improving Law and Order"
+},{
+  "id": "organizer",
+  "name": "Organizer",
+  "effect": {
+    "attr": "TIME",
+    "modifier": "-20"
+  },
+  "level": 0,
+  "description": "Reduces time cost for doing actions"
+}]

@@ -15,6 +15,8 @@ angular.module('partyanimalsDraftApp')
     that.eventsRef = new Firebase(url+'/events');
     that.cardsRef = new Firebase(url+'/cards');
     that.weekdaysRef = new Firebase(url+'/weekdays');
+    that.staffersRef = new Firebase(url+'/staffers');
+    that.traitsRef = new Firebase(url+'/traits');
 
     that.removeCallbacks = function(){
       that.weekdaysRef.off();
@@ -28,5 +30,7 @@ angular.module('partyanimalsDraftApp')
       that.workhoursRef.off();
       that.eventsRef.off();
       that.cardsRef.off();
+      that.staffersRef.off();
+      that.traitsRef.off();
     };
   });

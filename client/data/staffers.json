@@ -1,0 +1,41 @@
+[{
+  "id": 0,
+  "name": "Mr. Catman",
+  "image": "catorcio.png",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 100,
+  "traitsId": ["finance", "pr"]
+},{
+  "id": 1,
+  "name": "Prof. Birdman",
+  "image": "pelicarpio.png",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 100,
+  "traitsId": ["pr", "educator"]
+},{
+  "id": 2,
+  "name": "Dr. Alpaca",
+  "image": "alpacita.png",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 100,
+  "traitsId": ["doctor", "finance"]
+},{
+  "id": 3,
+  "name": "Atty. Dog",
+  "image": "doglas.png",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 200,
+  "traitsId": ["lawyer","finance", "organizer"]
+},{
+  "id": 4,
+  "name": "Mr. Turtle",
+  "image": "tortuga.png",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 200,
+  "traitsId": ["organizer", "finance", "pr"]
+}]
