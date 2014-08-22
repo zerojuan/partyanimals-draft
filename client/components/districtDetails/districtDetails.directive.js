@@ -10,7 +10,8 @@ angular.module('partyanimalsDraftApp')
       scope: {
         selectedDistrict: '=',
         human: '=',
-        ai: '='
+        ai: '=',
+        closeHandler: '='
       },
       link: function (scope, element, attrs) {
       }

@@ -96,8 +96,7 @@
 </div> -->
 <game-layer select-district="selectDistrict" selected-district="selectedDistrict">
 </game-layer>
-<district-details ng-show="selectedDistrict" selected-district="selectedDistrict" human="human" ai="ai">
-  <div class="btn btn-success" ng-click="closeDistrictDetails()">X</div>
+<district-details ng-show="selectedDistrict" selected-district="selectedDistrict" human="human" ai="ai" close-handler="closeDistrictDetails">
 </district-details>
 <!-- <div class="bottom container">
     <div class="content">

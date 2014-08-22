@@ -1,8 +1,10 @@
 <div class="district-details container">
-  <div ng-transclude></div>
-  <h4>{{selectedDistrict.name}}
-    &nbsp;<span>{{selectedDistrict.info}}</span>
-  </h4>
+  <div class="header">
+    <h4>{{selectedDistrict.name}}
+      &nbsp;<span>{{selectedDistrict.info}}</span>
+    </h4>
+    <div class="close-btn btn" ng-click="closeHandler()"><i class="glyphicon glyphicon-remove"></i></div>
+  </div>
   <div class="district-status">
     <span class="district-animal" tooltip="{{selectedDistrict.kapitan.humanRelations | feelings}}"><img ng-src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
   </div>
