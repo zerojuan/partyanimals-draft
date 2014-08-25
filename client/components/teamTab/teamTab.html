@@ -1,14 +1,19 @@
-<div class="tab">
+<div class="tab team-tab">
   <div class="header" ng-class="{selected: showGraph}" ng-click="showGraph = !showGraph">
     <span>Team</span>
   </div>
   <div class="content container" ng-show="showGraph">
     <ul class="list list-unstyled">
-      <li ng-repeat="s in staff">
-        {{s.name}}
-        <span ng-repeat="trait in s.traits">
-          <i>{{trait.name}}</i>,
-        </span>
+      <li ng-repeat="s in staff" class="row">
+          <div class="col-xs-1">
+            <img ng-src="/assets/images/avatars/{{s.image}}" class="avatar-clickable"></img>
+          </div>
+          <div class="col-xs-11">
+            <h4>{{s.name}}</h4>
+            <span ng-repeat="trait in s.traits" class="badge">
+              {{trait.name}}
+            </span>
+          </div>
       </li>
     </ul>
   </div>
