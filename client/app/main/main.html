@@ -1,6 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-
-<div ng-switch="page" class="my-switch-container">
+<div ng-switch on="page" id="switch-container" class="my-switch-container">
   <div ng-switch-when="1" class="my-switch-animation">
     <h1>Design your platform:</h1>
     <p class="lead">

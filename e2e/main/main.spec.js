@@ -1,5 +1,5 @@
 'use strict';
-
+/* jshint -W117 */
 describe('Main View', function() {
   var page;
 
@@ -8,16 +8,22 @@ describe('Main View', function() {
     page = require('./main.po');
   });
 
-  it('should include jumbotron with correct data', function() {
-    expect(page.h1El.getText()).toBe('\'Allo, \'Allo!');
-    expect(page.imgEl.getAttribute('src')).toMatch(/assets\/images\/yeoman.png$/);
-    expect(page.imgEl.getAttribute('alt')).toBe('I\'m Yeoman');
+  it('should show platform selection initially', function() {
+    page.switchElem.getText().then(function(text) {
+      console.log('Text: ' + text + ';');
+    });
+    expect(page.switchElem.element(by.css('h1')).getText(), 'Design your platform:');
   });
 
-  it('should render awesomeThings', function() {
-    expect(page.firstAwesomeThingNameEl.getText()).toContain('Development Tools');
+  it('should show HQ select after clicked nextPage()', function(){
+    var nextPageEl = page.switchElem.element(by.css('a[ng-click="nextPage()"'));
+    nextPageEl.click();
+    expect(page.switchElem.element(by.css('h1')).getText(), 'Select your HQ');
+  });
+
+  it('should render issues', function() {
     page.awesomeThingsCount.then(function(count) {
-      expect(count).toBe(6);
+      expect(count).toBe(5);
     });
   });
 });
