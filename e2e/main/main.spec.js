@@ -4,12 +4,14 @@ describe('Main View', function() {
   var page;
 
   beforeEach(function() {
-    browser.get('/');
+    browser.get('/#');
+    browser.waitForAngular();
+    browser.sleep(5000);
     page = require('./main.po');
   });
 
   it('should show platform selection initially', function() {
-    page.switchElem.getText().then(function(text) {
+    page.switchElem.element(by.css('h1')).getText().then(function(text) {
       console.log('Text: ' + text + ';');
     });
     expect(page.switchElem.element(by.css('h1')).getText(), 'Design your platform:');
