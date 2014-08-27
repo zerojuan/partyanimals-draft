@@ -6,6 +6,7 @@ angular.module('partyanimalsDraftApp', [
   'ngSanitize',
   'ui.bootstrap',
   'ui.router',
+  'ui.slider',
   'ngAnimate',
   'firebase'
 ])
