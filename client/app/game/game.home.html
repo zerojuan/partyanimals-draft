@@ -21,13 +21,26 @@
           Loading...
           <progressbar  value="config.loadedItems" max="dataLoadSize" ></progressbar>
         </div>
-        <welcome-paper ng-show="config.loadedItems===dataLoadSize" human="human" ai="ai" total-reputations="totalReputations" issue="1">
+        <!-- <welcome-paper ng-show="config.loadedItems===dataLoadSize" human="human" ai="ai" total-reputations="totalReputations" issue="1">
           <div class="col-xs-12 done-btn">
-            <div ng-show="config.loadedItems===dataLoadSize" ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
+            <div ng-show="config.loadedItems===dataLoadSize" ng-click="onHideOverlay()" class="btn btn-success"><h4>Done Reading</h4></div>
           </div>
-        </welcome-paper>
+        </welcome-paper> -->
       </div>
     </div>
+  </div>
+  <div ng-switch-when="ACTIVITY" class="activity">
+    <div class="row simulation-container">
+      <div class="event-container"></div>
+      <div class="activity-sim row">
+        <div class="col-xs-12">
+          <h1>{{selectedActivity.name}}</h1>
+          <div class="btn" ng-click="onHideOverlay()">Close Me</div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
   <div ng-switch-when="WEEKLY" class="container">
     <div class="row simulation-container">
@@ -35,7 +48,7 @@
       <div class="activity-sim row newspaper" >
         <weekly-paper human="human" ai="ai" total-reputations="totalReputations" issue="{{((totalTurns-turnsLeft)/daysInAWeek)+1}}">
           <div class="col-xs-12 done-btn">
-            <div ng-show="config.loadedItems===dataLoadSize" ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
+            <div ng-show="config.loadedItems===dataLoadSize" ng-click="onHideOverlay()" class="btn btn-success"><h4>Done Reading</h4></div>
           </div>
         </weekly-paper>
       </div>
@@ -61,7 +74,7 @@
           <p>{{currEventCard.details}}</p>
         </div>
         <div class="col-xs-12 done-btn">
-          <div ng-click="onHideEventPanel()" class="btn btn-success"><h4>Done Reading</h4></div>
+          <div ng-click="onHideOverlay()" class="btn btn-success"><h4>Done Reading</h4></div>
         </div>
       </div>
     </div>
@@ -96,7 +109,7 @@
 </div> -->
 <game-layer select-district="selectDistrict" selected-district="selectedDistrict">
 </game-layer>
-<district-details ng-show="selectedDistrict" selected-district="selectedDistrict" human="human" ai="ai" close-handler="closeDistrictDetails">
+<district-details ng-show="selectedDistrict" on-activity-selected="onActivitySelected" selected-district="selectedDistrict" human="human" ai="ai" close-handler="closeDistrictDetails">
 </district-details>
 <!-- <div class="bottom container">
     <div class="content">

@@ -11,9 +11,13 @@ angular.module('partyanimalsDraftApp')
         selectedDistrict: '=',
         human: '=',
         ai: '=',
-        closeHandler: '='
+        closeHandler: '=',
+        onActivitySelected: '='
       },
       link: function (scope, element, attrs) {
+        scope.selectedAction = function(action){
+          scope.onActivitySelected(action);
+        };
       }
     };
   });

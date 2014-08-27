@@ -236,22 +236,45 @@ angular.module('partyanimalsDraftApp')
         $scope.human.staff.push($scope.staffers[1]);
         $scope.human.staff.push($scope.staffers[2]);
 
+        //hide welcome paper for now
+        $scope.onHideOverlay();
+
         $rootScope.$broadcast('GAME:turn');
       }
     });
 
-    $scope.onHideEventPanel = function(){
+    $scope.onHideOverlay = function(){
       $scope.showOverlay = false;
+    };
+
+    $scope.onShowOverlay = function(state){
+      $scope.showOverlay = true;
+      $scope.config.overlayState = state;
     };
 
     $scope.closeDistrictDetails = function(){
       $scope.selectedDistrict = null;
     };
 
+    $scope.onActivitySelected = function(activity){
+      $scope.onShowOverlay('ACTIVITY');
+      console.log('Activity: ', activity);
+      $scope.selectedActivity = activity;
+    };
+
     $scope.selectDistrict = function(id){
       $scope.selectedDistrict = GameState.findDistrict(id, $scope.districts);
       //supply selected district with a kapitan
       $scope.selectedDistrict.kapitan = GameState.findKapitan($scope.selectedDistrict.kapitanId);
+
+      //supply selected district with actions
+      var activities = [];
+      _.forEach($scope.activities, function(activity){
+        var nActivity = angular.copy(activity);
+        activities.push(nActivity);
+      });
+      $scope.selectedDistrict.activities = activities;
+
       $scope.$apply();
     };
   });
