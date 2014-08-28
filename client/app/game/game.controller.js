@@ -271,6 +271,7 @@ angular.module('partyanimalsDraftApp')
       var activities = [];
       _.forEach($scope.activities, function(activity){
         var nActivity = angular.copy(activity);
+        nActivity.district = angular.copy($scope.selectedDistrict);
         activities.push(nActivity);
       });
       $scope.selectedDistrict.activities = activities;

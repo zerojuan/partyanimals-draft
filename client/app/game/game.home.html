@@ -29,20 +29,14 @@
       </div>
     </div>
   </div>
-  <div ng-switch-when="ACTIVITY" class="activity">
+  <div ng-switch-when="ACTIVITY" class="container">
     <div class="row simulation-container">
       <div class="event-container"></div>
       <div class="activity-sim row">
         <div class="col-xs-12">
-          <h1>{{selectedActivity.name}}</h1>
-          <div style="background-color: #f5f5f5;
-			       border: 1px solid #f0f0f0;">
-            <div ui-slider min="0" max="20000" ng-model="selectedActivity.cost.gold"></div>
-  		      <input type="text" ng-model="selectedActivity.cost.gold" />
-          </div>
-          <div class="btn" ng-click="onHideOverlay()">Close Me</div>
+          <action-config-panel selected-activity="selectedActivity" human="human" staffers="human.staff" cancel="onHideOverlay" done="onActivityConfigDone">
+          </action-config-panel>
         </div>
-
       </div>
     </div>
 

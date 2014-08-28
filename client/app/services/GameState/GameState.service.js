@@ -195,6 +195,7 @@ angular.module('partyanimalsDraftApp')
     that.setHuman = function(issueStats, hq){
       that.humanStats.issueStats = issueStats;
       that.humanStats.hq = hq;
+      that.humanStats.image = 'mouseyMale.jpg';
       $cookieStore.put('humanStats', that.humanStats);
     };
 
@@ -202,6 +203,7 @@ angular.module('partyanimalsDraftApp')
       that.aiStats.issueStats = issueStats;
       that.aiStats.personality = personality;
       that.aiStats.hq = hq;
+      that.aiStats.image = 'crocopio.jpg';
       $cookieStore.put('aiStats', that.aiStats);
     };
 

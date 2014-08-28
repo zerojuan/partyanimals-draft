@@ -1,0 +1,67 @@
+<div class="action-config">
+  <div class="panel-header">
+    <h4>{{selectedActivity.name}}</h4>
+    <div class="close-btn btn" ng-click="cancel()"><i class="glyphicon glyphicon-remove"></i></div>
+  </div>
+  <div class="row">
+    <div class="label">
+      Where
+    </div>
+    <div class="col-xs-2">
+      {{selectedActivity.district.name}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="label">
+      What
+    </div>
+    <div class="col-xs-9">
+      {{selectedActivity.description}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="label">
+      Who
+    </div>
+    <div class="col-xs-9">
+      <ul class="list list-unstyled list-inline">
+        <li>
+          <img class="avatar" ng-src="assets/images/avatars/{{human.image}}"></img> You
+        </li>
+        <li ng-repeat="staff in staffers">
+          <img class="avatar" ng-src="assets/images/avatars/{{staff.image}}"></img> {{staff.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="label">
+      How Much:
+    </div>
+    <div class="col-xs-9">
+      <div ui-slider min="{{selectedActivity.cost.min}}" max="{{selectedActivity.cost.max}}" ng-model="selectedActivity.cost.gold"></div>
+      <span>{{selectedActivity.cost.gold}}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="label">
+      How Long:
+    </div>
+    <div class="col-xs-9">
+      {{selectedActivity.cost.hours}}hrs
+    </div>
+  </div>
+  <div class="row">
+    <div class="label">
+      Success Chance
+    </div>
+    <div class="col-xs-9">
+      90%
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 done-btn">
+      <div ng-click="done()" class="btn btn-success">Done</div>
+    </div>
+  </div>
+</div>
