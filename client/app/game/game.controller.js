@@ -278,4 +278,9 @@ angular.module('partyanimalsDraftApp')
 
       $scope.$apply();
     };
+
+    $scope.onActivityConfigDone = function(confdActivity){
+      $scope.onHideOverlay();
+      console.log(confdActivity);
+    };
   });

@@ -25,11 +25,9 @@
     </div>
     <div class="col-xs-9">
       <ul class="list list-unstyled list-inline">
-        <li>
-          <img class="avatar" ng-src="assets/images/avatars/{{human.image}}"></img> You
-        </li>
-        <li ng-repeat="staff in staffers">
-          <img class="avatar" ng-src="assets/images/avatars/{{staff.image}}"></img> {{staff.name}}
+        <li ng-repeat="staff in localStaffers" ng-class="{'un-selected': !staff.selected}">
+          <img ng-click="selectStaffer(staff)" class="avatar" ng-class="{disabled: !staff.selected}" ng-src="assets/images/avatars/{{staff.image}}"></img>
+          {{staff.name}}
         </li>
       </ul>
     </div>
@@ -39,8 +37,8 @@
       How Much:
     </div>
     <div class="col-xs-9">
-      <div ui-slider min="{{selectedActivity.cost.min}}" max="{{selectedActivity.cost.max}}" ng-model="selectedActivity.cost.gold"></div>
-      <span>{{selectedActivity.cost.gold}}</span>
+      <div ui-slider min="{{selectedActivity.cost.min}}" max="{{selectedActivity.cost.max}}" ng-model="details.cost"></div>
+      <span>{{details.cost}}</span>
     </div>
   </div>
   <div class="row">
@@ -61,7 +59,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 done-btn">
-      <div ng-click="done()" class="btn btn-success">Done</div>
+      <div ng-disabled="!isReady()" ng-click="onOkClicked()" class="btn btn-success">Done</div>
     </div>
   </div>
 </div>
