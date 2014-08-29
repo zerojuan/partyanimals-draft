@@ -82,7 +82,6 @@ angular.module('partyanimalsDraftApp')
           _.forEach(GameState.districts, function(d){
             //find equivalent
             var district = _findDistrict(Utils.combineDistrictName(d.name));
-            console.log(d);
             district.label.text = d.name;
             if(d.hasHuman){
               game.add.tween(chipsGroup.getAt(1)).to( { x: district.base.x, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);

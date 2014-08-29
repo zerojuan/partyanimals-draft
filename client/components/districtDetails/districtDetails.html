@@ -8,26 +8,59 @@
   <div class="district-status">
     <span class="district-animal" tooltip="{{selectedDistrict.kapitan.humanRelations | feelings}}"><img ng-src="assets/images/avatars/{{selectedDistrict.kapitan.image}}"></img> {{selectedDistrict.kapitan.name}}</span>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <tabset>
+        <tab>
+          <tab-heading>
+            Issues
+          </tab-heading>
+          <br>
+          <table class="table table-striped">
+            <tr>
+              <th>Issue</th>
+              <th style="text-align: right;">Satisfaction</th>
+            </tr>
+            <tr ng-repeat="issue in human.issueStats">
+              <td>
+                <div>
+                  {{issue.name}}<span tooltip="{{selectedDistrict.issues[$index] | demandexplainer}}" class="district-difficulty {{selectedDistrict.issues[$index] | demandparser}}">{{selectedDistrict.issues[$index] | demandparser}}</span>
+                </div>
+              </td>
 
-  <table class="table table-striped">
-    <tr>
-      <th>Issue</th>
-      <th style="text-align: right;">Satisfaction</th>
-    </tr>
-    <tr ng-repeat="issue in human.issueStats">
-      <td>
-        <div>
-          {{issue.name}}<span tooltip="{{selectedDistrict.issues[$index] | demandexplainer}}" class="district-difficulty {{selectedDistrict.issues[$index] | demandparser}}">{{selectedDistrict.issues[$index] | demandparser}}</span>
-        </div>
-      </td>
+              <td style="text-align: right;">
+                <div class="district-stances">
+                  <issue-level-view base="5" human-lvl="selectedDistrict.humanStance[$index]" ai-lvl="selectedDistrict.aiStance[$index]"></issue-level-view>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </tab>
+        <tab>
+          <tab-heading>
+            Activity <span class="badge">{{selectedDistrict.actors.length}}</span>
+          </tab-heading>
+          <span ng-show="!selectedDistrict.actors">None</span>
+          <ul class="list list-unstyled">
+            <li class="row" ng-repeat="actor in selectedDistrict.actors">
+              <div class="col-xs-12">
+                <progressbar value="actor.activity.details.hoursLeft" max="actor.activity.details.hours" ></progressbar>
+              </div>
+              <div class="col-xs-4">
+                {{actor.name}}
+              </div>
+              <div class="col-xs-4">
+                {{actor.activity.name}}
+              </div>
+            </li>
+          </ul>
+        </tab>
+      </tabset>
+    </div>
 
-      <td style="text-align: right;">
-        <div class="district-stances">
-          <issue-level-view base="5" human-lvl="selectedDistrict.humanStance[$index]" ai-lvl="selectedDistrict.aiStance[$index]"></issue-level-view>
-        </div>
-      </td>
-    </tr>
-  </table>
+  </div>
+
+
   <div class="subheader">
     <h4>Actions</h4>
   </div>

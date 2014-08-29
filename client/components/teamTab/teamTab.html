@@ -4,6 +4,17 @@
   </div>
   <div class="content container" ng-show="showGraph">
     <ul class="list list-unstyled">
+      <li class="row">
+        <div class="col-xs-1">
+          <img ng-src="/assets/images/avatars/{{human.image}}" class="avatar-clickable"></img>
+        </div>
+        <div class="col-xs-11">
+          <h4>{{human.name}}</h4>
+          <span>{{human.activity.name}} ({{human.activity.district.name}})</span>
+        </div>
+
+      </li>
+      <hr/>
       <li ng-repeat="s in staff" class="row">
           <div class="col-xs-1">
             <img ng-src="/assets/images/avatars/{{s.image}}" class="avatar-clickable"></img>
@@ -13,7 +24,7 @@
             <span ng-repeat="trait in s.traits" class="badge">
               {{trait.name}}
             </span>
-            <span>{{s.activity.name}}</span>
+            <span>{{s.activity.name}} {{s.activity.district.name}}</span>
           </div>
       </li>
     </ul>

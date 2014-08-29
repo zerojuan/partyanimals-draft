@@ -245,6 +245,7 @@ angular.module('partyanimalsDraftApp')
 
     $scope.onHideOverlay = function(){
       $scope.showOverlay = false;
+      $scope.config.overlayState = 'HIDDEN';
     };
 
     $scope.onShowOverlay = function(state){
@@ -258,7 +259,6 @@ angular.module('partyanimalsDraftApp')
 
     $scope.onActivitySelected = function(activity){
       $scope.onShowOverlay('ACTIVITY');
-      console.log('Activity: ', activity);
       $scope.selectedActivity = activity;
     };
 
@@ -271,7 +271,10 @@ angular.module('partyanimalsDraftApp')
       var activities = [];
       _.forEach($scope.activities, function(activity){
         var nActivity = angular.copy(activity);
-        nActivity.district = angular.copy($scope.selectedDistrict);
+        nActivity.district = {
+          name: $scope.selectedDistrict.name,
+          id: $scope.selectedDistrict.id
+        };
         activities.push(nActivity);
       });
       $scope.selectedDistrict.activities = activities;
@@ -281,10 +284,16 @@ angular.module('partyanimalsDraftApp')
 
     $scope.onActivityConfigDone = function(confdActivity){
       $scope.onHideOverlay();
-      console.log(confdActivity);
       //set actor to task
       var staff = GameState.findStaff(confdActivity.details.actor.id, $scope.human.staff);
-      staff.activity = confdActivity;
+      if(staff){
+        staff.activity = confdActivity;
+      }else{
+        //this is you
+        $scope.human.activity = confdActivity;
+        staff = $scope.human;
+      }
+
       //set district to contain actor
       if(!$scope.selectedDistrict.actors){
         $scope.selectedDistrict.actors = [];

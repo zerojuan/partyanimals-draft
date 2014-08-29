@@ -28,7 +28,6 @@ angular.module('partyanimalsDraftApp')
         scope.$watch('aiLvl', function(){
           scope.aiArray = [];
           for(var i = 0; i < scope.aiLvl; i++){
-            console.log('THis is i: ', i);
             scope.aiArray.push(i);
           }
         });

@@ -232,7 +232,6 @@ angular.module('partyanimalsDraftApp')
     };
 
     that.findKapitan = function(id){
-      console.log('Kapitans: ', that.kapitans);
       return _.find(that.kapitans, function(val){
         return val.id === id;
       });
