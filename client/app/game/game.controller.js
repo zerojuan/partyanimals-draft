@@ -282,5 +282,13 @@ angular.module('partyanimalsDraftApp')
     $scope.onActivityConfigDone = function(confdActivity){
       $scope.onHideOverlay();
       console.log(confdActivity);
+      //set actor to task
+      var staff = GameState.findStaff(confdActivity.details.actor.id, $scope.human.staff);
+      staff.activity = confdActivity;
+      //set district to contain actor
+      if(!$scope.selectedDistrict.actors){
+        $scope.selectedDistrict.actors = [];
+      }
+      $scope.selectedDistrict.actors.push(staff);
     };
   });

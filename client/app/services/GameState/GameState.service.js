@@ -238,6 +238,12 @@ angular.module('partyanimalsDraftApp')
       });
     };
 
+    that.findStaff = function(id, staffers){
+      return _.find(staffers, function(val){
+        return val.id === id;
+      });
+    };
+
     that.findDistrict = function(id, districts){
       return _.find(districts, function(val){
         return val.id === id;

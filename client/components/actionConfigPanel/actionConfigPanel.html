@@ -36,16 +36,14 @@
     <div class="label">
       How Much:
     </div>
-    <div class="col-xs-9">
+    <div class="col-xs-4">
       <div ui-slider min="{{selectedActivity.cost.min}}" max="{{selectedActivity.cost.max}}" ng-model="details.cost"></div>
-      <span>{{details.cost}}</span>
+      <span>${{details.cost | number}}</span>
     </div>
-  </div>
-  <div class="row">
     <div class="label">
       How Long:
     </div>
-    <div class="col-xs-9">
+    <div class="col-xs-4">
       {{selectedActivity.cost.hours}}hrs
     </div>
   </div>

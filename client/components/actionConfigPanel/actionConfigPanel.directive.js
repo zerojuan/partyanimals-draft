@@ -22,6 +22,11 @@ angular.module('partyanimalsDraftApp')
           if(scope.selectedActivity){
               scope.details.actor = null;
               scope.details.cost = scope.selectedActivity.cost.gold;
+              if(scope.localStaffers && scope.localStaffers.length > 0){
+                _.forEach(scope.localStaffers, function(staff){
+                  staff.selected = false;
+                });
+              }
           }
         });
         scope.$watch('staffers', function(){
