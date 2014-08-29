@@ -113,8 +113,8 @@
 <div class="bottom container">
   <timeline staffers="human.staff" timenow="hoursElapsed" human="human"></timeline>
   <div class="content">
-    <a class="btn btn-success" ng-click="onNext()">Next</a>
-    <a class="btn btn-success" ng-click="onRest()">Rest</a>
+    <a ng-show="human.activity" class="btn btn-success" ng-click="onNext()">Resolve Action</a>
+    <a ng-hide="human.activity" class="btn btn-success" ng-click="onRest()">Rest</a>
     <a class="btn btn-success" ng-click="onEndDay()">End Day</a>
   </div>
 </div>

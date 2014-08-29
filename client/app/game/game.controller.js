@@ -246,26 +246,39 @@ angular.module('partyanimalsDraftApp')
 
     var endActivity = function(staff){
       console.log('Staff: ', staff);
+      var district = GameState.findDistrict(staff.activity.district.id, $scope.districts);
+      var index = 0;
       if(staff.id !== null && staff.id !== undefined ){
 
         var realStaff = GameState.findStaff(staff.id, $scope.human.staff);
-        var district = GameState.findDistrict(staff.activity.district.id, $scope.districts);
-        var index = _.findIndex(district.actors, function(actor){
+        index = _.findIndex(district.actors, function(actor){
           console.log('Actors?', actor);
           return actor.id === staff.id;
         });
         realStaff.activity = null;
         district.actors.splice(index,1);
       }else{
-        //this is me
+        index = _.findIndex(district.actors, function(actor){
+          return actor.name === $scope.human.name;
+        });
+        district.actors.splice(index,1);
+        $scope.human.activity = null;
       }
     };
 
-    $scope.$watch('hoursElapsed', function(){
+    $scope.$watch('hoursElapsed', function(newVal, oldVal){
+      var elapsed = newVal - oldVal;
+
+      if($scope.human.activity){
+        $scope.human.activity.details.hoursPassed+=elapsed;
+        endActivity($scope.human);
+      }
+
       _.forEach($scope.human.staff, function(staff){
         if(staff.activity){
-          staff.activity.details.hoursPassed++;
-          if(staff.activity.details.hoursPassed === staff.activity.details.hours){
+
+          staff.activity.details.hoursPassed+=elapsed;
+          if(staff.activity.details.hoursPassed >= staff.activity.details.hours){
             //done!!
             endActivity(staff);
           }
@@ -337,7 +350,7 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.onNext = function(){
-
+      $scope.hoursElapsed += $scope.human.activity.details.hours;
     };
 
     $scope.onRest = function(){
