@@ -110,9 +110,11 @@
 </game-layer>
 <district-details ng-show="selectedDistrict" on-activity-selected="onActivitySelected" selected-district="selectedDistrict" human="human" ai="ai" close-handler="closeDistrictDetails">
 </district-details>
-<!-- <div class="bottom container">
-    <div class="content">
-      <a class="btn btn-default" ng-click="onKapClicked()">Kapitans</a>
-      <a class="btn btn-default" ng-click="onNewsClicked()">News</a>
-    </div>
-</div> -->
+<div class="bottom container">
+  <timeline staffers="human.staff" timenow="hoursElapsed" human="human"></timeline>
+  <div class="content">
+    <a class="btn btn-success" ng-click="onNext()">Next</a>
+    <a class="btn btn-success" ng-click="onRest()">Rest</a>
+    <a class="btn btn-success" ng-click="onEndDay()">End Day</a>
+  </div>
+</div>

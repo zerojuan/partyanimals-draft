@@ -65,7 +65,7 @@ angular.module('partyanimalsDraftApp')
 
         scope.onOkClicked = function(){
           var activity = angular.copy(scope.selectedActivity);
-          scope.details.hoursLeft = 0;
+          scope.details.hoursPassed = 0;
           scope.details.hours = activity.cost.hours;
           activity.details = scope.details;
           scope.done(activity);

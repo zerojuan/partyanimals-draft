@@ -243,6 +243,36 @@ angular.module('partyanimalsDraftApp')
       }
     });
 
+
+    var endActivity = function(staff){
+      console.log('Staff: ', staff);
+      if(staff.id !== null && staff.id !== undefined ){
+
+        var realStaff = GameState.findStaff(staff.id, $scope.human.staff);
+        var district = GameState.findDistrict(staff.activity.district.id, $scope.districts);
+        var index = _.findIndex(district.actors, function(actor){
+          console.log('Actors?', actor);
+          return actor.id === staff.id;
+        });
+        realStaff.activity = null;
+        district.actors.splice(index,1);
+      }else{
+        //this is me
+      }
+    };
+
+    $scope.$watch('hoursElapsed', function(){
+      _.forEach($scope.human.staff, function(staff){
+        if(staff.activity){
+          staff.activity.details.hoursPassed++;
+          if(staff.activity.details.hoursPassed === staff.activity.details.hours){
+            //done!!
+            endActivity(staff);
+          }
+        }
+      });
+    });
+
     $scope.onHideOverlay = function(){
       $scope.showOverlay = false;
       $scope.config.overlayState = 'HIDDEN';
@@ -293,11 +323,24 @@ angular.module('partyanimalsDraftApp')
         $scope.human.activity = confdActivity;
         staff = $scope.human;
       }
+      confdActivity.details.startTime = $scope.hoursElapsed;
 
       //set district to contain actor
       if(!$scope.selectedDistrict.actors){
         $scope.selectedDistrict.actors = [];
       }
       $scope.selectedDistrict.actors.push(staff);
+    };
+
+    $scope.onEndDay = function(){
+
+    };
+
+    $scope.onNext = function(){
+
+    };
+
+    $scope.onRest = function(){
+      $scope.hoursElapsed += 1;
     };
   });
