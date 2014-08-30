@@ -111,7 +111,7 @@
 <district-details ng-show="selectedDistrict" on-activity-selected="onActivitySelected" selected-district="selectedDistrict" human="human" ai="ai" close-handler="closeDistrictDetails">
 </district-details>
 <div class="bottom container">
-  <timeline staffers="human.staff" timenow="hoursElapsed" human="human"></timeline>
+  <timeline staffers="human.staff" timenow="hoursElapsed" human="human" hours="hours"></timeline>
   <div class="content">
     <a ng-show="human.activity" class="btn btn-success" ng-click="onNext()">Resolve Action</a>
     <a ng-hide="human.activity" class="btn btn-success" ng-click="onRest()">Rest</a>

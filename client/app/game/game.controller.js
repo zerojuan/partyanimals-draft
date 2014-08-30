@@ -11,7 +11,7 @@ angular.module('partyanimalsDraftApp')
     $scope.totalCash = GameState.getInitialCash();
     $scope.showItinerary = false;
     $scope.showOverlay = true;
-    $scope.hours = [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+    $scope.hours = 10;
     $scope.hoursElapsed = 0;
     $scope.scheduledActivities = [];
     $scope.futureLocation = $scope.human.hq;
@@ -73,10 +73,7 @@ angular.module('partyanimalsDraftApp')
         $scope.config.loadedItems += 1;
         onDataChanged('workhours');
         var hours = snapshot.val();
-        $scope.hours = [];
-        for(var i = 0; i < hours; i++){
-          $scope.hours.push(9+i);
-        }
+        $scope.hours = hours;
         $scope.$apply();
       });
 
@@ -267,7 +264,11 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.$watch('hoursElapsed', function(newVal, oldVal){
-      var elapsed = newVal - oldVal;
+      var elapsed = newVal-oldVal;
+      if(elapsed < 0){
+        //$scope.turnsLeft--;
+        elapsed = 5;
+      }
 
       if($scope.human.activity){
         $scope.human.activity.details.hoursPassed+=elapsed;
@@ -349,11 +350,21 @@ angular.module('partyanimalsDraftApp')
 
     };
 
+    function shouldNextDay(){
+      if($scope.hoursElapsed >= $scope.hours){
+        $scope.hoursElapsed = 0;
+        $scope.turnsLeft--;
+      }
+    }
+
     $scope.onNext = function(){
       $scope.hoursElapsed += $scope.human.activity.details.hours;
+      shouldNextDay();
     };
 
     $scope.onRest = function(){
+      shouldNextDay();
       $scope.hoursElapsed += 1;
+
     };
   });

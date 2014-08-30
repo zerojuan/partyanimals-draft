@@ -8,10 +8,11 @@ angular.module('partyanimalsDraftApp')
       scope: {
         timenow: '=',
         staffers: '=',
-        human: '='
+        human: '=',
+        hours: '='
       },
       link: function (scope) {
-
+        
       }
     };
   });
