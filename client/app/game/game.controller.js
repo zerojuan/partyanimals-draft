@@ -21,6 +21,7 @@ angular.module('partyanimalsDraftApp')
       simulateText: 'Start',
       isNextReady: false
     };
+    $scope.updates = [];
     $scope.config = {
       alerts: [],
       state: 'home',
@@ -242,7 +243,6 @@ angular.module('partyanimalsDraftApp')
 
 
     var endActivity = function(staff){
-      console.log('Staff: ', staff);
       var district = GameState.findDistrict(staff.activity.district.id, $scope.districts);
       var index = 0;
       if(staff.id !== null && staff.id !== undefined ){
@@ -252,6 +252,8 @@ angular.module('partyanimalsDraftApp')
           console.log('Actors?', actor);
           return actor.id === staff.id;
         });
+
+        $scope.updates.push(angular.copy(realStaff));
         realStaff.activity = null;
         district.actors.splice(index,1);
       }else{
@@ -259,6 +261,7 @@ angular.module('partyanimalsDraftApp')
           return actor.name === $scope.human.name;
         });
         district.actors.splice(index,1);
+        $scope.updates.push(angular.copy($scope.human));
         $scope.human.activity = null;
       }
     };

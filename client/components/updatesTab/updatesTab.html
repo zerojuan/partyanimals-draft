@@ -1,0 +1,15 @@
+<div class="tab updates-tab">
+  <div class="header" ng-class="{selected: showGraph}" ng-click="showGraph = !showGraph">
+    <span>Updates <span ng-show="updates.length>0" class="badge">{{updates.length}}</span></span>
+  </div>
+  <div class="content container" ng-show="showGraph">
+    <ul class="list list-unstyled">
+      <li class="row" ng-repeat="update in updates">
+        <div class="col-xs-11">
+          <h4>{{update.name}}</h4>
+          <span>{{update.activity.name}}, {{update.activity.district.name}}</span> Done!
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
