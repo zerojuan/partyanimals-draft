@@ -4,6 +4,9 @@
   </div>
   <div class="content container" ng-show="showGraph">
     <ul class="list list-unstyled">
+      <div ng-show="updates.length === 0">
+        This is where you see your staff's updates
+      </div>
       <li class="row" ng-repeat="update in updates">
         <div class="col-xs-11">
           <h4>{{update.name}}</h4>
