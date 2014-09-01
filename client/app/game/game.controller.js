@@ -249,7 +249,6 @@ angular.module('partyanimalsDraftApp')
 
         var realStaff = GameState.findStaff(staff.id, $scope.human.staff);
         index = _.findIndex(district.actors, function(actor){
-          console.log('Actors?', actor);
           return actor.id === staff.id;
         });
 
@@ -269,7 +268,6 @@ angular.module('partyanimalsDraftApp')
     $scope.$watch('hoursElapsed', function(newVal, oldVal){
       var elapsed = newVal-oldVal;
       if(elapsed < 0){
-        //$scope.turnsLeft--;
         elapsed = 5;
       }
 

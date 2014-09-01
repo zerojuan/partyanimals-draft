@@ -9,7 +9,12 @@
       <reputation-panel reputations="totalReputations" kapitans="kapitans"></reputation-panel>
     </div>
     <div class="col-xs-3">
-      <div ng-class="{red: totalCash<0}">Funds: <strong>${{totalCash | number}}</strong>&nbsp;<strong>{{turnsLeft}}</strong> Days Until Election</div>
+      <div class="col-xs-6" ng-class="{red: totalCash<0}">
+        Budget:&nbsp;<strong>${{totalCash | number}}</strong>
+      </div>
+      <div class="col-xs-6">
+        <i class="glyphicon glyphicon-calendar"></i>Days Left:&nbsp;<strong>{{turnsLeft}}</strong>
+      </div>
     </div>
   </div>
 </div>

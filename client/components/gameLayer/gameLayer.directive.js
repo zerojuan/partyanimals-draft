@@ -13,6 +13,7 @@ angular.module('partyanimalsDraftApp')
       link: function (scope) {
         var districtGroup;
         var chipsGroup;
+        // var cursor;
         var districtArray = [];
         var districtsImages = [
           'kapitolyo',
@@ -27,6 +28,7 @@ angular.module('partyanimalsDraftApp')
           _.forEach(districtsImages, function(val){
             game.load.image(val, './assets/images/districts/'+val+'.jpg');
           });
+          game.load.image('cursor', './assets/images/ui/cursor.png');
           game.load.image('mousey', './assets/images/avatars/mouseyMale.jpg');
           game.load.image('croc', './assets/images/avatars/crocopio.jpg');
           game.load.image('bg', './assets/images/districts/normal2.png');
@@ -51,6 +53,7 @@ angular.module('partyanimalsDraftApp')
             districtArray.push(district);
           });
 
+          // cursor = game.add.sprite(0,0, 'cursor');
           var mouseySprite = new Phaser.Sprite(game, 0, 0, 'mousey');
           mouseySprite.anchor.set(0.5);
           mouseySprite.scale.x = mouseySprite.scale.y = 0.5;
@@ -70,6 +73,8 @@ angular.module('partyanimalsDraftApp')
         }
 
         function update() {
+          // cursor.x = game.input.mousePointer.x;
+          // cursor.y = game.input.mousePointer.y;
         }
 
         function _findDistrict(name){
