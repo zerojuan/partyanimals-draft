@@ -357,7 +357,9 @@ angular.module('partyanimalsDraftApp')
       if($scope.hoursElapsed >= $scope.hours){
         $scope.hoursElapsed = 0;
         $scope.turnsLeft--;
+        return true;
       }
+      return false;
     }
 
     $scope.onNext = function(){
@@ -366,8 +368,8 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.onRest = function(){
-      shouldNextDay();
-      $scope.hoursElapsed += 1;
-
+      if(!shouldNextDay()){
+        $scope.hoursElapsed += 1;
+      }
     };
   });
