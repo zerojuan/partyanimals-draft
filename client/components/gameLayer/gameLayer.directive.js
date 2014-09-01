@@ -28,6 +28,7 @@ angular.module('partyanimalsDraftApp')
           _.forEach(districtsImages, function(val){
             game.load.image(val, './assets/images/districts/'+val+'.jpg');
           });
+          game.load.spritesheet('people', './assets/images/ui/tiny-people.png', 15, 20, 4);
           game.load.image('cursor', './assets/images/ui/cursor.png');
           game.load.image('mousey', './assets/images/avatars/mouseyMale.jpg');
           game.load.image('croc', './assets/images/avatars/crocopio.jpg');
@@ -66,8 +67,17 @@ angular.module('partyanimalsDraftApp')
         }
 
         function onDistrictClicked(sprite){
+
           var index = _.findIndex(districtsImages, function(val){
             return val === sprite.key;
+          });
+          
+          _.forEach(districtArray, function(val, i){
+            if(i === index){
+              val.selected();
+            }else{
+              val.unSelected();
+            }
           });
           scope.selectDistrict(index);
         }
