@@ -1,23 +1,23 @@
 [{
   "id": 0,
-  "name": "Mr. Catman",
-  "image": "catorcio.png",
+  "name": "Mr. Platricio",
+  "image": "platricio_campaignmanager.jpg",
   "locked": false,
   "loyalty": 50,
   "salary": 100,
   "traitsId": ["finance", "pr"]
 },{
   "id": 1,
-  "name": "Prof. Birdman",
-  "image": "pelicarpio.png",
+  "name": "Mr. Franciscrow, PI",
+  "image": "franciscrow_PI.jpg",
   "locked": false,
   "loyalty": 50,
   "salary": 100,
   "traitsId": ["pr", "educator"]
 },{
   "id": 2,
-  "name": "Dr. Alpaca",
-  "image": "alpacita.png",
+  "name": "Dr. Macaquio",
+  "image": "DRmacaquio_doctor.jpg",
   "locked": false,
   "loyalty": 50,
   "salary": 100,

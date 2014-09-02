@@ -6,6 +6,9 @@
     "hours" : 2
   },
   "description" : "Talk to the district's Kapitan and try to improve your Relationship with them.",
+  "restriction": [
+    "CANDIDATE_ONLY"
+  ],
   "difficulty" : 0,
   "id" : 3,
   "name" : "Talk to Kapitan",
@@ -25,6 +28,9 @@
     "attr" : "DR",
     "modifier" : "(AR-AD)/5"
   },
+  "restrictions": [
+    "CANDIDATE_ONLY"
+  ],
   "id" : 1,
   "name" : "Sortie",
   "text" : {
@@ -32,28 +38,6 @@
     "success" : [ "The sortie was a $place$ was a success" ]
   },
   "type" : "SORTIE"
-}, {
-  "actionCheck" : "random+PKRm+em",
-  "actionDifficulty" : "BD+em",
-  "cost" : {
-    "gold" : 200,
-    "min": 100,
-    "max": 500,
-    "hours" : 2
-  },
-  "description" : "Increase reputation in the district. Affected by Kapitan Relationship.",
-  "difficulty" : 20,
-  "effect" : {
-    "attr" : "DR",
-    "modifier" : "10"
-  },
-  "id" : 2,
-  "name" : "Photo Op",
-  "text" : {
-    "fail" : [ "That photo-op failed" ],
-    "success" : [ "That photo-op was extremely effective!" ]
-  },
-  "type" : "REPUTATION"
 }, {
   "actionCheck" : "random+PKRm+em",
   "actionDifficulty" : "(BD+em)+(OKRm)",
@@ -163,7 +147,7 @@
   },
   "id" : 8,
   "name" : "Confession",
-  "restriction" : [ 4 ],
+  "restriction" : [ "DISTRICT-4" ],
   "text" : {
     "success" : [ "You have confessed your sins. Do your penance and pray to the Almighty Bone for guidance." ]
   },
@@ -184,7 +168,7 @@
   },
   "id" : 9,
   "name" : "Gamble",
-  "restriction" : [ 1 ],
+  "restriction" : [ "DISTRICT-1" ],
   "text" : {
     "fail" : [ "Out of luck! You lost your money to the horses." ],
     "success" : [ "Congratulations, you won $$gold$." ]
