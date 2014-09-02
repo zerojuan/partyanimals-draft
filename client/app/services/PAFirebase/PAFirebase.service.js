@@ -9,7 +9,7 @@ angular.module('partyanimalsDraftApp')
     that.districtsRef = new Firebase(url+'/districts');
     that.issuesRef = new Firebase(url+'/issues');
     that.kapitansRef = new Firebase(url+'/kapitan');
-    that.activitiesRef = new Firebase(url+'/activities');
+    that.activitiesRef = new Firebase(url+'/activitiesnew');
     that.turnsPerGameRef = new Firebase(url+'/turnsPerGame');
     that.workhoursRef = new Firebase(url+'/workhours');
     that.eventsRef = new Firebase(url+'/events');

@@ -26,11 +26,8 @@
     <div class="col-xs-9">
       <ul class="list list-unstyled list-inline">
         <li ng-repeat="staff in localStaffers" ng-class="{'un-selected': !staff.selected}" class="staff-list">
-          <img ng-click="selectStaffer(staff)" class="avatar" ng-class="{disabled: staff.activity}" ng-disabled="staff.activity" ng-src="assets/images/avatars/{{staff.image}}"></img>
+          <img ng-click="selectStaffer(staff)" class="avatar" ng-class="{disabled: staff.disabled}" ng-disabled="staff.disabled" ng-src="assets/images/avatars/{{staff.image}}"></img>
           {{staff.name}}
-          <div class="check" ng-show="staff.selected">
-            <i class="glyphicon glyphicon-ok"></i>
-          </div>
         </li>
       </ul>
     </div>

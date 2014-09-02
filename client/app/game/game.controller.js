@@ -237,7 +237,7 @@ angular.module('partyanimalsDraftApp')
         //hide welcome paper for now
         $scope.onHideOverlay();
 
-        $rootScope.$broadcast('GAME:turn');
+        $rootScope.$broadcast('GAME:start');
       }
     });
 
@@ -263,6 +263,7 @@ angular.module('partyanimalsDraftApp')
         $scope.updates.push(angular.copy($scope.human));
         $scope.human.activity = null;
       }
+      $rootScope.$broadcast('GAME:resolve');
     };
 
     $scope.$watch('hoursElapsed', function(newVal, oldVal){
@@ -316,12 +317,30 @@ angular.module('partyanimalsDraftApp')
       var activities = [];
       _.forEach($scope.activities, function(activity){
         var nActivity = angular.copy(activity);
-        nActivity.district = {
-          name: $scope.selectedDistrict.name,
-          id: $scope.selectedDistrict.id
-        };
-        activities.push(nActivity);
+        var isValid = true;
+        if(activity.restrictions){
+          _.forEach(activity.restrictions, function(restriction){
+            if(restriction === 'DISTRICT-1' && $scope.selectedDistrict.id !== 1){
+              isValid = false;
+              return false;
+            }else if(restriction === 'DISTRICT-4' && $scope.selectedDistrict.id !== 4){
+              isValid = false;
+              return false;
+            }else if(restriction === -1){
+              isValid = false;
+              return false;
+            }
+          });
+        }
+        if(isValid){
+          nActivity.district = {
+            name: $scope.selectedDistrict.name,
+            id: $scope.selectedDistrict.id
+          };
+          activities.push(nActivity);
+        }
       });
+
       $scope.selectedDistrict.activities = activities;
 
       $scope.$apply();
@@ -345,6 +364,7 @@ angular.module('partyanimalsDraftApp')
         $scope.selectedDistrict.actors = [];
       }
       $scope.selectedDistrict.actors.push(staff);
+      $rootScope.$broadcast('GAME:assign');
     };
 
     $scope.onEndDay = function(){

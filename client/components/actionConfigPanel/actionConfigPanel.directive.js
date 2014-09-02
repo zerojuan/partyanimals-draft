@@ -19,15 +19,27 @@ angular.module('partyanimalsDraftApp')
           actor: null,
           cost: 0
         };
+
+        function shouldDisable(staffer, activity){
+          var isDisabled = false;
+          if(staffer.activity){
+            isDisabled = true;
+          }else{
+            _.forEach(activity.restrictions, function(restriction){
+              if(restriction === 'CANDIDATE_ONLY'){
+                isDisabled = true;
+                return false;
+              }
+            });
+          }
+          return isDisabled;
+        }
+
         scope.$watch('state', function(){
           if(scope.state === 'ACTIVITY'){
             scope.details.actor = null;
             scope.details.cost = scope.selectedActivity.cost.gold;
-            // if(scope.localStaffers && scope.localStaffers.length > 0){
-            //   _.forEach(scope.localStaffers, function(staff){
-            //     staff.selected = false;
-            //   });
-            // }
+
             scope.localStaffers = [];
             var localHuman = angular.copy(scope.human);
             localHuman.selected = false;
@@ -35,6 +47,8 @@ angular.module('partyanimalsDraftApp')
             _.forEach(scope.staffers, function(staffer){
               var s = angular.copy(staffer);
               s.selected = false;
+              s.disabled = shouldDisable(staffer, scope.selectedActivity);
+
               scope.localStaffers.push(s);
             });
           }
@@ -42,7 +56,7 @@ angular.module('partyanimalsDraftApp')
 
 
         scope.selectStaffer = function(selectedStaffer){
-          if(selectedStaffer.activity){
+          if(selectedStaffer.disabled){
             return;
           }
           _.forEach(scope.localStaffers, function(staffer){

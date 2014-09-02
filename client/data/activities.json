@@ -6,7 +6,7 @@
     "hours" : 2
   },
   "description" : "Talk to the district's Kapitan and try to improve your Relationship with them.",
-  "restriction": [
+  "restrictions": [
     "CANDIDATE_ONLY"
   ],
   "difficulty" : 0,
@@ -147,7 +147,7 @@
   },
   "id" : 8,
   "name" : "Confession",
-  "restriction" : [ "DISTRICT-4" ],
+  "restrictions" : [ "DISTRICT-4" ],
   "text" : {
     "success" : [ "You have confessed your sins. Do your penance and pray to the Almighty Bone for guidance." ]
   },
@@ -168,7 +168,7 @@
   },
   "id" : 9,
   "name" : "Gamble",
-  "restriction" : [ "DISTRICT-1" ],
+  "restrictions" : [ "DISTRICT-1" ],
   "text" : {
     "fail" : [ "Out of luck! You lost your money to the horses." ],
     "success" : [ "Congratulations, you won $$gold$." ]
@@ -190,7 +190,7 @@
   },
   "id" : 10,
   "name" : "Typhoon Relief",
-  "restriction" : [ -1 ],
+  "restrictions" : [ -1 ],
   "text" : {
     "fail" : [ "The relief operation didn't work. Perhaps they didn't like the sardines." ],
     "success" : [ "The relief operation was a success!" ]
