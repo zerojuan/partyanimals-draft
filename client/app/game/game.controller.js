@@ -2,7 +2,7 @@
 
 angular.module('partyanimalsDraftApp')
   .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim) {
-    $scope.dataLoadSize = 12;
+    $scope.dataLoadSize = 13;
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
     $scope.turnsLeft = GameState.getTurnsLeft();
@@ -26,6 +26,7 @@ angular.module('partyanimalsDraftApp')
       alerts: [],
       state: 'home',
       loadedItems: 0,
+      currentLoadedItem: '',
       overlayState: 'WELCOME' //WELCOME, EVENT, SIMULATION, WEEKLY
     };
     $scope.currentPlayer = $scope.human;
@@ -58,6 +59,8 @@ angular.module('partyanimalsDraftApp')
     var addDataCallbacks = function(){
       PAFirebase.staffersRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Sourcing staffers...';
+        console.log($scope.config.currentLoadedItem);
         onDataChanged('staffers');
         $scope.staffers = snapshot.val();
         $scope.$apply();
@@ -65,6 +68,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.traitsRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Evaluating multiple personalities...';
+        console.log($scope.config.currentLoadedItem);
         onDataChanged('traits');
         $scope.traits = snapshot.val();
         $scope.$apply();
@@ -72,6 +77,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.workhoursRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Calculating workhours...';
+        console.log($scope.config.currentLoadedItem);
         onDataChanged('workhours');
         var hours = snapshot.val();
         $scope.hours = hours;
@@ -80,12 +87,16 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.weekdaysRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Counting days in a week...';
+        console.log($scope.config.currentLoadedItem);
         onDataChanged('weekdays');
         $scope.daysInAWeek = snapshot.val();
       });
 
       PAFirebase.cardsRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Drawing cards against humanity...';
+        console.log($scope.config.currentLoadedItem);
         onDataChanged('cards');
         $scope.cards = snapshot.val();
         _.forEach($scope.cards, function(val){
@@ -98,6 +109,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.goldRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Calculating budget savings...';
+        console.log($scope.config.currentLoadedItem);
         if(!onDataChanged('initialGold')){
           $scope.totalCash = snapshot.val();
           $scope.human.totalCash = snapshot.val();
@@ -108,6 +121,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.turnsPerGameRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Counting election days...';
+        console.log($scope.config.currentLoadedItem);
         if(!onDataChanged('turnsPerGame')){
           // $scope.turnsLeft = 1;
           // $scope.totalTurns = 1;
@@ -121,6 +136,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.districtsRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Canvassing districts...';
+        console.log($scope.config.currentLoadedItem);
         if(!onDataChanged('districts')){
           $scope.districts = snapshot.val();
           var selectedDistrict = null;
@@ -170,8 +187,6 @@ angular.module('partyanimalsDraftApp')
               val.level += 1;
             }
           });
-          GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
-          GameState.updateDistrictReputationHistory($scope.districts);
 
           $scope.$apply();
 
@@ -180,6 +195,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.issuesRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Inciting issues...';
+        console.log($scope.config.currentLoadedItem);
         if(!onDataChanged('issues')){
           $scope.issues = snapshot.val();
           $scope.$apply();
@@ -188,6 +205,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.kapitansRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Convening the Kapitans...';
+        console.log($scope.config.currentLoadedItem);
         if(!onDataChanged('kapitans')){
           $scope.kapitans = snapshot.val();
           angular.forEach($scope.kapitans, function(val){
@@ -201,6 +220,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.eventsRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Recieving God\'s plans...';
+        console.log($scope.config.currentLoadedItem);
         if(!onDataChanged('events')){
           $scope.eventsDb = snapshot.val();
           GameState.eventsDb = $scope.eventsDb;
@@ -209,6 +230,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.activitiesRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
+        $scope.config.currentLoadedItem = 'Composing campaign jingles...';
+        console.log($scope.config.currentLoadedItem);
         if(!onDataChanged('activities')){
           $scope.activities = snapshot.val();
           $scope.$apply();
@@ -219,7 +242,11 @@ angular.module('partyanimalsDraftApp')
     addDataCallbacks();
 
     $scope.$watch('config.loadedItems', function(){
+      console.log($scope.config.loadedItems +' vs '+ $scope.dataLoadSize);
       if($scope.config.loadedItems === $scope.dataLoadSize){
+        console.log('Time to start the game...');
+        GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
+        GameState.updateDistrictReputationHistory($scope.districts);
         $scope.totalReputations = GameState.getTotalReputation();
         //combine traits to the staffers
         _.forEach($scope.staffers, function(staffer){
@@ -241,6 +268,24 @@ angular.module('partyanimalsDraftApp')
       }
     });
 
+    $scope.$on('CANVAS:ready', function(){
+      $scope.config.loadedItems += 1;
+      $scope.config.currentLoadedItem = 'Setting the political canvas...';
+      $scope.$apply();
+      console.log($scope.config.currentLoadedItem);
+    });
+
+    var resolveActivity = function(actor){
+      $scope.updates.push(actor);
+      //resolve activity
+      if(actor.activity.type === 'REPUTATION'){
+        console.log('THIS IS A REPUTATION POST');
+        var district = GameState.findDistrict(actor.activity.district.id, $scope.districts);
+        district.humanReputation+=30;
+        GameState.districts = $scope.districts;
+      }
+      $rootScope.$broadcast('GAME:ACTION:result', actor);
+    };
 
     var endActivity = function(staff){
       var district = GameState.findDistrict(staff.activity.district.id, $scope.districts);
@@ -252,17 +297,18 @@ angular.module('partyanimalsDraftApp')
           return actor.id === staff.id;
         });
 
-        $scope.updates.push(angular.copy(realStaff));
+        resolveActivity(angular.copy(realStaff));
         realStaff.activity = null;
-        district.actors.splice(index,1);
+
       }else{
         index = _.findIndex(district.actors, function(actor){
           return actor.name === $scope.human.name;
         });
-        district.actors.splice(index,1);
-        $scope.updates.push(angular.copy($scope.human));
+
+        resolveActivity(angular.copy($scope.human));
         $scope.human.activity = null;
       }
+      district.actors.splice(index,1);
       $rootScope.$broadcast('GAME:resolve');
     };
 

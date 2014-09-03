@@ -24,7 +24,7 @@
       <div class="event-container"></div>
       <div class="activity-sim row newspaper" >
         <div ng-hide="config.loadedItems===dataLoadSize" class="col-xs-12 reveal-animation">
-          Loading...
+          {{config.currentLoadedItem}}
           <progressbar value="config.loadedItems" max="dataLoadSize" ></progressbar>
         </div>
         <!-- <welcome-paper ng-show="config.loadedItems===dataLoadSize" human="human" ai="ai" total-reputations="totalReputations" issue="1">

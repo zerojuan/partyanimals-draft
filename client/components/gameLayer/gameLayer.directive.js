@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .directive('gameLayer', function (Utils, GameState, GameModel) {
+  .directive('gameLayer', function ($rootScope, Utils, GameState, GameModel) {
     return {
       template: '<div id="phaserGame"></div>',
       restrict: 'E',
@@ -34,7 +34,7 @@ angular.module('partyanimalsDraftApp')
             game.load.image(val, './assets/images/districts/'+val+'.jpg');
           });
           game.load.spritesheet('people', './assets/images/ui/tiny-people.png', 15, 20, 4);
-          game.load.atlas('staffers', './assets/images/avatars/staff/staff.png', './assets/images/avatars/staff/staff.json');
+          game.load.atlas('staffers', './assets/images/staff/staff.png', './assets/images/staff/staff.json');
           game.load.image('cursor', './assets/images/ui/cursor.png');
           game.load.image('mousey', './assets/images/avatars/mouseyMale.jpg');
           game.load.image('croc', './assets/images/avatars/crocopio.jpg');
@@ -42,7 +42,6 @@ angular.module('partyanimalsDraftApp')
         }
 
         function create() {
-
           var centerX = game.world.width / 2;
 
           game.add.tileSprite(0,0,1280, 720, 'bg');
@@ -72,6 +71,7 @@ angular.module('partyanimalsDraftApp')
           chipsGroup.add(crocSprite);
           chipsGroup.add(mouseySprite);
 
+          $rootScope.$broadcast('CANVAS:ready');
         }
 
         function onDistrictClicked(sprite){
@@ -91,7 +91,7 @@ angular.module('partyanimalsDraftApp')
         }
 
         function update() {
-          
+
         }
 
         function _findDistrict(name){
@@ -136,22 +136,30 @@ angular.module('partyanimalsDraftApp')
           });
         }
 
-        function _updateDistrictDetails(){
-          _.forEach(GameState.districts, function(d){
-            //find equivalent
-            var district = _findDistrict(Utils.combineDistrictName(d.name));
-            district.label.text = d.name;
-            district.data = d;
-
-            if(d.hasHuman){
-              game.add.tween(chipsGroup.getAt(1)).to( { x: district.base.x, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
-            }
-            if(d.hasAI){
-              game.add.tween(chipsGroup.getAt(0)).to( { x: district.base.x, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
-            }
-
+        function _updateDistrictDetails(districtToUpdate){
+          var district;
+          if(districtToUpdate){
+            district = _findDistrict(Utils.combineDistrictName(districtToUpdate.name));
             district.updateData();
-          });
+          }else{
+            console.log('Rendering district details...', GameState.districts.length);
+            _.forEach(GameState.districts, function(d){
+              //find equivalent
+              district = _findDistrict(Utils.combineDistrictName(d.name));
+              district.label.text = d.name;
+              district.data = d;
+
+              if(d.hasHuman){
+                game.add.tween(chipsGroup.getAt(1)).to( { x: district.base.x, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
+              }
+              if(d.hasAI){
+                game.add.tween(chipsGroup.getAt(0)).to( { x: district.base.x, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
+              }
+
+              district.updateData();
+            });
+          }
+
         }
 
         var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'phaserGame', { preload: preload, create: create, update: update }, null, true);
@@ -164,6 +172,7 @@ angular.module('partyanimalsDraftApp')
         });
 
         scope.$on('GAME:start', function(){
+          console.log('Starting the game...');
           _updateDistrictDetails();
           _setupStaff();
         });
@@ -174,6 +183,11 @@ angular.module('partyanimalsDraftApp')
 
         scope.$on('GAME:resolve', function(){
           _updateStaff();
+        });
+
+        scope.$on('GAME:ACTION:result', function(evt, actor){
+          console.log('Actor Resolving: ', actor);
+          _updateDistrictDetails(actor.activity.district);
         });
 
       }

@@ -61,6 +61,8 @@ angular.module('partyanimalsDraftApp')
           peoples.callAll('animations.add', 'animations', 'stay', [0], 1, true);
 
           that.updateReputation();
+        }else{
+          that.updateReputation();
         }
 
         //update reputation

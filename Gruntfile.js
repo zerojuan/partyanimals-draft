@@ -258,7 +258,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.client %>/assets/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          src: '{,*/}*.{png,jpg,jpeg,gif,json}',
           dest: '<%= yeoman.dist %>/public/assets/images'
         }]
       }
@@ -335,7 +335,8 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'bower_components/**/*',
-            'assets/images/{,*/}*.{webp}',
+            'assets/images/{,*/}*.{webp|json}',
+            'assets/images/**/*.{json}',
             'assets/fonts/**/*',
             'index.html'
           ]
