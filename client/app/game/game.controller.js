@@ -26,7 +26,7 @@ angular.module('partyanimalsDraftApp')
       alerts: [],
       state: 'home',
       loadedItems: 0,
-      currentLoadedItem: '',
+      currentLoadedItem: 'Loading...',
       overlayState: 'WELCOME' //WELCOME, EVENT, SIMULATION, WEEKLY
     };
     $scope.currentPlayer = $scope.human;
