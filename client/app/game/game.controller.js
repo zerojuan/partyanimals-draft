@@ -167,6 +167,7 @@ angular.module('partyanimalsDraftApp')
                 $scope.districts[neighborIndex].humanReputation = 25;
               });
               selectedDistrict = district;
+              $scope.human.currentLocation = district;
             }
             if(district.id === $scope.ai.hq.id){
               district.isAIHQ = true;
@@ -280,7 +281,7 @@ angular.module('partyanimalsDraftApp')
       $scope.$apply();
     });
 
-    var resolveActivity = function(actor){
+    var resolveActivity = function(actor, isCandidate){
       $scope.updates.push(actor);
       //resolve activity
       if(actor.activity.type === 'REPUTATION'){
@@ -289,7 +290,13 @@ angular.module('partyanimalsDraftApp')
         district.humanReputation+=30;
         GameState.districts = $scope.districts;
       }
-      $rootScope.$broadcast('GAME:ACTION:result', actor);
+      if(isCandidate){
+        $rootScope.$broadcast('GAME:ACTION:candidate_result', actor);
+      }else{
+        $rootScope.$broadcast('GAME:ACTION:result', actor);
+      }
+
+
     };
 
     var endActivity = function(staff){
@@ -310,8 +317,9 @@ angular.module('partyanimalsDraftApp')
           return actor.name === $scope.human.name;
         });
 
-        resolveActivity(angular.copy($scope.human));
+        resolveActivity(angular.copy($scope.human), true);
         $scope.human.activity = null;
+        $scope.human.currentLocation = district;
       }
       district.actors.splice(index,1);
       $rootScope.$broadcast('GAME:resolve');
@@ -375,6 +383,7 @@ angular.module('partyanimalsDraftApp')
             name: $scope.selectedDistrict.name,
             id: $scope.selectedDistrict.id
           };
+          nActivity.travelTime = Ruleset.calculateTravelCost($scope.currentLocation, $scope.selectedDistrict);
           activities.push(nActivity);
         }
       });
@@ -402,7 +411,8 @@ angular.module('partyanimalsDraftApp')
         $scope.selectedDistrict.actors = [];
       }
       $scope.selectedDistrict.actors.push(staff);
-      $rootScope.$broadcast('GAME:assign');
+      staff.districtName = $scope.selectedDistrict.name;
+      $rootScope.$broadcast('GAME:assign', staff);
     };
 
     $scope.onEndDay = function(){
