@@ -56,11 +56,16 @@ angular.module('partyanimalsDraftApp')
       }
     };
 
+    var setLoadingMessage = function(message){
+      $scope.config.currentLoadedItem = message;
+      console.log(message);
+    };
+
     var addDataCallbacks = function(){
       PAFirebase.staffersRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Sourcing staffers...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Sourcing staffers...');
+
         onDataChanged('staffers');
         $scope.staffers = snapshot.val();
         $scope.$apply();
@@ -68,8 +73,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.traitsRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Evaluating multiple personalities...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Evaluating multiple personalities...');
+
         onDataChanged('traits');
         $scope.traits = snapshot.val();
         $scope.$apply();
@@ -77,8 +82,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.workhoursRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Calculating workhours...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Calculating workhours...');
+
         onDataChanged('workhours');
         var hours = snapshot.val();
         $scope.hours = hours;
@@ -87,16 +92,16 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.weekdaysRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Counting days in a week...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Counting days in a week...');
+
         onDataChanged('weekdays');
         $scope.daysInAWeek = snapshot.val();
       });
 
       PAFirebase.cardsRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Drawing cards against humanity...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Drawing cards against humanity...');
+
         onDataChanged('cards');
         $scope.cards = snapshot.val();
         _.forEach($scope.cards, function(val){
@@ -109,8 +114,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.goldRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Calculating budget savings...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Calculating budget savings...');
+
         if(!onDataChanged('initialGold')){
           $scope.totalCash = snapshot.val();
           $scope.human.totalCash = snapshot.val();
@@ -121,8 +126,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.turnsPerGameRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Counting election days...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Counting election days...');
+
         if(!onDataChanged('turnsPerGame')){
           // $scope.turnsLeft = 1;
           // $scope.totalTurns = 1;
@@ -136,8 +141,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.districtsRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Canvassing districts...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Canvassing districts...');
+
         if(!onDataChanged('districts')){
           $scope.districts = snapshot.val();
           var selectedDistrict = null;
@@ -195,8 +200,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.issuesRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Inciting issues...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Inciting issues...');
+
         if(!onDataChanged('issues')){
           $scope.issues = snapshot.val();
           $scope.$apply();
@@ -205,8 +210,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.kapitansRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Convening the Kapitans...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Convening the Kapitans...');
+
         if(!onDataChanged('kapitans')){
           $scope.kapitans = snapshot.val();
           angular.forEach($scope.kapitans, function(val){
@@ -220,8 +225,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.eventsRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Recieving God\'s plans...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Recieving God\'s Plans...');
+
         if(!onDataChanged('events')){
           $scope.eventsDb = snapshot.val();
           GameState.eventsDb = $scope.eventsDb;
@@ -230,8 +235,8 @@ angular.module('partyanimalsDraftApp')
 
       PAFirebase.activitiesRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        $scope.config.currentLoadedItem = 'Composing campaign jingles...';
-        console.log($scope.config.currentLoadedItem);
+        setLoadingMessage('Composing campaign jingles...');
+
         if(!onDataChanged('activities')){
           $scope.activities = snapshot.val();
           $scope.$apply();
@@ -270,9 +275,9 @@ angular.module('partyanimalsDraftApp')
 
     $scope.$on('CANVAS:ready', function(){
       $scope.config.loadedItems += 1;
-      $scope.config.currentLoadedItem = 'Setting the political canvas...';
+      setLoadingMessage('Setting the political canvas...');
+
       $scope.$apply();
-      console.log($scope.config.currentLoadedItem);
     });
 
     var resolveActivity = function(actor){
