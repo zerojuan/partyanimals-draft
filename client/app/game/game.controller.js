@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim) {
+  .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim, Ruleset) {
     $scope.dataLoadSize = 13;
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
@@ -363,21 +363,8 @@ angular.module('partyanimalsDraftApp')
       var activities = [];
       _.forEach($scope.activities, function(activity){
         var nActivity = angular.copy(activity);
-        var isValid = true;
-        if(activity.restrictions){
-          _.forEach(activity.restrictions, function(restriction){
-            if(restriction === 'DISTRICT-1' && $scope.selectedDistrict.id !== 1){
-              isValid = false;
-              return false;
-            }else if(restriction === 'DISTRICT-4' && $scope.selectedDistrict.id !== 4){
-              isValid = false;
-              return false;
-            }else if(restriction === -1){
-              isValid = false;
-              return false;
-            }
-          });
-        }
+        var isValid = Ruleset.Restrictions.isValidAction(activity.restrictions, $scope.selectedDistrict);
+
         if(isValid){
           nActivity.district = {
             name: $scope.selectedDistrict.name,
