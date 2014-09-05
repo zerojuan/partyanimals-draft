@@ -127,10 +127,17 @@ angular.module('partyanimalsDraftApp')
           var from = _findDistrict(Utils.combineDistrictName(scope.human.currentLocation.name));
           var to;
           var localUpdateStaff = function(staff){
+            console.log('Updating staff...', staff);
             staff.alpha = 1;
             staff.x = from.base.x;
             staff.y = from.base.y;
-            game.add.tween(staff).to({x: to.base.x, y: to.base.y}, 750, Phaser.Easing.Sinusoidal.Out, true);
+            var tween = game.add.tween(staff).to({x: to.base.x, y: to.base.y}, 750, Phaser.Easing.Sinusoidal.Out, true);
+            if(resolve){
+              tween.onComplete.add(function(){
+                console.log('Staff to alpha');
+                staff.alpha = 0;
+              });
+            }
           };
           if(staffFromScope){
             var staffToUpdate = _findStaffer(staffFromScope.id);
@@ -140,13 +147,14 @@ angular.module('partyanimalsDraftApp')
             }else{
               to = _findDistrict(Utils.combineDistrictName(staffFromScope.districtName));
             }
+            console.log('Is resolve?', resolve);
             localUpdateStaff(staffToUpdate);
           }else{
             _.forEach(scope.staffers, function(staff){
               var staffer = _findStaffer(staff.id);
               if(staff.activity){
                 to = _findDistrict(Utils.combineDistrictName(staff.activity.district.name));
-                localUpdateStaff(staff);
+                localUpdateStaff(staffer);
               }else{
                 staffer.alpha = 0;
               }
@@ -207,6 +215,10 @@ angular.module('partyanimalsDraftApp')
 
         scope.$on('GAME:assign', function(event, staff){
           _updateStaff(staff, false);
+        });
+
+        scope.$on('GAME:assign_candidate', function(event, staff){
+
         });
 
         scope.$on('GAME:resolve', function(){

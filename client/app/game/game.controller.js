@@ -291,8 +291,10 @@ angular.module('partyanimalsDraftApp')
         GameState.districts = $scope.districts;
       }
       if(isCandidate){
+        console.log('Candidate Result! Dispatch');
         $rootScope.$broadcast('GAME:ACTION:candidate_result', actor);
       }else{
+        console.log('Staffer Result! Dispatch');
         $rootScope.$broadcast('GAME:ACTION:result', actor);
       }
 
@@ -309,7 +311,7 @@ angular.module('partyanimalsDraftApp')
           return actor.id === staff.id;
         });
 
-        resolveActivity(angular.copy(realStaff));
+        resolveActivity(angular.copy(realStaff), false);
         realStaff.activity = null;
 
       }else{
@@ -397,12 +399,14 @@ angular.module('partyanimalsDraftApp')
       $scope.onHideOverlay();
       //set actor to task
       var staff = GameState.findStaff(confdActivity.details.actor.id, $scope.human.staff);
+      var isCandidate = false;
       if(staff){
         staff.activity = confdActivity;
       }else{
         //this is you
         $scope.human.activity = confdActivity;
         staff = $scope.human;
+        isCandidate = true;
       }
       confdActivity.details.startTime = $scope.hoursElapsed;
 
@@ -412,7 +416,14 @@ angular.module('partyanimalsDraftApp')
       }
       $scope.selectedDistrict.actors.push(staff);
       staff.districtName = $scope.selectedDistrict.name;
-      $rootScope.$broadcast('GAME:assign', staff);
+
+
+      if(isCandidate){
+        $rootScope.$broadcast('GAME:assign_candidate', staff);
+      }else{
+        $rootScope.$broadcast('GAME:assign', staff);
+      }
+
     };
 
     $scope.onEndDay = function(){
