@@ -84,26 +84,15 @@
       </div>
     </div>
   </div>
-  <div ng-switch-when="SIMULATION" class="container reveal-animation">
-    <div class="row">
-      <div class="col-md-4">
-        <h3>Simulating</h3>
+  <div ng-switch-when="RESOLVE" class="container reveal-animation">
+    <div class="row simulation-container">
+      <div class="event-container">
       </div>
-    </div>
-    <div class="row simulation-container" ng-show="!endTurn">
-      <div>
-        <a ng-click="simulate.onNext()" class="btn btn-success" ng-class="{disabled: !simulate.isNextReady}">{{simulate.simulateText}}</a>
+      <div class="activity-sim row">
+        <div class="col-xs-12">
+          Somehow show the people here
+        </div>
       </div>
-      <div ng-show="simulate.activeAct">
-        {{simulate.activeAct.name}} @ {{simulate.activeAct.location.name}} {{hoursElapsed+8 | itinerarytime}}
-        <activity-sim activity="simulate.activeAct" on-next-ready="simulate.onNextReady" player="currentPlayer" ai="ai" issues="issues"></activity-sim>
-      </div>
-    </div>
-    <div class="row simulation-container" ng-show="endTurn">
-      <div>
-        <a class="btn btn-success" ng-click="simulate.onEndTurn()">{{simulate.simulateText}}</a>
-      </div>
-      <summary-sim summaries="simulate.summaries" ai-summaries="simulate.aiSummaries" total-contribution="totalContribution" total-cost="totalCost"></summary-sim>
     </div>
   </div>
 </div>
@@ -119,7 +108,7 @@
 <div class="bottom container">
   <timeline staffers="human.staff" timenow="hoursElapsed" human="human" hours="hours"></timeline>
   <div class="content">
-    <a ng-show="human.activity" class="btn btn-success" ng-click="onNext()">Resolve Action</a>
+    <a ng-show="human.activity" class="btn btn-success" ng-click="onResolve()">Resolve Action</a>
     <a ng-hide="human.activity" class="btn btn-success" ng-click="onRest()">Rest</a>
     <a class="btn btn-success" ng-click="onEndDay()">End Day</a>
   </div>

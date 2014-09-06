@@ -439,9 +439,11 @@ angular.module('partyanimalsDraftApp')
       return false;
     }
 
-    $scope.onNext = function(){
-      $scope.hoursElapsed += $scope.human.activity.details.hours;
-      shouldNextDay();
+    $scope.onResolve = function(){
+      //show dialog or sortie
+      $scope.onShowOverlay('RESOLVE');
+      // $scope.hoursElapsed += $scope.human.activity.details.hours;
+      // shouldNextDay();
     };
 
     $scope.onRest = function(){
