@@ -1,27 +1,27 @@
 <div class="activity-sim">
-  <div ng-switch="activity.type">
+  <div ng-switch="actor.activity.type">
     <div ng-switch-when="MOVE">
-      <move-ui activity="activity"></move-ui>
+      <move-ui activity="actor.activity"></move-ui>
     </div>
     <div ng-switch-when="TALK">
       <!-- Show talk directive here -->
-      <talk-ui activity="activity"></sortie-ui>
+      <talk-ui activity="actor.activity"></sortie-ui>
     </div>
     <div ng-switch-when="SORTIE">
       <!-- Show sortie directive here -->
-      <sortie-ui activity="activity"></sortie-ui>
+      <sortie-ui activity="actor.activity"></sortie-ui>
     </div>
     <div ng-switch-when="STAT">
       <!-- Show stat directive here -->
-      <stat-ui activity="activity"></stat-ui>
+      <stat-ui activity="actor.activity"></stat-ui>
     </div>
     <div ng-switch-when="REPUTATION">
       <!-- Show reputation directive here -->
-      <reputation-ui activity="activity"></reputation-ui>
+      <reputation-ui activity="actor.activity"></reputation-ui>
     </div>
     <div ng-switch-when="SPECIAL">
       <!-- Show special directive here -->
-      <special-ui activity="activity"></special-ui>
+      <special-ui activity="actor.activity"></special-ui>
     </div>
     <div ng-switch-default>
       This is the default action {{activity.name}}

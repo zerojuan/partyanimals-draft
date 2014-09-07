@@ -451,4 +451,11 @@ angular.module('partyanimalsDraftApp')
         $scope.hoursElapsed += 1;
       }
     };
+
+    $scope.onNextReady = function(){
+      console.log('Next is ready');
+      $scope.hoursElapsed += $scope.human.activity.details.hours;
+      shouldNextDay();
+      $scope.onHideOverlay();
+    };
   });
