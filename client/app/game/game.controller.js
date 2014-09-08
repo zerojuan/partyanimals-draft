@@ -267,6 +267,13 @@ angular.module('partyanimalsDraftApp')
         $scope.human.staff.push($scope.staffers[1]);
         $scope.human.staff.push($scope.staffers[2]);
 
+
+        Aisim.ai = $scope.ai;
+        $scope.ai.staff = [];
+        $scope.ai.staff.push($scope.staffers[3]);
+        $scope.ai.staff.push($scope.staffers[4]);
+        $scope.ai.staff.push($scope.staffers[5]);
+
         //hide welcome paper for now
         $scope.onHideOverlay();
 
@@ -307,7 +314,7 @@ angular.module('partyanimalsDraftApp')
       if(staff.id !== null && staff.id !== undefined ){
 
         var realStaff = GameState.findStaff(staff.id, $scope.human.staff);
-        index = _.findIndex(district.actors, function(actor){
+        index = _.findIndex(district.humanActors, function(actor){
           return actor.id === staff.id;
         });
 
@@ -315,7 +322,7 @@ angular.module('partyanimalsDraftApp')
         realStaff.activity = null;
 
       }else{
-        index = _.findIndex(district.actors, function(actor){
+        index = _.findIndex(district.humanActors, function(actor){
           return actor.name === $scope.human.name;
         });
 
@@ -323,7 +330,7 @@ angular.module('partyanimalsDraftApp')
         $scope.human.activity = null;
         $scope.human.currentLocation = district;
       }
-      district.actors.splice(index,1);
+      district.humanActors.splice(index,1);
       $rootScope.$broadcast('GAME:resolve');
     };
 
@@ -419,10 +426,26 @@ angular.module('partyanimalsDraftApp')
       confdActivity.details.startTime = $scope.hoursElapsed;
 
       //set district to contain actor
-      if(!$scope.selectedDistrict.actors){
-        $scope.selectedDistrict.actors = [];
+      if(!$scope.selectedDistrict.humanActors){
+        $scope.selectedDistrict.humanActors = [];
       }
-      $scope.selectedDistrict.actors.push(staff);
+      $scope.selectedDistrict.humanActors.push(staff);
+      console.log("Human Actors: ", $scope.selectedDistrict.humanActors, staff);
+      //count how many players are here
+      for(var i = 0, position = 0; i < $scope.selectedDistrict.humanActors.length; i++){
+        console.log('Iterating...');
+        if($scope.selectedDistrict.humanActors[i].id !== undefined){
+          if(staff === $scope.selectedDistrict.humanActors[i]){
+            console.log('Found!');
+            staff.position = position;
+          }else{
+            console.log('Not found!');
+          }
+          position++;
+        }else{
+          console.log('Not found actor');
+        }
+      }
       staff.districtName = $scope.selectedDistrict.name;
 
 

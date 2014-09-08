@@ -38,11 +38,11 @@
         </tab>
         <tab>
           <tab-heading>
-            Activity <span class="badge" ng-show="selectedDistrict.actors.length > 0">{{selectedDistrict.actors.length}}</span>
+            Activity <span class="badge" ng-show="selectedDistrict.humanActors.length > 0">{{selectedDistrict.humanActors.length}}</span>
           </tab-heading>
-          <span ng-show="!selectedDistrict.actors.length > 0">None</span>
+          <span ng-show="!selectedDistrict.humanActors.length > 0">None</span>
           <ul class="list list-unstyled">
-            <li class="row" ng-repeat="actor in selectedDistrict.actors">
+            <li class="row" ng-repeat="actor in selectedDistrict.humanActors">
               <div class="col-xs-12">
                 <progressbar value="actor.activity.details.hoursPassed" max="actor.activity.details.hours" >
                   <span style="color:black; white-space:nowrap;">{{actor.activity.details.hoursPassed}} / {{actor.activity.details.hours}}</span>

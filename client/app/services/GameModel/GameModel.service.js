@@ -12,6 +12,15 @@ angular.module('partyanimalsDraftApp')
       var redNexus = {x:70, y:50};
       var grayNexus = {x:50, y:70};
 
+      this.topPositions = [];
+      this.bottomPositions = [];
+
+      var i = 0;
+      for(i=0; i<3; i++){
+        this.topPositions.push({x: i*33-30, y: -35});
+        this.bottomPositions.push({x: i*33+30, y: 35});
+      }
+
       this.name = key;
       sprite.inputEnabled = true;
       sprite.anchor.set(0.5);
@@ -117,5 +126,5 @@ angular.module('partyanimalsDraftApp')
         });
       };
     };
-    
+
   });

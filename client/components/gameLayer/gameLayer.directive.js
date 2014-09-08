@@ -141,7 +141,12 @@ angular.module('partyanimalsDraftApp')
             staff.alpha = 1;
             staff.x = from.base.x;
             staff.y = from.base.y;
-            var tween = game.add.tween(staff).to({x: to.base.x, y: to.base.y}, 750, Phaser.Easing.Sinusoidal.Out, true);
+            var direction = {x:to.base.x, y:to.base.y};
+            if(!resolve){
+              console.log('Top Positions: ', to.topPositions, 'Position: ', staffFromScope.position);
+              direction = {x:to.topPositions[staffFromScope.position].x+to.base.x, y: to.base.y+to.topPositions[staffFromScope.position].y};
+            }
+            var tween = game.add.tween(staff).to({x: direction.x, y: direction.y}, 750, Phaser.Easing.Sinusoidal.Out, true);
             if(resolve){
               tween.onComplete.add(function(){
                 console.log('Staff to alpha');
