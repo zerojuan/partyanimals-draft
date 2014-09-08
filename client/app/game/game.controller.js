@@ -383,8 +383,16 @@ angular.module('partyanimalsDraftApp')
         if(isValid){
           nActivity.district = {
             name: $scope.selectedDistrict.name,
-            id: $scope.selectedDistrict.id
+            id: $scope.selectedDistrict.id,
+            kapitan: $scope.selectedDistrict.kapitan,
+            humanStance: $scope.selectedDistrict.humanStance,
+            aiStance: $scope.selectedDistrict.aiStance,
+            goldCostModifier: $scope.selectedDistrict.goldCostModifier,
+            timeCostModifier: $scope.selectedDistrict.timeCostModifier,
+            kapitanCostModifier: $scope.selectedDistrict.kapitanCostModifier,
+            issues: $scope.selectedDistrict.issues
           };
+
           nActivity.travelTime = Ruleset.calculateTravelCost($scope.currentLocation, $scope.selectedDistrict);
           activities.push(nActivity);
         }
@@ -440,10 +448,7 @@ angular.module('partyanimalsDraftApp')
     }
 
     $scope.onResolve = function(){
-      //show dialog or sortie
       $scope.onShowOverlay('RESOLVE');
-      // $scope.hoursElapsed += $scope.human.activity.details.hours;
-      // shouldNextDay();
     };
 
     $scope.onRest = function(){
@@ -452,8 +457,8 @@ angular.module('partyanimalsDraftApp')
       }
     };
 
-    $scope.onNextReady = function(){
-      console.log('Next is ready');
+    $scope.onNextReady = function(action){
+      console.log('Next is ready', action);
       $scope.hoursElapsed += $scope.human.activity.details.hours;
       shouldNextDay();
       $scope.onHideOverlay();

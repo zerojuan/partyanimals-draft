@@ -338,9 +338,9 @@ angular.module('partyanimalsDraftApp')
     };
 
     that.getStatActivityResult = function(activity){
-      console.log('ISSUE STATS: ', that.aiStats, activity.location.aiStance);
+      console.log('ISSUE STATS: ', that.aiStats, activity.district.aiStance);
       var issueIndex = _.findIndex(that.aiStats.issueStats, function(issue, i){
-        if(activity.location.aiStance[i] < issue.level){
+        if(activity.district.aiStance[i] < issue.level){
           return true;
         }
         return false;
@@ -350,7 +350,7 @@ angular.module('partyanimalsDraftApp')
           name: activity.name,
           type: 'STAT',
           success: false,
-          district: activity.location,
+          district: activity.district,
           cost: {
             gold: 0
           }
@@ -365,7 +365,7 @@ angular.module('partyanimalsDraftApp')
         cost: {
           gold: 0
         },
-        district: activity.location
+        district: activity.district
       };
     };
 
@@ -377,17 +377,17 @@ angular.module('partyanimalsDraftApp')
         },
         type: 'TALK',
         value: 30,
-        district: activity.location
+        district: activity.district
       };
     };
 
     that.getReputationActivityResult = function(activity, isAI){
       var attributeParser = $filter('attributeparser')(activity.effect.attr);
-      var PKRm = $filter('feelingstorollmodifier')(activity.location.kapitan.humanRelations);
-      var OKRm = $filter('feelingstorollmodifier')(activity.location.kapitan.aiRelations);
+      var PKRm = $filter('feelingstorollmodifier')(activity.district.kapitan.humanRelations);
+      var OKRm = $filter('feelingstorollmodifier')(activity.district.kapitan.aiRelations);
       if(isAI){
-        PKRm = $filter('feelingstorollmodifier')(activity.location.kapitan.aiRelations);
-        OKRm = $filter('feelingstorollmodifier')(activity.location.kapitan.humanRelations);
+        PKRm = $filter('feelingstorollmodifier')(activity.district.kapitan.aiRelations);
+        OKRm = $filter('feelingstorollmodifier')(activity.district.kapitan.humanRelations);
       }
       var dataForCheck = {
         random: Math.random() * 100,
@@ -416,7 +416,7 @@ angular.module('partyanimalsDraftApp')
         value: resultValue,
         success: success,
         type: activity.type,
-        district: activity.location,
+        district: activity.district,
         name: activity.name,
         cost: activity.cost,
         isVs: attributeParser.isVs,

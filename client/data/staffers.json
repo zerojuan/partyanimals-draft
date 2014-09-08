@@ -24,16 +24,72 @@
   "traitsId": ["doctor", "finance"]
 },{
   "id": 3,
-  "name": "Atty. Dog",
-  "image": "doglas.png",
+  "name": "Ka Ambing",
+  "image": "ka_ambing_farmer.jpg",
   "locked": false,
   "loyalty": 50,
   "salary": 200,
   "traitsId": ["lawyer","finance", "organizer"]
 },{
   "id": 4,
-  "name": "Mr. Turtle",
-  "image": "tortuga.png",
+  "name": "Owlfonso",
+  "image": "owlfonso_accountant.jpg",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 200,
+  "traitsId": ["organizer", "finance", "pr"]
+},{
+  "id": 5,
+  "name": "Pelicarias",
+  "image": "pelicarias_fisherman.jpg",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 200,
+  "traitsId": ["organizer", "finance", "pr"]
+},{
+  "id": 6,
+  "name": "Pr. Alfredog",
+  "image": "alfredog_priest.jpg",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 200,
+  "traitsId": ["organizer", "finance", "pr"]
+},{
+  "id": 7,
+  "name": "Eleferdinand",
+  "image": "eleferdinand_fireman.jpg",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 200,
+  "traitsId": ["organizer", "finance", "pr"]
+},{
+  "id": 8,
+  "name": "Capt. Hippopolita",
+  "image": "hippopolita_police.jpg",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 200,
+  "traitsId": ["organizer", "finance", "pr"]
+},{
+  "id": 9,
+  "name": "Penguinaldo",
+  "image": "penguinaldo_singer.jpg",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 200,
+  "traitsId": ["organizer", "finance", "pr"]
+},{
+  "id": 10,
+  "name": "Penguino",
+  "image": "penguino_singer.jpg",
+  "locked": false,
+  "loyalty": 50,
+  "salary": 200,
+  "traitsId": ["organizer", "finance", "pr"]
+},{
+  "id": 11,
+  "name": "Velascrow",
+  "image": "velascrow_reporter.jpg",
   "locked": false,
   "loyalty": 50,
   "salary": 200,

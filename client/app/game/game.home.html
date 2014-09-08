@@ -89,16 +89,13 @@
       <div class="event-container">
       </div>
       <div class="activity-sim row">
-        <activity-sim actor="human" on-next-ready="onNextReady"></activity-sim>
+        <activity-sim actor="human" issues="issues" ai="ai" on-next-ready="onNextReady"></activity-sim>
       </div>
     </div>
   </div>
 </div>
 <cards-view cards="cards"></cards-view>
 <div ng-include="'components/alert/alert.html'"></div>
-<!-- <div class="row col-xs-5">
-  <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelectedDistrict" show-reputation="true"></province-view>
-</div> -->
 <game-layer select-district="selectDistrict" selected-district="selectedDistrict" human="human" ai="ai" staffers="staffers">
 </game-layer>
 <district-details ng-show="selectedDistrict" on-activity-selected="onActivitySelected" selected-district="selectedDistrict" human="human" ai="ai" close-handler="closeDistrictDetails">

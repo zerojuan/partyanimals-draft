@@ -21,34 +21,34 @@ angular.module('partyanimalsDraftApp')
 
         scope.$watch('activity', function(){
           if(scope.activity){
-            //loop through activity.location's human stance
+            //loop through activity.district's human stance
             var player = simCtrl.getPlayer();
 
             var totalReputation = 0;
             var maxIndex, maxValue, minIndex, minValue;
             maxIndex = maxValue = minIndex = minValue = 0;
             scope.results = [];
-            scope.activity.location.humanStance.forEach(function(val, i){
+            scope.activity.district.humanStance.forEach(function(val, i){
               var dataForCheck = {
                 random: Math.random() * 100,
-                PKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.humanRelations),
+                PKRm: $filter('feelingstorollmodifier')(scope.activity.district.kapitan.humanRelations),
                 em: 10,
-                OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations),
-                GCMod: scope.activity.location.goldCostModifier,
-                TCMod: scope.activity.location.timeCostModifier,
-                KMod: scope.activity.location.kapitanModifier,
-                IDM: scope.activity.location.issues[i],
+                OKRm: $filter('feelingstorollmodifier')(scope.activity.district.kapitan.aiRelations),
+                GCMod: scope.activity.district.goldCostModifier,
+                TCMod: scope.activity.district.timeCostModifier,
+                KMod: scope.activity.district.kapitanModifier,
+                IDM: scope.activity.district.issues[i],
                 IDS: val
               };
               var dataForActionDifficulty = {
                 BD: scope.activity.difficulty,
-                IDM: scope.activity.location.issues[i],
+                IDM: scope.activity.district.issues[i],
                 IDS: val,
                 em: 10,
-                OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations),
-                GCMod: scope.activity.location.goldCostModifier,
-                TCMod: scope.activity.location.timeCostModifier,
-                KMod: scope.activity.location.kapitanModifier
+                OKRm: $filter('feelingstorollmodifier')(scope.activity.district.kapitan.aiRelations),
+                GCMod: scope.activity.district.goldCostModifier,
+                TCMod: scope.activity.district.timeCostModifier,
+                KMod: scope.activity.district.kapitanModifier
               };
 
               var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);
@@ -96,7 +96,7 @@ angular.module('partyanimalsDraftApp')
               cost: scope.activity.cost,
               success: scope.success,
               type: 'SORTIE',
-              district: scope.activity.location,
+              district: scope.activity.district,
               name: scope.activity.name,
               stats: scope.stats
             };

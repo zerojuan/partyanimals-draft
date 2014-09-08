@@ -26,7 +26,7 @@ angular.module('partyanimalsDraftApp')
         };
 
         this.getPlayer = function(){
-          return $scope.player;
+          return $scope.actor;
         };
 
         this.getAI = function(){

@@ -23,13 +23,13 @@ angular.module('partyanimalsDraftApp')
             scope.done = false;
             result = GameState.getReputationActivityResult(scope.activity);
             scope.success = result.success;
-            scope.districtName = scope.activity.location.name.split(' ').join('').toLowerCase();
+            scope.districtName = scope.activity.district.name.split(' ').join('').toLowerCase();
             if(result.success){
               scope.doneMessage = scope.activity.text.success[0];
             }else{
               scope.doneMessage = scope.activity.text.fail[0];
             }
-            scope.onDone();
+            // scope.onDone();
           }
         });
       }
