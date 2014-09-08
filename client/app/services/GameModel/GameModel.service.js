@@ -22,6 +22,7 @@ angular.module('partyanimalsDraftApp')
 
       this.base = district;
       this.sprite = sprite;
+      this.border = null;
 
       //text
       var style = { font: '12px Arial', fill: 'black', align: 'center' };
@@ -31,11 +32,20 @@ angular.module('partyanimalsDraftApp')
 
       this.selected = function(){
         peoples.callAll('play', null, 'run');
+        if(that.border.x <= 0 && that.border.y <= 0){
+          that.border.alpha = 1;
+          that.border.x = that.base.x;
+          that.border.y = that.base.y;
+        }else{
+          game.add.tween(that.border).to( { x: that.base.x, y: that.base.y }, 250, Phaser.Easing.Sinusoidal.Out, true);
+        }
+
         that.updateReputation();
       };
 
       this.unSelected = function(){
         peoples.callAll('play', null, 'stay');
+        sprite.alpha = 1;
       };
 
       var scale = 50;
@@ -47,14 +57,14 @@ angular.module('partyanimalsDraftApp')
           peoples.x = this.base.x;
           peoples.y = this.base.y;
           for (i = 0; i < total; i++){
-            sprite = peoples.create(5 * i - 50, 0, 'people');
-            sprite.scale.x = 0.60;
-            sprite.scale.y = 0.60;
-            sprite.dest = {
+            var pSprite = peoples.create(5 * i - 50, 0, 'people');
+            pSprite.scale.x = 0.60;
+            pSprite.scale.y = 0.60;
+            pSprite.dest = {
               x: 20,
               y: 20
             };
-            sprite.tint = 0xffffff;
+            pSprite.tint = 0xffffff;
           }
 
           peoples.callAll('animations.add', 'animations', 'run', [1,2,3], 10, true);

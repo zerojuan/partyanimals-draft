@@ -39,6 +39,7 @@ angular.module('partyanimalsDraftApp')
           game.load.image('mousey', './assets/images/avatars/mouseyMale.jpg');
           game.load.image('croc', './assets/images/avatars/crocopio.jpg');
           game.load.image('bg', './assets/images/districts/normal2.png');
+          game.load.image('border', './assets/images/ui/border.png');
         }
 
         function create() {
@@ -51,6 +52,13 @@ angular.module('partyanimalsDraftApp')
           chipsGroup = game.add.group();
           peoplesGroup = game.add.group();
 
+          var borderSprite = new Phaser.Sprite(game, 0, 0, 'border');
+          borderSprite.anchor.set(0.5);
+          borderSprite.alpha = 0;
+          borderSprite.x = -100;
+          borderSprite.y = -100;
+          borderSprite.tint = 0x0000ff;
+          game.add.tween(borderSprite).to( {alpha: 0.5}, 500, Phaser.Easing.Linear.Out, true).to({alpha: 1}, 500, Phaser.Easing.Linear.Out, true).loop();
 
           _.forEach(districtsImages, function(val,i){
             var district = new GameModel.District(game, districtGroup, peoplesGroup, val, onDistrictClicked, this);
@@ -58,6 +66,7 @@ angular.module('partyanimalsDraftApp')
             var y = Math.floor(i/2);
             district.base.x = x*120 + centerX - 60;
             district.base.y = y*120 + 120;
+            district.border = borderSprite;
             districtGroup.add(district.base);
             districtArray.push(district);
           });
@@ -71,6 +80,7 @@ angular.module('partyanimalsDraftApp')
           crocSprite.scale.x = crocSprite.scale.y = 0.5;
           chipsGroup.add(crocSprite);
           chipsGroup.add(mouseySprite);
+          chipsGroup.add(borderSprite);
 
           $rootScope.$broadcast('CANVAS:ready');
         }
