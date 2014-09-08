@@ -15,6 +15,7 @@ angular.module('partyanimalsDraftApp')
       },
       link: function (scope) {
         var districtGroup;
+        var uiGroup;
         var chipsGroup;
         var staffersGroup;
         var peoplesGroup;
@@ -48,6 +49,7 @@ angular.module('partyanimalsDraftApp')
           game.add.tileSprite(0,0,1280, 720, 'bg');
 
           districtGroup = game.add.group();
+          uiGroup = game.add.group();
           staffersGroup = game.add.group();
           chipsGroup = game.add.group();
           peoplesGroup = game.add.group();
@@ -59,6 +61,7 @@ angular.module('partyanimalsDraftApp')
           borderSprite.y = -100;
           borderSprite.tint = 0x0000ff;
           game.add.tween(borderSprite).to( {alpha: 0.5}, 500, Phaser.Easing.Linear.Out, true).to({alpha: 1}, 500, Phaser.Easing.Linear.Out, true).loop();
+          uiGroup.add(borderSprite);
 
           _.forEach(districtsImages, function(val,i){
             var district = new GameModel.District(game, districtGroup, peoplesGroup, val, onDistrictClicked, this);
@@ -80,7 +83,6 @@ angular.module('partyanimalsDraftApp')
           crocSprite.scale.x = crocSprite.scale.y = 0.5;
           chipsGroup.add(crocSprite);
           chipsGroup.add(mouseySprite);
-          chipsGroup.add(borderSprite);
 
           $rootScope.$broadcast('CANVAS:ready');
         }
@@ -137,19 +139,16 @@ angular.module('partyanimalsDraftApp')
           var from = _findDistrict(Utils.combineDistrictName(scope.human.currentLocation.name));
           var to;
           var localUpdateStaff = function(staff){
-            console.log('Updating staff...', staff);
             staff.alpha = 1;
             staff.x = from.base.x;
             staff.y = from.base.y;
             var direction = {x:to.base.x, y:to.base.y};
             if(!resolve){
-              console.log('Top Positions: ', to.topPositions, 'Position: ', staffFromScope.position);
               direction = {x:to.topPositions[staffFromScope.position].x+to.base.x, y: to.base.y+to.topPositions[staffFromScope.position].y};
             }
             var tween = game.add.tween(staff).to({x: direction.x, y: direction.y}, 750, Phaser.Easing.Sinusoidal.Out, true);
             if(resolve){
               tween.onComplete.add(function(){
-                console.log('Staff to alpha');
                 staff.alpha = 0;
               });
             }
