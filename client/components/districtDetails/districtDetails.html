@@ -38,9 +38,9 @@
         </tab>
         <tab>
           <tab-heading>
-            Activity <span class="badge" ng-show="selectedDistrict.humanActors.length > 0">{{selectedDistrict.humanActors.length}}</span>
+            Activity <span class="badge" ng-show="selectedDistrict.humanActors.length + selectedDistrict.aiActors.length > 0">{{selectedDistrict.humanActors.length + selectedDistrict.aiActors.length}}</span>
           </tab-heading>
-          <span ng-show="!selectedDistrict.humanActors.length > 0">None</span>
+          <span ng-show="!(selectedDistrict.humanActors.length + selectedDistrict.aiActors.length > 0)">None</span>
           <ul class="list list-unstyled">
             <li class="row" ng-repeat="actor in selectedDistrict.humanActors">
               <div class="col-xs-12">
@@ -53,6 +53,18 @@
               </div>
               <div class="col-xs-4">
                 {{actor.activity.name}}
+              </div>
+            </li>
+            <li class="row" ng-repeat="actor in selectedDistrict.aiActors">
+              <div class="col-xs-12">
+                <progressbar value="actor.activity.details.hoursPassed" max="actor.activity.details.hours">
+                </progressbar>
+              </div>
+              <div class="col-xs-4">
+                {{actor.name}}
+              </div>
+              <div class="col-xs-4">
+                ??? <span class="semi-hidden">{{actor.activity.name}}</span>
               </div>
             </li>
           </ul>

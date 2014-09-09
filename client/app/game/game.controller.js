@@ -154,6 +154,8 @@ angular.module('partyanimalsDraftApp')
             district.aiStance = [0,0,0,0,0];
             district.humanReputations = [0];
             district.aiReputations = [0];
+            district.humanActors = [];
+            district.aiActors = [];
             //drip reputation to neighbors
             if(district.id === $scope.human.hq.id){
               district.isHQ = true;
@@ -332,10 +334,15 @@ angular.module('partyanimalsDraftApp')
       if(actor.activity.type === 'REPUTATION'){
 
         var district = GameState.findDistrict(actor.activity.district.id, $scope.districts);
+        var reputation;
         if(isHuman){
-          district.humanReputation+=30;
+          reputation = GameState.capReputation(district.humanReputation, district.aiReputation, 30);
+          district.humanReputation = reputation.a;
+          district.aiReputation = reputation.b;
         }else{
-          district.aiReputation+=30;
+          reputation = GameState.capReputation(district.aiReputation, district.humanReputation, 30);
+          district.aiReputation = reputation.a;
+          district.humanReputation = reputation.b;
         }
 
         GameState.districts = $scope.districts;

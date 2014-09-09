@@ -474,6 +474,11 @@ angular.module('partyanimalsDraftApp')
       return newFeelings;
     };
 
+    /**
+     a: the reputation that will change
+     b: the other candidate's reputation
+     add: how much change
+    **/
     that.capReputation = function(a, b, add){
       var diff = 100 - (a+ add + b);
       if(diff < 0){
