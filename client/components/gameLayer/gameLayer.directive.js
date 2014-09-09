@@ -140,10 +140,10 @@ angular.module('partyanimalsDraftApp')
           var to;
           var localUpdateStaff = function(staff){
             staff.alpha = 1;
-            staff.x = from.base.x;
-            staff.y = from.base.y;
             var direction = {x:to.base.x, y:to.base.y};
             if(!resolve){
+              staff.x = from.base.x;
+              staff.y = from.base.y;
               direction = {x:to.topPositions[staffFromScope.position].x+to.base.x, y: to.base.y+to.topPositions[staffFromScope.position].y};
             }
             var tween = game.add.tween(staff).to({x: direction.x, y: direction.y}, 750, Phaser.Easing.Sinusoidal.Out, true);

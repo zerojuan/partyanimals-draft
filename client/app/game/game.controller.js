@@ -264,18 +264,27 @@ angular.module('partyanimalsDraftApp')
 
         $scope.human.staff = [];
         $scope.human.staff.push($scope.staffers[0]);
+        $scope.staffers[0].team = 'HUMAN';
         $scope.human.staff.push($scope.staffers[1]);
+        $scope.staffers[1].team = 'HUMAN';
         $scope.human.staff.push($scope.staffers[2]);
+        $scope.staffers[2].team = 'HUMAN';
 
 
         Aisim.ai = $scope.ai;
         $scope.ai.staff = [];
         $scope.ai.staff.push($scope.staffers[3]);
+        $scope.staffers[3].team = 'AI';
         $scope.ai.staff.push($scope.staffers[4]);
+        $scope.staffers[4].team = 'AI';
         $scope.ai.staff.push($scope.staffers[5]);
+        $scope.staffers[5].team = 'AI';
 
         //hide welcome paper for now
         $scope.onHideOverlay();
+
+        //set AI movement
+
 
         $rootScope.$broadcast('GAME:start');
       }
@@ -297,11 +306,10 @@ angular.module('partyanimalsDraftApp')
         district.humanReputation+=30;
         GameState.districts = $scope.districts;
       }
+
       if(isCandidate){
-        console.log('Candidate Result! Dispatch');
         $rootScope.$broadcast('GAME:ACTION:candidate_result', actor);
       }else{
-        console.log('Staffer Result! Dispatch');
         $rootScope.$broadcast('GAME:ACTION:result', actor);
       }
 
@@ -410,50 +418,50 @@ angular.module('partyanimalsDraftApp')
       $scope.$apply();
     };
 
+    var assignActivity = function(staff, isCandidate, district, staffers){
+      //set district to contain actor
+      staffers.push(staff);
+
+      //count how many staffers are here
+      for(var i = 0, position = 0; i < staffers.length; i++){
+        if(staffers[i].id !== undefined){
+          if(staff === staffers[i]){
+            staff.position = position;
+          }
+          position++;
+        }
+      }
+      staff.districtName = $scope.selectedDistrict.name;
+
+      //handle staff and candidate assignment differently
+      if(isCandidate){
+        $rootScope.$broadcast('GAME:assign_candidate', staff);
+      }else{
+        $rootScope.$broadcast('GAME:assign', staff);
+      }
+    };
+
     $scope.onActivityConfigDone = function(confdActivity){
       $scope.onHideOverlay();
       //set actor to task
       var staff = GameState.findStaff(confdActivity.details.actor.id, $scope.human.staff);
       var isCandidate = false;
       if(staff){
+        //this is your staff
         staff.activity = confdActivity;
       }else{
-        //this is you
+        //this is you, the candidate
         $scope.human.activity = confdActivity;
         staff = $scope.human;
         isCandidate = true;
       }
       confdActivity.details.startTime = $scope.hoursElapsed;
 
-      //set district to contain actor
       if(!$scope.selectedDistrict.humanActors){
         $scope.selectedDistrict.humanActors = [];
       }
-      $scope.selectedDistrict.humanActors.push(staff);
-      console.log("Human Actors: ", $scope.selectedDistrict.humanActors, staff);
-      //count how many players are here
-      for(var i = 0, position = 0; i < $scope.selectedDistrict.humanActors.length; i++){
-        console.log('Iterating...');
-        if($scope.selectedDistrict.humanActors[i].id !== undefined){
-          if(staff === $scope.selectedDistrict.humanActors[i]){
-            console.log('Found!');
-            staff.position = position;
-          }else{
-            console.log('Not found!');
-          }
-          position++;
-        }else{
-          console.log('Not found actor');
-        }
-      }
-      staff.districtName = $scope.selectedDistrict.name;
 
-
-      if(isCandidate){
-        $rootScope.$broadcast('GAME:assign_candidate', staff);
-      }else{
-        $rootScope.$broadcast('GAME:assign', staff);
-      }
+      assignActivity(staff, isCandidate, $scope.selectedDistrict, $scope.selectedDistrict.humanActors);
 
     };
 
