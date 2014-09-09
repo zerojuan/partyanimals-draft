@@ -26,12 +26,14 @@ angular.module('partyanimalsDraftApp')
 
     $scope.$watch('kapitans', function(){
       //divide the kapitans into two
-      $scope.localKapitans = $scope.kapitans.filter(function(val){
-        return val.type === 'KAPITAN';
-      });
+      if($scope.kapitans){
+        $scope.localKapitans = $scope.kapitans.filter(function(val){
+          return val.type === 'KAPITAN';
+        });
 
-      $scope.specialists = $scope.kapitans.filter(function(val){
-        return val.type === 'SPECIALIST';
-      });
+        $scope.specialists = $scope.kapitans.filter(function(val){
+          return val.type === 'SPECIALIST';
+        });
+      }
     });
   });
