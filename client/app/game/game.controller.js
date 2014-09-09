@@ -535,8 +535,13 @@ angular.module('partyanimalsDraftApp')
 
     function shouldNextDay(){
       if($scope.hoursElapsed >= $scope.hours){
-        $scope.hoursElapsed = 0;
+        console.log('Next Day Happened!');
         $scope.turnsLeft--;
+        GameState.updateTurn($scope.turnsLeft);
+        GameState.updateDistrictReputationHistory($scope.districts);
+        $scope.totalReputations = GameState.getTotalReputation();
+        $scope.hoursElapsed = 0;
+
         return true;
       }
       return false;
