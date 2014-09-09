@@ -18,7 +18,7 @@ angular.module('partyanimalsDraftApp')
       var i = 0;
       for(i=0; i<3; i++){
         this.topPositions.push({x: i*33-30, y: -35});
-        this.bottomPositions.push({x: i*33+30, y: 35});
+        this.bottomPositions.push({x: i*33-30, y: 35});
       }
 
       this.name = key;

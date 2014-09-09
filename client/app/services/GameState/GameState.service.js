@@ -475,7 +475,7 @@ angular.module('partyanimalsDraftApp')
     };
 
     that.capReputation = function(a, b, add){
-      var diff = 100 - (a+add + b);
+      var diff = 100 - (a+ add + b);
       if(diff < 0){
           b += diff;
       }

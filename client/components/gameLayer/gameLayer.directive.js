@@ -120,7 +120,6 @@ angular.module('partyanimalsDraftApp')
               sprite = staffSprite;
             }
           });
-
           return sprite;
         }
 
@@ -135,16 +134,22 @@ angular.module('partyanimalsDraftApp')
           });
         }
 
-        function _updateStaff(staffFromScope, resolve){
-          var from = _findDistrict(Utils.combineDistrictName(scope.human.currentLocation.name));
+        function _updateStaff(staffFromScope, resolve, isHuman){
+          var player = scope.human;
+          if(!isHuman){
+            player = scope.ai;
+          }
+          var from = _findDistrict(Utils.combineDistrictName(player.currentLocation.name));
           var to;
+
           var localUpdateStaff = function(staff){
             staff.alpha = 1;
             var direction = {x:to.base.x, y:to.base.y};
             if(!resolve){
               staff.x = from.base.x;
               staff.y = from.base.y;
-              direction = {x:to.topPositions[staffFromScope.position].x+to.base.x, y: to.base.y+to.topPositions[staffFromScope.position].y};
+              var positions = isHuman ? to.topPositions : to.bottomPositions;
+              direction = {x:positions[staffFromScope.position].x+to.base.x, y: to.base.y+positions[staffFromScope.position].y};
             }
             var tween = game.add.tween(staff).to({x: direction.x, y: direction.y}, 750, Phaser.Easing.Sinusoidal.Out, true);
             if(resolve){
@@ -153,15 +158,15 @@ angular.module('partyanimalsDraftApp')
               });
             }
           };
+
           if(staffFromScope){
             var staffToUpdate = _findStaffer(staffFromScope.id);
             if(resolve){
               from = _findDistrict(Utils.combineDistrictName(staffFromScope.districtName));
-              to = _findDistrict(Utils.combineDistrictName(scope.human.currentLocation.name));
+              to = _findDistrict(Utils.combineDistrictName(player.currentLocation.name));
             }else{
               to = _findDistrict(Utils.combineDistrictName(staffFromScope.districtName));
             }
-            console.log('Is resolve?', resolve);
             localUpdateStaff(staffToUpdate);
           }else{
             _.forEach(scope.staffers, function(staff){
@@ -228,10 +233,19 @@ angular.module('partyanimalsDraftApp')
         });
 
         scope.$on('GAME:assign', function(event, staff){
-          _updateStaff(staff, false);
+          _updateStaff(staff, false, true);
+        });
+
+        scope.$on('GAME:assign_ai', function(event, staff){
+          console.log('AI Assignment: ', staff);
+          _updateStaff(staff, false, false);
         });
 
         scope.$on('GAME:assign_candidate', function(event, staff){
+
+        });
+
+        scope.$on('GAME:assign_candidate_ai', function(event, staff){
 
         });
 
@@ -241,7 +255,12 @@ angular.module('partyanimalsDraftApp')
 
         scope.$on('GAME:ACTION:result', function(evt, actor){
           console.log('Actor Resolving: ', actor);
-          _updateStaff(actor, true);
+          _updateStaff(actor, true, true);
+          _updateDistrictDetails(actor.activity.district);
+        });
+
+        scope.$on('GAME:ACTION:result_ai', function(evt, actor){
+          _updateStaff(actor, true, false);
           _updateDistrictDetails(actor.activity.district);
         });
 
