@@ -104,7 +104,9 @@ angular.module('partyanimalsDraftApp')
         }
 
         function update() {
-
+          _.forEach(districtArray, function(val){
+            val.update();
+          });
         }
 
         function _findDistrict(name){

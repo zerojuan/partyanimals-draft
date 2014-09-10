@@ -22,9 +22,16 @@ angular.module('partyanimalsDraftApp')
       }
 
       this.name = key;
+      this.isMouseOver = false;
       sprite.inputEnabled = true;
       sprite.anchor.set(0.5);
       sprite.events.onInputDown.add(handler, context);
+      sprite.events.onInputOver.add(function(){
+        that.isMouseOver = true;
+      }, this);
+      sprite.events.onInputOut.add(function(){
+        that.isMouseOver = false;
+      }, this);
       district.add(sprite);
 
       var peoples;
@@ -69,10 +76,9 @@ angular.module('partyanimalsDraftApp')
             var pSprite = peoples.create(5 * i - 50, 0, 'people');
             pSprite.scale.x = 0.60;
             pSprite.scale.y = 0.60;
-            pSprite.dest = {
-              x: 20,
-              y: 20
-            };
+            pSprite.dest = new Phaser.Point();
+            pSprite.dest.x = 20;
+            pSprite.dest.y = 20;
             pSprite.tint = 0xffffff;
           }
 
@@ -87,6 +93,33 @@ angular.module('partyanimalsDraftApp')
         //update reputation
 
 
+      };
+
+      this.update = function(){
+        // if(that.isMouseOver){
+          if(peoples && peoples.length > 0){
+            peoples.forEach(function(person){
+                if(Math.floor(person.x) === Math.floor(person.dest.x) && Math.floor(person.y) === Math.floor(person.dest.y)){
+                  //look for a new destination
+                  if(person.status === 'human'){
+                    person.dest.x = blueNexus.x + (Math.random() * 30 - 60);
+                    person.dest.y = blueNexus.y + (Math.random() * 30 - 60);
+                  }else if(person.status === 'undecided'){
+                    person.dest.x = grayNexus.x + (Math.random() * 30 - 60);
+                    person.dest.y = grayNexus.y + (Math.random() * 30 - 60);
+                  }else if(person.status === 'red'){
+                    person.dest.x = redNexus.x + (Math.random() * 30 - 60);
+                    person.dest.y = redNexus.y + (Math.random() * 30 - 60);
+                  }
+                }
+                var direction = Phaser.Point.subtract(person.dest, person.position);
+                direction = Phaser.Point.normalize(direction);
+                direction.setMagnitude(0.2);
+                person.x += direction.x;
+                person.y += direction.y;
+            });
+          }
+        // }
       };
 
       this.updateReputation = function(){
