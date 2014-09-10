@@ -31,9 +31,9 @@ angular.module('partyanimalsDraftApp')
       //examine the landscape and do a move
       var actions = [];
       //select district with lowest rating
-      var district = angular.copy(getRandomDistrict(districts));
-      _.forEach(that.ai.staff, function(staff){
 
+      _.forEach(that.ai.staff, function(staff){
+        var district = angular.copy(getRandomDistrict(districts));
         if(!staff.activity){
           //something should be up here
           var confdActivity = angular.copy(selectActivity(BRIBE, activities));
