@@ -38,7 +38,7 @@ angular.module('partyanimalsDraftApp')
             totalEffect.push(theEffects);
           }
           if(id > 0){
-            scope.dialog = GameState.getDialog(id, scope.event, scope.activity.location);
+            scope.dialog = GameState.getDialog(id, scope.event, scope.activity.district);
             return;
           }
           if(dialog.willRepeat){
@@ -58,7 +58,7 @@ angular.module('partyanimalsDraftApp')
           result.kapitan = character;
           scope.event = GameState.getEvent(character);
           result.name = scope.event.name.split(' ').join('');
-          scope.dialog = GameState.getDialog(0, scope.event, scope.activity.location);
+          scope.dialog = GameState.getDialog(0, scope.event, scope.activity.district);
         };
 
         scope.$watch('activity', function(){
@@ -67,7 +67,7 @@ angular.module('partyanimalsDraftApp')
           scope.talkState = 'choose';
           result = {
             type: 'TALK',
-            district: scope.activity.location,
+            district: scope.activity.district,
             cost: scope.activity.cost
           };
         });

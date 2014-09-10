@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .directive('actionConfigPanel', function () {
+  .directive('actionConfigPanel', function ($filter) {
     return {
       templateUrl: 'components/actionConfigPanel/actionConfigPanel.html',
       restrict: 'E',
@@ -19,6 +19,14 @@ angular.module('partyanimalsDraftApp')
           actor: null,
           cost: 0
         };
+
+        scope.showPossibleIndex = -1;
+        scope.statAvailable = 1;
+        scope.tempHumanStance = [];
+        scope.tempAIStance = [];
+
+        var attributeFormula;
+        var modifier = 1;
 
         function shouldDisable(staffer, activity){
           var isDisabled = false;
@@ -51,6 +59,15 @@ angular.module('partyanimalsDraftApp')
 
               scope.localStaffers.push(s);
             });
+
+            if(scope.selectedActivity.type === 'STAT'){
+              attributeFormula = $filter('attributeparser')(scope.selectedActivity.effect.attr);
+              var effectFormula = $filter('formulaparser')(scope.selectedActivity.effect.modifier);
+              modifier = effectFormula;
+
+              scope.tempHumanStance = angular.copy(scope.selectedActivity.district.humanStance);
+              scope.tempAIStance = angular.copy(scope.selectedActivity.district.aiStance);
+            }
           }
         });
 
@@ -71,7 +88,11 @@ angular.module('partyanimalsDraftApp')
 
         scope.isReady = function(){
           if(scope.details.actor){
-            return true;
+            if(scope.selectedActivity.type === 'STAT'){
+              return scope.selectedIndex >= 0;
+            }else{
+              return true;
+            }
           }
 
           return false;
@@ -82,7 +103,48 @@ angular.module('partyanimalsDraftApp')
           scope.details.hoursPassed = 0;
           scope.details.hours = activity.cost.hours;
           activity.details = scope.details;
+          if(scope.selectedActivity.type === 'STAT'){
+            activity.details.selectedIssue = scope.selectedIndex;
+            activity.details.isVs = attributeFormula.isVs;
+          }
           scope.done(activity);
+        };
+
+        scope.hidePossible = function(){
+          scope.showPossibleIndex = -1;
+        };
+
+        scope.showPossible = function(index){
+          scope.showPossibleIndex = index;
+        };
+
+        scope.shouldDisableStat = function(index, issue){
+          if(scope.selectedIndex >= 0){
+            return scope.selectedIndex !== index;
+          }
+          if(attributeFormula.isVs){
+            return scope.tempAIStance[index] === 0;
+          }else{
+            return scope.tempHumanStance[index] === issue.level;
+          }
+        };
+
+        scope.raiseStats = function(index){
+          if(scope.selectedIndex === index){
+            if(attributeFormula.isVs){
+              scope.tempAIStance[index] -= modifier;
+            }else{
+              scope.tempHumanStance[index] -= modifier;
+            }
+            scope.selectedIndex = -1;
+          }else{
+            if(attributeFormula.isVs){
+              scope.tempAIStance[index] += modifier;
+            }else{
+              scope.tempHumanStance[index] += modifier;
+            }
+            scope.selectedIndex = index;
+          }
         };
       }
     };

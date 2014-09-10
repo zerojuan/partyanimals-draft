@@ -26,7 +26,7 @@ angular.module('partyanimalsDraftApp')
           scope.issues = simCtrl.getIssues();
           scope.player = simCtrl.getPlayer();
           scope.ai = simCtrl.getAI();
-          scope.done = false;
+          scope.done = true;
           scope.success = false;
           attributeFormula = $filter('attributeparser')(scope.activity.effect.attr);
           var effectFormula = $filter('formulaparser')(scope.activity.effect.modifier);
@@ -38,15 +38,15 @@ angular.module('partyanimalsDraftApp')
         scope.getADandAC = function(index){
           var dataForCheck = {
             random: 50,
-            PKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.humanRelations),
+            PKRm: $filter('feelingstorollmodifier')(scope.activity.district.kapitan.humanRelations),
             em: 10
           };
           var dataForActionDifficulty = {
             BD: scope.activity.difficulty,
             em: 10,
-            IDS: scope.activity.location.humanStance[index],
-            IDM: scope.activity.location.issues[index],
-            OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
+            IDS: scope.activity.district.humanStance[index],
+            IDM: scope.activity.district.issues[index],
+            OKRm: $filter('feelingstorollmodifier')(scope.activity.district.kapitan.aiRelations)
           };
 
           var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);
@@ -56,8 +56,8 @@ angular.module('partyanimalsDraftApp')
             difficulty: $filter('difficultyparser')(actionCheck, actionDifficulty),
             PKRm: dataForCheck.PKRm,
             OKRm: dataForActionDifficulty.OKRm,
-            humanFeelings: $filter('feelingstowards')(scope.activity.location.kapitan.humanRelations),
-            aiFeelings: $filter('feelingstowards')(scope.activity.location.kapitan.aiRelations),
+            humanFeelings: $filter('feelingstowards')(scope.activity.district.kapitan.humanRelations),
+            aiFeelings: $filter('feelingstowards')(scope.activity.district.kapitan.aiRelations),
             IDS: dataForActionDifficulty.IDS,
             IDM: dataForActionDifficulty.IDM
           };
@@ -72,7 +72,7 @@ angular.module('partyanimalsDraftApp')
           }
           var result = {
             type: 'STAT',
-            district: scope.activity.location,
+            district: scope.activity.district,
             value: value,
             name: scope.activity.name,
             issueIndex: scope.selectedIndex,
@@ -90,15 +90,15 @@ angular.module('partyanimalsDraftApp')
           //success or fail?
           var dataForCheck = {
             random: Math.random() * 100,
-            PKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.humanRelations),
+            PKRm: $filter('feelingstorollmodifier')(scope.activity.district.kapitan.humanRelations),
             em: 10
           };
           var dataForActionDifficulty = {
             BD: scope.activity.difficulty,
             em: 10,
-            IDS: scope.activity.location.humanStance[scope.selectedIndex],
-            IDM: scope.activity.location.issues[scope.selectedIndex],
-            OKRm: $filter('feelingstorollmodifier')(scope.activity.location.kapitan.aiRelations)
+            IDS: scope.activity.district.humanStance[scope.selectedIndex],
+            IDM: scope.activity.district.issues[scope.selectedIndex],
+            OKRm: $filter('feelingstorollmodifier')(scope.activity.district.kapitan.aiRelations)
           };
 
           var actionCheck = $filter('formulaparser')(scope.activity.actionCheck, dataForCheck);
@@ -113,7 +113,7 @@ angular.module('partyanimalsDraftApp')
           }
           var parseVal = {
             issue: scope.player.issueStats[scope.selectedIndex].name,
-            district: scope.activity.location.name
+            district: scope.activity.district.name
           };
           var message = '';
           if(scope.success){
@@ -140,25 +140,25 @@ angular.module('partyanimalsDraftApp')
             return scope.selectedIndex !== index;
           }
           if(attributeFormula.isVs){
-            return scope.activity.location.aiStance[index] === 0;
+            return scope.activity.district.aiStance[index] === 0;
           }else{
-            return scope.activity.location.humanStance[index] === issue.level;
+            return scope.activity.district.humanStance[index] === issue.level;
           }
         };
 
         scope.raiseStats = function(index){
           if(scope.selectedIndex === index){
             if(attributeFormula.isVs){
-              scope.activity.location.aiStance[index] -= modifier;
+              scope.activity.district.aiStance[index] -= modifier;
             }else{
-              scope.activity.location.humanStance[index] -= modifier;
+              scope.activity.district.humanStance[index] -= modifier;
             }
             scope.selectedIndex = -1;
           }else{
             if(attributeFormula.isVs){
-              scope.activity.location.aiStance[index] += modifier;
+              scope.activity.district.aiStance[index] += modifier;
             }else{
-              scope.activity.location.humanStance[index] += modifier;
+              scope.activity.district.humanStance[index] += modifier;
             }
             scope.selectedIndex = index;
           }

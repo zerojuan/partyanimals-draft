@@ -187,8 +187,17 @@ angular.module('partyanimalsDraftApp')
           var humanChip = chipsGroup.getAt(1);
           humanChip.x = from.base.x;
           humanChip.y = from.base.y;
-          game.add.tween(humanChip).to({x:to.base.x, y:to.base.y}, 500, Phaser.Easing.Sinusoidal.Out, true);
+          game.add.tween(humanChip).to({x:to.base.x-15, y:to.base.y}, 500, Phaser.Easing.Sinusoidal.Out, true);
 
+        }
+
+        function _updateAICandidate(candidate){
+          var from = _findDistrict(Utils.combineDistrictName(scope.ai.currentLocation.name));
+          var to = _findDistrict(Utils.combineDistrictName(candidate.districtName));
+          var aiChip = chipsGroup.getAt(0);
+          aiChip.x = from.base.x;
+          aiChip.y = from.base.y;
+          game.add.tween(aiChip).to({x:to.base.x+15, y:to.base.y}, 500, Phaser.Easing.Sinusoidal.Out, true);
         }
 
         function _updateDistrictDetails(districtToUpdate){
@@ -205,10 +214,10 @@ angular.module('partyanimalsDraftApp')
               district.data = d;
 
               if(d.hasHuman){
-                game.add.tween(chipsGroup.getAt(1)).to( { x: district.base.x, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
+                game.add.tween(chipsGroup.getAt(1)).to( { x: district.base.x-15, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
               }
               if(d.hasAI){
-                game.add.tween(chipsGroup.getAt(0)).to( { x: district.base.x, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
+                game.add.tween(chipsGroup.getAt(0)).to( { x: district.base.x+15, y: district.base.y }, 500, Phaser.Easing.Sinusoidal.Out, true);
               }
 
               district.updateData();
@@ -267,6 +276,11 @@ angular.module('partyanimalsDraftApp')
         scope.$on('GAME:ACTION:candidate_result', function(evt, actor){
           console.log('Candidate Resolving:', actor);
           _updateCandidate(actor);
+        });
+
+        scope.$on('GAME:ACTION:candidate_result_ai', function(evt, actor){
+          console.log('AI Candidate Resolving:', actor);
+          _updateAICandidate(actor);
         });
 
       }

@@ -19,6 +19,35 @@
       {{selectedActivity.description}}
     </div>
   </div>
+  <div class="row" ng-show="selectedActivity.type==='STAT'">
+    <div class="label">
+      Target
+    </div>
+    <div class="col-xs-9">
+      <div>
+        <table class="table table-striped">
+          <tr>
+            <th>Issue</th>
+            <th class="issue-bar">Satisfaction</th>
+            <th></th>
+          </tr>
+          <tr ng-repeat="issue in human.issueStats">
+            <td style="text-align: left;">{{issue.name}}</td>
+            <td class="issue-bar" ng-class="{strong: selectedActivity.district.issues[$index] <= issue.level && selectedActivity.district.issues[$index] > 0}">
+              <div class="district-stances">
+                <issue-level-view base="5" human-lvl="tempHumanStance[$index]" ai-lvl="tempAIStance[$index]"></issue-level-view>
+              </div>
+            </td>
+            <td ng-class="{strong: selectedActivity.district.issues[$index] <= issue.level && selectedActivity.district.issues[$index] > 0}">
+              <a class="btn" ng-class="{disabled: shouldDisableStat($index, issue) }" ng-click="raiseStats($index)" ng-mouseover="showPossible($index)" ng-mouseleave="hidePossible($index)">
+                <i ng-class="{'glyphicon-check': selectedIndex == $index, 'glyphicon-unchecked': selectedIndex != $index}" class="glyphicon"></i>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="label">
       Who

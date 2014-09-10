@@ -312,7 +312,7 @@ angular.module('partyanimalsDraftApp')
         $rootScope.$broadcast('GAME:start');
 
         //set AI movement
-        var actions = Aisim.proposeAction($scope.districts, $scope.activities);
+        var actions = Aisim.proposeAction($scope.ai, $scope.districts, $scope.activities);
         insertAiActions(actions);
       }
     });
@@ -331,10 +331,9 @@ angular.module('partyanimalsDraftApp')
         eventSuffix = '_ai';
       }
       //resolve activity
+      var district = GameState.findDistrict(actor.activity.district.id, $scope.districts);
+      var reputation;
       if(actor.activity.type === 'REPUTATION'){
-
-        var district = GameState.findDistrict(actor.activity.district.id, $scope.districts);
-        var reputation;
         if(isHuman){
           reputation = GameState.capReputation(district.humanReputation, district.aiReputation, 30);
           district.humanReputation = reputation.a;
@@ -346,6 +345,31 @@ angular.module('partyanimalsDraftApp')
         }
 
         GameState.districts = $scope.districts;
+      }else if(actor.activity.type === 'STAT'){
+        if(actor.activity.details.isVs){
+          //subtract enemy ai
+          if(isHuman){
+            district.aiStance[actor.activity.details.selectedIssue] -= 1;
+          }else{
+            district.humanStance[actor.activity.details.selectedIssue] -= 1;
+          }
+        }else{
+          if(isHuman){
+            district.humanStance[actor.activity.details.selectedIssue] += 1;
+          }else{
+            district.aiStance[actor.activity.details.selectedIssue] += 1;
+          }
+        }
+      }else if(actor.activity.type === 'SORTIE'){
+        if(isHuman){
+          reputation = GameState.capReputation(district.humanReputation, district.aiReputation, 40);
+          district.humanReputation = reputation.a;
+          district.aiReputation = reputation.b;
+        }else{
+          reputation = GameState.capReputation(district.aiReputation, district.humanReputation, 40);
+          district.aiReputation = reputation.a;
+          district.humanReputation = reputation.b;
+        }
       }
 
       if(isCandidate){
@@ -364,7 +388,6 @@ angular.module('partyanimalsDraftApp')
       var candidate = isHuman? $scope.human : $scope.ai;
 
       if(staff.id !== null && staff.id !== undefined ){
-
         var realStaff = GameState.findStaff(staff.id, staffList);
 
         index = _.findIndex(actors, function(actor){
@@ -400,7 +423,9 @@ angular.module('partyanimalsDraftApp')
 
       if($scope.ai.activity){
         $scope.ai.activity.details.hoursPassed+=elapsed;
-        endActivity($scope.ai, $scope.ai.staff, false);
+        if($scope.ai.activity.details.hoursPassed>=$scope.ai.activity.details.hours){
+          endActivity($scope.ai, $scope.ai.staff, false);
+        }
       }
 
       _.forEach($scope.human.staff, function(staff){
@@ -549,7 +574,7 @@ angular.module('partyanimalsDraftApp')
 
     function move1Hour(){
       $scope.hoursElapsed+=1;
-      var aiMoves = Aisim.proposeAction($scope.districts, $scope.activities);
+      var aiMoves = Aisim.proposeAction($scope.ai, $scope.districts, $scope.activities);
       insertAiActions(aiMoves);
     }
 

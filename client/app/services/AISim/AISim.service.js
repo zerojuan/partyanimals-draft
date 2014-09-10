@@ -4,6 +4,8 @@ angular.module('partyanimalsDraftApp')
   .service('Aisim', function Aisim(GameState) {
     var that = this;
     var BRIBE = 5;
+    var CONTEST = 4;
+    var EDUCATE = 6;
     //generate ai affinities (which kapitans, he likes)
     that.moralAffinity = Math.floor(80);//Math.random()*100);
     //generate good/evil affinity (the likelihood to do morality)
@@ -27,28 +29,66 @@ angular.module('partyanimalsDraftApp')
       });
     };
 
-    that.proposeAction = function(districts, activities){
+    that.proposeAction = function(ai, districts, activities){
       //examine the landscape and do a move
       var actions = [];
-      //select district with lowest rating
+      var district;
+      //select district with lowest rating??
 
-      _.forEach(that.ai.staff, function(staff){
-        var district = angular.copy(getRandomDistrict(districts));
+      _.forEach(ai.staff, function(staff){
+        district = angular.copy(getRandomDistrict(districts));
         if(!staff.activity){
           //something should be up here
-          var confdActivity = angular.copy(selectActivity(BRIBE, activities));
+          if(Math.random()*100 > 50){
+            var confdActivity;
+            if(Math.random()*100 > 50){
+              confdActivity = angular.copy(selectActivity(BRIBE, activities));
+              confdActivity.details = {};
 
-          confdActivity.details = {};
-          confdActivity.details.hoursPassed = 0;
-          confdActivity.details.hours = confdActivity.cost.hours;
-          confdActivity.details.actor = staff;
-          confdActivity.details.cost = confdActivity.cost.gold;
-          confdActivity.district = district;
+            }else{
+              if(Math.random()*100 > 50){
+                confdActivity = angular.copy(selectActivity(CONTEST, activities));
+                confdActivity.details = {};
+                confdActivity.details.selectedIssue = 0;
+                confdActivity.details.isVs = true;
+              }else{
+                confdActivity = angular.copy(selectActivity(EDUCATE, activities));
+                confdActivity.details = {};
+                confdActivity.details.selectedIssue = 0;
+                confdActivity.details.isVs = false;
+              }
 
-          actions.push(confdActivity);
+            }
+
+            confdActivity.details.hoursPassed = 0;
+            confdActivity.details.hours = confdActivity.cost.hours;
+            confdActivity.details.actor = staff;
+            confdActivity.details.cost = confdActivity.cost.gold;
+            confdActivity.district = district;
+
+
+
+
+            actions.push(confdActivity);
+          }
+
         }
       });
 
+      if(!ai.activity){
+        console.log('AI has no activity?', ai.activity);
+        district = angular.copy(getRandomDistrict(districts));
+        var aiActivity = angular.copy(selectActivity(BRIBE, activities));
+
+        aiActivity.details = {};
+        aiActivity.details.hoursPassed = 0;
+        aiActivity.details.hours = aiActivity.cost.hours;
+        aiActivity.details.actor = ai;
+        aiActivity.details.cost = aiActivity.cost.gold;
+        aiActivity.district = district;
+
+        actions.push(aiActivity);
+      }
 
       return actions;
     };
