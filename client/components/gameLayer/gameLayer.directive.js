@@ -46,7 +46,7 @@ angular.module('partyanimalsDraftApp')
         function create() {
           var centerX = game.world.width / 2;
 
-          game.add.tileSprite(0,0,1280, 720, 'bg');
+          game.add.tileSprite(0,0,w, h, 'bg');
 
           districtGroup = game.add.group();
           uiGroup = game.add.group();
@@ -88,7 +88,7 @@ angular.module('partyanimalsDraftApp')
         }
 
         function onDistrictClicked(sprite){
-
+          console.log('District clicked: ', sprite);
           var index = _.findIndex(districtsImages, function(val){
             return val === sprite.key;
           });
@@ -228,8 +228,11 @@ angular.module('partyanimalsDraftApp')
 
         }
 
-        var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'phaserGame', { preload: preload, create: create, update: update }, null, true);
-
+        var w = window.innerWidth, //* window.devicePixelRatio,
+            h = window.innerHeight;// * window.devicePixelRatio;
+        var game = new Phaser.Game(w, h, Phaser.AUTO, 'phaserGame', { preload: preload, create: create, update: update }, null, true);
+        game.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+        // game.setScreenSize(true);
         scope.$watch('selectedDistrict', function(){
           if(scope.selectedDistrict){
             //_updateDistrictDetails();

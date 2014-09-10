@@ -27,9 +27,11 @@ angular.module('partyanimalsDraftApp')
       sprite.anchor.set(0.5);
       sprite.events.onInputDown.add(handler, context);
       sprite.events.onInputOver.add(function(){
+        console.log('Mouse over: ' + key);
         that.isMouseOver = true;
       }, this);
       sprite.events.onInputOut.add(function(){
+        console.log('Mouse out: ' + key);
         that.isMouseOver = false;
       }, this);
       district.add(sprite);
