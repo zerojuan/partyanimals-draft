@@ -231,7 +231,7 @@ angular.module('partyanimalsDraftApp')
         var w = window.innerWidth, //* window.devicePixelRatio,
             h = window.innerHeight;// * window.devicePixelRatio;
         var game = new Phaser.Game(w, h, Phaser.AUTO, 'phaserGame', { preload: preload, create: create, update: update }, null, true);
-        game.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+        game.scaleMode = Phaser.ScaleManager.RESIZE;
         // game.setScreenSize(true);
         scope.$watch('selectedDistrict', function(){
           if(scope.selectedDistrict){
