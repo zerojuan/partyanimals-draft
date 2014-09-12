@@ -3,7 +3,7 @@
     "gold" : 0,
     "min": 100,
     "max": 1000,
-    "hours" : 2
+    "days" : 2
   },
   "description" : "Talk to the district's Kapitan and try to improve your Relationship with them.",
   "restrictions": [
@@ -20,7 +20,7 @@
     "gold" : 500,
     "min": 500,
     "max": 2000,
-    "hours" : 4
+    "days" : 4
   },
   "description" : "Increase reputation in this district. Affected by Issue Satisfaction and Kapitan Relationship.",
   "difficulty" : 50,
@@ -45,7 +45,7 @@
     "gold" : 300,
     "min": 100,
     "max": 300,
-    "hours" : 2
+    "days" : 2
   },
   "description" : "Reduce opponent's Issue Satisfaction in this district.",
   "difficulty" : 50,
@@ -68,7 +68,7 @@
     "gold" : 2500,
     "min": 1000,
     "max": 5000,
-    "hours" : 2,
+    "days" : 2,
     "morality" : -10
   },
   "description" : "Attempt to bribe Animals in the district. High risk/reward.",
@@ -91,7 +91,7 @@
     "gold" : 200,
     "min": 100,
     "max": 500,
-    "hours" : 2
+    "days" : 2
   },
   "description" : "Increase Issue Satisfaction in this district.",
   "difficulty" : 20,
@@ -114,7 +114,7 @@
     "gold" : 700,
     "min": 300,
     "max": 1400,
-    "hours" : 2,
+    "days" : 2,
     "morality" : -10
   },
   "description" : "Reduce the enemy's reputation in this district.",
@@ -137,7 +137,7 @@
     "gold" : 0,
     "min": 100,
     "max": 2000,
-    "hours" : 2
+    "days" : 2
   },
   "description" : "Confess your sins to Pader Doglas",
   "difficulty" : 0,
@@ -159,7 +159,7 @@
     "gold" : 1000,
     "min": 1000,
     "max": 2000,
-    "hours" : 2
+    "days" : 2
   },
   "description" : "Gamble at the Casino",
   "effect" : {
@@ -181,7 +181,7 @@
     "gold" : 2000,
     "min": 1000,
     "max": 4000,
-    "hours" : 2
+    "days" : 2
   },
   "description" : "Typhoon Relief",
   "effect" : {

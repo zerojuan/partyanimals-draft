@@ -60,8 +60,8 @@ angular.module('partyanimalsDraftApp')
 
             }
 
-            confdActivity.details.hoursPassed = 0;
-            confdActivity.details.hours = confdActivity.cost.hours;
+            confdActivity.details.daysPassed = 0;
+            confdActivity.details.days = confdActivity.cost.days;
             confdActivity.details.actor = staff;
             confdActivity.details.cost = confdActivity.cost.gold;
             confdActivity.district = district;
@@ -81,8 +81,8 @@ angular.module('partyanimalsDraftApp')
         var aiActivity = angular.copy(selectActivity(BRIBE, activities));
 
         aiActivity.details = {};
-        aiActivity.details.hoursPassed = 0;
-        aiActivity.details.hours = aiActivity.cost.hours;
+        aiActivity.details.daysPassed = 0;
+        aiActivity.details.days = aiActivity.cost.days;
         aiActivity.details.actor = ai;
         aiActivity.details.cost = aiActivity.cost.gold;
         aiActivity.district = district;

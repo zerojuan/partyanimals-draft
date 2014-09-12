@@ -6,13 +6,13 @@ angular.module('partyanimalsDraftApp')
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
     $scope.turnsLeft = GameState.getTurnsLeft();
-    $scope.totalTurns = 25;
+    $scope.totalTurns = 30;
     $scope.daysInAWeek = 5;
     $scope.totalCash = GameState.getInitialCash();
     $scope.showItinerary = false;
     $scope.showOverlay = true;
     $scope.hours = 10;
-    $scope.hoursElapsed = 0;
+    $scope.daysElapsed = 0;
     $scope.scheduledActivities = [];
     $scope.futureLocation = $scope.human.hq;
     $scope.currentLocation = $scope.human.hq;
@@ -80,13 +80,12 @@ angular.module('partyanimalsDraftApp')
         $scope.$apply();
       });
 
-      PAFirebase.workhoursRef.on('value', function(snapshot){
+      PAFirebase.workdaysRef.on('value', function(snapshot){
         $scope.config.loadedItems += 1;
-        setLoadingMessage('Calculating workhours...');
+        setLoadingMessage('Calculating workdays...');
 
-        onDataChanged('workhours');
-        var hours = snapshot.val();
-        $scope.hours = hours;
+        onDataChanged('workdays');
+        $scope.days = snapshot.val();
         $scope.$apply();
       });
 
@@ -410,20 +409,20 @@ angular.module('partyanimalsDraftApp')
       $rootScope.$broadcast('GAME:resolve');
     };
 
-    $scope.$watch('hoursElapsed', function(newVal, oldVal){
+    $scope.$watch('daysElapsed', function(newVal, oldVal){
       var elapsed = newVal-oldVal;
       if(elapsed < 0){
         elapsed = 5;
       }
 
       if($scope.human.activity){
-        $scope.human.activity.details.hoursPassed+=elapsed;
+        $scope.human.activity.details.daysPassed+=elapsed;
         endActivity($scope.human, $scope.human.staff, true);
       }
 
       if($scope.ai.activity){
-        $scope.ai.activity.details.hoursPassed+=elapsed;
-        if($scope.ai.activity.details.hoursPassed>=$scope.ai.activity.details.hours){
+        $scope.ai.activity.details.daysPassed+=elapsed;
+        if($scope.ai.activity.details.daysPassed>=$scope.ai.activity.details.days){
           endActivity($scope.ai, $scope.ai.staff, false);
         }
       }
@@ -431,8 +430,8 @@ angular.module('partyanimalsDraftApp')
       _.forEach($scope.human.staff, function(staff){
         if(staff.activity){
 
-          staff.activity.details.hoursPassed+=elapsed;
-          if(staff.activity.details.hoursPassed >= staff.activity.details.hours){
+          staff.activity.details.daysPassed+=elapsed;
+          if(staff.activity.details.daysPassed >= staff.activity.details.days){
             //done!!
             endActivity(staff, $scope.human.staff, true);
           }
@@ -441,8 +440,8 @@ angular.module('partyanimalsDraftApp')
 
       _.forEach($scope.ai.staff, function(staff){
         if(staff.activity){
-          staff.activity.details.hoursPassed+=elapsed;
-          if(staff.activity.details.hoursPassed >= staff.activity.details.hours){
+          staff.activity.details.daysPassed+=elapsed;
+          if(staff.activity.details.daysPassed >= staff.activity.details.days){
             endActivity(staff, $scope.ai.staff, false);
           }
         }
@@ -516,7 +515,7 @@ angular.module('partyanimalsDraftApp')
         }
       }
       staff.districtName = district.name;
-      staff.activity.details.startTime = $scope.hoursElapsed;
+      staff.activity.details.startTime = $scope.daysElapsed;
 
       //handle staff and candidate assignment differently
       var eventName = '';
@@ -558,22 +557,12 @@ angular.module('partyanimalsDraftApp')
 
     };
 
-    function shouldNextDay(){
-      if($scope.hoursElapsed >= $scope.hours){
-        console.log('Next Day Happened!');
-        $scope.turnsLeft--;
-        GameState.updateTurn($scope.turnsLeft);
-        GameState.updateDistrictReputationHistory($scope.districts);
-        $scope.totalReputations = GameState.getTotalReputation();
-        $scope.hoursElapsed = 0;
-
-        return true;
-      }
-      return false;
-    }
-
-    function move1Hour(){
-      $scope.hoursElapsed+=1;
+    function move1Day(){
+      $scope.daysElapsed+=1;
+      $scope.turnsLeft--;
+      GameState.updateTurn($scope.turnsLeft);
+      GameState.updateDistrictReputationHistory($scope.districts);
+      $scope.totalReputations = GameState.getTotalReputation();
       var aiMoves = Aisim.proposeAction($scope.ai, $scope.districts, $scope.activities);
       insertAiActions(aiMoves);
     }
@@ -583,17 +572,7 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.onRest = function(){
-      if(!shouldNextDay()){
-        move1Hour();
-      }
+      move1Day();
     };
 
-    $scope.onNextReady = function(action){
-      console.log('Next is ready', action);
-      for(var i = 0; i < $scope.human.activity.details.hours; i++){
-        move1Hour();
-        shouldNextDay();
-      }
-      $scope.onHideOverlay();
-    };
   });

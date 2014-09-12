@@ -11,7 +11,7 @@ angular.module('partyanimalsDraftApp')
     that.kapitansRef = new Firebase(url+'/kapitan');
     that.activitiesRef = new Firebase(url+'/activitiesnew');
     that.turnsPerGameRef = new Firebase(url+'/turnsPerGame');
-    that.workhoursRef = new Firebase(url+'/workhours');
+    that.workdaysRef = new Firebase(url+'/workhours');
     that.eventsRef = new Firebase(url+'/events');
     that.cardsRef = new Firebase(url+'/cards');
     that.weekdaysRef = new Firebase(url+'/weekdays');
@@ -27,7 +27,7 @@ angular.module('partyanimalsDraftApp')
       that.kapitansRef.off();
       that.activitiesRef.off();
       that.turnsPerGameRef.off();
-      that.workhoursRef.off();
+      that.workdaysRef.off();
       that.eventsRef.off();
       that.cardsRef.off();
       that.staffersRef.off();

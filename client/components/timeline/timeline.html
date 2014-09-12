@@ -1,12 +1,12 @@
 <div>
-  <div ng-show="human.activity" style="margin-bottom: 5px; height: 20px; margin-left:{{(human.activity.details.startTime/(hours+1))*100}}%; width: {{(human.activity.details.hours/(hours+1))*100}}%;">
+  <div ng-show="human.activity" style="margin-bottom: 5px; height: 20px; margin-left:{{(human.activity.details.startTime/(days))*100}}%; width: {{(human.activity.details.days/(days))*100}}%;">
     <actor-in-timeline staff="human"></actor-in-timeline>
   </div>
-  <div ng-repeat="staff in staffers" ng-show="staff.activity" style="margin-bottom: 5px; height: 20px; margin-left:{{(staff.activity.details.startTime/(hours+1))*100}}%; width: {{(staff.activity.details.hours/(hours+1))*100}}%;">
+  <div ng-repeat="staff in staffers" ng-show="staff.activity" style="margin-bottom: 5px; height: 20px; margin-left:{{(staff.activity.details.startTime/(days))*100}}%; width: {{(staff.activity.details.days/(days))*100}}%;">
     <actor-in-timeline staff="staff"></actor-in-timeline>
   </div>
 
-  <progressbar value="timenow" max="hours" >
-    <span style="color:black; white-space:nowrap;">{{timenow+8 | itinerarytime}}</span>
+  <progressbar value="(timenow/days)*100" >
+    <span style="color:black; white-space:nowrap;">Day {{timenow}}</span>
   </progressbar>
 </div>

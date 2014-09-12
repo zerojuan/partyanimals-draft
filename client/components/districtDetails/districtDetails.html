@@ -79,10 +79,6 @@
     <h4>Actions</h4>
   </div>
   <div class="activity-container">
-    <ul class="activity-list list list-unstyled">
-        <li ng-repeat="action in selectedDistrict.activities">
-          <div class="btn" ng-click="selectedAction(action)">{{action.name}}</div>
-        </li>
-      <ul>
+    <activities-list activities="selectedDistrict.activities" on-selected="selectedAction"></activities-list>
   </div>
 </div>

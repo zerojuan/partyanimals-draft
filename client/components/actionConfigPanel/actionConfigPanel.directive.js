@@ -100,8 +100,8 @@ angular.module('partyanimalsDraftApp')
 
         scope.onOkClicked = function(){
           var activity = angular.copy(scope.selectedActivity);
-          scope.details.hoursPassed = 0;
-          scope.details.hours = activity.cost.hours;
+          scope.details.daysPassed = 0;
+          scope.details.days = activity.cost.days;
           activity.details = scope.details;
           if(scope.selectedActivity.type === 'STAT'){
             activity.details.selectedIssue = scope.selectedIndex;
