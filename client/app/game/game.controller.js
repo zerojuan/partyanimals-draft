@@ -389,7 +389,7 @@ angular.module('partyanimalsDraftApp')
       if(staff.id !== null && staff.id !== undefined){
         var realStaff = GameState.findStaff(staff.id, staffList);
 
-        index = _.findIndex($scope.human.staff, function(actor){
+        index = _.findIndex(actors, function(actor){
           return actor.id === staff.id;
         });
         $scope.totalCash += realStaff.activity.details.cost;
