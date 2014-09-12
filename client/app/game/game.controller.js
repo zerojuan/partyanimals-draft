@@ -392,17 +392,19 @@ angular.module('partyanimalsDraftApp')
         index = _.findIndex($scope.human.staff, function(actor){
           return actor.id === staff.id;
         });
-
+        $scope.totalCash += realStaff.activity.details.cost;
         realStaff.activity = null;
+        $rootScope.$broadcast('GAME:cancel', realStaff);
       }else{
         index = _.findIndex(actors, function(actor){
           return actor.name === $scope.human.name;
         });
-
+        $scope.totalCash += $scope.human.activity.details.cost;
         $scope.human.activity = null;
       }
 
       actors.splice(index, 1);
+
     };
 
     var endActivity = function(staff, staffList, isHuman){
@@ -548,7 +550,12 @@ angular.module('partyanimalsDraftApp')
       var eventName = '';
       if(!isHuman){
         eventName = '_ai';
+      }else{
+        $scope.totalCash -= staff.activity.details.cost;
       }
+
+      //subtract to money
+
 
       if(isCandidate){
         $rootScope.$broadcast('GAME:assign_candidate'+eventName, staff);

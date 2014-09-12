@@ -267,6 +267,10 @@ angular.module('partyanimalsDraftApp')
           // _updateStaff(staff);
         });
 
+        scope.$on('GAME:cancel', function(event, staff){
+          _updateStaff(staff, true, true);
+        });
+
         scope.$on('GAME:ACTION:result', function(evt, actor){
           console.log('Actor Resolving: ', actor);
           _updateStaff(actor, true, true);
