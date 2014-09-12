@@ -1,24 +1,24 @@
 <div class="activity-list">
   <h4>Candidate</h4>
   <div class="row">
-    <div class="activity btn" ng-click="onSelected(sortie)">{{sortie.name}}</div>
-    <div class="activity btn" ng-click="onSelected(talk)">{{talk.name}}</div>
+    <div class="activity btn btn-xs" ng-click="onSelected(sortie)">{{sortie.name}}</div>
+    <div class="activity btn btn-xs" ng-click="onSelected(talk)">{{talk.name}}</div>
   </div>
   <h4>Reputation</h4>
   <div class="row">
-    <div class="activity btn" ng-click="onSelected(reputation)" ng-repeat="reputation in reputations">
+    <div class="activity btn btn-xs" ng-click="onSelected(reputation)" ng-repeat="reputation in reputations">
       {{reputation.name}}
     </div>
   </div>
   <h4>Stat</h4>
   <div class="row">
-    <div class="activity btn" ng-click="onSelected(stat)" ng-repeat="stat in stats">
+    <div class="activity btn btn-xs" ng-click="onSelected(stat)" ng-repeat="stat in stats">
       {{stat.name}}
     </div>
   </div>
   <h4 ng-show="specials.length > 0">Special</h4>
   <div class="row">
-    <div class="activity btn" ng-click="onSelected(special)" ng-repeat="special in specials">
+    <div class="activity btn btn-xs" ng-click="onSelected(special)" ng-repeat="special in specials">
       {{special.name}}
     </div>
   </div>

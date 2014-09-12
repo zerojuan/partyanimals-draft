@@ -101,7 +101,7 @@
 <district-details ng-show="selectedDistrict" on-activity-selected="onActivitySelected" selected-district="selectedDistrict" human="human" ai="ai" close-handler="closeDistrictDetails">
 </district-details>
 <div class="bottom container">
-  <timeline staffers="human.staff" timenow="daysElapsed" human="human" days="totalTurns"></timeline>
+  <timeline staffers="human.staff" on-cancel="onCancel" timenow="daysElapsed" human="human" days="totalTurns"></timeline>
   <div class="content">
     <a class="btn btn-success" ng-click="onRest()">Done</a>
   </div>

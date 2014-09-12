@@ -122,7 +122,7 @@ angular.module('partyanimalsDraftApp')
           if(scope.selectedIndex >= 0){
             return scope.selectedIndex !== index;
           }
-          if(attributeFormula.isVs){
+          if(scope.selectedActivity.type === 'STAT' && attributeFormula.isVs){
             return scope.tempAIStance[index] === 0;
           }else{
             return scope.tempHumanStance[index] === issue.level;

@@ -44,8 +44,8 @@
           <ul class="list list-unstyled">
             <li class="row" ng-repeat="actor in selectedDistrict.humanActors">
               <div class="col-xs-12">
-                <progressbar value="actor.activity.details.hoursPassed" max="actor.activity.details.hours" >
-                  <span style="color:black; white-space:nowrap;">{{actor.activity.details.hoursPassed}} / {{actor.activity.details.hours}}</span>
+                <progressbar value="actor.activity.details.daysPassed" max="actor.activity.details.days" >
+                  <span style="color:black; white-space:nowrap;">{{actor.activity.details.daysPassed}} / {{actor.activity.details.days}}</span>
                 </progressbar>
               </div>
               <div class="col-xs-4">
@@ -57,7 +57,7 @@
             </li>
             <li class="row" ng-repeat="actor in selectedDistrict.aiActors">
               <div class="col-xs-12">
-                <progressbar value="actor.activity.details.hoursPassed" max="actor.activity.details.hours">
+                <progressbar value="actor.activity.details.daysPassed" max="actor.activity.details.days">
                 </progressbar>
               </div>
               <div class="col-xs-4">

@@ -380,6 +380,31 @@ angular.module('partyanimalsDraftApp')
 
     };
 
+    var cancelActivity = function(staff){
+      var district = GameState.findDistrict(staff.activity.district.id, $scope.districts);
+      var actors = district.humanActors;
+      var staffList = $scope.human.staff;
+      var index = 0;
+
+      if(staff.id !== null && staff.id !== undefined){
+        var realStaff = GameState.findStaff(staff.id, staffList);
+
+        index = _.findIndex($scope.human.staff, function(actor){
+          return actor.id === staff.id;
+        });
+
+        realStaff.activity = null;
+      }else{
+        index = _.findIndex(actors, function(actor){
+          return actor.name === $scope.human.name;
+        });
+
+        $scope.human.activity = null;
+      }
+
+      actors.splice(index, 1);
+    };
+
     var endActivity = function(staff, staffList, isHuman){
       var district = GameState.findDistrict(staff.activity.district.id, $scope.districts);
       var index = 0;
@@ -417,7 +442,9 @@ angular.module('partyanimalsDraftApp')
 
       if($scope.human.activity){
         $scope.human.activity.details.daysPassed+=elapsed;
-        endActivity($scope.human, $scope.human.staff, true);
+        if($scope.human.activity.details.daysPassed>=$scope.human.activity.details.days){
+          $scope.onShowOverlay('RESOLVE');
+        }
       }
 
       if($scope.ai.activity){
@@ -553,10 +580,6 @@ angular.module('partyanimalsDraftApp')
 
     };
 
-    $scope.onEndDay = function(){
-
-    };
-
     function move1Day(){
       $scope.daysElapsed+=1;
       $scope.turnsLeft--;
@@ -567,12 +590,21 @@ angular.module('partyanimalsDraftApp')
       insertAiActions(aiMoves);
     }
 
-    $scope.onResolve = function(){
-      $scope.onShowOverlay('RESOLVE');
-    };
-
     $scope.onRest = function(){
       move1Day();
+    };
+
+    $scope.onCancel = function(actor){
+      console.log('Cancelling action', actor);
+      if(actor.activity.details.daysPassed === 0){
+        //remove from list of activities
+        cancelActivity(actor);
+      }
+    };
+
+    $scope.onNextReady = function(){
+      $scope.onHideOverlay();
+      endActivity($scope.human, $scope.human.staff, true);
     };
 
   });

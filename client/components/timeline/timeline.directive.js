@@ -9,10 +9,8 @@ angular.module('partyanimalsDraftApp')
         timenow: '=',
         staffers: '=',
         human: '=',
-        days: '='
-      },
-      link: function (scope) {
-
+        days: '=',
+        onCancel: '='
       }
     };
   });
