@@ -2,6 +2,36 @@
 
 angular.module('partyanimalsDraftApp')
   .service('GameModel', function Gamemodel() {
+    this.cloneDistrict = function(district){
+        return {
+          name: district.name,
+          id: district.id,
+          kapitan: district.kapitan,
+          humanStance: district.humanStance,
+          aiStance: district.aiStance,
+          goldCostModifier: district.goldCostModifier,
+          timeCostModifier: district.timeCostModifier,
+          kapitanCostModifier: district.kapitanCostModifier,
+          issues: district.issues
+        };
+    };
+
+    this.createMoveActivity = function(selectedDistrict){
+      var move = {};
+      move.cost = {
+          gold: 100,
+          min: 0,
+          max: 0,
+          days: 1
+      };
+      move.restrictions = ['CANDIDATE_ONLY'];
+      move.name = 'Move';
+      move.type = 'MOVE';
+
+      move.district = selectedDistrict;
+      return move;
+    };
+
     this.District = function(game, group, peoplesGroup, key, handler, context){
       var that = this;
       var district = new Phaser.Group(game, group, key);

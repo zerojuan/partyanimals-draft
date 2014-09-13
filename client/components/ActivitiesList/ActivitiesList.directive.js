@@ -15,11 +15,16 @@ angular.module('partyanimalsDraftApp')
           scope.reputations = [];
           scope.stats = [];
           scope.specials = [];
+          scope.sortie = null;
+          scope.move = null;
+          scope.talk = null;
           _.forEach(scope.activities, function(activity){
 
 
             if(activity.type === 'SORTIE'){
               scope.sortie = activity;
+            }else if(activity.type === 'MOVE'){
+              scope.move = activity;
             }else if(activity.type === 'REPUTATION'){
               scope.reputations.push(activity);
             }else if(activity.type === 'STAT'){

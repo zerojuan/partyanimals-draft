@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim, Ruleset) {
+  .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim, Ruleset, GameModel) {
     $scope.dataLoadSize = 13;
     $scope.human = GameState.getHuman();
     $scope.ai = GameState.getAI();
@@ -503,22 +503,25 @@ angular.module('partyanimalsDraftApp')
 
       //supply selected district with actions
       var activities = [];
+
+      //add move action
+      if($scope.selectedDistrict.name !== $scope.human.currentLocation.name){
+        //add move action
+        activities.push(GameModel.createMoveActivity(GameModel.cloneDistrict($scope.selectedDistrict)));
+      }
+
       _.forEach($scope.activities, function(activity){
         var nActivity = angular.copy(activity);
-        var isValid = Ruleset.Restrictions.isValidAction(activity.restrictions, $scope.selectedDistrict);
+        var isValid = Ruleset.Restrictions.isValidActionFromRestriction(activity.restrictions, $scope.selectedDistrict);
+
+        if($scope.selectedDistrict.name !== $scope.human.currentLocation.name){
+          if(nActivity.type === 'SORTIE' || nActivity.type === 'TALK'){
+            return;
+          }
+        }
 
         if(isValid){
-          nActivity.district = {
-            name: $scope.selectedDistrict.name,
-            id: $scope.selectedDistrict.id,
-            kapitan: $scope.selectedDistrict.kapitan,
-            humanStance: $scope.selectedDistrict.humanStance,
-            aiStance: $scope.selectedDistrict.aiStance,
-            goldCostModifier: $scope.selectedDistrict.goldCostModifier,
-            timeCostModifier: $scope.selectedDistrict.timeCostModifier,
-            kapitanCostModifier: $scope.selectedDistrict.kapitanCostModifier,
-            issues: $scope.selectedDistrict.issues
-          };
+          nActivity.district = GameModel.cloneDistrict($scope.selectedDistrict);
 
           nActivity.travelTime = Ruleset.calculateTravelCost($scope.currentLocation, $scope.selectedDistrict);
           activities.push(nActivity);

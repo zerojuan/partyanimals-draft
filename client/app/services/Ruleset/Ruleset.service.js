@@ -3,7 +3,7 @@
 angular.module('partyanimalsDraftApp')
   .service('Ruleset', function Ruleset() {
     this.Restrictions = {
-      isValidAction: function(restrictions, district){
+      isValidActionFromRestriction: function(restrictions, district){
         var isValid = true;
         if(restrictions){
           _.forEach(restrictions, function(restriction){

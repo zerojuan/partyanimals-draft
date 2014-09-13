@@ -1,8 +1,9 @@
 <div class="activity-list">
   <h4>Candidate</h4>
   <div class="row">
-    <div class="activity btn btn-xs" ng-click="onSelected(sortie)">{{sortie.name}}</div>
-    <div class="activity btn btn-xs" ng-click="onSelected(talk)">{{talk.name}}</div>
+    <div class="activity btn btn-xs" ng-show="move" ng-click="onSelected(move)">{{move.name}}</div>
+    <div class="activity btn btn-xs" ng-show="sortie" ng-click="onSelected(sortie)">{{sortie.name}}</div>
+    <div class="activity btn btn-xs" ng-show="talk" ng-click="onSelected(talk)">{{talk.name}}</div>
   </div>
   <h4>Reputation</h4>
   <div class="row">

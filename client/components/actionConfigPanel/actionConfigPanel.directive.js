@@ -30,7 +30,7 @@ angular.module('partyanimalsDraftApp')
 
         function shouldDisable(staffer, activity){
           var isDisabled = false;
-          if(staffer.activity){
+          if(staffer.activity){ //if staffer is already assigned
             isDisabled = true;
           }else{
             _.forEach(activity.restrictions, function(restriction){
@@ -51,6 +51,10 @@ angular.module('partyanimalsDraftApp')
             scope.localStaffers = [];
             var localHuman = angular.copy(scope.human);
             localHuman.selected = false;
+            if(scope.selectedActivity.type !== 'MOVE'){
+              localHuman.disabled = scope.selectedActivity.district.name !== localHuman.currentLocation.name;
+            }
+
             scope.localStaffers.push(localHuman);
             _.forEach(scope.staffers, function(staffer){
               var s = angular.copy(staffer);
