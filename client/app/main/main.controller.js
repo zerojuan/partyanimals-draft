@@ -10,9 +10,38 @@ angular.module('partyanimalsDraftApp')
       $scope.issues = issues;
       $scope.districts = districts;
 
+      $scope.presets = [{
+        name: 'Liberal',
+        values: [0,0,1,2,2]
+      },{
+        name: 'Conservative',
+        value: [0,2,1,2,0]
+      },{
+        name: 'Religious',
+        value: [1,4,0,0,0]
+      },{
+        name: 'Wild One',
+        value: [1,2,0,2,0]
+      }];
+
+      $scope.currentPreset = 'Liberal';
+
+      function checkPreset(){
+        //check if the same as other presets
+        _.forEach($scope.presets, function(preset){
+          _.forEach($scope.issues, function(issue, j){
+            if(issue.level === preset.value[j]){
+              console.log('Is equal');
+            }
+          });
+        });
+
+      }
+
       $scope.plus = function(thing){
         if($scope.initialLimit > 0){
           thing.level += 1;
+          checkPreset();
           $scope.initialLimit -= 1;
         }
       };
@@ -20,6 +49,7 @@ angular.module('partyanimalsDraftApp')
       $scope.minus = function(thing){
         if(thing.level > 0){
           thing.level -= 1;
+          checkPreset();
           $scope.initialLimit += 1;
         }
       };
