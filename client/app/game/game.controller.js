@@ -22,6 +22,7 @@ angular.module('partyanimalsDraftApp')
       isNextReady: false
     };
     $scope.updates = [];
+    $scope.notifications = [];
     $scope.config = {
       alerts: [],
       state: 'home',
@@ -343,6 +344,7 @@ angular.module('partyanimalsDraftApp')
 
     var resolveActivity = function(actor, isCandidate, isHuman){
       $scope.updates.push(actor);
+      $scope.notifications.unshift(actor);
       var eventSuffix = '';
       if(!isHuman){
         eventSuffix = '_ai';
@@ -507,6 +509,16 @@ angular.module('partyanimalsDraftApp')
 
     $scope.closeDistrictDetails = function(){
       $scope.selectedDistrict = null;
+    };
+
+    $scope.closeNotification = function(index){
+      var notification = $scope.notifications[index];
+      var update = _.find($scope.updates, function(update){
+        return update == notification;
+      });
+      update.seen = true;
+      $scope.notifications.splice(index, 1);
+
     };
 
     $scope.onActivitySelected = function(activity){
