@@ -12,31 +12,45 @@ angular.module('partyanimalsDraftApp')
 
       $scope.presets = [{
         name: 'Liberal',
-        values: [0,0,1,2,2]
+        values: [3,0,0,2,0]
       },{
-        name: 'Conservative',
-        value: [0,2,1,2,0]
+        name: 'Autocrat',
+        values: [0,3,2,0,0]
       },{
-        name: 'Religious',
-        value: [1,4,0,0,0]
+        name: 'Populist',
+        values: [0,2,1,0,2]
       },{
-        name: 'Wild One',
-        value: [1,2,0,2,0]
+        name: 'Customized',
+        values: [0,0,0,0,0]
       }];
-
-      $scope.currentPreset = 'Liberal';
 
       function checkPreset(){
         //check if the same as other presets
-        _.forEach($scope.presets, function(preset){
-          _.forEach($scope.issues, function(issue, j){
-            if(issue.level === preset.value[j]){
-              console.log('Is equal');
-            }
+        var some = _.some($scope.presets, function(preset){
+          var match = _.every($scope.issues, function(issue, j){
+            return issue.level === preset.values[j];
           });
+          if(match){
+            $scope.currentPreset = preset;
+          }
+          return match;
         });
 
+        if(!some){
+          $scope.currentPreset = $scope.presets[3];
+        }
+
       }
+
+      $scope.selectPreset = function(preset){
+        $scope.currentPreset = preset;
+        $scope.initialLimit = preset.name === 'Customized' ? 5 : 0;
+        _.forEach($scope.issues, function(issue, i){
+          issue.level = preset.values[i];
+        });
+      };
+
+      $scope.selectPreset($scope.presets[0]);
 
       $scope.plus = function(thing){
         if($scope.initialLimit > 0){

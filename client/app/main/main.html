@@ -1,7 +1,18 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div ng-switch on="page" id="switch-container" class="my-switch-container">
-  <div ng-switch-when="1" class="my-switch-animation">
-    <h1>Design your platform:</h1>
+<div ng-switch on="page" id="switch-container" class="my-switch-container row">
+  <div ng-switch-when="1" class="my-switch-animation col-xs-12">
+    <h1>Design your platform:
+      <div class="btn-group" dropdown is-open="status.isopen">
+        <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+          {{currentPreset.name}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="preset in presets">
+            <a href ng-click="selectPreset(preset)">{{preset.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </h1>
     <p class="lead">
       <span>{{initialLimit}} pts. Left</span>
       <ul class="list-group">
@@ -20,7 +31,7 @@
     </p>
     <p><a class="btn btn-lg btn-success" ng-click="nextPage()">Next</a></p>
   </div>
-  <div ng-switch-when="2" class="my-switch-animation">
+  <div ng-switch-when="2" class="my-switch-animation col-xs-12">
     <h1>Select your HQ</h1>
     <div class="lead">
       <province-view districts="districts" selected-district="selectedDistrict" change-selected="changeSelected" show-reputation="false"></province-view>
