@@ -145,6 +145,16 @@ angular.module('partyanimalsDraftApp')
         if(!onDataChanged('districts')){
           $scope.districts = snapshot.val();
           var selectedDistrict = null;
+          //district bonuses
+          var districtBonus = [
+            0, //EDUCATION
+            2, //LAW AND ORDER
+            1, //EMPLOYMENT
+            1, //EMPLOYMENT
+            4, //RELIGION,
+            3 //HEALTH
+          ];
+
           $scope.districts.forEach(function(district){
             var i = 0;
             district.humanReputation = district.humanReputation ? district.humanReputation : 0;
@@ -164,7 +174,6 @@ angular.module('partyanimalsDraftApp')
                 district.humanStance[i] = $scope.human.issueStats[i].level;
               }
               district.neighbors.forEach(function(neighborIndex){
-                console.log('NeighborIndex:', neighborIndex);
                 $scope.districts[neighborIndex].humanReputation = 25;
               });
               selectedDistrict = district;
@@ -182,6 +191,15 @@ angular.module('partyanimalsDraftApp')
               });
               $scope.ai.hq = district;
               $scope.ai.currentLocation = district;
+            }
+
+            //add bonus stat
+            if(district.aiStance[districtBonus[$scope.ai.hq.id]] < 5){
+              district.aiStance[districtBonus[$scope.ai.hq.id]]+=1;
+            }
+
+            if(district.humanStance[districtBonus[$scope.human.hq.id]] < 5){
+              district.humanStance[districtBonus[$scope.human.hq.id]]+=1;
             }
           });
           _.forEach($scope.human.issueStats, function(val){

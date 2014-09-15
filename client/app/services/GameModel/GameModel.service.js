@@ -25,6 +25,7 @@ angular.module('partyanimalsDraftApp')
           days: 1
       };
       move.restrictions = ['CANDIDATE_ONLY'];
+      move.description = 'Travel to this location';
       move.name = 'Move';
       move.type = 'MOVE';
 
