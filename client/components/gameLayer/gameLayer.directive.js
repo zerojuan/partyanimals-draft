@@ -13,7 +13,9 @@ angular.module('partyanimalsDraftApp')
         ai: '=',
         staffers: '='
       },
-      link: function (scope) {
+      link: function (scope){
+        var seaBG1;
+        var seaBG2;
         var districtGroup;
         var uiGroup;
         var chipsGroup;
@@ -46,7 +48,8 @@ angular.module('partyanimalsDraftApp')
         function create() {
           var centerX = game.world.width / 2;
 
-          game.add.tileSprite(0,0,w, h, 'bg');
+          seaBG1 = game.add.tileSprite(0,0,w, h, 'bg');
+          seaBG2 = game.add.tileSprite(w,0,w,h, 'bg');
 
           districtGroup = game.add.group();
           uiGroup = game.add.group();
@@ -134,6 +137,15 @@ angular.module('partyanimalsDraftApp')
             staffSprite.frameName = staff.image;
             staffersGroup.add(staffSprite);
           });
+        }
+
+        function _updateGameTurn(){
+          console.log('Game has turned');
+          var currentBG = (seaBG1.x === 0) ? seaBG1 : seaBG2;
+          var otherBG = (seaBG1.x === 0) ? seaBG2 : seaBG1;
+          otherBG.x = w;
+          game.add.tween(currentBG).to({x:-w}, 750, Phaser.Easing.Sinusoidal.Out, true);
+          game.add.tween(otherBG).to({x:0}, 750, Phaser.Easing.Sinusoidal.Out, true);
         }
 
         function _updateStaff(staffFromScope, resolve, isHuman){
@@ -244,6 +256,11 @@ angular.module('partyanimalsDraftApp')
           console.log('Starting the game...');
           _updateDistrictDetails();
           _setupStaff();
+        });
+
+        scope.$on('GAME:turn', function(){
+          console.log('Game turned');
+          _updateGameTurn();
         });
 
         scope.$on('GAME:assign', function(event, staff){

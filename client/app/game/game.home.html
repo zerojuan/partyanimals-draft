@@ -97,8 +97,8 @@
 <cards-view cards="cards"></cards-view>
 <div ng-include="'components/alert/alert.html'"></div>
 <div class="status-updates">
-  <alert ng-repeat="notification in notifications | limitTo:5" type="{{alert.type}}" close="closeNotification($index)">
-    <strong>Warning!</strong> {{notification.name}}
+  <alert ng-repeat="notification in notifications | limitTo:5" class="{{notification.team}}" close="closeNotification($index)">
+    <notification actor="notification"></notification>
   </alert>
 </div>
 <game-layer select-district="selectDistrict" selected-district="selectedDistrict" human="human" ai="ai" staffers="staffers">

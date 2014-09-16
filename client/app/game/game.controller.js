@@ -4,7 +4,9 @@ angular.module('partyanimalsDraftApp')
   .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim, Ruleset, GameModel) {
     $scope.dataLoadSize = 13;
     $scope.human = GameState.getHuman();
+    $scope.human.team = 'HUMAN';
     $scope.ai = GameState.getAI();
+    $scope.ai.team = 'AI';
     $scope.turnsLeft = GameState.getTurnsLeft();
     $scope.totalTurns = 30;
     $scope.daysInAWeek = 5;
@@ -343,7 +345,7 @@ angular.module('partyanimalsDraftApp')
     });
 
     var resolveActivity = function(actor, isCandidate, isHuman){
-      $scope.updates.push(actor);
+      $scope.updates.unshift(actor);
       $scope.notifications.unshift(actor);
       var eventSuffix = '';
       if(!isHuman){
@@ -621,13 +623,20 @@ angular.module('partyanimalsDraftApp')
     };
 
     function move1Day(){
+      $scope.notifications = [];
       $scope.daysElapsed+=1;
-      $scope.turnsLeft--;
-      GameState.updateTurn($scope.turnsLeft);
-      GameState.updateDistrictReputationHistory($scope.districts);
-      $scope.totalReputations = GameState.getTotalReputation();
+      updateTurn();
       var aiMoves = Aisim.proposeAction($scope.ai, $scope.districts, $scope.activities);
       insertAiActions(aiMoves);
+    }
+
+    function updateTurn(){
+      $scope.turnsLeft--;
+      GameState.updateTurn($scope.turnsLeft);
+      $scope.closeDistrictDetails();
+      GameState.updateDistrictReputationHistory($scope.districts);
+      $scope.totalReputations = GameState.getTotalReputation();
+      $rootScope.$broadcast('GAME:turn');
     }
 
     $scope.onRest = function(){
