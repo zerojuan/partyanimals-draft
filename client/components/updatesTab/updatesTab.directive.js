@@ -11,7 +11,6 @@ angular.module('partyanimalsDraftApp')
       link: function (scope) {
         scope.countSeen = function(){
           return _.reduce(scope.updates, function(total, update){
-            console.log('Update: ', total);
             return !update.seen ? total+=1 : total;
           }, 0);
         };

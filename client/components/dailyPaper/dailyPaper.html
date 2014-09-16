@@ -1,0 +1,35 @@
+<div class="reveal-animation">
+  <div class="col-xs-12">
+    <div class="title">
+      <h1>Summer Dais</h1><h4>New<span class="red">'</span>s Today</h4>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <hr>
+    <h4 class="right">Issue {{days}}</h4>
+  </div>
+  <div class="container body">
+    <div ng-show="actors.length === 0">
+      <h1>Nothing happened in Summer Island</h1>
+    </div>
+    <div ng-show="actors.length > 0">
+      <div ng-show="humanCandidate">
+        {{humanCandidate.name}} {{humanCandidate.activity.name}} {{humanCandidate.activity.district.name}}
+      </div>
+      <div ng-show="humanActors.length > 0">
+        <div ng-repeat="actor in humanActors">
+          {{actor.name}} {{actor.activity.name}} {{actor.activity.district.name}}
+        </div>
+      </div>
+      <div ng-show="aiCandidate">
+        {{aiCandidate.name}} {{aiCandidate.activity.name}} {{aiCandidate.activity.district.name}}
+      </div>
+      <div ng-show="aiActors.length > 0">
+        <div ng-repeat="actor in aiActors">
+          {{actor.name}} {{actor.activity.name}} {{actor.activity.district.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-transclude></div>
+</div>

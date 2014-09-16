@@ -45,7 +45,18 @@
         </div>
       </div>
     </div>
-
+  </div>
+  <div ng-switch-when="DAILY" class="container">
+    <div class="row simulation-container">
+      <div class="event-container"></div>
+      <div class="activity-sim row newspaper">
+        <daily-paper actors="notifications" days="daysElapsed">
+          <div class="col-xs-12 done-btn">
+            <div ng-click="onHideOverlay()" class="btn btn-success"><h4>Done Reading</h4></div>
+          </div>
+        </daily-paper>
+      </div>
+    </div>
   </div>
   <div ng-switch-when="WEEKLY" class="container">
     <div class="row simulation-container">
@@ -84,11 +95,12 @@
       </div>
     </div>
   </div>
-  <div ng-switch-when="RESOLVE" class="container reveal-animation">
+  <div ng-switch-when="RESOLVE" class="container">
     <div class="row simulation-container">
       <div class="event-container">
       </div>
       <div class="activity-sim row">
+        <!-- <h1>Hey this should appear right?</h1> -->
         <activity-sim actor="human" issues="issues" ai="ai" on-next-ready="onNextReady"></activity-sim>
       </div>
     </div>
@@ -96,11 +108,6 @@
 </div>
 <cards-view cards="cards"></cards-view>
 <div ng-include="'components/alert/alert.html'"></div>
-<div class="status-updates">
-  <alert ng-repeat="notification in notifications | limitTo:5" class="{{notification.team}}" close="closeNotification($index)">
-    <notification actor="notification"></notification>
-  </alert>
-</div>
 <game-layer select-district="selectDistrict" selected-district="selectedDistrict" human="human" ai="ai" staffers="staffers">
 </game-layer>
 <district-details ng-show="selectedDistrict" on-activity-selected="onActivitySelected" selected-district="selectedDistrict" human="human" ai="ai" close-handler="closeDistrictDetails">

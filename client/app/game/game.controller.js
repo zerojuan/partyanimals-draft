@@ -5,8 +5,10 @@ angular.module('partyanimalsDraftApp')
     $scope.dataLoadSize = 13;
     $scope.human = GameState.getHuman();
     $scope.human.team = 'HUMAN';
+    $scope.human.isCandidate = true;
     $scope.ai = GameState.getAI();
     $scope.ai.team = 'AI';
+    $scope.ai.isCandidate = true;
     $scope.turnsLeft = GameState.getTurnsLeft();
     $scope.totalTurns = 30;
     $scope.daysInAWeek = 5;
@@ -499,14 +501,24 @@ angular.module('partyanimalsDraftApp')
       });
     });
 
+    var reservedState = [];
     $scope.onHideOverlay = function(){
-      $scope.showOverlay = false;
-      $scope.config.overlayState = 'HIDDEN';
+      if(reservedState.length > 0){
+        console.log('Showing next overlay');
+        $scope.config.overlayState = reservedState.pop();
+      }else{
+        $scope.showOverlay = false;
+        $scope.config.overlayState = 'HIDDEN';
+      }
     };
 
     $scope.onShowOverlay = function(state){
-      $scope.showOverlay = true;
-      $scope.config.overlayState = state;
+      if($scope.showOverlay){
+        reservedState.push(state);
+      }else{
+        $scope.showOverlay = true;
+        $scope.config.overlayState = state;
+      }
     };
 
     $scope.closeDistrictDetails = function(){
@@ -636,6 +648,7 @@ angular.module('partyanimalsDraftApp')
       $scope.closeDistrictDetails();
       GameState.updateDistrictReputationHistory($scope.districts);
       $scope.totalReputations = GameState.getTotalReputation();
+      $scope.onShowOverlay('DAILY');
       $rootScope.$broadcast('GAME:turn');
     }
 
