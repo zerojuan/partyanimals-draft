@@ -14,7 +14,7 @@
     </div>
     <div ng-show="actors.length > 0">
       <div ng-show="humanCandidate">
-        {{humanCandidate.name}} {{humanCandidate.activity.name}} {{humanCandidate.activity.district.name}}
+        <h1>{{humanCandidate.name}} {{humanCandidate.activity.name}} {{humanCandidate.activity.district.name}}</h1>
       </div>
       <div ng-show="humanActors.length > 0">
         <div ng-repeat="actor in humanActors">
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div ng-show="aiCandidate">
-        {{aiCandidate.name}} {{aiCandidate.activity.name}} {{aiCandidate.activity.district.name}}
+        <h1>{{aiCandidate.name}} {{aiCandidate.activity.name}} {{aiCandidate.activity.district.name}}</h1>
       </div>
       <div ng-show="aiActors.length > 0">
         <div ng-repeat="actor in aiActors">

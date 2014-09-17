@@ -17,6 +17,7 @@ angular.module('partyanimalsDraftApp')
           scope.humanCandidate = null;
           scope.aiActors = [];
           scope.aiCandidate = null;
+          //TODO: render news items with proper layout
           _.forEach(scope.actors, function(actor){
             if(actor.team === 'AI'){
               if(actor.isCandidate){
