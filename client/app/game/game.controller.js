@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim, Ruleset, GameModel) {
+  .controller('GameCtrl', function ($scope, $rootScope, $filter, $http, PAFirebase, GameState, Aisim, Ruleset, GameModel, NewspaperService) {
     $scope.dataLoadSize = 13;
     $scope.human = GameState.getHuman();
     $scope.human.team = 'HUMAN';
@@ -310,6 +310,8 @@ angular.module('partyanimalsDraftApp')
           });
         });
 
+        NewspaperService.setupCandidates($scope.human, $scope.ai, $scope.issues);
+
         $scope.human.staff = [];
         $scope.human.staff.push($scope.staffers[0]);
         $scope.staffers[0].team = 'HUMAN';
@@ -461,6 +463,7 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.$watch('daysElapsed', function(newVal, oldVal){
+      console.log('Days Elapsed Executed');
       var elapsed = newVal-oldVal;
       if(elapsed < 0){
         elapsed = 5;

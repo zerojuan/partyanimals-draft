@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .directive('dailyPaper', function () {
+  .directive('dailyPaper', function (NewspaperService) {
     return {
       templateUrl: 'components/dailyPaper/dailyPaper.html',
       restrict: 'E',
@@ -20,12 +20,14 @@ angular.module('partyanimalsDraftApp')
           //TODO: render news items with proper layout
           _.forEach(scope.actors, function(actor){
             if(actor.team === 'AI'){
+              actor.headline = NewspaperService.createHeadline(actor, true);
               if(actor.isCandidate){
                 scope.aiCandidate = actor;
               }else{
                 scope.aiActors.push(actor);
               }
             }else{
+              actor.headline = NewspaperService.createHeadline(actor, false);
               if(actor.isCandidate){
                 scope.humanCandidate = actor;
               }else{
