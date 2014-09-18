@@ -462,48 +462,6 @@ angular.module('partyanimalsDraftApp')
       $rootScope.$broadcast('GAME:resolve');
     };
 
-    $scope.$watch('daysElapsed', function(newVal, oldVal){
-      console.log('Days Elapsed Executed');
-      var elapsed = newVal-oldVal;
-      if(elapsed < 0){
-        elapsed = 5;
-      }
-
-      if($scope.human.activity){
-        $scope.human.activity.details.daysPassed+=elapsed;
-        if($scope.human.activity.details.daysPassed>=$scope.human.activity.details.days){
-          $scope.onShowOverlay('RESOLVE');
-        }
-      }
-
-      if($scope.ai.activity){
-        $scope.ai.activity.details.daysPassed+=elapsed;
-        if($scope.ai.activity.details.daysPassed>=$scope.ai.activity.details.days){
-          endActivity($scope.ai, $scope.ai.staff, false);
-        }
-      }
-
-      _.forEach($scope.human.staff, function(staff){
-        if(staff.activity){
-
-          staff.activity.details.daysPassed+=elapsed;
-          if(staff.activity.details.daysPassed >= staff.activity.details.days){
-            //done!!
-            endActivity(staff, $scope.human.staff, true);
-          }
-        }
-      });
-
-      _.forEach($scope.ai.staff, function(staff){
-        if(staff.activity){
-          staff.activity.details.daysPassed+=elapsed;
-          if(staff.activity.details.daysPassed >= staff.activity.details.days){
-            endActivity(staff, $scope.ai.staff, false);
-          }
-        }
-      });
-    });
-
     var reservedState = [];
     $scope.onHideOverlay = function(){
       if(reservedState.length > 0){
@@ -639,7 +597,7 @@ angular.module('partyanimalsDraftApp')
 
     function move1Day(){
       $scope.notifications = [];
-      $scope.daysElapsed+=1;
+      updateDaysElapsed(1);
       updateTurn();
       var aiMoves = Aisim.proposeAction($scope.ai, $scope.districts, $scope.activities);
       insertAiActions(aiMoves);
@@ -653,6 +611,45 @@ angular.module('partyanimalsDraftApp')
       $scope.totalReputations = GameState.getTotalReputation();
       $scope.onShowOverlay('DAILY');
       $rootScope.$broadcast('GAME:turn');
+    }
+
+    function updateDaysElapsed(elapsed){
+      console.log('Days Elapsed Executed');
+      $scope.daysElapsed+=1;
+
+      if($scope.human.activity){
+        $scope.human.activity.details.daysPassed+=elapsed;
+        if($scope.human.activity.details.daysPassed>=$scope.human.activity.details.days){
+          $scope.onShowOverlay('RESOLVE');
+        }
+      }
+
+      if($scope.ai.activity){
+        $scope.ai.activity.details.daysPassed+=elapsed;
+        if($scope.ai.activity.details.daysPassed>=$scope.ai.activity.details.days){
+          endActivity($scope.ai, $scope.ai.staff, false);
+        }
+      }
+
+      _.forEach($scope.human.staff, function(staff){
+        if(staff.activity){
+
+          staff.activity.details.daysPassed+=elapsed;
+          if(staff.activity.details.daysPassed >= staff.activity.details.days){
+            //done!!
+            endActivity(staff, $scope.human.staff, true);
+          }
+        }
+      });
+
+      _.forEach($scope.ai.staff, function(staff){
+        if(staff.activity){
+          staff.activity.details.daysPassed+=elapsed;
+          if(staff.activity.details.daysPassed >= staff.activity.details.days){
+            endActivity(staff, $scope.ai.staff, false);
+          }
+        }
+      });
     }
 
     $scope.onRest = function(){
