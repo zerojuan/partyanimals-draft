@@ -135,8 +135,8 @@ angular.module('partyanimalsDraftApp')
         if(!onDataChanged('turnsPerGame')){
           // $scope.turnsLeft = 1;
           // $scope.totalTurns = 1;
-          $scope.turnsLeft = snapshot.val();
-          $scope.totalTurns = snapshot.val();
+          $scope.turnsLeft = 5;//snapshot.val();
+          $scope.totalTurns = 5;//snapshot.val();
 
           GameState.turnsLeft = $scope.turnsLeft;
           $scope.$apply();
@@ -609,8 +609,13 @@ angular.module('partyanimalsDraftApp')
       $scope.closeDistrictDetails();
       GameState.updateDistrictReputationHistory($scope.districts);
       $scope.totalReputations = GameState.getTotalReputation();
-      $scope.onShowOverlay('DAILY');
-      $rootScope.$broadcast('GAME:turn');
+      if($scope.turnsLeft === 0){
+        $scope.config.state = 'end';
+      }else{
+        $scope.onShowOverlay('DAILY');
+        $rootScope.$broadcast('GAME:turn');
+      }
+
     }
 
     function updateDaysElapsed(elapsed){
