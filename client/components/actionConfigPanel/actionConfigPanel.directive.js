@@ -90,6 +90,20 @@ angular.module('partyanimalsDraftApp')
           });
         };
 
+        scope.getCostModifier = function(){
+          //distance between min and max
+          var min = scope.selectedActivity.cost.min;
+          var max = scope.selectedActivity.cost.max;
+          var range = max - min;
+          var cost = scope.details.cost - min;
+          //min and max percentage
+          var minPercentage = 30;
+          var maxPercentage = 80;
+          var percentageRange = maxPercentage - minPercentage;
+          var costPercentage = (percentageRange * (cost / range)) + minPercentage;
+          return costPercentage;
+        }
+
         scope.isReady = function(){
           if(scope.details.actor){
             if(scope.selectedActivity.type === 'STAT'){

@@ -81,7 +81,7 @@
       Success Chance
     </div>
     <div class="col-xs-9">
-      90%
+      {{getCostModifier() | number:2}} + {{selectedActivity.district.kapitan.humanRelations}}
     </div>
   </div>
   <div class="row">
