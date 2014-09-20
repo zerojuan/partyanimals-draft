@@ -81,7 +81,10 @@
       Success Chance
     </div>
     <div class="col-xs-9">
-      {{getCostModifier() | number:2}} + {{selectedActivity.district.kapitan.humanRelations}}
+      {{getCostModifier() | number:2}} 
+      <span ng-show="getKapitanModifier() !== 0">
+        <span ng-show="getKapitanModifier()>0">+</span> {{getKapitanModifier()}} Kapitan Relationship Bonus
+      </span>
     </div>
   </div>
   <div class="row">

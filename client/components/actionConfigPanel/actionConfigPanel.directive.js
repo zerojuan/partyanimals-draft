@@ -104,6 +104,11 @@ angular.module('partyanimalsDraftApp')
           return costPercentage;
         }
 
+        scope.getKapitanModifier = function(){
+          var kapitanModifier = $filter('feelingstomodifier')(scope.selectedActivity.district.kapitan.humanRelations);
+          return kapitanModifier * 100;
+        }
+
         scope.isReady = function(){
           if(scope.details.actor){
             if(scope.selectedActivity.type === 'STAT'){
