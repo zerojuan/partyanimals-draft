@@ -493,4 +493,15 @@ angular.module('partyanimalsDraftApp')
           a: a+add
       };
     };
+
+    that.capIssue = function(issue, value){
+      var newValue = issue+value;
+      if(newValue > 5){
+        return 5;
+      }
+      if(newValue < 0){
+        return 0;
+      }
+      return newValue;
+    }
   });

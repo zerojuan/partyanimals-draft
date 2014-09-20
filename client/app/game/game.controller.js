@@ -374,15 +374,15 @@ angular.module('partyanimalsDraftApp')
         if(actor.activity.details.isVs){
           //subtract enemy ai
           if(isHuman){
-            district.aiStance[actor.activity.details.selectedIssue] -= 1;
+            district.aiStance[actor.activity.details.selectedIssue] = GameState.capIssue(district.aiStance[actor.activity.details.selectedIssue], -1);
           }else{
-            district.humanStance[actor.activity.details.selectedIssue] -= 1;
+            district.humanStance[actor.activity.details.selectedIssue] = GameState.capIssue(district.humanStance[actor.activity.details.selectedIssue], -1);
           }
         }else{
           if(isHuman){
-            district.humanStance[actor.activity.details.selectedIssue] += 1;
+            district.humanStance[actor.activity.details.selectedIssue] = GameState.capIssue(district.humanStance[actor.activity.details.selectedIssue], 1);
           }else{
-            district.aiStance[actor.activity.details.selectedIssue] += 1;
+            district.aiStance[actor.activity.details.selectedIssue] = GameState.capIssue(district.aiStance[actor.activity.details.selectedIssue], 1);
           }
         }
       }else if(actor.activity.type === 'SORTIE'){
