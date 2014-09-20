@@ -395,6 +395,12 @@ angular.module('partyanimalsDraftApp')
           district.aiReputation = reputation.a;
           district.humanReputation = reputation.b;
         }
+      }else if(actor.activity.type === 'TALK'){
+        //RESOLVE TALK ACTION
+        var result = actor.activity.result;
+        //update kapitan reputation values
+        //update gold values if any
+        //update state update
       }
 
       if(isCandidate){
@@ -669,8 +675,9 @@ angular.module('partyanimalsDraftApp')
       }
     };
 
-    $scope.onNextReady = function(){
-      $scope.onHideOverlay();
+    $scope.onNextReady = function(result){
+      $scope.onHideOverlay();      
+      $scope.human.activity.result = result;
       endActivity($scope.human, $scope.human.staff, true);
     };
 
