@@ -53,6 +53,8 @@ angular.module('partyanimalsDraftApp')
       }else if(actor.activity.name === 'Contest'){
         return actor.name + ' contests ' + actor.activity.district.name + ' on ' +
           myOpponentName + '\'s ' + that.issues[actor.activity.details.selectedIssue].name + ' Platform';
+      }else if(actor.activity.name === 'Move'){
+        return actor.name + ' travels to ' + actor.activity.district.name;
       }
     };
   });

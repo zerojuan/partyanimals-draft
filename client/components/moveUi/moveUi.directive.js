@@ -12,17 +12,15 @@ angular.module('partyanimalsDraftApp')
       },
       link: function postLink(scope, element, attrs, simCtrl) {
 
-        scope.$watch('activity', function(){
-          if(scope.activity){
-            simCtrl.setDone({
+        scope.onDone = function(){
+          simCtrl.setDone({
               type: 'MOVE',
-              district: scope.activity.location,
+              district: scope.activity.district,
               name: scope.activity.name,
               cost: scope.activity.cost,
               success: true
             });
-          }
-        });
+        }
       }
     };
   });
