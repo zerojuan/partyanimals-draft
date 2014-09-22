@@ -133,10 +133,10 @@ angular.module('partyanimalsDraftApp')
         setLoadingMessage('Counting election days...');
 
         if(!onDataChanged('turnsPerGame')){
-          $scope.turnsLeft = 1;
-          $scope.totalTurns = 1;
-          // $scope.turnsLeft = snapshot.val();
-          // $scope.totalTurns = snapshot.val();
+          // $scope.turnsLeft = 1;
+          // $scope.totalTurns = 1;
+          $scope.turnsLeft = snapshot.val();
+          $scope.totalTurns = snapshot.val();
 
           GameState.turnsLeft = $scope.turnsLeft;
           $scope.$apply();

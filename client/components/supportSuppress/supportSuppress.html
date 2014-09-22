@@ -1,17 +1,50 @@
 <div class="support-suppress">
   <h3>Cash Left: ${{cash}} <span class="evil" ng-show="costSuppress > 0"> - {{costSuppress}}</span><span class="good" ng-show="costSupport>0"> - {{costSupport}}</span><span ng-show="costSupport>0 || costSuppress>0"> = ${{cash - costSupport - costSuppress}}</span></h3>
-  <div class="province-container">
-    <div ng-repeat="district in districts" class="district-container col-xs-4">
-      <div class="district {{district.name.split(' ').join('')}}">
-        <strong>{{district.name}}</strong> {{district.humanProjectedVote}} vs {{district.aiProjectedVote}}
-        <div class="avatar">
-          <img tooltip="{{district.kapitan.humanRelations | feelings}}" class="avatar-clickable" ng-src="assets/images/avatars/{{district.kapitan.image}}"></img>
-        </div>
-        <div class="btn-container">
-          <a class="btn good" ng-class="{selected: district.manipulate === 1}" ng-click="supportThis(district)">Support</a>
-          <a class="btn evil" ng-class="{selected: district.manipulate === -1}" ng-click="suppressThis(district)">Suppress</a>
+  <div>
+    <i>Click on a district to do additional preparations</i>
+  </div>
+  <div class="row">
+    <div class="staff-container col-xs-4">
+      <div class="pull-right col-xs-12">
+        <div ng-show="showStaffChoice" class="staff-choice" style="margin-top: {{selectedDistrictMargin}}px;">
+          <h4>Assign:</h4>
+          <div class="avatar" ng-click="selectStaff(human)" ng-class="{disabled: shouldDisable(human), selected: human.selected}">
+            <img ng-class="{disabled: shouldDisable(human)}"ng-src="/assets/images/avatars/{{human.image}}"></img>
+          </div>
+          <div ng-click="selectStaff(staff)" ng-repeat="staff in human.staff" class="avatar" ng-class="{disabled: shouldDisable(staff), selected: staff.selected}">
+            <img ng-class="{disabled: shouldDisable(staff)}" ng-src="/assets/images/avatars/{{staff.image}}"></img>
+          </div>
+          <h4 class="clear">Action:</h4>
+          <div class="btn-group btn-container">
+              <label class="btn good" ng-model="selectedDistrict.manipulate" btn-radio='1'>Support</label>
+              <label class="btn evil" ng-model="selectedDistrict.manipulate" btn-radio='-1'>Suppress</label>
+          </div>
+          <div>
+            <a class="btn good btn-done active" ng-click="onStaffDone()">Done</a>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="col-xs-4">
+
+    <div class="province-container">
+      <div ng-repeat="district in districts" class="district-container">
+        <div class="district {{district.name.split(' ').join('')}}" ng-class="{selected: district.selected}" ng-click="clickOnDistrict(district, $index)">
+          <strong>{{district.name}}</strong> {{district.humanProjectedVote}} vs {{district.aiProjectedVote}}
+          <div class="avatar">
+            <img tooltip="{{district.kapitan.humanRelations | feelings}}" class="avatar-clickable" ng-src="assets/images/avatars/{{district.kapitan.image}}"></img>
+          </div>
+          <div class="staff-container">
+            <div ng-repeat="staff in district.humanActors" class="avatar" ng-click="removeStaff(staff, district)">
+              <img ng-src="/assets/images/avatars/{{staff.image}}" class="{{staff.activity}}"></img>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="staff-container col-xs-4">
+
     </div>
   </div>
   <p>

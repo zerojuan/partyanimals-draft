@@ -9,10 +9,14 @@ angular.module('partyanimalsDraftApp')
         cash: '=',
         kapitans: '=',
         districts: '=',
-        done: '='
+        done: '=',
+        human: '=',
+        ai: '='
       },
       link: function (scope) {
+        scope.showStaffChoice = false;
         var kapitansAttached = false;
+
         var attachKapitans = function(){
           if(kapitansAttached){
             return;
@@ -34,7 +38,24 @@ angular.module('partyanimalsDraftApp')
           });
         };
 
+        var updateCosts = function(){
+          scope.costSupport = 0;
+          scope.costSuppress = 0;
+          _.forEach(scope.districts, function(district){
+            if(district.humanActors.length > 0){
+              _.forEach(district.humanActors, function(actor){
+                if(actor.activity === 'suppress'){
+                  scope.suppressThis(district);
+                }else if(actor.activity === 'support'){
+                  scope.supportThis(district);
+                }
+              });
+            }
+          });
+        };
+
         scope.$watch('kapitans', function(){
+
           if(scope.kapitans && scope.districts){
               attachKapitans();
           }
@@ -42,42 +63,101 @@ angular.module('partyanimalsDraftApp')
 
         scope.$watch('districts', function(){
           if(scope.kapitans && scope.districts){
+            _.forEach(scope.districts, function(d){
+              d.humanActors = [];
+            });
               attachKapitans();
           }
         });
+
+        scope.$watch('human', function(){
+          scope.human.activity = null;
+          _.forEach(scope.human.staff, function(staff){
+            staff.activity = null;
+          });
+        });
+
+        scope.shouldDisable = function(staffer){
+          var isDisabled = false;
+          if(staffer.activity){ //if staffer is already assigned
+            isDisabled = true;
+          }
+          return isDisabled;
+        };
+
+        scope.selectStaff = function(staff){
+
+          scope.human.selected = false;
+          _.forEach(scope.human.staff, function(s){
+            s.selected = false;
+          });
+          if(staff.activity){
+            return;
+          }
+          staff.selected = true;
+        };
+
+        scope.onStaffDone = function(){
+          var selectedStaff = scope.human.selected ? scope.human : null;
+          if(!selectedStaff){
+            selectedStaff = _.find(scope.human.staff, function(s){
+              return s.selected && !s.activity;
+            });
+          }
+
+          if(selectedStaff){
+            var district = _.find(scope.districts, function(d){
+              return d.selected;
+            });
+            selectedStaff.activity = district.manipulate > 0 ? 'support' : 'suppress';
+            district.humanActors.push(selectedStaff);
+          }
+          scope.showStaffChoice = false;
+          updateCosts();
+        };
+
+        scope.clickOnDistrict = function(district, index){
+          scope.showStaffChoice = true;
+          scope.selectedDistrictMargin = index * 40;
+          _.forEach(scope.districts, function(d){
+            d.selected = false;
+            d.manipulate = 1;
+          });
+          var defaultExists = false;
+          _.forEach(scope.human.staff, function(s){
+            if(!s.activity){
+              s.selected = true;
+              defaultExists = true;
+              return false;
+            }
+          });
+          if(!defaultExists && !scope.human.activity){
+            scope.human.selected = true;
+          }
+          district.selected = true;
+          scope.selectedDistrict = district;
+        };
 
         scope.onDone = function(){
           scope.done();
         };
 
-        scope.suppressThis = function(district){
-          if(district.manipulate === 0){
-            district.manipulate = -1;
-            scope.costSuppress += 1000 * district.goldCostModifier;
-          }else if(district.manipulate === 1){
-            district.manipulate = -1;
-            scope.costSupport -= 1000 * district.goldCostModifier;
-            scope.costSuppress += 1000 * district.goldCostModifier;
-          }else{
-            district.manipulate = 0;
-            scope.costSuppress -= 1000 * district.goldCostModifier;
-          }
+        scope.removeStaff = function(staff, district){
+          staff.activity = null;
+          staff.selected = false;
+          var index = _.findIndex(district.humanActors, function(s){
+            return s.name === staff.name;
+          });
+          district.humanActors.splice(index,1);
+          updateCosts();
+        };
 
+        scope.suppressThis = function(district){
+          scope.costSuppress += 1000 * district.goldCostModifier;
         };
 
         scope.supportThis = function(district){
-          if(district.manipulate === 0){
-            district.manipulate = 1;
-            scope.costSupport += 1000 * district.goldCostModifier;
-          }else if(district.manipulate === -1){
-            district.manipulate = 1;
-            scope.costSupport += 1000 * district.goldCostModifier;
-            scope.costSuppress -= 1000 * district.goldCostModifier;
-          }else{
-            district.manipulate = 0;
-            scope.costSupport -= 1000 * district.goldCostModifier;
-          }
-
+          scope.costSupport += 1000 * district.goldCostModifier;
         };
       }
     };

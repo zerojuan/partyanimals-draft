@@ -3,7 +3,7 @@
     <div ng-switch-when="prep">
       <h2>Final Day Preparations</h2>
       <voting-graph reputations="totalReputations"></voting-graph>
-      <support-suppress districts="districts" kapitans="kapitans" cash="human.totalCash" done="onPreparationDone"></support-suppress>
+      <support-suppress human="human" ai="ai" districts="districts" kapitans="kapitans" cash="human.totalCash" done="onPreparationDone"></support-suppress>
     </div>
     <div ng-switch-when="sim" class="row">
       <div class="col-xs-12">
