@@ -133,10 +133,10 @@ angular.module('partyanimalsDraftApp')
         setLoadingMessage('Counting election days...');
 
         if(!onDataChanged('turnsPerGame')){
-          // $scope.turnsLeft = 1;
-          // $scope.totalTurns = 1;
-          $scope.turnsLeft = 5;//snapshot.val();
-          $scope.totalTurns = 5;//snapshot.val();
+          $scope.turnsLeft = 1;
+          $scope.totalTurns = 1;
+          // $scope.turnsLeft = snapshot.val();
+          // $scope.totalTurns = snapshot.val();
 
           GameState.turnsLeft = $scope.turnsLeft;
           $scope.$apply();
@@ -676,7 +676,7 @@ angular.module('partyanimalsDraftApp')
     };
 
     $scope.onNextReady = function(result){
-      $scope.onHideOverlay();      
+      $scope.onHideOverlay();
       $scope.human.activity.result = result;
       endActivity($scope.human, $scope.human.staff, true);
     };
