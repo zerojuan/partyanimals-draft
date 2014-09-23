@@ -74,6 +74,7 @@ angular.module('partyanimalsDraftApp')
             //construct relationship graph based on kapitans
             var nodes = angular.copy(scope.kapitans);
             var links = [];
+            // d3.selectAll("svg > *").remove();
             _.forEach(nodes, function(val){
               var data = {};
               _.forEach(val.relations, function(rel, i){

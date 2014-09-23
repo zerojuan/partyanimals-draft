@@ -49,6 +49,34 @@ angular.module('partyanimalsDraftApp')
       addDataCallbacks();
     });
 
+    var setKapitanForDistrict = function(kapitan, district){
+      var changedDistrict = _.find($scope.districts, function(val){
+        return val.id === district.id;
+      });
+      changedDistrict.kapitan = kapitan;
+      return changedDistrict;
+    };
+
+    var updateKapitanRelations = function(kapitan, relationUpgrade, isHuman){
+      var kapId = kapitan.id;
+      _.forEach($scope.kapitans, function(kap){
+        if(kap.id === kapId){
+          if(isHuman){
+            kap.humanRelations = GameState.capFeelings(relationUpgrade + kap.humanRelations);
+          }else{
+            kap.aiRelations = GameState.capFeelings(relationUpgrade + kap.aiRelations);
+          }
+          return;
+        }
+        var feelingsModifier = $filter('feelingstomodifier')(kap.relations[kapId]);
+        if(isHuman){
+          kap.humanRelations = GameState.capFeelings(kap.humanRelations + feelingsModifier * relationUpgrade);
+        }else{
+          kap.aiRelations = GameState.capFeelings(kap.aiRelations + feelingsModifier * relationUpgrade);
+        }
+      });
+    };
+
     var changedList = {};
     var onDataChanged = function(name){
       if(changedList[name] !== undefined){
@@ -319,6 +347,8 @@ angular.module('partyanimalsDraftApp')
         $scope.staffers[1].team = 'HUMAN';
         $scope.human.staff.push($scope.staffers[2]);
         $scope.staffers[2].team = 'HUMAN';
+        $scope.human.donEvents = [];
+        $scope.human.met = [0,0,0,0,0,0,0,0,0];
 
 
         Aisim.ai = $scope.ai;
@@ -398,6 +428,23 @@ angular.module('partyanimalsDraftApp')
       }else if(actor.activity.type === 'TALK'){
         //RESOLVE TALK ACTION
         var result = actor.activity.result;
+        var kapitan = result.kapitan;
+        var total = result.total;
+        var localKapitan = GameState.findKapitan(kapitan.id, $scope.kapitans);
+        updateKapitanRelations(localKapitan, total.relationship, true);
+        if(localKapitan.type === 'KAPITAN'){
+          setKapitanForDistrict(localKapitan, result.district);
+        }
+        console.log('Will Repeat?', result.willRepeat);
+        console.log('Total:', result, localKapitan);
+        if(result.willRepeat){
+          $scope.human.doneEvents[result.name] = 0;
+        }else{
+          //if an event is unfinished and will happen again, then you haven't really met
+          $scope.human.met[kapitan.id] += 1;
+        }
+        $scope.totalCash += result.total.gold;
+        $scope.human.morality += result.total.morality;
         //update kapitan reputation values
         //update gold values if any
         //update state update
@@ -613,6 +660,7 @@ angular.module('partyanimalsDraftApp')
       $scope.turnsLeft--;
       GameState.updateTurn($scope.turnsLeft);
       $scope.closeDistrictDetails();
+      GameState.updateGameState($scope.human, $scope.ai, $scope.districts, $scope.kapitans, $scope.issues);
       GameState.updateDistrictReputationHistory($scope.districts);
       $scope.totalReputations = GameState.getTotalReputation();
       if($scope.turnsLeft === 0){

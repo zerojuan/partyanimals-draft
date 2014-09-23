@@ -12,6 +12,8 @@ angular.module('partyanimalsDraftApp')
           goldCostModifier: district.goldCostModifier,
           timeCostModifier: district.timeCostModifier,
           kapitanCostModifier: district.kapitanCostModifier,
+          humanReputation: district.humanReputation,
+          aiReputation: district.aiReputation,
           issues: district.issues
         };
     };

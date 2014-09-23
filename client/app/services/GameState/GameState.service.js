@@ -76,6 +76,7 @@ angular.module('partyanimalsDraftApp')
 
     that.getDialog = function(index, event, district){
       console.log('MET:', that.humanStats.doneEvents);
+      console.log('District: ', district);
       var latestReputation = that.reputations[that.reputations.length - 1];
       var conditions = {
         GOLD: that.humanStats.totalCash,
@@ -95,6 +96,7 @@ angular.module('partyanimalsDraftApp')
         var defaultCondition = null;
         var selected = _.find(dialog.conditions, function(val){
           console.log('Testing: ' + val.condition);
+          console.log('Game Conditions: ', conditions)
           if(val.condition === 'DEFAULT') {
             defaultCondition = val;
             return false;
@@ -231,8 +233,9 @@ angular.module('partyanimalsDraftApp')
       });
     };
 
-    that.findKapitan = function(id){
-      return _.find(that.kapitans, function(val){
+    that.findKapitan = function(id, kapitans){
+      var kaps = kapitans || that.kapitans;
+      return _.find(kaps, function(val){
         return val.id === id;
       });
     };
