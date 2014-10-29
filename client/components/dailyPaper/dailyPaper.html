@@ -1,4 +1,4 @@
-<div class="reveal-animation">
+<div class="reveal-animation daily-paper">
   <div class="col-xs-12">
     <div class="title">
       <h1>Summer Dais</h1><h4>New<span class="red">'</span>s Today</h4>
@@ -10,24 +10,36 @@
   </div>
   <div class="container body">
     <div ng-show="actors.length === 0">
-      <h1>Nothing happened in Summer Island</h1>
+      <h2>{{fillerStory.headline}}</h2>
+      <p>{{fillerStory.story}}</p>
     </div>
     <div ng-show="actors.length > 0">
-      <div ng-show="humanCandidate">
-        <h1>{{humanCandidate.headline}}</h1>
+      <div ng-show="aiCandidate" class="left news-item col-xs-{{isBoth ? 8 : 12}}">
+        <h2>{{aiCandidate.headline}}</h2>
+        <p><img ng-src="./assets/images/avatars/{{aiCandidate.image}}"></img>{{aiCandidate.story}}</p>
+      </div>
+      <div ng-show="humanCandidate" class="left news-item col-xs-{{isBoth ? 4 : 12}}">
+        <h2 ng-hide="isBoth">{{humanCandidate.headline}}</h2>
+        <h3 ng-show="isBoth">{{humanCandidate.headline}}</h3>
+        <p><img ng-src="./assets/images/avatars/{{humanCandidate.image}}"></img>{{humanCandidate.story}}</p>
       </div>
       <div ng-show="humanActors.length > 0">
-        <div ng-repeat="actor in humanActors">
-          {{actor.headline}}
+        <div ng-repeat="actor in humanActors" class="left news-item col-xs-{{hasRemainder && $first ? 8 : 4}}">
+          <h4>{{actor.headline}}</h4>
+          <p><img class="failed" ng-src="./assets/images/avatars/{{actor.image}}"></img><hr class="human"/>{{actor.story}}</p>
         </div>
-      </div>
-      <div ng-show="aiCandidate">
-        <h1>{{aiCandidate.headline}}</h1>
       </div>
       <div ng-show="aiActors.length > 0">
-        <div ng-repeat="actor in aiActors">
-          {{actor.headline}}
+        <div ng-repeat="actor in aiActors" class="news-item left col-xs-{{humanActors.length==0 && hasRemainder && $first ? 8 : 4}}">
+          <h4>{{actor.headline}}</h4>
+          <p><img class="failed" ng-src="./assets/images/avatars/{{actor.image}}"></img><hr class="ai"/>{{actor.story}}</p>
         </div>
+      </div>
+    </div>
+    <div ng-show="fillerSubstories.length > 0">
+      <div ng-repeat="story in fillerSubstories" class="news-item left col-xs-4">
+        <h4>{{story.headline}}</h4>
+        <p>{{story.story}}</p>
       </div>
     </div>
   </div>

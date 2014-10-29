@@ -37,10 +37,10 @@ angular.module('partyanimalsDraftApp')
             game.load.image(val, './assets/images/districts/'+val+'.jpg');
           });
           game.load.spritesheet('people', './assets/images/ui/tiny-people.png', 15, 20, 4);
-          game.load.atlas('staffers', './assets/images/staff/staff.png', './assets/images/staff/staff.json');
+          game.load.atlas('staffers', './assets/images/avatars/staff/staff.png', './assets/images/staff/staff.json');
           game.load.image('cursor', './assets/images/ui/cursor.png');
-          game.load.image('mousey', './assets/images/avatars/mouseyMale.jpg');
-          game.load.image('croc', './assets/images/avatars/crocopio.jpg');
+          game.load.image('mousey', './assets/images/staff/mouse.png');
+          game.load.image('croc', './assets/images/staff/crocopio.png');
           game.load.image('bg', './assets/images/districts/normal2.png');
           game.load.image('border', './assets/images/ui/border.png');
         }
@@ -80,10 +80,10 @@ angular.module('partyanimalsDraftApp')
           // cursor = game.add.sprite(0,0, 'cursor');
           var mouseySprite = new Phaser.Sprite(game, 0, 0, 'mousey');
           mouseySprite.anchor.set(0.5);
-          mouseySprite.scale.x = mouseySprite.scale.y = 0.5;
+          mouseySprite.scale.x = mouseySprite.scale.y = 0.75;
           var crocSprite = new Phaser.Sprite(game, 0, 0, 'croc');
           crocSprite.anchor.set(0.5);
-          crocSprite.scale.x = crocSprite.scale.y = 0.5;
+          crocSprite.scale.x = crocSprite.scale.y = 0.75;
           chipsGroup.add(crocSprite);
           chipsGroup.add(mouseySprite);
 
@@ -133,7 +133,8 @@ angular.module('partyanimalsDraftApp')
             var staffSprite = new Phaser.Sprite(game, 0, 0, 'staffers');
             staffSprite.name = staff.id;
             staffSprite.anchor.set(0.5);
-            staffSprite.scale.x = staffSprite.scale.y = 0.5;
+            staffSprite.scale.x = staffSprite.scale.y = 0.75;
+            console.log('Setting up sprite: ', staff.image);
             staffSprite.frameName = staff.image;
             staffersGroup.add(staffSprite);
           });
