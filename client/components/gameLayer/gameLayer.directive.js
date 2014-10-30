@@ -37,7 +37,7 @@ angular.module('partyanimalsDraftApp')
             game.load.image(val, './assets/images/districts/'+val+'.jpg');
           });
           game.load.spritesheet('people', './assets/images/ui/tiny-people.png', 15, 20, 4);
-          game.load.atlas('staffers', './assets/images/avatars/staff/staff.png', './assets/images/staff/staff.json');
+          game.load.atlas('staffers', './assets/images/staff/staff.png', './assets/images/staff/staff.json');
           game.load.image('cursor', './assets/images/ui/cursor.png');
           game.load.image('mousey', './assets/images/staff/mouse.png');
           game.load.image('croc', './assets/images/staff/crocopio.png');
