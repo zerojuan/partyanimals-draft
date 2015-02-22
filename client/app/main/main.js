@@ -41,5 +41,10 @@ angular.module('partyanimalsDraftApp')
         url: '/game',
         templateUrl: 'app/game/game.html',
         controller: 'GameCtrl'
+      })
+      .state('endgame', {
+        url: '/endgame',
+        templateUrl: 'app/endgame-test/index.html',
+        controller: 'EndgameTest'
       });
   });
