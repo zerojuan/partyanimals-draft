@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('partyanimalsDraftApp')
-  .directive('endgameLayer', function (GameModel) {
+  .directive('endgameLayer', function (GameModel, EndGameSpriteToken) {
     return {
       template: '<div id="endgameCanvas"></div>',
       restrict: 'E',
@@ -22,7 +22,10 @@ angular.module('partyanimalsDraftApp')
           'resort'
         ];
         var districtGroup;
+        var uiGroup;
 
+        var tokens;
+        var tokensLeft = 6;
 
 
         function preload(){
@@ -30,6 +33,8 @@ angular.module('partyanimalsDraftApp')
           _.forEach(districtImages, function(val){
             game.load.image(val, './assets/images/districts/'+val+'.jpg');
           });
+          game.load.image('greenCircle', './assets/images/ui/green.png');
+          game.load.image('redCircle', './assets/images/ui/red.png');
           game.load.image('bg', './assets/images/districts/normal2.png');
         }
 
@@ -39,6 +44,9 @@ angular.module('partyanimalsDraftApp')
           seaBG1 = game.add.tileSprite(0,0,w,h, 'bg');
 
           districtGroup = game.add.group();
+          uiGroup = game.add.group();
+
+          tokens = [];
 
           _.forEach(districtImages, function(val, i){
             var district = new GameModel.District(game, districtGroup, null, val, onDistrictClicked, this);
@@ -48,6 +56,9 @@ angular.module('partyanimalsDraftApp')
             district.base.y = y*120 + 120;
             districtGroup.add(district.base);
             districtArray.push(district);
+
+            var token = EndGameSpriteToken.createToken(game, uiGroup, i, onTokenClicked, this);
+            tokens.push(token);
           });
         }
 
@@ -55,12 +66,25 @@ angular.module('partyanimalsDraftApp')
           /*TODO: update function*/
         }
 
-        function onDistrictClicked(sprite){
-          // var index = _.findIndex(districtImages, function(val){
-          //   return val === sprite.key;
-          // });
+        function onTokenClicked(sprite){
+          console.log('Clicked on this token');
+        }
 
-          console.log('Hey I clickd this : ' + sprite.key);
+        function onDistrictClicked(sprite){
+          var index = _.findIndex(districtImages, function(val){
+            return val === sprite.key;
+          });
+
+          var selectedDistrict = _.find(districtArray, function(val, i){
+            return i === index;
+          });
+
+
+
+          tokens[6-tokensLeft].move(selectedDistrict.base.x, selectedDistrict.base.y);
+          tokensLeft--;
+
+          console.log('Hey I clickd this : ', sprite);
         }
 
 

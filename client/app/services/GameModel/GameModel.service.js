@@ -60,11 +60,9 @@ angular.module('partyanimalsDraftApp')
       sprite.anchor.set(0.5);
       sprite.events.onInputDown.add(handler, context);
       sprite.events.onInputOver.add(function(){
-        console.log('Mouse over: ' + key);
         that.isMouseOver = true;
       }, this);
       sprite.events.onInputOut.add(function(){
-        console.log('Mouse out: ' + key);
         that.isMouseOver = false;
       }, this);
       district.add(sprite);
@@ -77,7 +75,7 @@ angular.module('partyanimalsDraftApp')
 
       //text
       var style = { font: '12px Arial', fill: 'black', align: 'center' };
-      var text = new Phaser.Text(game, -30, 40, 'x', style);
+      var text = new Phaser.Text(game, -30, 40, key, style);
       this.base.add(text);
       this.label = text;
 
