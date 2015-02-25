@@ -1,3 +1,12 @@
-<div>
+<div class="endgame-test">
   <endgame-layer></endgame-layer>
+  <div class="district-editor-container">
+    <h2>District Data</h2>
+    <ul class="list-unstyled">
+      <li ng-repeat="district in districts">
+        <strong>{{district.name}}</strong>
+        <input type="text" ng-model="district.population"></input>
+      </li>
+    </ul>
+  </div>
 </div>
