@@ -7,7 +7,7 @@ angular.module('partyanimalsDraftApp')
       restrict: 'E',
       replace: true,
       scope: {
-
+        orderedDistricts: '='
       },
       link: function (scope) {
         var seaBG1;
@@ -66,8 +66,30 @@ angular.module('partyanimalsDraftApp')
           /*TODO: update function*/
         }
 
-        function onTokenClicked(sprite){
+        function setTokenNumber(){
+          _.forEach(scope.orderedDistricts, function(district, i){
+            var t = _.find(tokens, function(token){
+              return (token.district === district);
+            })
+            t.setLabel(i+1);
+          });
+        }
+
+        function onTokenClicked(clickedToken){
           console.log('Clicked on this token');
+          var index = _.findIndex(tokens, function(token){
+            console.log('Base the same? ', clickedToken, token.base);
+            return token.base === clickedToken;
+          });
+
+          tokens[index].kill();
+          //remove from list
+          scope.orderedDistricts = _.reject(scope.orderedDistricts, function(district){
+            return district === tokens[index].district;
+          });
+          scope.$apply();
+
+          setTokenNumber();
         }
 
         function onDistrictClicked(sprite){
@@ -79,12 +101,19 @@ angular.module('partyanimalsDraftApp')
             return i === index;
           });
 
+          var token = _.find(tokens, function(val){
+            console.log('isAlive? ', val.isAlive());
+            return !val.isAlive();
+          });
 
+          if(token){
+            token.move(selectedDistrict.base.x, selectedDistrict.base.y);
+            token.district = selectedDistrict.name;
+            scope.orderedDistricts.push(selectedDistrict.name);
+            scope.$apply();
+            setTokenNumber();
+          }
 
-          tokens[6-tokensLeft].move(selectedDistrict.base.x, selectedDistrict.base.y);
-          tokensLeft--;
-
-          console.log('Hey I clickd this : ', sprite);
         }
 
 

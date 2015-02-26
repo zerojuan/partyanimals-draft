@@ -9,6 +9,7 @@ angular.module('partyanimalsDraftApp')
           player: playerRep,
           ai: aiRep
         },
+        index: 10,
         population: population
       };
     };
@@ -22,6 +23,22 @@ angular.module('partyanimalsDraftApp')
       new District('resort', 250, 20, 80)
     ];
 
+    $scope.orderedDistricts = [];
 
+    $scope.$watch('orderedDistricts', function(){
+      _.forEach($scope.districts, function(district){
+        district.index=  10;
+      });
+      _.forEach($scope.orderedDistricts, function(districtName, i){
+          var district = _.find($scope.districts, function(district){
+            return district.name === districtName;
+          });
+          district.index = i;
+      });
+      $scope.districts = _.sortBy($scope.districts, function(district){
+        return district.index;
+      });
+      console.log($scope.districts);
+    }, true);
 
   });
