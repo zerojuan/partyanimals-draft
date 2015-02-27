@@ -10,7 +10,8 @@ angular.module('partyanimalsDraftApp')
           ai: aiRep
         },
         index: 10,
-        population: population
+        population: population,
+        action: 'support'
       };
     };
 
@@ -41,4 +42,11 @@ angular.module('partyanimalsDraftApp')
       console.log($scope.districts);
     }, true);
 
+    $scope.toggleAction = function(district){
+        if(district.action === 'support'){
+            district.action = 'suppress';
+        }else{
+          district.action = 'support';
+        }
+    }
   });

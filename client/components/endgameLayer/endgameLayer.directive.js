@@ -7,7 +7,8 @@ angular.module('partyanimalsDraftApp')
       restrict: 'E',
       replace: true,
       scope: {
-        orderedDistricts: '='
+        orderedDistricts: '=',
+        districts: '='
       },
       link: function (scope) {
         var seaBG1;
@@ -25,8 +26,6 @@ angular.module('partyanimalsDraftApp')
         var uiGroup;
 
         var tokens;
-        var tokensLeft = 6;
-
 
         function preload(){
           game.stage.backgroundColor = '#53b5ef';
@@ -63,13 +62,18 @@ angular.module('partyanimalsDraftApp')
         }
 
         function update(){
-          /*TODO: update function*/
+          _.forEach(tokens, function(token){
+            if(token.district){
+              var color = token.district.action === 'support' ? 'green' : 'red';
+              token.setColor(color);
+            }
+          });
         }
 
         function setTokenNumber(){
           _.forEach(scope.orderedDistricts, function(district, i){
             var t = _.find(tokens, function(token){
-              return (token.district === district);
+              return (token.district.name === district);
             })
             t.setLabel(i+1);
           });
@@ -85,7 +89,7 @@ angular.module('partyanimalsDraftApp')
           tokens[index].kill();
           //remove from list
           scope.orderedDistricts = _.reject(scope.orderedDistricts, function(district){
-            return district === tokens[index].district;
+            return district === tokens[index].district.name;
           });
           scope.$apply();
 
@@ -107,8 +111,11 @@ angular.module('partyanimalsDraftApp')
           });
 
           if(token){
+            var district = _.find(scope.districts, function(d){
+              return d.name === selectedDistrict.name;
+            });
+            token.setDistrict(district);
             token.move(selectedDistrict.base.x, selectedDistrict.base.y);
-            token.district = selectedDistrict.name;
             scope.orderedDistricts.push(selectedDistrict.name);
             scope.$apply();
             setTokenNumber();

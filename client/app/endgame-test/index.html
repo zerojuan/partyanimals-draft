@@ -1,11 +1,22 @@
 <div class="endgame-test">
-  <endgame-layer ordered-districts="orderedDistricts"></endgame-layer>
+  <endgame-layer ordered-districts="orderedDistricts" districts="districts"></endgame-layer>
   <div class="district-editor-container">
     <h2>District Data</h2>
     <ul class="list-unstyled">
       <li ng-repeat="district in districts">
         <strong>{{district.name}}</strong>
         <input type="text" ng-model="district.population"></input>
+      </li>
+    </ul>
+  </div>
+  <div class="action-config-container">
+    <h2>Actions</h2>
+    <ul class="list-unstyled">
+      <li ng-repeat="district in districts">
+        <span ng-show="district.index !== 10">{{district.index+1}}</span>
+        <span ng-show="district.index === 10">--</span>
+        <span ng-click="toggleAction(district)" class="action-toggle {{district.action}}">{{district.action}}</span>
+        <strong>{{district.name}}</strong>
       </li>
     </ul>
   </div>

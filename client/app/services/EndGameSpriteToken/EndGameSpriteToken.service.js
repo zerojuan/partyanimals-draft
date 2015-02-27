@@ -37,10 +37,13 @@ angular.module('partyanimalsDraftApp')
         greenSprite.events.onInputDown.add(clickHandler, context)
         return {
           base: base,
-          district: '',
+          district: null,
           setLabel: function(x){
             label = x;
             text.text = x;
+          },
+          setDistrict: function(district){
+            this.district = district;            
           },
           move: function(x,y){
             alive = true;
