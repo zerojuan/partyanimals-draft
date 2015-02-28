@@ -74,7 +74,7 @@ angular.module('partyanimalsDraftApp')
           _.forEach(scope.orderedDistricts, function(district, i){
             var t = _.find(tokens, function(token){
               return (token.district.name === district);
-            })
+            });
             t.setLabel(i+1);
           });
         }
@@ -91,6 +91,7 @@ angular.module('partyanimalsDraftApp')
           scope.orderedDistricts = _.reject(scope.orderedDistricts, function(district){
             return district === tokens[index].district.name;
           });
+
           scope.$apply();
 
           setTokenNumber();
@@ -105,20 +106,27 @@ angular.module('partyanimalsDraftApp')
             return i === index;
           });
 
-          var token = _.find(tokens, function(val){
-            console.log('isAlive? ', val.isAlive());
-            return !val.isAlive();
-          });
-
-          if(token){
-            var district = _.find(scope.districts, function(d){
-              return d.name === selectedDistrict.name;
+          if(!_.contains(scope.orderedDistricts, selectedDistrict.name)){
+            console.log('OrderedDistricts: ', scope.orderedDistricts);
+            var token = _.find(tokens, function(val){
+              console.log('isAlive? ', val.isAlive());
+              return !val.isAlive();
             });
-            token.setDistrict(district);
-            token.move(selectedDistrict.base.x, selectedDistrict.base.y);
-            scope.orderedDistricts.push(selectedDistrict.name);
-            scope.$apply();
-            setTokenNumber();
+
+            if(token){
+
+                console.log('District',token.district);
+                var district = _.find(scope.districts, function(d){
+                  return d.name === selectedDistrict.name;
+                });
+                token.setDistrict(district);
+                token.move(selectedDistrict.base.x, selectedDistrict.base.y);
+                scope.orderedDistricts.push(selectedDistrict.name);
+                scope.$apply();
+                setTokenNumber();
+
+
+            }
           }
 
         }

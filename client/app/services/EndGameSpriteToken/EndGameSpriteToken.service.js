@@ -43,7 +43,7 @@ angular.module('partyanimalsDraftApp')
             text.text = x;
           },
           setDistrict: function(district){
-            this.district = district;            
+            this.district = district;
           },
           move: function(x,y){
             alive = true;
@@ -58,7 +58,7 @@ angular.module('partyanimalsDraftApp')
             alive = false;
             base.alpha = 0;
             base.x = -100;
-            base.y = -100;
+            base.y = -100;            
           },
           setColor: function(color){
             switch(color){

@@ -12,10 +12,10 @@
   <div class="action-config-container">
     <h2>Actions</h2>
     <ul class="list-unstyled">
-      <li ng-repeat="district in districts">
+      <li ng-repeat="district in districts | filter: {index: '!10'}">
         <span ng-show="district.index !== 10">{{district.index+1}}</span>
         <span ng-show="district.index === 10">--</span>
-        <span ng-click="toggleAction(district)" class="action-toggle {{district.action}}">{{district.action}}</span>
+        <a><span ng-click="toggleAction(district)" class="action-toggle {{district.action}}">{{district.action}}</span></a>
         <strong>{{district.name}}</strong>
       </li>
     </ul>
