@@ -11,8 +11,17 @@ angular.module('partyanimalsDraftApp')
         },
         index: 10,
         population: population,
-        action: 'support'
+        action: 'support',
+        budget: 0
       };
+    };
+
+    $scope.player = {
+      budget: 2000
+    };
+
+    $scope.ai = {
+      budget: 2000
     };
 
     $scope.districts = [
@@ -48,5 +57,18 @@ angular.module('partyanimalsDraftApp')
         }else{
           district.action = 'support';
         }
-    }
+    };
+
+    $scope.clickSubmit = function(){
+      //show the next stage of the game
+    };
+
+    $scope.getTotalSpending = function(){
+      return _.reduce($scope.districts, function(memo, val){
+        if(val.index !== 10){
+          return memo + val.budget;
+        }
+        return memo;
+      }, 0);
+    };
   });

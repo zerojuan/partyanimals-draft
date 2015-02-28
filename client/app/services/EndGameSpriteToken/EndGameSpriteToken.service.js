@@ -23,6 +23,8 @@ angular.module('partyanimalsDraftApp')
         redSprite.scale.set(0.5);
         greenSprite.anchor.set(0.5);
         greenSprite.scale.set(0.5);
+        
+        base.alpha = 0;
 
         base.add(redSprite);
         base.add(greenSprite);
@@ -30,11 +32,12 @@ angular.module('partyanimalsDraftApp')
 
         var clickHandler = function(){
             handler(base);
-        }
+        };
         redSprite.inputEnabled = true;
         greenSprite.inputEnabled = true;
         redSprite.events.onInputDown.add(clickHandler, context);
-        greenSprite.events.onInputDown.add(clickHandler, context)
+        greenSprite.events.onInputDown.add(clickHandler, context);
+
         return {
           base: base,
           district: null,
@@ -58,7 +61,7 @@ angular.module('partyanimalsDraftApp')
             alive = false;
             base.alpha = 0;
             base.x = -100;
-            base.y = -100;            
+            base.y = -100;
           },
           setColor: function(color){
             switch(color){

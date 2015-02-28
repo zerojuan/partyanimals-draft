@@ -1,11 +1,23 @@
 <div class="endgame-test">
   <endgame-layer ordered-districts="orderedDistricts" districts="districts"></endgame-layer>
   <div class="district-editor-container">
+    <h2>Budget</h2>
+    <ul class="list-unstyled">
+      <li>
+        <strong>Player</strong>
+        <input ng-model="player.budget" type="number"></input>
+      </li>
+      <li>
+        <strong>AI</strong>
+        <input ng-model="ai.budget" type="number"></input>
+      </li>
+    </ul>
+
     <h2>District Data</h2>
     <ul class="list-unstyled">
       <li ng-repeat="district in districts">
         <strong>{{district.name}}</strong>
-        <input type="text" ng-model="district.population"></input>
+        <input type="number" ng-model="district.population"></input>
       </li>
     </ul>
   </div>
@@ -16,8 +28,17 @@
         <span ng-show="district.index !== 10">{{district.index+1}}</span>
         <span ng-show="district.index === 10">--</span>
         <a><span ng-click="toggleAction(district)" class="action-toggle {{district.action}}">{{district.action}}</span></a>
+        <span><input type="number" ng-model="district.budget"></input></span>
         <strong>{{district.name}}</strong>
       </li>
     </ul>
+    <hr>
+    <div>
+      <span>Total: &nbsp;</span>
+      <span>{{player.budget}}</span>&nbsp;-&nbsp;
+      <span>{{getTotalSpending()}}</span>&nbsp;=&nbsp;
+      <span>{{player.budget - getTotalSpending()}}</span>
+    </div>
+    <a class="btn btn-success" ng-click="clickSubmit()">To the Polls!</a>
   </div>
 </div>
