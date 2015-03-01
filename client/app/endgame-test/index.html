@@ -18,6 +18,12 @@
       <li ng-repeat="district in districts">
         <strong>{{district.name}}</strong>
         <input type="number" ng-model="district.population"></input>
+        <p>
+          <span>{{district.reputation.player}}</span>
+            &nbsp;vs&nbsp;
+          <span>{{district.reputation.ai}}</span>
+        </p>
+        <two-slider-input model="district.reputation"></two-slider-input>
       </li>
     </ul>
   </div>

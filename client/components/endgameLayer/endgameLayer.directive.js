@@ -24,6 +24,7 @@ angular.module('partyanimalsDraftApp')
         ];
         var districtGroup;
         var uiGroup;
+        var graphics;
 
         var tokens;
 
@@ -43,6 +44,7 @@ angular.module('partyanimalsDraftApp')
           seaBG1 = game.add.tileSprite(0,0,w,h, 'bg');
 
           districtGroup = game.add.group();
+          graphics = game.add.graphics(0,0);
           uiGroup = game.add.group();
 
           tokens = [];
@@ -66,6 +68,23 @@ angular.module('partyanimalsDraftApp')
             if(token.district){
               var color = token.district.action === 'support' ? 'green' : 'red';
               token.setColor(color);
+            }
+          });
+          graphics.clear();
+          _.forEach(scope.orderedDistricts, function(districtName, i){
+            var token = _.find(tokens, function(t){
+              return t.district.name === districtName;
+            });
+            if(i !== scope.orderedDistricts.length-1){
+              var districtName2 = scope.orderedDistricts[i+1];
+              var token2 = _.find(tokens, function(t){
+                return t.district.name === districtName2;
+              });
+              // graphics.beginFill(0x0033FF);
+              graphics.lineStyle(10, 0x0033FF, 1);
+              graphics.moveTo(token.base.x, token.base.y);
+              graphics.quadraticCurveTo(token.base.x - 40,token.base.y - 40, token2.base.x, token2.base.y);
+              graphics.endFill();
             }
           });
         }

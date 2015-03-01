@@ -61,6 +61,7 @@ angular.module('partyanimalsDraftApp')
 
     $scope.clickSubmit = function(){
       //show the next stage of the game
+      //calculate ai movement
     };
 
     $scope.getTotalSpending = function(){
