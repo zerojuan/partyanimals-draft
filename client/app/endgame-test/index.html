@@ -1,50 +1,80 @@
 <div class="endgame-test">
   <endgame-layer ordered-districts="orderedDistricts" districts="districts"></endgame-layer>
-  <div class="district-editor-container">
-    <h2>Budget</h2>
-    <ul class="list-unstyled">
-      <li>
-        <strong>Player</strong>
-        <input ng-model="player.budget" type="number"></input>
-      </li>
-      <li>
-        <strong>AI</strong>
-        <input ng-model="ai.budget" type="number"></input>
-      </li>
-    </ul>
+  <div ng-show="!simulationMode">
+    <div class="district-editor-container">
+      <h2>Budget</h2>
+      <ul class="list-unstyled">
+        <li>
+          <strong>Player</strong>
+          <input ng-model="player.budget" type="number"></input>
+        </li>
+        <li>
+          <strong>AI</strong>
+          <input ng-model="ai.budget" type="number"></input>
+        </li>
+      </ul>
 
-    <h2>District Data</h2>
-    <ul class="list-unstyled">
-      <li ng-repeat="district in districts">
-        <strong>{{district.name}}</strong>
-        <input type="number" ng-model="district.population"></input>
-        <p>
-          <span>{{district.reputation.player}}</span>
-            &nbsp;vs&nbsp;
-          <span>{{district.reputation.ai}}</span>
-        </p>
-        <two-slider-input model="district.reputation"></two-slider-input>
-      </li>
-    </ul>
-  </div>
-  <div class="action-config-container">
-    <h2>Actions</h2>
-    <ul class="list-unstyled">
-      <li ng-repeat="district in districts | filter: {index: '!10'}">
-        <span ng-show="district.index !== 10">{{district.index+1}}</span>
-        <span ng-show="district.index === 10">--</span>
-        <a><span ng-click="toggleAction(district)" class="action-toggle {{district.action}}">{{district.action}}</span></a>
-        <span><input type="number" ng-model="district.budget"></input></span>
-        <strong>{{district.name}}</strong>
-      </li>
-    </ul>
-    <hr>
-    <div>
-      <span>Total: &nbsp;</span>
-      <span>{{player.budget}}</span>&nbsp;-&nbsp;
-      <span>{{getTotalSpending()}}</span>&nbsp;=&nbsp;
-      <span>{{player.budget - getTotalSpending()}}</span>
+      <h2>District Data</h2>
+      <ul class="list-unstyled">
+        <li ng-repeat="district in districts">
+          <strong>{{district.name}}</strong>
+          <input type="number" ng-model="district.population"></input>
+          <p>
+            <span>{{district.reputation.player}}%</span>
+              &nbsp;vs&nbsp;
+            <span>{{district.reputation.ai}}%</span>
+          </p>
+          <two-slider-input model="district.reputation"></two-slider-input>
+        </li>
+      </ul>
     </div>
-    <a class="btn btn-success" ng-click="clickSubmit()">To the Polls!</a>
+    <div class="action-config-container">
+      <h2>Actions</h2>
+      <ul class="list-unstyled">
+        <li class="actions-list" ng-repeat="district in districts | filter: {index: '!10'}">
+          <span ng-show="district.index !== 10">{{district.index+1}}</span>
+          <span ng-show="district.index === 10">--</span>
+          <a><span ng-click="toggleAction(district)" class="btn action-toggle {{district.action}}">{{district.action}}</span></a>
+          <span><input type="number" ng-model="district.budget"></input></span>
+          <strong>{{district.name}}</strong>
+        </li>
+      </ul>
+      <hr>
+      <div>
+        <span>Total: &nbsp;</span>
+        <span>{{player.budget}}</span>&nbsp;-&nbsp;
+        <span>{{getTotalSpending()}}</span>&nbsp;=&nbsp;
+        <span>{{player.budget - getTotalSpending()}}</span>
+      </div>
+      <a class="btn btn-success" ng-click="clickSubmit()">To the Polls!</a>
+    </div>
+  </div>
+  <div ng-show="simulationMode">
+    <div class="simulation-container">
+      <div class="simulation-inner">
+        <h3>Election Results</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>District</th>
+              <th>You</th>
+              <th>AI</th>
+              <th>Result</th>
+              <th>Text</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="district in results">
+              <td>{{district.name}}</td>
+              <td class="{{district.index!==10 ? district.action : 'blank'}}">{{district.budget}}</td>
+              <td class="{{district.aiAction}}">{{district.aiBudget}}</td>
+              <td>1,200</td>
+              <td>This is the result, so many things happened it's crazy</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>{{winner.msg}}</h4>
+      </div>
+    </div>
   </div>
 </div>

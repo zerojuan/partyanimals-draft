@@ -17,13 +17,47 @@
     background: #efefef;
     padding: 5px 10px;
   }
+  .actions-list{
+    height: 40px;
+    input[type='number']{
+      width: 90px;
+    }
+  }
   .action-toggle{
     cursor: pointer;
+    width: 90px;
     &.support{
       background: green;
     }
     &.suppress{
       background: red;
+    }
+  }
+  .simulation-container{
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    margin: 0 auto;
+    .simulation-inner{
+      position: relative;
+      background: white;
+      min-width: 400px;
+      height: 500px;
+      left: -50%;
+    }
+    td{
+      &.suppress{
+        background: red;
+        color: white;
+      }
+      &.support{
+        background: green;
+        color: white;
+      }
+      &.blank{
+        background: #333;
+        color: white;
+      }
     }
   }
 }
