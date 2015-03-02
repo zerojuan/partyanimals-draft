@@ -53,7 +53,7 @@
     <div class="simulation-container">
       <div class="simulation-inner">
         <h3>Election Results</h3>
-        <table class="table table-striped">
+        <table class="table">
           <thead>
             <tr>
               <th>District</th>
@@ -64,12 +64,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="district in results">
+            <tr ng-repeat="district in results" ng-class="{'winner-ai':district.winner === 'ai', 'winner-player':district.winner === 'player'}">
               <td>{{district.name}}</td>
               <td class="{{district.index!==10 ? district.action : 'blank'}}">{{district.budget}}</td>
               <td class="{{district.aiAction}}">{{district.aiBudget}}</td>
-              <td>1,200</td>
-              <td>This is the result, so many things happened it's crazy</td>
+              <td>{{district.votes.player}} vs {{district.votes.ai}}</td>
+              <td>{{district.text}}</td>
             </tr>
           </tbody>
         </table>

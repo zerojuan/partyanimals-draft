@@ -45,6 +45,16 @@
       height: 500px;
       left: -50%;
     }
+    tr{
+      &.winner-ai{
+        // border: 3px solid red;
+        background: lighten(red, 20%);
+      }
+      &.winner-player{
+        // border: 3px solid blue;
+        background: lighten(blue, 20%);
+      }
+    }
     td{
       &.suppress{
         background: red;

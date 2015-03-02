@@ -9,6 +9,10 @@ angular.module('partyanimalsDraftApp')
           player: playerRep,
           ai: aiRep
         },
+        votes: {
+          player: 0,
+          ai: 0
+        },
         index: 10,
         population: population,
         action: 'support',
@@ -95,26 +99,67 @@ angular.module('partyanimalsDraftApp')
         var district = $scope.districts[resultDone];
         resultDone++;
         var difference = 0;
-        if(district.index !== 10){
+        var textResult = '';
+        var aiVoters = district.population * (district.reputation.ai / 100);
+        var playerVoters = district.population * (district.reputation.player / 100);
+        var neutralVoters = district.population - (aiVoters + playerVoters);
+        var potentialVoters = 0;
+        //checks if a district has special action
+        if(district.budget > 0 || district.aiBudget > 0){
           if(district.budget > district.aiBudget){
             //player wins
-            district.winner = 'player';
+            district.actionWinner = 'player';
             difference = district.budget - district.aiBudget;
+
             if(district.action === 'support'){
               //support
-              
+              potentialVoters = Math.min(Math.floor((difference / 100) * 20), neutralVoters);
+              playerVoters += potentialVoters;
+              textResult = 'Player convinced '+potentialVoters+' undecideds.';
             }else{
               //suppress
+              potentialVoters = Math.min(Math.floor((difference / 100) * 20), aiVoters);
+              aiVoters -= potentialVoters;
+              textResult = 'Player convinced ' + potentialVoters + ' AI supporters to not vote';
             }
           }else{
             //ai wins
-            district.winner = 'ai';
+            district.actionWinner = 'ai';
+            difference = district.aiBudget - district.budget;
+            if(district.action === 'support'){
+              potentialVoters = Math.min(Math.floor((difference / 100) * 20), neutralVoters);
+              aiVoters += potentialVoters;
+              textResult = 'AI convinced '+potentialVoters+' undecideds.';
+            }else{
+              potentialVoters = Math.min(Math.floor((difference / 100) * 20), playerVoters);
+              playerVoters -= potentialVoters;
+              textResult = 'AI convinced ' + potentialVoters + ' Player supporters to not vote';
+            }
           }
+        }else{
+          textResult = 'No special action in this district';
         }
+        district.votes.player = playerVoters;
+        district.votes.ai = aiVoters;
+        district.winner = (playerVoters >= aiVoters) ? 'player' :'ai';
+        district.text = textResult;
         $scope.results.push(district);
         if(resultDone === $scope.districts.length){
+          //calculate the votes
+          var totalPlayerVotes = 0;
+          var totalAIVotes = 0;
+          var msg = '';
+          _.forEach($scope.districts, function(district){
+            totalPlayerVotes += district.votes.player;
+            totalAIVotes += district.votes.ai;
+          });
+          if(totalPlayerVotes >= totalAIVotes){
+            msg = 'Player Won By ' + (totalPlayerVotes - totalAIVotes);
+          }else{
+            msg = 'AI Won By ' + (totalAIVotes - totalPlayerVotes);
+          }
           $scope.winner = {
-            msg: 'Someone won'
+            msg: msg
           };
           $interval.cancel(stopTime);
         }
