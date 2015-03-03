@@ -117,8 +117,7 @@ angular.module('partyanimalsDraftApp')
         }
 
         scope.$watch('model', function(){
-          if(scope.model){
-            console.log('Should you be watching?');
+          if(scope.model){            
             var aPos = scope.model.player * 170;
             x.a = (aPos / 100)-10;
             startX.a = x.a;
@@ -128,7 +127,7 @@ angular.module('partyanimalsDraftApp')
             startX.b = x.b;
             setPosition(bMarker, x.b);
           }
-        });
+        }, true);
 
 
       }

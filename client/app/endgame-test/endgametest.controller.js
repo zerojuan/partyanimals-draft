@@ -30,6 +30,13 @@ angular.module('partyanimalsDraftApp')
       budget: 2000
     };
 
+    $scope.presets = [
+      'AI Leading',
+      'Player Leading',
+      'Random'];
+
+    $scope.preset = $scope.presets[2];
+
     $scope.results = [];
 
     $scope.simulationMode = false;
@@ -44,6 +51,31 @@ angular.module('partyanimalsDraftApp')
     ];
 
     $scope.orderedDistricts = [];
+
+    $scope.$watch('preset', function(){
+      var getRatio = function(player, ai){
+        return function(district){
+          var aiRep = Math.floor(Math.random() * ai);
+          var playerRep = Math.floor(Math.random() * player);
+          district.reputation.player = Math.max(playerRep, 6);
+          district.reputation.ai = Math.max(aiRep, 6);
+        }
+      };
+      switch($scope.preset){
+        case $scope.presets[0]:
+          //AI is leading
+          _.forEach($scope.districts, getRatio(10, 90));
+          break;
+        case $scope.presets[1]:
+          //Player is leading
+          _.forEach($scope.districts, getRatio(90, 10));
+          break;
+        case $scope.presets[2]:
+          //Random
+          _.forEach($scope.districts, getRatio(50, 50));
+          break;
+      }
+    });
 
     $scope.$watch('orderedDistricts', function(){
       _.forEach($scope.districts, function(district){
